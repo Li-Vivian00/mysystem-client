@@ -114,6 +114,7 @@ export default {
           self.errAccountInfo = "";
           self.errPwdInfo = ADMIN_LOGIN_STATUS.PASSWORD_ERROR;
         } else if (response.status == 200) {
+          console.log("success")
           self.errAccountInfo = "";
           self.errPwdInfo = "";
           self.$router.push("/adminHome");

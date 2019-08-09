@@ -89,7 +89,7 @@
           <el-input v-model="editForm.password" auto-complete="off">{{form.password}}</el-input>
         </el-form-item>
         <el-form-item label="性别：">
-          <el-input v-model="editForm.sex" auto-complete="off" disabled="">{{form.sex}}</el-input>
+          <el-input v-model="editForm.sex" auto-complete="off" disabled>{{form.sex}}</el-input>
         </el-form-item>
         <el-form-item label="联系方式">
           <el-input v-model="editForm.phone" auto-complete="off">{{form.phone}}</el-input>
@@ -166,21 +166,26 @@ export default {
         .then(() => {
           const self = this;
           let id = rows.Id;
+          console.log(id);
           self.$http
             .post("/api/userManage/deleteUser", { id: id }, {})
             .then(response => {
               console.log(response);
               if (response.data === "删除用户失败") {
                 this.showDeleteInfo = "删除用户失败";
+                this.$message({
+                  type: "error",
+                  message: "删除失败!"
+                });
               } else {
                 this.showDeleteInfo = "删除用户成功";
+                this.getUserData();
+                this.$message({
+                  type: "success",
+                  message: "删除成功!"
+                });
               }
             });
-          this.getUserData();
-          this.$message({
-            type: "success",
-            message: "删除成功!"
-          });
         })
         .catch(() => {
           this.$message({
@@ -198,7 +203,14 @@ export default {
         .get("/api/userManage/getUser", { params: { name: username } })
         .then(function(response) {
           console.log(response);
-          self.form = response.data;
+          if (response.data === "获取用户信息失败") {
+            this.$message({
+              type: "error",
+              message: "获取用户信息失败!"
+            });
+          } else {
+            self.form = response.data;
+          }
         })
         .catch(function(error) {
           console.log("error", error);
@@ -246,7 +258,7 @@ export default {
             )
             .then(response => {
               console.log(response);
-              if (response.data === "更新失败，请联系管理员") {
+              if (response.data === "更新用户失败") {
                 this.showUpdateInfo = "用户信息更新失败";
                 console.log("用户信息更新失败");
               } else {
@@ -280,7 +292,7 @@ export default {
         .then(() => {
           const self = this;
           self.$http
-            .post("/api/userManage/batchDeleteUser", { id: formatId }, {})
+            .post("/api/userManage/deleteUser", { id: formatId }, {})
             .then(response => {
               console.log(response);
               if (response.data === "删除用户失败") {
@@ -312,7 +324,7 @@ export default {
       for (let i = 0; i < val.length; i++) {
         sqlId += val[i].Id;
         if (i == val.length - 1) {
-          sqlId += ")";
+          sqlId += "";
         } else {
           sqlId += ",";
         }
