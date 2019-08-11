@@ -89,7 +89,7 @@
           <el-input v-model="editForm.password" auto-complete="off">{{form.password}}</el-input>
         </el-form-item>
         <el-form-item label="性别：">
-          <el-input v-model="editForm.sex" auto-complete="off" disabled="">{{form.sex}}</el-input>
+          <el-input v-model="editForm.sex" auto-complete="off" disabled>{{form.sex}}</el-input>
         </el-form-item>
         <el-form-item label="联系方式">
           <el-input v-model="editForm.phone" auto-complete="off">{{form.phone}}</el-input>
@@ -111,6 +111,7 @@
 
 <script>
 // import Util from "../../../utils/utils";
+import _ from 'lodash'
 export default {
   data() {
     return {
@@ -198,7 +199,14 @@ export default {
         .get("/api/adminManage/getAdmin", { params: { name: adminname } })
         .then(function(response) {
           console.log(response);
-          self.form = response.data;
+          if (response.data === "获取用户信息失败") {
+            this.$message({
+              type: "error",
+              message: "获取用户信息失败!"
+            });
+          } else {
+            self.form = response.data;
+          }
         })
         .catch(function(error) {
           console.log("error", error);
@@ -280,7 +288,7 @@ export default {
         .then(() => {
           const self = this;
           self.$http
-            .post("/api/adminManage/batchDeleteAdmin", { id: formatId }, {})
+            .post("/api/adminManage/deleteAdmin", { id: formatId }, {})
             .then(response => {
               console.log(response);
               if (response.data === "删除用户失败") {
@@ -312,7 +320,7 @@ export default {
       for (let i = 0; i < val.length; i++) {
         sqlId += val[i].Id;
         if (i == val.length - 1) {
-          sqlId += ")";
+          sqlId += "";
         } else {
           sqlId += ",";
         }
@@ -323,7 +331,7 @@ export default {
     //选择器取值
     selectItem(val) {
       this.selectValue = val;
-      if (this.selectValue == "all" || this.selectValue == "") {
+      if (this.selectValue == "all" || _.isEmpty(this.selectValue)) {
         this.selectAll = true;
       } else {
         this.selectAll = false;
@@ -338,7 +346,7 @@ export default {
       if (selValue == "all") {
         this.getUserData();
       } else {
-        if (inpValue == "") {
+        if (_.isEmpty(inpValue) && !_.isEmpty(this.selectValue)) {
           self.$alert("输入不能为空，请输入需要查询的用户", "警告", {
             confirmButtonText: "确定"
           });

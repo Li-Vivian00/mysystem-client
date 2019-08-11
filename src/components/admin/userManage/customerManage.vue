@@ -111,6 +111,7 @@
 
 <script>
 // import Util from "../../../utils/utils";
+import _ from 'lodash'
 export default {
   data() {
     return {
@@ -335,7 +336,7 @@ export default {
     //选择器取值
     selectItem(val) {
       this.selectValue = val;
-      if (this.selectValue == "all" || this.selectValue == "") {
+      if (this.selectValue == "all" || _.isEmpty(this.selectValue)) {
         this.selectAll = true;
       } else {
         this.selectAll = false;
@@ -346,11 +347,10 @@ export default {
       const self = this;
       let selValue = self.selectValue;
       let inpValue = self.input;
-      console.log(selValue + " " + inpValue);
       if (selValue == "all") {
         this.getUserData();
       } else {
-        if (inpValue == "") {
+        if (_.isEmpty(inpValue) && !_.isEmpty(this.selectValue)) {
           self.$alert("输入不能为空，请输入需要查询的用户", "警告", {
             confirmButtonText: "确定"
           });
