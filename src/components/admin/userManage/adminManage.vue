@@ -4,18 +4,18 @@
       type="primary"
       @click="batchDelect"
       class="batchDelect"
-    >{{$t('adminManage.batchDelete')}}</el-button>关键字：
+    >{{$t('manage.batchDelete')}}</el-button>{{$t("manage.keyWord")}}
     <el-select v-model="value" clearable @change="selectItem">
       <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
     </el-select>
     <el-input
-      :placeholder="`${$t("adminManage.inputText")}`"
+      :placeholder='`${$t("manage.inputText")}`'
       v-model="input"
       clearable
       :disabled="selectAll"
       style="width:210px; margin-left:12px;margin-right:10px"
     ></el-input>
-    <el-button type="primary" @click="searchAdmin" plain>{{$t("adminManage.search")}}</el-button>
+    <el-button type="primary" @click="searchAdmin" plain>{{$t("manage.search")}}</el-button>
 
     <el-table
       :data="form"
@@ -25,7 +25,7 @@
       border
       str
       v-loading="loading"
-      :element-loading-text="`${$t("adminManage.loadingText")}`"
+      :element-loading-text='`${$t("manage.loadingText")}`'
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(0, 0, 0, 0.8)"
       @selection-change="handleSelectionChange"
@@ -35,77 +35,77 @@
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
-            <el-form-item :label="`${$t("register.label.loginId")}`">
+            <el-form-item :label='`${$t("register.label.loginId")}`'>
               <span>{{ props.row.loginid }}</span>
             </el-form-item>
-            <el-form-item :label="`${$t("register.label.userName")}`">
+            <el-form-item :label='`${$t("register.label.userName")}`'>
               <span>{{ props.row.adminname }}</span>
             </el-form-item>
-            <el-form-item :label="`${$t("register.label.password")}`">
+            <el-form-item :label='`${$t("register.label.password")}`'>
               <span>{{ props.row.password }}</span>
             </el-form-item>
-            <el-form-item :label="`${$t("register.label.sex")}`">
+            <el-form-item :label='`${$t("register.label.sex")}`'>
               <span>{{ props.row.sex }}</span>
             </el-form-item>
-            <el-form-item :label="`${$t("register.label.phone")}`">
+            <el-form-item :label='`${$t("register.label.phone")}`'>
               <span>{{ props.row.phone }}</span>
             </el-form-item>
-            <el-form-item :label="`${$t("register.label.email")}`">
+            <el-form-item :label='`${$t("register.label.email")}`'>
               <span>{{ props.row.email }}</span>
             </el-form-item>
-            <el-form-item :label="`${$t("register.label.card")}`">
+            <el-form-item :label='`${$t("register.label.card")}`'>
               <span>{{ props.row.card }}</span>
             </el-form-item>
           </el-form>
         </template>
       </el-table-column>
       <el-table-column label="ID" prop="Id" sortable></el-table-column>
-      <el-table-column :label="`${$t("adminManage.loginId")}`" prop="loginid" sortable></el-table-column>
-      <el-table-column :label="`${$t("adminManage.userName")}`" prop="adminname" sortable></el-table-column>
-      <el-table-column fixed="right" :label="`${$t("adminManage.operate")}`" width="120">
+      <el-table-column :label='`${$t("manage.loginId")}`' prop="loginid" sortable></el-table-column>
+      <el-table-column :label='`${$t("manage.userName")}`' prop="adminname" sortable></el-table-column>
+      <el-table-column fixed="right" :label='`${$t("manage.operate")}`' width="120">
         <template slot-scope="scope">
           <el-button
             type="text"
             size="small"
             @click.native="handleEdit(scope.$index, scope.row)"
             v-if="!showBtn[scope.$index]"
-          >{{$t("adminManage.edit")}}</el-button>
+          >{{$t("manage.edit")}}</el-button>
           <el-button
             @click="deleteRow(scope.$index, scope.row)"
             type="text"
             size="small"
-          >{{$t("adminManage.delete")}}</el-button>
+          >{{$t("manage.delete")}}</el-button>
         </template>
       </el-table-column>
     </el-table>
 
     <el-dialog
-      :title="`${$t("adminManage.edit")}`"
+      :title='`${$t("manage.edit")}`'
       :visible.sync="editFormVisible"
       :close-on-click-modal="false"
       class="edit-form"
       :before-close="handleClose"
     >
       <el-form :model="editForm" label-width="80px" ref="editForm">
-        <el-form-item :label="`${$t("register.label.loginId")}`">
+        <el-form-item :label='`${$t("register.label.loginId")}`'>
           <el-input v-model="editForm.loginid" auto-complete="off" disabled>{{form.loginid}}</el-input>
         </el-form-item>
-        <el-form-item :label="`${$t("register.label.userName")}`">
+        <el-form-item :label='`${$t("register.label.userName")}`'>
           <el-input v-model="editForm.adminname" auto-complete="off">{{form.adminname}}</el-input>
         </el-form-item>
-        <el-form-item :label="`${$t("register.label.password")}`">
+        <el-form-item :label='`${$t("register.label.password")}`'>
           <el-input v-model="editForm.password" auto-complete="off">{{form.password}}</el-input>
         </el-form-item>
-        <el-form-item :label="`${$t("register.label.sex")}`">
+        <el-form-item :label='`${$t("register.label.sex")}`'>
           <el-input v-model="editForm.sex" auto-complete="off" disabled>{{form.sex}}</el-input>
         </el-form-item>
-        <el-form-item :label="`${$t("register.label.phone")}`">
+        <el-form-item :label='`${$t("register.label.phone")}`'>
           <el-input v-model="editForm.phone" auto-complete="off">{{form.phone}}</el-input>
         </el-form-item>
-        <el-form-item :label="`${$t("register.label.email")}`">
+        <el-form-item :label='`${$t("register.label.email")}`'>
           <el-input v-model="editForm.email" auto-complete="off">{{form.email}}</el-input>
         </el-form-item>
-        <el-form-item :label="`${$t("register.label.card")}`">
+        <el-form-item :label='`${$t("register.label.card")}`'>
           <el-input v-model="editForm.card" auto-complete="off" disabled>{{form.card}}</el-input>
         </el-form-item>
       </el-form>
@@ -149,7 +149,7 @@ export default {
       options: [
         {
           value: "all",
-          label: this.$t("adminManage.options.label.all")
+          label: this.$t("manage.options.label.all")
         },
         {
           value: "Id",
@@ -157,11 +157,11 @@ export default {
         },
         {
           value: "loginid",
-          label: this.$t("adminManage.options.label.loginId")
+          label: this.$t("manage.options.label.loginId")
         },
         {
           value: "adminname",
-          label: this.$t("adminManage.options.label.userName")
+          label: this.$t("manage.options.label.userName")
         }
       ],
       value: "",
@@ -175,8 +175,8 @@ export default {
       const self = this;
       self
         .$confirm(
-          this.$t("adminManage.confirm.deleteAdmin"),
-          this.$t("adminManage.warning"),
+          this.$t("manage.confirm.deleteAdmin"),
+          this.$t("manage.warning"),
           {
             confirmButtonText: this.$t("button.ok"),
             cancelButtonText: this.$t("button.cancel"),
@@ -187,24 +187,24 @@ export default {
           const id = rows.Id;
           const response = deleteAdmin(self, id);
           if (
-            response.data === this.$t("adminManage.showMessage.deleteUserError")
+            response.data === this.$t("manage.showMessage.deleteUserError")
           ) {
             self.$message({
               type: "error",
-              message: this.$t("adminManage.showMessage.deleteUserError")
+              message: this.$t("manage.showMessage.deleteError")
             });
           } else {
             self.getAdminData();
             self.$message({
               type: "success",
-              message: this.$t("adminManage.showMessage.deleteUserSuccess")
+              message: this.$t("manage.showMessage.deleteUserSuccess")
             });
           }
         })
         .catch(() => {
           self.$message({
             type: "info",
-            message: this.$t("adminManage.showMessage.cancel")
+            message: this.$t("manage.showMessage.cancel")
           });
         });
     },
@@ -214,12 +214,10 @@ export default {
       const self = this;
       const adminname = "";
       const response = await getAllAdmin(self, adminname);
-      if (
-        response.data === this.$t("adminManage.showMessage.getUserInfoError")
-      ) {
+      if (response.data === self.$t("manage.showMessage.getUserInfoError")) {
         self.$message({
           type: "error",
-          message: this.$t("adminManage.showMessage.getUserInfoError")
+          message: self.$t("manage.showMessage.getUserError")
         });
       } else {
         self.form = response.data;
@@ -249,7 +247,7 @@ export default {
       const phone = self.editForm.phone;
       const card = self.editForm.card;
       self
-        .$confirm(this.$t("adminManage.confirm.updateUserInfo"), this.$t("adminManage.confirm.warning"), {
+        .$confirm(this.$t("manage.confirm.updateUserInfo"), this.$t("manage.confirm.warning"), {
           confirmButtonText: this.$t("button.ok"),
           cancelButtonText: this.$t("button.cancel"),
           type: "warning"
@@ -264,15 +262,15 @@ export default {
             phone,
             card
           );
-          if (response.data === this.$t("adminManage.showMessage.updateUserError")) {
+          if (response.data === this.$t("manage.showMessage.updateUserError")) {
             his.$message({
               type: "error",
-              message: this.$t("adminManage.showMessage.updateUserError")
+              message: this.$t("manage.showMessage.updateError")
             });
           } else {
             self.$message({
               type: "success",
-              message: this.$t("adminManage.showMessage.updateUserSuccess")
+              message: this.$t("manage.showMessage.updateUserSuccess")
             });
             self.getAdminData();
             self.editFormVisible = false;
@@ -281,7 +279,7 @@ export default {
         .catch(() => {
           self.$message({
             type: "info",
-            message: this.$t("adminManage.showMessage.cancel")
+            message: this.$t("manage.showMessage.cancel")
           });
         });
     },
@@ -291,30 +289,30 @@ export default {
       const self = this;
       const formatId = self.formatId(self.multipleSelection);
       self
-        .$confirm(this.$t("adminManage.confirm.deleteAdmin"), this.$t("adminManage.confirm.warning"), {
+        .$confirm(this.$t("manage.confirm.deleteAdmin"), this.$t("manage.confirm.warning"), {
           confirmButtonText: this.$t("button.ok"),
           cancelButtonText: this.$t("button.cancel"),
           type: "warning"
         })
         .then(() => {
           const response = deleteAdmin(self, formatId);
-          if (response.data === this.$t("adminManage.showMessage.deleteUserError")) {
+          if (response.data === this.$t("manage.showMessage.deleteUserError")) {
           self.$message({
               type: "error",
-              message: this.$t("adminManage.showMessage.deleteUserError")
+              message: this.$t("manage.showMessage.deleteError")
             });
           } else {
             self.getAdminData();
             self.$message({
               type: "success",
-              message: this.$t("adminManage.showMessage.deleteUserSuccess")
+              message: this.$t("manage.showMessage.deleteUserSuccess")
             });
           }
         })
         .catch(() => {
           self.$message({
             type: "info",
-            message: this.$t("adminManage.showMessage.cancel")
+            message: this.$t("manage.showMessage.cancel")
           });
         });
     },
@@ -355,14 +353,14 @@ export default {
         self.getAdminData();
       } else {
         if (_.isEmpty(inpValue) && !_.isEmpty(self.selectValue)) {
-          self.$alert(this.$t("adminManage.showMessage.inputText"), this.$t("adminManage.confirm.warning"), {
+          self.$alert(this.$t("manage.showMessage.inputText"), this.$t("manage.confirm.warning"), {
             confirmButtonText: this.$t("button.ok")
           });
         } else {
           self.selectAll = false;
           const response = await searchAdmin(self, selValue, inpValue);
-          if (response.data === this.$t("adminManage.showMessage.userIsNull")) {
-            self.$alert(this.$t("adminManage.showMessage.userUndefined"), this.$t("adminManage.showMessage.searchError"), {
+          if (response.data === this.$t("manage.showMessage.userIsNull" || response.data == "")) {
+            self.$alert(this.$t("manage.showMessage.userUndefined"), this.$t("manage.showMessage.searchError"), {
               confirmButtonText: this.$t("button.ok")
             });
             self.input = " ";
@@ -395,7 +393,7 @@ export default {
   margin-bottom: 0;
   width: 50%;
 }
-.adminManage {
+.manage {
   width: 100%;
   position: absolute;
   top: 10px;

@@ -28,6 +28,7 @@ export default {
       male: "男",
       female: "女"
     },
+    
     inputPlaceholder: {
       loginId: "请输入登录账号",
       userName: "请输入用户名称",
@@ -46,8 +47,9 @@ export default {
     update: "更新"
   },
 
-  adminManage: {
+  manage: {
     batchDelete: "批量删除",
+    keyWord:"关键字：",
     edit: "编辑",
     delete: "删除",
     search: "搜索",
@@ -59,24 +61,27 @@ export default {
     options: {
       label: {
         all: "全部",
-        loginId: "登陆账号",
+        loginId: "登录账号",
         userName: "用户名"
       }
     },
     confirm: {
-      deleteAdmin: "此操作删除该管理员，是否继续？",
+      deleteAdmin: "此操作删除该用户，是否继续？",
       updateUserInfo:"是否更新该用户信息",
       warning: "提示",
     },
     showMessage: {
       deleteUserError: "删除用户失败",
+      deleteError:"删除用户失败",
       deleteUserSuccess: "删除用户成功！",
       
       cancel: "取消操作",
 
       getUserInfoError:"获取用户信息失败",
+      getUserError:"获取用户信息失败",
 
       updateUserError: "更新用户失败",
+      updateError:"更新用户失败",
       updateUserSuccess: "用户更新成功",
 
       inputText: "输入不能为空，请输入需要查询的用户",
