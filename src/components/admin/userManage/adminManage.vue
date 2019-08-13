@@ -1,11 +1,15 @@
 <template>
   <div class="adminManage">
-    <el-button type="primary" @click="batchDelect" class="batchDelect">{{$t('adminManage.batchDelete')}}</el-button>关键字：
+    <el-button
+      type="primary"
+      @click="batchDelect"
+      class="batchDelect"
+    >{{$t('adminManage.batchDelete')}}</el-button>关键字：
     <el-select v-model="value" clearable @change="selectItem">
       <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
     </el-select>
     <el-input
-      :placeholder='`${$t("adminManage.inputText")}`'
+      :placeholder="`${$t("adminManage.inputText")}`"
       v-model="input"
       clearable
       :disabled="selectAll"
@@ -21,7 +25,7 @@
       border
       str
       v-loading="loading"
-      :element-loading-text='`${$t("adminManage.loadingText")}`'
+      :element-loading-text="`${$t("adminManage.loadingText")}`"
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(0, 0, 0, 0.8)"
       @selection-change="handleSelectionChange"
@@ -31,34 +35,34 @@
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
-            <el-form-item :label='`${$t("register.label.loginId")}`'>
+            <el-form-item :label="`${$t("register.label.loginId")}`">
               <span>{{ props.row.loginid }}</span>
             </el-form-item>
-            <el-form-item :label='`${$t("register.label.userName")}`'>
+            <el-form-item :label="`${$t("register.label.userName")}`">
               <span>{{ props.row.adminname }}</span>
             </el-form-item>
-            <el-form-item :label='`${$t("register.label.password")}`'>
+            <el-form-item :label="`${$t("register.label.password")}`">
               <span>{{ props.row.password }}</span>
             </el-form-item>
-            <el-form-item :label='`${$t("register.label.sex")}`'>
+            <el-form-item :label="`${$t("register.label.sex")}`">
               <span>{{ props.row.sex }}</span>
             </el-form-item>
-            <el-form-item :label='`${$t("register.label.phone")}`'>
+            <el-form-item :label="`${$t("register.label.phone")}`">
               <span>{{ props.row.phone }}</span>
             </el-form-item>
-            <el-form-item :label='`${$t("register.label.email")}`'>
+            <el-form-item :label="`${$t("register.label.email")}`">
               <span>{{ props.row.email }}</span>
             </el-form-item>
-            <el-form-item :label='`${$t("register.label.card")}`'>
+            <el-form-item :label="`${$t("register.label.card")}`">
               <span>{{ props.row.card }}</span>
             </el-form-item>
           </el-form>
         </template>
       </el-table-column>
       <el-table-column label="ID" prop="Id" sortable></el-table-column>
-      <el-table-column :label='`${$t("adminManage.loginId")}`' prop="loginid" sortable></el-table-column>
-      <el-table-column :label='`${$t("adminManage.userName")}`' prop="adminname" sortable></el-table-column>
-      <el-table-column fixed="right" :label='`${$t("adminManage.operate")}`' width="120">
+      <el-table-column :label="`${$t("adminManage.loginId")}`" prop="loginid" sortable></el-table-column>
+      <el-table-column :label="`${$t("adminManage.userName")}`" prop="adminname" sortable></el-table-column>
+      <el-table-column fixed="right" :label="`${$t("adminManage.operate")}`" width="120">
         <template slot-scope="scope">
           <el-button
             type="text"
@@ -66,38 +70,42 @@
             @click.native="handleEdit(scope.$index, scope.row)"
             v-if="!showBtn[scope.$index]"
           >{{$t("adminManage.edit")}}</el-button>
-          <el-button @click="deleteRow(scope.$index, scope.row)" type="text" size="small">{{$t("adminManage.delete")}}</el-button>
+          <el-button
+            @click="deleteRow(scope.$index, scope.row)"
+            type="text"
+            size="small"
+          >{{$t("adminManage.delete")}}</el-button>
         </template>
       </el-table-column>
     </el-table>
 
     <el-dialog
-      :title='`${$t("adminManage.edit")}`'
+      :title="`${$t("adminManage.edit")}`"
       :visible.sync="editFormVisible"
       :close-on-click-modal="false"
       class="edit-form"
       :before-close="handleClose"
     >
       <el-form :model="editForm" label-width="80px" ref="editForm">
-        <el-form-item :label='`${$t("register.label.loginId")}`'>
+        <el-form-item :label="`${$t("register.label.loginId")}`">
           <el-input v-model="editForm.loginid" auto-complete="off" disabled>{{form.loginid}}</el-input>
         </el-form-item>
-        <el-form-item :label='`${$t("register.label.userName")}`'>
+        <el-form-item :label="`${$t("register.label.userName")}`">
           <el-input v-model="editForm.adminname" auto-complete="off">{{form.adminname}}</el-input>
         </el-form-item>
-        <el-form-item :label='`${$t("register.label.password")}`'>
+        <el-form-item :label="`${$t("register.label.password")}`">
           <el-input v-model="editForm.password" auto-complete="off">{{form.password}}</el-input>
         </el-form-item>
-        <el-form-item :label='`${$t("register.label.sex")}`'>
+        <el-form-item :label="`${$t("register.label.sex")}`">
           <el-input v-model="editForm.sex" auto-complete="off" disabled>{{form.sex}}</el-input>
         </el-form-item>
-        <el-form-item :label='`${$t("register.label.phone")}`'>
+        <el-form-item :label="`${$t("register.label.phone")}`">
           <el-input v-model="editForm.phone" auto-complete="off">{{form.phone}}</el-input>
         </el-form-item>
-        <el-form-item :label='`${$t("register.label.email")}`'>
+        <el-form-item :label="`${$t("register.label.email")}`">
           <el-input v-model="editForm.email" auto-complete="off">{{form.email}}</el-input>
         </el-form-item>
-        <el-form-item :label='`${$t("register.label.card")}`'>
+        <el-form-item :label="`${$t("register.label.card")}`">
           <el-input v-model="editForm.card" auto-complete="off" disabled>{{form.card}}</el-input>
         </el-form-item>
       </el-form>
@@ -166,31 +174,37 @@ export default {
     deleteRow(index, rows) {
       const self = this;
       self
-        .$confirm(this.$t("adminManage.confirm.deleteAdmin"), this.$t("adminManage.warning"), {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning"
-        })
+        .$confirm(
+          this.$t("adminManage.confirm.deleteAdmin"),
+          this.$t("adminManage.warning"),
+          {
+            confirmButtonText: this.$t("button.ok"),
+            cancelButtonText: this.$t("button.cancel"),
+            type: "warning"
+          }
+        )
         .then(() => {
           const id = rows.Id;
           const response = deleteAdmin(self, id);
-          if (response.data === "删除用户失败") {
+          if (
+            response.data === this.$t("adminManage.showMessage.deleteUserError")
+          ) {
             self.$message({
               type: "error",
-              message: "删除用户失败!"
+              message: this.$t("adminManage.showMessage.deleteUserError")
             });
           } else {
             self.getAdminData();
             self.$message({
               type: "success",
-              message: "删除成功!"
+              message: this.$t("adminManage.showMessage.deleteUserSuccess")
             });
           }
         })
         .catch(() => {
           self.$message({
             type: "info",
-            message: "已取消删除"
+            message: this.$t("adminManage.showMessage.cancel")
           });
         });
     },
@@ -200,10 +214,12 @@ export default {
       const self = this;
       const adminname = "";
       const response = await getAllAdmin(self, adminname);
-      if (response.data === "获取用户信息失败") {
+      if (
+        response.data === this.$t("adminManage.showMessage.getUserInfoError")
+      ) {
         self.$message({
           type: "error",
-          message: "获取用户信息失败!"
+          message: this.$t("adminManage.showMessage.getUserInfoError")
         });
       } else {
         self.form = response.data;
@@ -212,7 +228,7 @@ export default {
 
     //点击编辑
     handleEdit(index, row) {
-      const self = this
+      const self = this;
       self.editFormVisible = true;
       self.editForm = Object.assign({}, row);
       self.isEdit = true;
@@ -220,7 +236,7 @@ export default {
 
     //关闭dialog
     handleClose(done) {
-      const self = this
+      const self = this;
       self.editFormVisible = false;
     },
     //点击更新
@@ -233,9 +249,9 @@ export default {
       const phone = self.editForm.phone;
       const card = self.editForm.card;
       self
-        .$confirm("是否更新该用户信息", "提示", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
+        .$confirm(this.$t("adminManage.confirm.updateUserInfo"), this.$t("adminManage.confirm.warning"), {
+          confirmButtonText: this.$t("button.ok"),
+          cancelButtonText: this.$t("button.cancel"),
           type: "warning"
         })
         .then(() => {
@@ -248,15 +264,15 @@ export default {
             phone,
             card
           );
-          if (response.data === "更新失败，请联系管理员") {
+          if (response.data === this.$t("adminManage.showMessage.updateUserError")) {
             his.$message({
               type: "error",
-              message: "用户信息更新失败!"
+              message: this.$t("adminManage.showMessage.updateUserError")
             });
           } else {
             self.$message({
               type: "success",
-              message: "用户信息更新成功!"
+              message: this.$t("adminManage.showMessage.updateUserSuccess")
             });
             self.getAdminData();
             self.editFormVisible = false;
@@ -265,7 +281,7 @@ export default {
         .catch(() => {
           self.$message({
             type: "info",
-            message: "取消更新"
+            message: this.$t("adminManage.showMessage.cancel")
           });
         });
     },
@@ -275,35 +291,37 @@ export default {
       const self = this;
       const formatId = self.formatId(self.multipleSelection);
       self
-        .$confirm("此操作删除用户, 是否继续?", "提示", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
+        .$confirm(this.$t("adminManage.confirm.deleteAdmin"), this.$t("adminManage.confirm.warning"), {
+          confirmButtonText: this.$t("button.ok"),
+          cancelButtonText: this.$t("button.cancel"),
           type: "warning"
         })
         .then(() => {
           const response = deleteAdmin(self, formatId);
-          if (response.data === "删除用户失败") {
-            self.showDeleteInfo = "删除用户失败";
+          if (response.data === this.$t("adminManage.showMessage.deleteUserError")) {
+          self.$message({
+              type: "error",
+              message: this.$t("adminManage.showMessage.deleteUserError")
+            });
           } else {
-            self.showDeleteInfo = "删除用户成功";
             self.getAdminData();
             self.$message({
               type: "success",
-              message: "删除成功!"
+              message: this.$t("adminManage.showMessage.deleteUserSuccess")
             });
           }
         })
         .catch(() => {
           self.$message({
             type: "info",
-            message: "取消删除"
+            message: this.$t("adminManage.showMessage.cancel")
           });
         });
     },
 
     //多选框取值
     handleSelectionChange(val) {
-      const self = this
+      const self = this;
       self.multipleSelection = val;
     },
     formatId(val) {
@@ -337,15 +355,15 @@ export default {
         self.getAdminData();
       } else {
         if (_.isEmpty(inpValue) && !_.isEmpty(self.selectValue)) {
-          self.$alert("输入不能为空，请输入需要查询的用户", "警告", {
-            confirmButtonText: "确定"
+          self.$alert(this.$t("adminManage.showMessage.inputText"), this.$t("adminManage.confirm.warning"), {
+            confirmButtonText: this.$t("button.ok")
           });
         } else {
           self.selectAll = false;
           const response = await searchAdmin(self, selValue, inpValue);
-          if (response.data === "无该用户信息") {
-            self.$alert("无该用户信息，请重新搜索！", "查询失败", {
-              confirmButtonText: "确定"
+          if (response.data === this.$t("adminManage.showMessage.userIsNull")) {
+            self.$alert(this.$t("adminManage.showMessage.userUndefined"), this.$t("adminManage.showMessage.searchError"), {
+              confirmButtonText: this.$t("button.ok")
             });
             self.input = " ";
           } else {

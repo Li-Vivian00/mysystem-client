@@ -203,7 +203,7 @@ export default {
       const self = this;
       const username = "";
       const response = await getAllUser(self, username);
-      if (response.data === "获取用户信息失败") {
+      if (response.data === "更新用户失败") {
         self.$message({
           type: "error",
           message: "获取用户信息失败!"

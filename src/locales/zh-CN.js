@@ -65,7 +65,24 @@ export default {
     },
     confirm: {
       deleteAdmin: "此操作删除该管理员，是否继续？",
+      updateUserInfo:"是否更新该用户信息",
       warning: "提示",
+    },
+    showMessage: {
+      deleteUserError: "删除用户失败",
+      deleteUserSuccess: "删除用户成功！",
+      
+      cancel: "取消操作",
+
+      getUserInfoError:"获取用户信息失败",
+
+      updateUserError: "更新用户失败",
+      updateUserSuccess: "用户更新成功",
+
+      inputText: "输入不能为空，请输入需要查询的用户",
+      userIsNull:"无该用户信息",
+      userUndefined:"无该用户信息，请重新搜索！",
+      searchError:"查询失败"
     }
   }
 }
