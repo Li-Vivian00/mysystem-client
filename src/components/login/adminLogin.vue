@@ -19,7 +19,7 @@
         <el-form-item prop="loginId">
           <el-input
             v-model="ruleForm.loginId"
-            placeholder="管理员账号"
+            :placeholder='`${$t("login.adminLogin.inputPlaceholder")}`'
             @keyup.enter.native="submitForm('ruleForm')"
           ></el-input>
           <span>{{errAccountInfo}}</span>
@@ -27,7 +27,7 @@
         <el-form-item prop="password">
           <el-input
             type="password"
-            placeholder="密码"
+            :placeholder='`${$t("login.adminLogin.password")}`'
             v-model="ruleForm.password"
             @keyup.enter.native="submitForm('ruleForm')"
           ></el-input>
@@ -37,7 +37,7 @@
           <el-input
             v-model="ruleForm.validate"
             class="validate-code"
-            placeholder="验证码"
+            :placeholder='`${$t("login.adminLogin.code")}`'
             @keyup.enter.native="submitForm('ruleForm')"
           ></el-input>
           <div class="code" @click="refreshCode">
@@ -45,7 +45,7 @@
           </div>
         </el-form-item>
         <div class="login-btn">
-          <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+          <el-button type="primary" @click="submitForm('ruleForm')">{{$t('login.adminLogin.load')}}</el-button>
         </div>
         <!-- <p class="register" @click="handleCommand()">注册</p> -->
       </el-form>
@@ -56,11 +56,11 @@
 <script>
 import SIdentify from "./Identity";
 import { adminLogin } from "../../service/login/adminLogin.service";
-import { ADMIN_LOGIN_STATUS } from "../../local/login/adminLogin.const";
+import { ADMIN_LOGIN_STATUS } from "../../locales/login/adminLogin.const";
 export default {
   name: "adminLogin",
   data() {
-    var checkVal = (rule, value, callback) => {
+    const checkVal = (rule, value, callback) => {
       if (!value) {
         return callback(new Error(ADMIN_LOGIN_STATUS.INPUT_CODE));
         this.tureVali = false;
@@ -75,7 +75,7 @@ export default {
       }, 100);
     };
     return {
-      identifyCodes: "1234567890",
+      identifyCodes: ADMIN_LOGIN_STATUS.IDENTIFYCODES,
       identifyCode: "",
       errAccountInfo: "",
       errPwdInfo: "",
@@ -86,10 +86,26 @@ export default {
         validate: ""
       },
       rules: {
-        loginId: [{ required: true, message: ADMIN_LOGIN_STATUS.INPUT_NAME, trigger: "blur" }],
-        password: [{ required: true, message: ADMIN_LOGIN_STATUS.INPUT_PASSWORD, trigger: "blur" }],
+        loginId: [
+          {
+            required: true,
+            message: ADMIN_LOGIN_STATUS.INPUT_NAME,
+            trigger: "blur"
+          }
+        ],
+        password: [
+          {
+            required: true,
+            message: ADMIN_LOGIN_STATUS.INPUT_PASSWORD,
+            trigger: "blur"
+          }
+        ],
         validate: [
-          { required: true, message: ADMIN_LOGIN_STATUS.INPUT_CODE, trigger: "blur" },
+          {
+            required: true,
+            message: ADMIN_LOGIN_STATUS.INPUT_CODE,
+            trigger: "blur"
+          },
           { validator: checkVal, trigger: "blur" }
         ]
       }
@@ -105,7 +121,7 @@ export default {
   methods: {
     async submitForm(formName) {
       const self = this;
-      if (this.tureVali) {
+      if (self.tureVali) {
         const response = await adminLogin(self.ruleForm, self);
         if (response.data == -1) {
           self.errAccountInfo = ADMIN_LOGIN_STATUS.LOGINID_NOT_EXIST;
@@ -114,15 +130,17 @@ export default {
           self.errAccountInfo = "";
           self.errPwdInfo = ADMIN_LOGIN_STATUS.PASSWORD_ERROR;
         } else if (response.status == 200) {
-          console.log("success")
           self.errAccountInfo = "";
           self.errPwdInfo = "";
           self.$router.push("/adminHome");
           sessionStorage.setItem("adminName", self.ruleForm.loginId);
-          sessionStorage.setItem("admin", JSON.stringify(self.ruleForm));
+          // sessionStorage.setItem("admin", JSON.stringify(self.ruleForm));
         }
       } else {
-        console.log("error submit!!");
+        self.$message({
+          type: "error",
+          message: ADMIN_LOGIN_STATUS.LOADING_ERROR
+        });
         return false;
       }
     },
@@ -146,5 +164,5 @@ export default {
 </script>
 
 <style scoped>
-@import '../../css/login/adminLogin.css';
+@import "../../css/login/adminLogin.css";
 </style>

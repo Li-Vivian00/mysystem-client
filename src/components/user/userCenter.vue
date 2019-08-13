@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import {userCenter} from '../../service/user/userCenter.service'
 export default {
   data() {
     return {
@@ -48,17 +49,11 @@ export default {
     };
   },
   methods: {
-    getUserData() {
+    async getUserData() {
       const self = this;
-      // var username = localStorage.getItem('ms_user').username;
-      var userLoginId = localStorage.getItem("userLoginId");
-      // var myObj = JSON.parse(myStr);
-      // var username = myObj.username;
-      // console.log("-----", userLoginId); //user2
-      self.$http
-        .get("/api/user/getUser", { params: { userLoginId: userLoginId } })
-        .then(function(response) {
-          console.log(response);
+      const userLoginId = localStorage.getItem("userLoginId");
+      const response = await userCenter(self, userLoginId);
+      if (response.status == 200){
           let result = response.data[0];
           self.form.username = result.username;
           self.form.loginid = result.loginid;
@@ -68,7 +63,7 @@ export default {
           self.form.sex = result.sex;
           self.form.Id = result.Id;
           sessionStorage.setItem("ms_userId", result.Id);
-        });
+      }
       // .then(function(error) {
       //   console.log("error", error);
       // });

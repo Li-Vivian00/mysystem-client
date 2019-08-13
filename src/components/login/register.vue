@@ -6,54 +6,88 @@
           <i class="el-icon-setting"></i>注册
         </el-breadcrumb-item>
       </el-breadcrumb>
+      <el-dropdown @command='selectLang'>
+        <span class="el-dropdown-link">
+          {{lang}}
+          <i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="ZH">ZH</el-dropdown-item>
+          <el-dropdown-item command="EN">EN</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </div>
     <div class="userContent">
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item prop="loginId" label="登录账号">
-          <el-input v-model="form.loginId" placeholder="请输入登录账号" :readonly="successRegister"></el-input>
+        <el-form-item prop="loginId" :label='`${$t("register.label.loginId")}`'>
+          <el-input
+            v-model="form.loginId"
+            :placeholder='`${$t("register.inputPlaceholder.loginId")}`'
+            :readonly="successRegister"
+          ></el-input>
         </el-form-item>
-        <el-form-item prop="name" label="用户名称">
-          <el-input v-model="form.name" placeholder="请输入用户名称" :readonly="successRegister"></el-input>
+        <el-form-item prop="name" :label='`${$t("register.label.userName")}`'>
+          <el-input
+            v-model="form.name"
+            :placeholder='`${$t("register.inputPlaceholder.userName")}`'
+            :readonly="successRegister"
+          ></el-input>
         </el-form-item>
-        <el-form-item prop="pass" label="密码">
+        <el-form-item prop="pass" :label='`${$t("register.label.password")}`'>
           <el-input
             v-model="form.pass"
             type="password"
-            placeholder="请输入密码"
+            :placeholder='`${$t("register.inputPlaceholder.password")}`'
             :readonly="successRegister"
           ></el-input>
         </el-form-item>
-        <el-form-item prop="checkPass" label="确认密码">
+        <el-form-item prop="checkPass" :label='`${$t("register.label.repeatPassword")}`'>
           <el-input
             v-model="form.checkPass"
             type="password"
-            placeholder="请再次输入密码"
+            :placeholder='`${$t("register.inputPlaceholder.repeatPassword")}`'
             :readonly="successRegister"
           ></el-input>
         </el-form-item>
-        <el-form-item prop="sex" label="性别">
+        <el-form-item prop="sex" :label='`${$t("register.label.sex")}`'>
           <el-select
             class="select-sex"
             v-model="form.sex"
-            placeholder="请选择性别"
+            :placeholder='`${$t("register.inputPlaceholder.sex")}`'
             :disabled="successRegister"
           >
-            <el-option label="男" value="male"></el-option>
-            <el-option label="女" value="female"></el-option>
+            <el-option :label='`${$t("register.label.male")}`' value="male"></el-option>
+            <el-option :label='`${$t("register.label.female")}`' value="female"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item prop="phone" label="手机">
-          <el-input v-model="form.phone" placeholder="请输入手机号" :readonly="successRegister"></el-input>
+        <el-form-item prop="phone" :label='`${$t("register.label.phone")}`'>
+          <el-input
+            v-model="form.phone"
+            :placeholder='`${$t("register.inputPlaceholder.phone")}`'
+            :readonly="successRegister"
+          ></el-input>
         </el-form-item>
-        <el-form-item prop="email" label="邮箱">
-          <el-input v-model="form.email" placeholder="请输入邮箱" :readonly="successRegister"></el-input>
+        <el-form-item prop="email" :label='`${$t("register.label.email")}`'>
+          <el-input
+            v-model="form.email"
+            :placeholder='`${$t("register.inputPlaceholder.email")}`'
+            :readonly="successRegister"
+          ></el-input>
         </el-form-item>
-        <el-form-item prop="card" label="身份证">
-          <el-input v-model="form.card" placeholder="请输入身份证号" :readonly="successRegister"></el-input>
+        <el-form-item prop="card" :label='`${$t("register.label.card")}`'>
+          <el-input
+            v-model="form.card"
+            :placeholder='`${$t("register.inputPlaceholder.card")}`'
+            :readonly="successRegister"
+          ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit('form')" :disabled="successRegister">确定</el-button>
-          <el-button @click="onCancle()" :disabled="successRegister">取消</el-button>
+          <el-button
+            type="primary"
+            @click="onSubmit('form')"
+            :disabled="successRegister"
+          >{{$t('button.ok')}}</el-button>
+          <el-button @click="onCancle()" :disabled="successRegister">{{$t('button.cancel')}}</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -78,29 +112,32 @@
 
 <script>
 import Util from "../../utils/utils";
-import {register} from "../../service/login/register"
+import {
+  register,
+  validateId,
+  getUser
+} from "../../service/login/register.service";
+import { REGISTER_LOGIN_STATUS } from "../../locales/login/register.const";
+import { constants } from 'crypto';
 export default {
   data() {
-    var validateId = (rule, value, callback) => {
+    const validateId = async (rule, value, callback) => {
+      const self = this;
       if (value === "") {
-        callback(new Error("请输入登陆账号"));
+        callback(new Error(REGISTER_LOGIN_STATUS.INPUT_LOGINID));
       } else {
-        let loginId = this.form.loginId;
-        this.$http
-          .get("/api/userLogin/getUser", { params: { loginId: loginId } })
-          .then(function(response) {
-            console.log(response);
-            let result = response.data[0];
-            if (result) {
-              callback(new Error("用户已存在"));
-            }
-            callback();
-          });
+        let loginId = self.form.loginId;
+        const response = await getUser(self, loginId);
+        let result = response.data[0];
+        if (result) {
+          callback(new Error(REGISTER_LOGIN_STATUS.LOGINID_ISEXIST));
+        }
+        callback();
       }
     };
-    var validatePass = (rule, value, callback) => {
+    const validatePass = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("请输入密码"));
+        callback(new Error(REGISTER_LOGIN_STATUS.INPUT_PASSWORD));
       } else {
         if (this.form.checkPass !== "") {
           this.$refs.form.validateField("checkPass");
@@ -108,38 +145,38 @@ export default {
         callback();
       }
     };
-    var validatePass2 = (rule, value, callback) => {
+    const validateRepeatPass = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("请再次输入密码"));
+        callback(new Error(REGISTER_LOGIN_STATUS.INPUT_REPEATPASSWORD));
       } else if (value !== this.form.pass) {
-        callback(new Error("两次输入的密码不一致"));
+        callback(new Error(REGISTER_LOGIN_STATUS.REPEATPASSWORD_ERROR));
       } else {
         callback();
       }
     };
-    var validateEmail = (rule, value, callback) => {
+    const validateEmail = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("请输入邮箱"));
+        callback(new Error(REGISTER_LOGIN_STATUS.INPUT_EMAIL));
       } else if (!Util.emailReg.test(this.form.email)) {
-        callback(new Error("请输入正确的邮箱"));
+        callback(new Error(REGISTER_LOGIN_STATUS.INPUT_FORMATEMAIL));
       } else {
         callback();
       }
     };
-    var validatePhone = (rule, value, callback) => {
+    const validatePhone = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("请输入手机号"));
+        callback(new Error(REGISTER_LOGIN_STATUS.INPUT_PHONE));
       } else if (!Util.phoneReg.test(this.form.phone)) {
-        callback(new Error("请输入正确的手机号"));
+        callback(new Error(REGISTER_LOGIN_STATUS.INPUT_FORMATPHONE));
       } else {
         callback();
       }
     };
-    var validateCard = (rule, value, callback) => {
+    const validateCard = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("请输入身份证号"));
+        callback(new Error(REGISTER_LOGIN_STATUS.INPUT_CARD));
       } else if (!Util.idCardReg.test(this.form.card)) {
-        callback(new Error("请输入正确的身份证号"));
+        callback(new Error(REGISTER_LOGIN_STATUS.INPUT_FORMATCARD));
       } else {
         callback();
       }
@@ -159,7 +196,13 @@ export default {
         sex: ""
       },
       rules: {
-        name: [{ required: true, message: "请输入用户名", trigger: "blur" }],
+        name: [
+          {
+            required: true,
+            message: REGISTER_LOGIN_STATUS.INPUT_NAME,
+            trigger: "blur"
+          }
+        ],
         loginId: [
           {
             required: true,
@@ -169,33 +212,36 @@ export default {
         ],
         pass: [{ required: true, validator: validatePass, trigger: "blur" }],
         checkPass: [
-          { required: true, validator: validatePass2, trigger: "blur" }
+          { required: true, validator: validateRepeatPass, trigger: "blur" }
         ],
         email: [{ required: true, validator: validateEmail, trigger: "blur" }],
         phone: [{ required: true, validator: validatePhone, trigger: "blur" }],
         card: [{ required: true, validator: validateCard, trigger: "blur" }],
-        sex: [{ required: true, message: "请输入性别", trigger: "blur" }]
-      }
+        sex: [
+          {
+            required: true,
+            message: REGISTER_LOGIN_STATUS.INPUT_SEX,
+            trigger: "blur"
+          }
+        ]
+      },
+      lang:'ZH'
     };
   },
   methods: {
-     onSubmit(formName) {
+    onSubmit(formName) {
       const self = this;
       self.$refs[formName].validate(valid => {
         if (valid) {
-          const response = register(self.form, self)
-              if (response.data == "注册失败") {
-                self.$alert("注册失败", "警告", {
-                  confirmButtonText: "确定"
-                });
-              } else {
-                self.successRegister = true;
-                self.timeGo();
-              }
+          const response = register(self.form, self);
+          if (response.data == "注册失败") {
+            self.alertMessage();
+          } else {
+            self.successRegister = true;
+            self.timeGo();
+          }
         } else {
-          self.$alert("注册失败", "警告", {
-                  confirmButtonText: "确定"
-                });
+          self.alertMessage();
           console.log("error submit!!");
           return false;
         }
@@ -218,11 +264,28 @@ export default {
           }
         }, 1000);
       }
-    }
+    },
     // getDateTimes(str) {
-    //   var str = new Date(str);
+    //   const str = new Date(str);
     //   return str;
     // }
+    alertMessage() {
+      this.$alert("注册失败", "警告", {
+        confirmButtonText: "确定"
+      });
+    },
+    selectLang(command) {
+      this.lang = this.getLangName(command);
+      this.$i18n.locale = this.lang
+      // location.reload();
+    },
+    getLangName (key) {
+      const langArr = {
+        'EN': 'EN',
+        'ZH': 'ZH',
+      };
+      return langArr[key]
+    }
   }
 };
 </script>

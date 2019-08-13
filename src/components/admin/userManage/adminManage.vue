@@ -1,17 +1,17 @@
 <template>
   <div class="adminManage">
-    <el-button type="primary" @click="batchDelect" class="batchDelect">批量删除</el-button>关键字：
+    <el-button type="primary" @click="batchDelect" class="batchDelect">{{$t('adminManage.batchDelete')}}</el-button>关键字：
     <el-select v-model="value" clearable @change="selectItem">
       <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
     </el-select>
     <el-input
-      placeholder="请输入内容"
+      :placeholder='`${$t("adminManage.inputText")}`'
       v-model="input"
       clearable
       :disabled="selectAll"
       style="width:210px; margin-left:12px;margin-right:10px"
     ></el-input>
-    <el-button type="primary" @click="searchAdmin" plain>搜索</el-button>
+    <el-button type="primary" @click="searchAdmin" plain>{{$t("adminManage.search")}}</el-button>
 
     <el-table
       :data="form"
@@ -21,7 +21,7 @@
       border
       str
       v-loading="loading"
-      element-loading-text="拼命加载中"
+      :element-loading-text='`${$t("adminManage.loadingText")}`'
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(0, 0, 0, 0.8)"
       @selection-change="handleSelectionChange"
@@ -31,48 +31,48 @@
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
-            <el-form-item label="登录id：">
+            <el-form-item :label='`${$t("register.label.loginId")}`'>
               <span>{{ props.row.loginid }}</span>
             </el-form-item>
-            <el-form-item label="管理员名称">
+            <el-form-item :label='`${$t("register.label.userName")}`'>
               <span>{{ props.row.adminname }}</span>
             </el-form-item>
-            <el-form-item label="管理员密码">
+            <el-form-item :label='`${$t("register.label.password")}`'>
               <span>{{ props.row.password }}</span>
             </el-form-item>
-            <el-form-item label="性别">
+            <el-form-item :label='`${$t("register.label.sex")}`'>
               <span>{{ props.row.sex }}</span>
             </el-form-item>
-            <el-form-item label="联系电话">
+            <el-form-item :label='`${$t("register.label.phone")}`'>
               <span>{{ props.row.phone }}</span>
             </el-form-item>
-            <el-form-item label="邮箱">
+            <el-form-item :label='`${$t("register.label.email")}`'>
               <span>{{ props.row.email }}</span>
             </el-form-item>
-            <el-form-item label="身份证">
+            <el-form-item :label='`${$t("register.label.card")}`'>
               <span>{{ props.row.card }}</span>
             </el-form-item>
           </el-form>
         </template>
       </el-table-column>
       <el-table-column label="ID" prop="Id" sortable></el-table-column>
-      <el-table-column label="登录账号" prop="loginid" sortable></el-table-column>
-      <el-table-column label="用户名" prop="adminname" sortable></el-table-column>
+      <el-table-column :label='`${$t("register.label.loginId")}`' prop="loginid" sortable></el-table-column>
+      <el-table-column :label='`${$t("register.label.userName")}`' prop="adminname" sortable></el-table-column>
       <el-table-column fixed="right" label="操作" width="120">
         <template slot-scope="scope">
-          <el-button @click="deleteRow(scope.$index, scope.row)" type="text" size="small">移除</el-button>
           <el-button
             type="text"
             size="small"
             @click.native="handleEdit(scope.$index, scope.row)"
             v-if="!showBtn[scope.$index]"
-          >编辑</el-button>
+          >{{$t("adminManage.edit")}}</el-button>
+          <el-button @click="deleteRow(scope.$index, scope.row)" type="text" size="small">{{$t("adminManage.delete")}}</el-button>
         </template>
       </el-table-column>
     </el-table>
 
     <el-dialog
-      title="编辑"
+      :title='`${$t("adminManage.edit")}`'
       :visible.sync="editFormVisible"
       :close-on-click-modal="false"
       class="edit-form"
@@ -111,7 +111,13 @@
 
 <script>
 // import Util from "../../../utils/utils";
-import _ from 'lodash'
+import _ from "lodash";
+import {
+  deleteAdmin,
+  getAllAdmin,
+  updateAdmin,
+  searchAdmin
+} from "../../../service/admin/userManage/adminManage.service";
 export default {
   data() {
     return {
@@ -158,33 +164,31 @@ export default {
   methods: {
     //单个移除
     deleteRow(index, rows) {
-      // rows.splice(index, 1);
-      this.$confirm("此操作删除该管理员, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
+      const self = this;
+      self
+        .$confirm("此操作删除该管理员, 是否继续?", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        })
         .then(() => {
-          const self = this;
-          let id = rows.Id;
-          self.$http
-            .post("/api/adminManage/deleteAdmin", { id: id }, {})
-            .then(response => {
-              console.log(response);
-              if (response.data === "删除用户失败") {
-                this.showDeleteInfo = "删除用户失败";
-              } else {
-                this.showDeleteInfo = "删除用户成功";
-              }
+          const id = rows.Id;
+          const response = deleteAdmin(self, id);
+          if (response.data === "删除用户失败") {
+            self.$message({
+              type: "error",
+              message: "删除用户失败!"
             });
-          this.getUserData();
-          this.$message({
-            type: "success",
-            message: "删除成功!"
-          });
+          } else {
+            self.getAdminData();
+            self.$message({
+              type: "success",
+              message: "删除成功!"
+            });
+          }
         })
         .catch(() => {
-          this.$message({
+          self.$message({
             type: "info",
             message: "已取消删除"
           });
@@ -192,128 +196,115 @@ export default {
     },
 
     //获得所有用户信息
-    getUserData() {
+    async getAdminData() {
       const self = this;
-      let adminname = "";
-      self.$http
-        .get("/api/adminManage/getAdmin", { params: { name: adminname } })
-        .then(function(response) {
-          console.log(response);
-          if (response.data === "获取用户信息失败") {
-            this.$message({
-              type: "error",
-              message: "获取用户信息失败!"
-            });
-          } else {
-            self.form = response.data;
-          }
-        })
-        .catch(function(error) {
-          console.log("error", error);
+      const adminname = "";
+      const response = await getAllAdmin(self, adminname);
+      if (response.data === "获取用户信息失败") {
+        self.$message({
+          type: "error",
+          message: "获取用户信息失败!"
         });
+      } else {
+        self.form = response.data;
+      }
     },
 
     //点击编辑
     handleEdit(index, row) {
-      this.editFormVisible = true;
-      this.editForm = Object.assign({}, row);
-      this.isEdit = true;
+      const self = this
+      self.editFormVisible = true;
+      self.editForm = Object.assign({}, row);
+      self.isEdit = true;
     },
 
     //关闭dialog
     handleClose(done) {
-      this.editFormVisible = false;
+      const self = this
+      self.editFormVisible = false;
     },
     //点击更新
     handleUpdate(formName) {
-      let loginid = this.editForm.loginid;
-      console.log(loginid);
-      let adminname = this.editForm.adminname;
-      let password = this.editForm.password;
-      let email = this.editForm.email;
-      let phone = this.editForm.phone;
-      let card = this.editForm.card;
-      this.$confirm("是否更新该用户信息", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
+      const self = this;
+      const loginid = self.editForm.loginid;
+      const adminname = self.editForm.adminname;
+      const password = self.editForm.password;
+      const email = self.editForm.email;
+      const phone = self.editForm.phone;
+      const card = self.editForm.card;
+      self
+        .$confirm("是否更新该用户信息", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        })
         .then(() => {
-          this.$http
-            .post(
-              "/api/adminManage/updateAdmin",
-              {
-                loginid: loginid,
-                adminname: adminname,
-                password: password,
-                email: email,
-                phone: phone,
-                card: card
-              },
-              {}
-            )
-            .then(response => {
-              console.log(response);
-              if (response.data === "更新失败，请联系管理员") {
-                this.showUpdateInfo = "用户信息更新失败";
-                console.log("用户信息更新失败");
-              } else {
-                this.showUpdateInfo = "用户信息更新成功";
-                this.$message({
-                  type: "success",
-                  message: "用户信息更新成功!"
-                });
-                console.log("用户信息更新成功");
-              }
+          const response = updateAdmin(
+            self,
+            loginid,
+            adminname,
+            password,
+            email,
+            phone,
+            card
+          );
+          if (response.data === "更新失败，请联系管理员") {
+            his.$message({
+              type: "error",
+              message: "用户信息更新失败!"
             });
-          this.getUserData();
-          this.editFormVisible = false;
+          } else {
+            self.$message({
+              type: "success",
+              message: "用户信息更新成功!"
+            });
+            self.getAdminData();
+            self.editFormVisible = false;
+          }
         })
         .catch(() => {
-          this.$message({
+          self.$message({
             type: "info",
-            message: "已取消更新"
+            message: "取消更新"
           });
         });
     },
 
     //批量删除
     batchDelect() {
-      let formatId = this.formatId(this.multipleSelection);
-      this.$confirm("此操作删除用户, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
+      const self = this;
+      const formatId = self.formatId(self.multipleSelection);
+      self
+        .$confirm("此操作删除用户, 是否继续?", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        })
         .then(() => {
-          const self = this;
-          self.$http
-            .post("/api/adminManage/deleteAdmin", { id: formatId }, {})
-            .then(response => {
-              console.log(response);
-              if (response.data === "删除用户失败") {
-                this.showDeleteInfo = "删除用户失败";
-              } else {
-                this.showDeleteInfo = "删除用户成功";
-              }
+          const response = deleteAdmin(self, formatId);
+          if (response.data === "删除用户失败") {
+            self.showDeleteInfo = "删除用户失败";
+          } else {
+            self.showDeleteInfo = "删除用户成功";
+            self.getAdminData();
+            self.$message({
+              type: "success",
+              message: "删除成功!"
             });
-          this.getUserData();
-          this.$message({
-            type: "success",
-            message: "删除成功!"
-          });
+          }
         })
         .catch(() => {
-          this.$message({
+          self.$message({
             type: "info",
-            message: "已取消删除"
+            message: "取消删除"
           });
         });
     },
 
     //多选框取值
     handleSelectionChange(val) {
-      this.multipleSelection = val;
+      const self = this
+      self.multipleSelection = val;
     },
     formatId(val) {
       let sqlId = "";
@@ -338,39 +329,28 @@ export default {
       }
     },
     //关键字查询用户
-    searchAdmin() {
+    async searchAdmin() {
       const self = this;
-      let selValue = self.selectValue;
-      let inpValue = self.input;
-      console.log(selValue + " " + inpValue);
+      const selValue = self.selectValue;
+      const inpValue = self.input;
       if (selValue == "all") {
-        this.getUserData();
+        self.getAdminData();
       } else {
-        if (_.isEmpty(inpValue) && !_.isEmpty(this.selectValue)) {
+        if (_.isEmpty(inpValue) && !_.isEmpty(self.selectValue)) {
           self.$alert("输入不能为空，请输入需要查询的用户", "警告", {
             confirmButtonText: "确定"
           });
         } else {
           self.selectAll = false;
-          self.$http
-            .get("/api/adminManage/getOneAdmin", {
-              params: { id: selValue, name: inpValue }
-            })
-            .then(function(response) {
-              console.log(response);
-              if (response.data === "无该用户信息") {
-                console.log("无该用户信息");
-                self.$alert("无该用户信息，请重新搜索！", "查询失败", {
-                  confirmButtonText: "确定"
-                });
-                self.input = " ";
-              } else {
-                self.form = response.data;
-              }
-            })
-            .catch(function(error) {
-              console.log("error", error);
+          const response = await searchAdmin(self, selValue, inpValue);
+          if (response.data === "无该用户信息") {
+            self.$alert("无该用户信息，请重新搜索！", "查询失败", {
+              confirmButtonText: "确定"
             });
+            self.input = " ";
+          } else {
+            self.form = response.data;
+          }
         }
       }
     }
@@ -379,7 +359,7 @@ export default {
     setTimeout(() => {
       this.loading = false;
     }, 1000);
-    this.getUserData();
+    this.getAdminData();
   }
 };
 </script>

@@ -19,15 +19,16 @@
         <el-form-item prop="loginId">
           <el-input
             v-model="ruleForm.loginId"
-            placeholder="用户账号"
+            :placeholder='`${$t("login.userLogin.inputPlaceholder")}`'
             @keyup.enter.native="submitForm('ruleForm')"
-          ></el-input>
+          >
+          </el-input>
           <span>{{errAccountInfo}}</span>
         </el-form-item>
         <el-form-item prop="password">
           <el-input
             type="password"
-            placeholder="密码"
+            :placeholder='`${$t("login.userLogin.password")}`'
             v-model="ruleForm.password"
             @keyup.enter.native="submitForm('ruleForm')"
           ></el-input>
@@ -37,7 +38,7 @@
           <el-input
             v-model="ruleForm.validate"
             class="validate-code"
-            placeholder="验证码"
+            :placeholder='`${$t("login.userLogin.code")}`'
             @keyup.enter.native="submitForm('ruleForm')"
           ></el-input>
           <div class="code" @click="refreshCode">
@@ -45,9 +46,9 @@
           </div>
         </el-form-item>
         <div class="login-btn">
-          <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+          <el-button type="primary" @click="submitForm('ruleForm')">{{$t('login.userLogin.load')}}</el-button>
         </div>
-        <p class="register" @click="handleCommand()">注册</p>
+        <p class="register" @click="handleCommand()">{{$t('login.userLogin.register')}}</p>
       </el-form>
     </div>
   </div>
@@ -56,11 +57,11 @@
 <script>
 import SIdentify from "./Identity";
 import { userLogin } from "../../service/login/userLogin.service";
-import { USER_LOGIN_STATUS } from "../../local/login/userLogin.const";
+import { USER_LOGIN_STATUS } from "../../locales/login/userLogin.const";
 export default {
   name: "userLogin",
   data() {
-    var checkVal = (rule, value, callback) => {
+    const checkVal = (rule, value, callback) => {
       if (!value) {
         return callback(new Error(USER_LOGIN_STATUS.INPUT_CODE));
         this.tureVali = false;
@@ -75,7 +76,7 @@ export default {
       }, 100);
     };
     return {
-      identifyCodes: "1234567890",
+      identifyCodes: USER_LOGIN_STATUS.IDENTIFYCODES,
       identifyCode: "",
       errAccountInfo: "",
       errPwdInfo: "",
@@ -86,10 +87,26 @@ export default {
         validate: ""
       },
       rules: {
-        loginId: [{ required: true, message: USER_LOGIN_STATUS.INPUT_NAME, trigger: "blur" }],
-        password: [{ required: true, message: USER_LOGIN_STATUS.ERROR_PASSWORD, trigger: "blur" }],
+        loginId: [
+          {
+            required: true,
+            message: USER_LOGIN_STATUS.INPUT_NAME,
+            trigger: "blur"
+          }
+        ],
+        password: [
+          {
+            required: true,
+            message: USER_LOGIN_STATUS.ERROR_PASSWORD,
+            trigger: "blur"
+          }
+        ],
         validate: [
-          { required: true, message: USER_LOGIN_STATUS.INPUT_NAME, trigger: "blur" },
+          {
+            required: true,
+            message: USER_LOGIN_STATUS.INPUT_NAME,
+            trigger: "blur"
+          },
           { validator: checkVal, trigger: "blur" }
         ]
       }
@@ -105,7 +122,7 @@ export default {
   methods: {
     async submitForm(formName) {
       const self = this;
-      if (this.tureVali) {
+      if (self.tureVali) {
         const response = await userLogin(self.ruleForm, self);
         if (response.data == -1) {
           self.errAccountInfo = USER_LOGIN_STATUS.LOGINID_NOT_EXIST;
@@ -118,10 +135,13 @@ export default {
           self.errPwdInfo = "";
           self.$router.push("/userHome");
           sessionStorage.setItem("userLoginId", self.ruleForm.loginId);
-          sessionStorage.setItem("user", JSON.stringify(self.ruleForm));
+          // sessionStorage.setItem("user", JSON.stringify(self.ruleForm));
         }
       } else {
-        console.log("error submit!!");
+        self.$message({
+          type: "error",
+          message: USER_LOGIN_STATUS.LOADING_ERROR
+        });
         return false;
       }
     },
@@ -148,5 +168,5 @@ export default {
 </script>
 
 <style scoped>
-@import '../../css/login/adminLogin.css';
+@import "../../css/login/adminLogin.css";
 </style>

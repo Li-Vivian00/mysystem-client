@@ -111,7 +111,13 @@
 
 <script>
 // import Util from "../../../utils/utils";
-import _ from 'lodash'
+import _ from "lodash";
+import {
+  getAllUser,
+  deleteUser,
+  updateUser,
+  searchUser
+} from "../../../service/admin/userManage/userManage.service";
 export default {
   data() {
     return {
@@ -159,37 +165,33 @@ export default {
     //单个移除
     deleteRow(index, rows) {
       // rows.splice(index, 1);
-      this.$confirm("此操作删除该用户, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
+      const self = this;
+      self
+        .$confirm("此操作删除该用户, 是否继续?", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        })
         .then(() => {
-          const self = this;
-          let id = rows.Id;
-          console.log(id);
-          self.$http
-            .post("/api/userManage/deleteUser", { id: id }, {})
-            .then(response => {
-              console.log(response);
-              if (response.data === "删除用户失败") {
-                this.showDeleteInfo = "删除用户失败";
-                this.$message({
-                  type: "error",
-                  message: "删除失败!"
-                });
-              } else {
-                this.showDeleteInfo = "删除用户成功";
-                this.getUserData();
-                this.$message({
-                  type: "success",
-                  message: "删除成功!"
-                });
-              }
+          const id = rows.Id;
+          const response = deleteUser(self, id);
+          if (response.data === "删除用户失败") {
+            self.showDeleteInfo = "删除用户失败";
+            self.$message({
+              type: "error",
+              message: "删除失败!"
             });
+          } else {
+            self.showDeleteInfo = "删除用户成功";
+            self.getUserData();
+            self.$message({
+              type: "success",
+              message: "删除成功!"
+            });
+          }
         })
         .catch(() => {
-          this.$message({
+          self.$message({
             type: "info",
             message: "已取消删除"
           });
@@ -197,85 +199,74 @@ export default {
     },
 
     //获得所有用户信息
-    getUserData() {
+    async getUserData() {
       const self = this;
-      let username = "";
-      self.$http
-        .get("/api/userManage/getUser", { params: { name: username } })
-        .then(function(response) {
-          console.log(response);
-          if (response.data === "获取用户信息失败") {
-            this.$message({
-              type: "error",
-              message: "获取用户信息失败!"
-            });
-          } else {
-            self.form = response.data;
-          }
-        })
-        .catch(function(error) {
-          console.log("error", error);
+      const username = "";
+      const response = await getAllUser(self, username);
+      if (response.data === "获取用户信息失败") {
+        self.$message({
+          type: "error",
+          message: "获取用户信息失败!"
         });
+      } else {
+        self.form = response.data;
+      }
     },
 
     //点击编辑
     handleEdit(index, row) {
-      this.editFormVisible = true;
-      this.editForm = Object.assign({}, row);
-      this.isEdit = true;
+      const self = this
+      self.editFormVisible = true;
+      self.editForm = Object.assign({}, row);
+      self.isEdit = true;
     },
 
     //关闭dialog
     handleClose(done) {
-      this.editFormVisible = false;
+      const self = this
+      self.editFormVisible = false;
     },
     //点击更新
     handleUpdate(formName) {
-      let loginid = this.editForm.loginid;
-      console.log(loginid);
-      let username = this.editForm.username;
-      let password = this.editForm.password;
-      let email = this.editForm.email;
-      let phone = this.editForm.phone;
-      let card = this.editForm.card;
-      this.$confirm("是否更新该用户信息", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
+      const self = this;
+      const loginid = self.editForm.loginid;
+      const username = self.editForm.username;
+      const password = self.editForm.password;
+      const email = self.editForm.email;
+      const phone = self.editForm.phone;
+      const card = self.editForm.card;
+      self
+        .$confirm("是否更新该用户信息", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        })
         .then(() => {
-          this.$http
-            .post(
-              "/api/userManage/updateUser",
-              {
-                loginid: loginid,
-                username: username,
-                password: password,
-                email: email,
-                phone: phone,
-                card: card
-              },
-              {}
-            )
-            .then(response => {
-              console.log(response);
-              if (response.data === "更新用户失败") {
-                this.showUpdateInfo = "用户信息更新失败";
-                console.log("用户信息更新失败");
-              } else {
-                this.showUpdateInfo = "用户信息更新成功";
-                this.$message({
-                  type: "success",
-                  message: "用户信息更新成功!"
-                });
-                console.log("用户信息更新成功");
-              }
+          const response = updateUser(
+            self,
+            loginid,
+            username,
+            password,
+            email,
+            phone,
+            card
+          );
+          if (response.data === "更新用户失败") {
+            self.$message({
+              type: "error",
+              message: "更新用户失败!"
             });
-          this.getUserData();
-          this.editFormVisible = false;
+          } else {
+            self.$message({
+              type: "success",
+              message: "用户信息更新成功!"
+            });
+            self.getUserData();
+            self.editFormVisible = false;
+          }
         })
         .catch(() => {
-          this.$message({
+          self.$message({
             type: "info",
             message: "已取消更新"
           });
@@ -284,32 +275,31 @@ export default {
 
     //批量删除
     batchDelect() {
-      let formatId = this.formatId(this.multipleSelection);
-      this.$confirm("此操作删除用户, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
+      const self = this;
+      const formatId = self.formatId(self.multipleSelection);
+      self
+        .$confirm("此操作删除用户, 是否继续?", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        })
         .then(() => {
-          const self = this;
-          self.$http
-            .post("/api/userManage/deleteUser", { id: formatId }, {})
-            .then(response => {
-              console.log(response);
-              if (response.data === "删除用户失败") {
-                this.showDeleteInfo = "删除用户失败";
-              } else {
-                this.showDeleteInfo = "删除用户成功";
-              }
+          const response = deleteUser(self, formatId);
+          if (response.data === "删除用户失败") {
+            self.$message({
+              type: "error",
+              message: "删除用户失败!"
             });
-          this.getUserData();
-          this.$message({
-            type: "success",
-            message: "删除成功!"
-          });
+          } else {
+            self.getUserData();
+            self.$message({
+              type: "success",
+              message: "删除成功!"
+            });
+          }
         })
         .catch(() => {
-          this.$message({
+          self.$message({
             type: "info",
             message: "已取消删除"
           });
@@ -318,7 +308,8 @@ export default {
 
     //多选框取值
     handleSelectionChange(val) {
-      this.multipleSelection = val;
+      const self = this
+      self.multipleSelection = val;
     },
     formatId(val) {
       let sqlId = "";
@@ -343,38 +334,29 @@ export default {
       }
     },
     //关键字查询用户
-    searchUser() {
+    async searchUser() {
       const self = this;
-      let selValue = self.selectValue;
-      let inpValue = self.input;
+      const selValue = self.selectValue;
+      const inpValue = self.input;
       if (selValue == "all") {
-        this.getUserData();
+        self.getUserData();
       } else {
-        if (_.isEmpty(inpValue) && !_.isEmpty(this.selectValue)) {
+        if (_.isEmpty(inpValue) && !_.isEmpty(self.selectValue)) {
           self.$alert("输入不能为空，请输入需要查询的用户", "警告", {
             confirmButtonText: "确定"
           });
         } else {
           self.selectAll = false;
-          self.$http
-            .get("/api/userManage/getOneUser", {
-              params: { id: selValue, name: inpValue }
-            })
-            .then(function(response) {
-              console.log(response);
-              if (response.data === "无该用户信息") {
-                console.log("无该用户信息");
-                self.$alert("无该用户信息，请重新搜索！", "查询失败", {
-                  confirmButtonText: "确定"
-                });
-                self.input = " ";
-              } else {
-                self.form = response.data;
-              }
-            })
-            .catch(function(error) {
-              console.log("error", error);
+          const response = await searchUser(self, selValue, inpValue);
+          if (response.data === "无该用户信息") {
+            console.log("无该用户信息");
+            self.$alert("无该用户信息，请重新搜索！", "查询失败", {
+              confirmButtonText: "确定"
             });
+            self.input = " ";
+          } else {
+            self.form = response.data;
+          }
         }
       }
     }

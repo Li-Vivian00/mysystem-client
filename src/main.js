@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from 'axios'
+import VueI18n from 'vue-i18n'
 // import VueResource from 'vue-resource'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -12,7 +13,12 @@ import _ from 'lodash'
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(_)
+Vue.use(VueI18n)
 Vue.prototype.$http = axios
+
+import local from './locales/index'
+const i18n = local(VueI18n);
+
 
 /* eslint-disable no-new */
 new Vue({
@@ -22,5 +28,6 @@ new Vue({
     App
     // SIdentify
   },
-  template: '<App/>'
+  template: '<App/>',
+  i18n
 })

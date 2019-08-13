@@ -31,9 +31,10 @@
 </template>
 
 <script>
+import {modifyPassword} from '../../service/user/modifyPassword.service'
 export default {
   data() {
-    var validatePass = (rule, value, callback) => {
+    const validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入密码"));
       } else {
@@ -43,7 +44,7 @@ export default {
         callback();
       }
     };
-    var validatePass2 = (rule, value, callback) => {
+    const validatePass2 = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请再次输入密码"));
       } else if (value !== this.form.pass) {
@@ -77,19 +78,12 @@ export default {
       console.log("id:", formData.id);
       self.$refs[formName].validate(valid => {
         if (valid) {
-          self.$http
-            .post("/api/user/modifyPassword", formData)
-            .then(function(response) {
-              console.log(response);
-              if (response.data === -1) {
-                console.log("change pwd is wrong");
-              } else {
-                self.$router.push("/login");
-              }
-            })
-            .then(function(error) {
-              console.log(error);
-            });
+          const response = modifyPassword(self, formData);
+          if (response.data === -1) {
+            console.log("change pwd is wrong");
+          } else {
+            self.$router.push("/login");
+          }
         } else {
           console.log("error submit!!");
           return false;
