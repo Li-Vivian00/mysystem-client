@@ -14,17 +14,17 @@ export default {
     },
   },
   register: {
-    lable: {
-      loginId: "LoginId",
-      userName: "UserName",
-      password: "Password",
-      repeatPassword: "RepeatPassword",
-      sex: "Sex",
-      phone: "Phone",
-      email: "Email",
-      card: "Card",
-      male: "Male",
-      female: "Female"
+    label: {
+      loginId: "LoginId:",
+      userName: "UserName:",
+      password: "Password:",
+      repeatPassword: "RepeatPassword:",
+      sex: "Sex:",
+      phone: "Phone:",
+      email: "Email:",
+      card: "Card:",
+      male: "Male:",
+      female: "Female:"
     },
     inputPlaceholder: {
       loginId: "Please input LoginId",
@@ -39,6 +39,26 @@ export default {
   },
   button: {
     ok: "ok",
-    cancel: "cancel"
+    cancel: "cancel",
+    update: "update"
+  },
+  adminManage: {
+    batchDelete: "Batch Delete",
+    edit: "Edit",
+    delete: "Delete",
+    search: "Search",
+    operate: "Operate",
+    loadingText: "Loading",
+    inputText: "Please input text",
+    loginId: "LoginId",
+    userName: "UserName",
+    options: {
+      label: {
+        all: "All",
+        loginId: "LoginId",
+        userName: "UserName"
+      }
+    },
+
   }
 }

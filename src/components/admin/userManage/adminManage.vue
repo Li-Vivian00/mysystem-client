@@ -56,9 +56,9 @@
         </template>
       </el-table-column>
       <el-table-column label="ID" prop="Id" sortable></el-table-column>
-      <el-table-column :label='`${$t("register.label.loginId")}`' prop="loginid" sortable></el-table-column>
-      <el-table-column :label='`${$t("register.label.userName")}`' prop="adminname" sortable></el-table-column>
-      <el-table-column fixed="right" label="操作" width="120">
+      <el-table-column :label='`${$t("adminManage.loginId")}`' prop="loginid" sortable></el-table-column>
+      <el-table-column :label='`${$t("adminManage.userName")}`' prop="adminname" sortable></el-table-column>
+      <el-table-column fixed="right" :label='`${$t("adminManage.operate")}`' width="120">
         <template slot-scope="scope">
           <el-button
             type="text"
@@ -79,31 +79,31 @@
       :before-close="handleClose"
     >
       <el-form :model="editForm" label-width="80px" ref="editForm">
-        <el-form-item label="登陆账号">
+        <el-form-item :label='`${$t("register.label.loginId")}`'>
           <el-input v-model="editForm.loginid" auto-complete="off" disabled>{{form.loginid}}</el-input>
         </el-form-item>
-        <el-form-item label="用户名称">
+        <el-form-item :label='`${$t("register.label.userName")}`'>
           <el-input v-model="editForm.adminname" auto-complete="off">{{form.adminname}}</el-input>
         </el-form-item>
-        <el-form-item label="用户密码">
+        <el-form-item :label='`${$t("register.label.password")}`'>
           <el-input v-model="editForm.password" auto-complete="off">{{form.password}}</el-input>
         </el-form-item>
-        <el-form-item label="性别：">
+        <el-form-item :label='`${$t("register.label.sex")}`'>
           <el-input v-model="editForm.sex" auto-complete="off" disabled>{{form.sex}}</el-input>
         </el-form-item>
-        <el-form-item label="联系方式">
+        <el-form-item :label='`${$t("register.label.phone")}`'>
           <el-input v-model="editForm.phone" auto-complete="off">{{form.phone}}</el-input>
         </el-form-item>
-        <el-form-item label="邮箱">
+        <el-form-item :label='`${$t("register.label.email")}`'>
           <el-input v-model="editForm.email" auto-complete="off">{{form.email}}</el-input>
         </el-form-item>
-        <el-form-item label="身份证">
+        <el-form-item :label='`${$t("register.label.card")}`'>
           <el-input v-model="editForm.card" auto-complete="off" disabled>{{form.card}}</el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click.native="editFormVisible = false">取消</el-button>
-        <el-button type="primary" @click.native="handleUpdate('editForm')">更新</el-button>
+        <el-button @click.native="editFormVisible = false">{{$t("button.cancel")}}</el-button>
+        <el-button type="primary" @click.native="handleUpdate('editForm')">{{$t("button.update")}}</el-button>
       </div>
     </el-dialog>
   </div>
@@ -141,7 +141,7 @@ export default {
       options: [
         {
           value: "all",
-          label: "全部"
+          label: this.$t("adminManage.options.label.all")
         },
         {
           value: "Id",
@@ -149,11 +149,11 @@ export default {
         },
         {
           value: "loginid",
-          label: "loginID"
+          label: this.$t("adminManage.options.label.loginId")
         },
         {
           value: "adminname",
-          label: "用户名"
+          label: this.$t("adminManage.options.label.userName")
         }
       ],
       value: "",
@@ -166,7 +166,7 @@ export default {
     deleteRow(index, rows) {
       const self = this;
       self
-        .$confirm("此操作删除该管理员, 是否继续?", "提示", {
+        .$confirm(this.$t("adminManage.confirm.deleteAdmin"), this.$t("adminManage.warning"), {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"
