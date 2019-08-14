@@ -36,7 +36,7 @@ export default {
   data() {
     const validatePass = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("请输入密码"));
+        callback(new Error(this.$t("register.inputPlaceholder.password")));
       } else {
         if (this.form.checkPass !== "") {
           this.$refs.form.validateField("checkPass");
@@ -46,7 +46,7 @@ export default {
     };
     const validatePass2 = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("请再次输入密码"));
+        callback(new Error(this.$t("register.inputPlaceholder.repeatPassword")));
       } else if (value !== this.form.pass) {
         this.isValue = true;
         callback(new Error("两次输入的密码不一致"));

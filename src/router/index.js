@@ -19,17 +19,12 @@ import baseFacility from '../components/admin/villaCenter/baseFacility'
 import repairManage from '../components/admin/repairManage/repairManage'
 import opinionManage from '../components/admin/repairManage/opinionManage'
 import buildingManage from '../components/admin/buildingManage/buildingManage'
+import forgetPassword from '../components/common/forgetPassword/Login'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'HelloWorld',
-    //   component: HelloWorld
-    // }
-
     {
       path: '/',
       name: 'userLogin',
@@ -126,6 +121,12 @@ export default new Router({
           component: buildingManage
         }
       ]
+    },
+
+    //忘记密码
+    {
+      path: '/forgetPassword',
+      component: forgetPassword
     }
   ]
 })

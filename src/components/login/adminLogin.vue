@@ -16,6 +16,7 @@
             <img src="../../../static/img/login_logo.png" />
           </a>
         </div>
+        <p class="login-enter" @click="userLogin">{{$t('login.adminLogin.userLogin')}}</p>
         <el-form-item prop="loginId">
           <el-input
             v-model="ruleForm.loginId"
@@ -28,6 +29,7 @@
             type="password"
             :placeholder='`${$t("login.adminLogin.password")}`'
             v-model="ruleForm.password"
+            show-password
           ></el-input>
           <span>{{errPwdInfo}}</span>
         </el-form-item>
@@ -45,7 +47,7 @@
         <div class="login-btn">
           <el-button type="primary" @click="submitForm('ruleForm')">{{$t('login.adminLogin.load')}}</el-button>
         </div>
-        <p class="register" @click="handleCommand()">注册</p>
+        <p class="forgetPwd" @click="forgetPwd">{{$t('login.adminLogin.forgetPwd')}}</p>
       </el-form>
     </div>
   </div>
@@ -156,6 +158,12 @@ export default {
         ];
       }
       console.log(this.identifyCode);
+    },
+    userLogin() {
+      this.$router.push("/userLogin");
+    },
+    forgetPwd() {
+
     }
   }
 };

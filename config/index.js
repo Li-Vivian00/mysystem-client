@@ -19,6 +19,13 @@ module.exports = {
         pathRewrite: {
           '^/api': ''
         }
+      },
+      "/apis": {
+        target: "http://utf8.api.smschinese.cn",
+        changeOrigin: true,
+        pathRewrite: {
+          '^/apis': ''
+        }
       }
     },
 

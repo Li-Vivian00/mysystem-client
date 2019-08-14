@@ -5,13 +5,17 @@ export default {
       password: "Please input password",
       code: "Please input code",
       load: "Load",
-      register: "Register"
+      register: "Register",
+      adminLogin:"AdminLogin",
+      forgetPwd:"ForgetPassword?"
     },
 
     adminLogin: {
       inputPlaceholder: "Please input admin loginid",
       password: "Please input password",
-      code: "Please input code"
+      code: "Please input code",
+      userLogin:"UserLogin",
+      forgetPwd:"ForgetPassword?"
     },
   },
 
@@ -20,6 +24,7 @@ export default {
       loginId: "LoginId:",
       userName: "UserName:",
       password: "Password:",
+      repeatError:"The two passwords did not match",
       repeatPassword: "RepeatPassword:",
       sex: "Sex:",
       phone: "Phone:",

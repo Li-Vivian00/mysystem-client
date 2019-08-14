@@ -5,13 +5,17 @@ export default {
       password: "请输入密码",
       code: "请输入验证码",
       load: "登录",
-      register: "注册"
+      register: "注册",
+      adminLogin:"管理员登录",
+      forgetPwd:"忘记密码？"
     },
     adminLogin: {
       inputPlaceholder: "请输入管理员账号",
       password: "请输入密码",
       code: "请输入验证码",
       load: "登录",
+      userLogin:"用户登录",
+      forgetPwd:"忘记密码？"
     },
   },
 
@@ -34,8 +38,9 @@ export default {
       userName: "请输入用户名称",
       password: "请输入密码",
       repeatPassword: "请再次输入密码",
+      repeatError:"两次输入的密码不一致",
       sex: "请输入性别",
-      phone: "请输入手机",
+      phone: "请输入手机号",
       email: "请输入邮箱",
       card: "请输入身份证"
     }

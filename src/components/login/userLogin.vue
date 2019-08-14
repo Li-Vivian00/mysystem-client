@@ -16,6 +16,7 @@
             <img src="../../../static/img/login_logo.png" />
           </a>
         </div>
+        <p class="login-enter" @click="adminLogin">{{$t('login.userLogin.adminLogin')}}</p>
         <el-form-item prop="loginId">
           <el-input
             v-model="ruleForm.loginId"
@@ -31,6 +32,7 @@
             :placeholder='`${$t("login.userLogin.password")}`'
             v-model="ruleForm.password"
             @keyup.enter.native="submitForm('ruleForm')"
+            show-password
           ></el-input>
           <span>{{errPwdInfo}}</span>
         </el-form-item>
@@ -48,7 +50,8 @@
         <div class="login-btn">
           <el-button type="primary" @click="submitForm('ruleForm')">{{$t('login.userLogin.load')}}</el-button>
         </div>
-        <p class="register" @click="handleCommand()">{{$t('login.userLogin.register')}}</p>
+        <p class="register" @click="handleCommand">{{$t('login.userLogin.register')}}</p>
+        <p class="forgetPwd" @click="forgetPwd">{{$t('login.userLogin.forgetPwd')}}</p>
       </el-form>
     </div>
   </div>
@@ -148,6 +151,9 @@ export default {
     handleCommand() {
       this.$router.push("/register");
     },
+    adminLogin() {
+      this.$router.push("/adminLogin");
+    },
     randomNum(min, max) {
       return Math.floor(Math.random() * (max - min) + min);
     },
@@ -162,6 +168,9 @@ export default {
         ];
       }
       console.log(this.identifyCode);
+    },
+    forgetPwd() {
+      
     }
   }
 };
