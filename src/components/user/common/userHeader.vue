@@ -1,25 +1,25 @@
 <template>
   <div class="header">
-    <div class="logo">用户登录系统</div>
+    <div class="logo">{{$t("header.userHeader")}}</div>
     <div class="user-info">
-      <el-dropdown trigger="click" @command="handleCommand">
+      <el-dropdown  @command="handleCommand">
         <span class="el-dropdown-link">
-          <img class="user-logo" src="../../../../static/img/img.jpg" />
           {{username}}
+          <img class="user-logo" src="../../../../static/img/img.jpg" />
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="userCenter">个人中心</el-dropdown-item>
-          <el-dropdown-item command="loginout">退出</el-dropdown-item>
+          <el-dropdown-item command="userCenter">{{$t("header.userCenter")}}</el-dropdown-item>
+          <el-dropdown-item command="loginout">{{$t("header.logout")}}</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
        <el-dropdown @command="selectLang">
         <span class="el-dropdown-link">
-          {{lang}}
+          {{lang == 'ZH'? $t("header.zh"):$t("header.en")}}
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="ZH">ZH</el-dropdown-item>
-          <el-dropdown-item command="EN">EN</el-dropdown-item>
+          <el-dropdown-item command="ZH">{{$t("header.zh")}}</el-dropdown-item>
+          <el-dropdown-item command="EN">{{$t("header.en")}}</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -29,22 +29,21 @@
 export default {
   data() {
     return {
-      name: "linxin",
-      //   lang: this.getLangName(get("lang"))
-      lang: "ZH"
+      name: "Hi,user",
+      lang: this.getLangName(sessionStorage.getItem("userLang"))
+      // lang: this.$t("header.zh")
     };
   },
   computed: {
     username() {
-      let username = sessionStorage.getItem("ms_username");
+      let username = "Hello," + sessionStorage.getItem("userLoginId");
       return username ? username : this.name;
     }
   },
   methods: {
     handleCommand(command) {
       if (command == "loginout") {
-        sessionStorage.removeItem("ms_username");
-        sessionStorage.removeItem("ms_userId");
+        sessionStorage.removeItem("userLoginId");
         this.$router.push("/userLogin");
       } else if (command == "userCenter") {
         this.$router.push("/userCenter");
@@ -52,6 +51,7 @@ export default {
     },
     selectLang(command) {
       this.lang = this.getLangName(command);
+      sessionStorage.setItem("userLang", this.lang)
       this.$i18n.locale = this.lang;
       // location.reload();
     },
@@ -104,5 +104,8 @@ export default {
 }
 .el-dropdown-menu__item {
   text-align: center;
+}
+.el-dropdown-link {
+  color: rgb(156, 156, 156) !important;
 }
 </style>

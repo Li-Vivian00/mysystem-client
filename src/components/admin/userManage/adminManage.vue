@@ -5,12 +5,12 @@
       @click="batchDelect"
       class="batchDelect"
     >{{$t('manage.batchDelete')}}</el-button>{{$t("manage.keyWord")}}
-    <el-select v-model="value" clearable @change="selectItem">
+    <el-select v-model="value" clearable @change="selectItem" :placeholder='`${$t("manage.selectHolder")}`'>
       <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
     </el-select>
     <el-input
       :placeholder='`${$t("manage.inputText")}`'
-      v-model="input"
+      v-model.trim="input"
       clearable
       :disabled="selectAll"
       style="width:210px; margin-left:12px;margin-right:10px"
@@ -405,5 +405,9 @@ export default {
 }
 .tableFont {
   font: 16px !important;
+}
+
+.el-form-item__label {
+  padding: 0 9px 0 0 !important;
 }
 </style>

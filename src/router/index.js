@@ -7,7 +7,8 @@ import register from '../components/login/register'
 import userHome from '../components/user/common/userHome'
 import adminHome from '../components/admin/common/adminHome'
 import Readme from '../components/Readme'
-import userCenter from '../components/user/UserCenter'
+import userCenter from '../components/user/userCenter'
+import adminCenter from '../components/admin/adminCenter'
 import modifyPassword from '../components/user/modifyPassword'
 import customerManage from '../components/admin/userManage/customerManage'
 import adminManage from '../components/admin/userManage/adminManage'
@@ -73,6 +74,12 @@ export default new Router({
         {
           path: '/readme',
           component: Readme
+        },
+
+        //个人中心
+        {
+          path: '/adminCenter',
+          component: adminCenter
         },
 
         //别墅中心

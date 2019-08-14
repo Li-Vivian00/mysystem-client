@@ -54,6 +54,7 @@ export default {
     delete: "Delete",
     search: "Search",
     operate: "Operate",
+    selectHolder:"Please choose",
     loadingText: "Loading",
     inputText: "Please input text",
     loginId: "LoginId",
@@ -89,5 +90,14 @@ export default {
       userUndefined: "No user information, please search again!",
       searchError: "Fail to query"
     }
+  },
+
+  header: {
+    adminHeader: "Admin System",
+    userHeader: "User System",
+    userCenter: "User Center",
+    logout: "Logout",
+    zh: "ZH",
+    en: "EN",
   }
 }

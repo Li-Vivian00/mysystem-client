@@ -54,6 +54,7 @@ export default {
     delete: "删除",
     search: "搜索",
     operate: "操作",
+    selectHolder:"请选择",
     loadingText: "拼命加载中",
     inputText: "请输入内容",
     loginId: "登陆账号",
@@ -89,5 +90,20 @@ export default {
       userUndefined:"无该用户信息，请重新搜索！",
       searchError:"查询失败"
     }
+  },
+
+  header: {
+    adminHeader: "管理员登录系统",
+    userHeader: "用户登录系统",
+    userCenter: "个人中心",
+    logout: "退出",
+    zh: "中文",
+    en: "英文",
+  },
+
+  sidebar: {
+    villaCenter: "别墅中心",
+    board: "公告栏",
+    baseInfo: "基本信息"
   }
 }

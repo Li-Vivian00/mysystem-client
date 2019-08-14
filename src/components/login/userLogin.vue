@@ -133,8 +133,8 @@ export default {
         } else if (response.status == 200) {
           self.errAccountInfo = "";
           self.errPwdInfo = "";
-          self.$router.push("/userHome");
           sessionStorage.setItem("userLoginId", self.ruleForm.loginId);
+          self.$router.push("/userHome");
           // sessionStorage.setItem("user", JSON.stringify(self.ruleForm));
         }
       } else {

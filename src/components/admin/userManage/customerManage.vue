@@ -6,7 +6,7 @@
     </el-select>
     <el-input
       :placeholder='`${$t("manage.inputText")}`'
-      v-model="input"
+      v-model.trim="input"
       clearable
       :disabled="selectAll"
       style="width:210px; margin-left:12px;margin-right:10px"

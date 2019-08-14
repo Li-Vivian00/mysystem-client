@@ -20,7 +20,6 @@
           <el-input
             v-model="ruleForm.loginId"
             :placeholder='`${$t("login.adminLogin.inputPlaceholder")}`'
-            @keyup.enter.native="submitForm('ruleForm')"
           ></el-input>
           <span>{{errAccountInfo}}</span>
         </el-form-item>
@@ -29,7 +28,6 @@
             type="password"
             :placeholder='`${$t("login.adminLogin.password")}`'
             v-model="ruleForm.password"
-            @keyup.enter.native="submitForm('ruleForm')"
           ></el-input>
           <span>{{errPwdInfo}}</span>
         </el-form-item>
@@ -47,7 +45,7 @@
         <div class="login-btn">
           <el-button type="primary" @click="submitForm('ruleForm')">{{$t('login.adminLogin.load')}}</el-button>
         </div>
-        <!-- <p class="register" @click="handleCommand()">注册</p> -->
+        <p class="register" @click="handleCommand()">注册</p>
       </el-form>
     </div>
   </div>
@@ -132,8 +130,8 @@ export default {
         } else if (response.status == 200) {
           self.errAccountInfo = "";
           self.errPwdInfo = "";
+          sessionStorage.setItem("adminLoginId", self.ruleForm.loginId);
           self.$router.push("/adminHome");
-          sessionStorage.setItem("adminName", self.ruleForm.loginId);
           // sessionStorage.setItem("admin", JSON.stringify(self.ruleForm));
         }
       } else {
