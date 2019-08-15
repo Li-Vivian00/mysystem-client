@@ -1,153 +1,46 @@
-/* @charset "utf-8";
-@keyframes up {
-  0% {
-    margin-top: 1.5rem;
-  }
-  100% {
-    margin-top: -1rem;
-  }
-}
-
-body {
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-
-button, input {
-  font: inherit;
-  margin: 0;
-  outline: none;
-  line-height: normal;
-}
-
 .bg_bank {
-  position: absolute;
-  height: 100%;
   width: 100%;
-  background: url("../image/bg_bank.png") no-repeat center;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: 0 center;
+  height: 100%;
+  position: relative;
 }
 
-.bg-color {
-  background-color: transparent;
-}
-
-.mt-bu {
-  color: #8a8a8a;
-}
-
-.label_start {
+.bg_bank .bg_color {
   position: absolute;
-  margin-top: 1.5rem;
-  margin-left: 3rem;
-  font-family: '仿宋';
-  color: #bfbfbf;
+  top: 50%;
+  left: 50%;
+  width: 1000px;
+  height: 400px;
+  border: 1px solid red;
+  border-radius: 10px;
+  background: #fff;
+  padding: 10px;
+  margin-top: -170px;
+  margin-left: -500px;
 }
 
-.label_updown {
-  animation: up 1s;
-  animation-fill-mode: forwards;
-  font-family: '仿宋';
-  color: #8a8a8a;
-  z-index: 1;
-  margin-top: 1.5rem;
-  margin-left: 3rem;
+.el-input-phone {
+  display: block;
+  width: 25%;
+  margin: 50px auto 16px;
+  /* float: left; */
 }
 
-.bg_color {
-  width: 30%;
-  margin: 0 auto;
-  margin-top: 15%;
-  background-color: rgba(255, 255, 255, 0.1);
-}
-.re_min {
-  border-bottom: 0.1rem solid #bfbfbf;
-  overflow: hidden;
-  height: 5rem;
-  margin-top: 2rem;
-  position: relative;
-  right: 0;
-}
-
-.re_min_outline {
-  border-bottom: 0.1rem solid #efb336;
-}
-
-.input_phone .el-input, .verif_code .el-input {
-  margin: 10px;
-  font-size: 16px;
-  height: 48px;
-}
-
-.re_login {
-  width: 30%;
-  margin-top: 2rem;
-  text-align: center;
-  margin: 22px auto;
-}
-
-.btn_login {
-  width: 35%;
-  margin: 0 auto;
-  color: #fff;
-  font-size: 16px;
-}
-
-.verif_code {
-  position: relative;
+.el-input-verif {
+  /* display: block; */
+  width: 25%;
+  margin: 20px auto;
 }
 
 .reto_code {
+  display: inline-block;
   position: absolute;
-  background-color: #dbdbdb;
-  text-align: center;
-  padding: 5px;
-  color: #515151;
-  border: none;
-  top: 17px;
-  right: -125px;
-  font-size: 14px;
-  border-radius: 5px;
-} */
-
-
-
-.bg_bank {
-  width: 100%;
-  height: 100%;
-  position: relative;
+  right: 22%;
+  bottom:42%;
+  /* margin-left: 10px; */
 }
-
-.bg_color {
-  position: absolute;
-  width: 500px;
-  height:250px;
-  border: 1px solid red;
-  border-radius: 5px;
-  background: #fff;
-  padding: 10px;
-  margin-top: 10%;
-  margin-left: 33%;
-}
-
-.input_phone, .verif_code {
-  margin: 15px 40px;
-}
-
-.verif_code .el-input-text{
-  width: 63%;
-  margin-right: 20px;
-  float: left;
-}
-
-.re_login {
-  width: 25px;
+.btn_login {
+  display: block;
   font-size: 16px;
   text-align: center;
-}
-.re_login .btn_login {
-  margin: 0 auto;
+  margin: 16px auto;
 }
