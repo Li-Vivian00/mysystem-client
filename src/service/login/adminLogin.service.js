@@ -3,7 +3,7 @@ export const adminLogin = async (ruleForm, self) => {
     // localStorage.setItem("admin", JSON.stringify(ruleForm));
     let result = self.$http
       .post("/api/adminLogin/adminlogin", {
-        loginId: ruleForm.loginId,
+        loginid: ruleForm.loginId,
         password:ruleForm.password
       }).catch(error => {
         console.log(error.message)
