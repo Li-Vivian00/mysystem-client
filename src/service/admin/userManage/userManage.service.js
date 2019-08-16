@@ -1,9 +1,7 @@
 export const getAllUser = async (self, username) => {
   const result = await self.$http
     .get("/api/userManage/getUser", {
-      params: {
-        name: username
-      }
+      
     }).catch(error => {
       console.log(error)
     })
@@ -13,7 +11,7 @@ export const getAllUser = async (self, username) => {
 export const deleteUser = (self, id) => {
   const result = self.$http
     .post("/api/userManage/deleteUser", {
-      id: id
+      Id: id
     }, {}).catch(error => {
       console.log(error)
     })

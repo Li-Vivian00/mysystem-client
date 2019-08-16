@@ -61,6 +61,7 @@
 import SIdentify from "./Identity";
 import { userLogin } from "../../service/login/userLogin.service";
 import { USER_LOGIN_STATUS } from "../../locales/login/userLogin.const";
+import { constants } from 'crypto';
 export default {
   name: "userLogin",
   data() {
@@ -127,10 +128,11 @@ export default {
       const self = this;
       if (self.tureVali) {
         const response = await userLogin(self.ruleForm, self);
-        if (response.data == -1) {
+        console.log(response)
+        if (response.data == "loginid not exist") {
           self.errAccountInfo = USER_LOGIN_STATUS.LOGINID_NOT_EXIST;
           self.errPwdInfo = "";
-        } else if (response.data == 0) {
+        } else if (response.data == "password not correct") {
           self.errAccountInfo = "";
           self.errPwdInfo = USER_LOGIN_STATUS.ERROR_PASSWORD;
         } else if (response.status == 200) {
@@ -177,5 +179,6 @@ export default {
 </script>
 
 <style scoped>
-@import "../../css/login/adminLogin.css";
+@import "../../../static/css/login/adminLogin.css";
+
 </style>

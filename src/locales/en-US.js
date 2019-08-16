@@ -21,11 +21,12 @@ export default {
 
   register: {
     label: {
+      register:"Register",
       loginId: "LoginId:",
       userName: "UserName:",
       password: "Password:",
       repeatError:"The two passwords did not match",
-      repeatPassword: "RepeatPassword:",
+      repeatPassword: "RepeatPwd:",
       sex: "Sex:",
       phone: "Phone:",
       email: "Email:",
@@ -43,6 +44,14 @@ export default {
       phone: "Please input phone",
       email: "Please input email",
       card: "Please input card"
+    },
+    title: {
+      successItem: "Congratulations on your successful registration and joining the warm community!",
+      returniItem: "Jumping to the login interface",
+      clickItem: "Click on the jump login interface"
+    },
+    showMessage: {
+      register: "Registration failed",
     }
   },
 
@@ -77,16 +86,13 @@ export default {
       warning: "Warning",
     },
     showMessage: {
-      deleteUserError: "删除用户失败",
       delteError:"Failed to delete user",
       deleteUserSuccess: "User deleted successfully",
 
       cancel: "Cancel the operation",
 
-      getUserInfoError:"获取用户信息失败",
       getUserError: "Failed to retrieve user information",
 
-      updateUserError:"更新用户失败",
       updateError: "Failed to update user",
       updateUserSuccess: "User updated successfully",
 

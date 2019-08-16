@@ -4,7 +4,7 @@ export const userLogin = async (ruleForm, self) => {
   console.log("user:", localStorage.getItem("user"));
   let result = await self.$http
     .post("/api/userLogin/login", {
-      loginId: ruleForm.loginId,
+      loginid: ruleForm.loginId,
       password: ruleForm.password
     }).catch(error => {
       console.log(error.message)

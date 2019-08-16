@@ -1,7 +1,7 @@
 export const deleteAdmin = (self, id) => {
   const result = self.$http
     .post("/api/adminManage/deleteAdmin", {
-      id: id
+      Id: id
     }, {}).catch(error => {
       console.log(error.message)
     })
@@ -11,9 +11,7 @@ export const deleteAdmin = (self, id) => {
 export const getAllAdmin = async (self, adminname) => {
   const result = await self.$http
     .get("/api/adminManage/getAdmin", {
-      params: {
-        name: adminname
-      }
+      
     }).catch(error => {
       console.log(error.message)
     })

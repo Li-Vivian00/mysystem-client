@@ -55,7 +55,7 @@
           </el-form>
         </template>
       </el-table-column>
-      <el-table-column label="ID" prop="Id" sortable></el-table-column>
+      <el-table-column label="ID" prop="id" sortable></el-table-column>
       <el-table-column :label='`${$t("manage.loginId")}`' prop="loginid" sortable></el-table-column>
       <el-table-column :label='`${$t("manage.userName")}`' prop="username" sortable></el-table-column>
       <el-table-column fixed="right" :label='`${$t("manage.operate")}`' width="120">
@@ -118,6 +118,7 @@ import {
   updateUser,
   searchUser
 } from "../../../service/admin/userManage/userManage.service";
+import { constants } from 'crypto';
 export default {
   data() {
     return {
@@ -173,9 +174,10 @@ export default {
           type: "warning"
         })
         .then(() => {
-          const id = rows.Id;
+          const id = rows.id;
+          console.log(id);
           const response = deleteUser(self, id);
-          if (response.data === response.data === this.$t("manage.showMessage.deleteUserError")) {
+          if (response.data === "fail to delete user") {
             self.$message({
               type: "error",
               message: this.$t("manage.showMessage.deleteError")
@@ -201,13 +203,14 @@ export default {
       const self = this;
       const username = "";
       const response = await getAllUser(self, username);
-      if (response.data === self.$t("manage.showMessage.getUserInfoError")) {
+      if (response.data === "fail to get user info") {
         self.$message({
           type: "error",
           message: self.$t("manage.showMessage.getUserError")          
         });
       } else {
         self.form = response.data;
+        console.log(self.form);
       }
     },
 
@@ -249,7 +252,7 @@ export default {
             phone,
             card
           );
-          if (response.data === this.$t("manage.showMessage.updateUserError")) {
+          if (response.data === "fail to update user info") {
             self.$message({
               type: "error",
               message: this.$t("manage.showMessage.updateError")
@@ -283,7 +286,7 @@ export default {
         })
         .then(() => {
           const response = deleteUser(self, formatId);
-          if (response.data === this.$t("manage.showMessage.deleteUserError")) {
+          if (response.data === "fail to delete user") {
             self.$message({
               type: "error",
               message: this.$t("manage.showMessage.deleteError")

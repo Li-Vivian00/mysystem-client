@@ -59,7 +59,7 @@
           </el-form>
         </template>
       </el-table-column>
-      <el-table-column label="ID" prop="Id" sortable></el-table-column>
+      <el-table-column label="ID" prop="id" sortable></el-table-column>
       <el-table-column :label='`${$t("manage.loginId")}`' prop="loginid" sortable></el-table-column>
       <el-table-column :label='`${$t("manage.userName")}`' prop="adminname" sortable></el-table-column>
       <el-table-column fixed="right" :label='`${$t("manage.operate")}`' width="120">
@@ -187,7 +187,7 @@ export default {
           const id = rows.Id;
           const response = deleteAdmin(self, id);
           if (
-            response.data === this.$t("manage.showMessage.deleteUserError")
+            response.data === "fail to delete user"
           ) {
             self.$message({
               type: "error",
@@ -214,7 +214,7 @@ export default {
       const self = this;
       const adminname = "";
       const response = await getAllAdmin(self, adminname);
-      if (response.data === self.$t("manage.showMessage.getUserInfoError")) {
+      if (response.data === "fail to get user info") {
         self.$message({
           type: "error",
           message: self.$t("manage.showMessage.getUserError")
@@ -262,7 +262,7 @@ export default {
             phone,
             card
           );
-          if (response.data === this.$t("manage.showMessage.updateUserError")) {
+          if (response.data === "fail to update user info") {
             his.$message({
               type: "error",
               message: this.$t("manage.showMessage.updateError")
@@ -296,7 +296,7 @@ export default {
         })
         .then(() => {
           const response = deleteAdmin(self, formatId);
-          if (response.data === this.$t("manage.showMessage.deleteUserError")) {
+          if (response.data === "fail to delete user") {
           self.$message({
               type: "error",
               message: this.$t("manage.showMessage.deleteError")

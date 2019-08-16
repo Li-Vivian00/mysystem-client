@@ -21,6 +21,7 @@ export default {
 
   register: {
     label: {
+      register:"注册",
       loginId: "登录账号：",
       userName: "用户名：",
       password: "密码：",
@@ -43,6 +44,16 @@ export default {
       phone: "请输入手机号",
       email: "请输入邮箱",
       card: "请输入身份证"
+    },
+
+    title: {
+      successItem: "恭喜你注册成功，加入温暖的小区！",
+      returniItem: "正在跳转至登录界面",
+      clickItem: "点击跳转登录界面"
+    },
+
+    showMessage: {
+      register: "注册失败",
     }
   },
 
@@ -77,16 +88,13 @@ export default {
       warning: "提示",
     },
     showMessage: {
-      deleteUserError: "删除用户失败",
       deleteError:"删除用户失败",
       deleteUserSuccess: "删除用户成功！",
       
       cancel: "取消操作",
 
-      getUserInfoError:"获取用户信息失败",
       getUserError:"获取用户信息失败",
 
-      updateUserError: "更新用户失败",
       updateError:"更新用户失败",
       updateUserSuccess: "用户更新成功",
 

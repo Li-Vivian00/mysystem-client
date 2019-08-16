@@ -3,47 +3,47 @@
     <div class="crumbs crumbs-register">
       <el-breadcrumb separator="/" class="register-title">
         <el-breadcrumb-item>
-          <i class="el-icon-setting"></i>注册
+          <i class="el-icon-setting"></i>{{$t("register.label.register")}}
         </el-breadcrumb-item>
       </el-breadcrumb>
       <el-dropdown @command='selectLang'>
         <span class="el-dropdown-link">
-          {{lang}}
+          {{lang == 'ZH'? $t("header.zh"):$t("header.en")}}
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="ZH">ZH</el-dropdown-item>
-          <el-dropdown-item command="EN">EN</el-dropdown-item>
+          <el-dropdown-item command="ZH">{{$t("header.zh")}}</el-dropdown-item>
+          <el-dropdown-item command="EN">{{$t("header.en")}}</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
     <div class="userContent">
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item prop="loginId" :label='`${$t("register.label.loginId")}`'>
+      <el-form ref="form" :model="form" :rules="rules" label-width="92px" label-position="right">
+        <el-form-item prop="loginid" :label='`${$t("register.label.loginId")}`'>
           <el-input
-            v-model="form.loginId"
+            v-model.trim="form.loginid"
             :placeholder='`${$t("register.inputPlaceholder.loginId")}`'
             :readonly="successRegister"
           ></el-input>
         </el-form-item>
-        <el-form-item prop="name" :label='`${$t("register.label.userName")}`'>
+        <el-form-item prop="username" :label='`${$t("register.label.userName")}`'>
           <el-input
-            v-model="form.name"
+            v-model.trim="form.username"
             :placeholder='`${$t("register.inputPlaceholder.userName")}`'
             :readonly="successRegister"
           ></el-input>
         </el-form-item>
-        <el-form-item prop="pass" :label='`${$t("register.label.password")}`'>
+        <el-form-item prop="password" :label='`${$t("register.label.password")}`'>
           <el-input
-            v-model="form.pass"
+            v-model.trim="form.password"
             type="password"
             :placeholder='`${$t("register.inputPlaceholder.password")}`'
             :readonly="successRegister"
           ></el-input>
         </el-form-item>
-        <el-form-item prop="checkPass" :label='`${$t("register.label.repeatPassword")}`'>
+        <el-form-item prop="repeatpass" :label='`${$t("register.label.repeatPassword")}`'>
           <el-input
-            v-model="form.checkPass"
+            v-model.trim="form.repeatpass"
             type="password"
             :placeholder='`${$t("register.inputPlaceholder.repeatPassword")}`'
             :readonly="successRegister"
@@ -52,7 +52,7 @@
         <el-form-item prop="sex" :label='`${$t("register.label.sex")}`'>
           <el-select
             class="select-sex"
-            v-model="form.sex"
+            v-model.trim="form.sex"
             :placeholder='`${$t("register.inputPlaceholder.sex")}`'
             :disabled="successRegister"
           >
@@ -62,21 +62,21 @@
         </el-form-item>
         <el-form-item prop="phone" :label='`${$t("register.label.phone")}`'>
           <el-input
-            v-model="form.phone"
+            v-model.trim="form.phone"
             :placeholder='`${$t("register.inputPlaceholder.phone")}`'
             :readonly="successRegister"
           ></el-input>
         </el-form-item>
         <el-form-item prop="email" :label='`${$t("register.label.email")}`'>
           <el-input
-            v-model="form.email"
+            v-model.trim="form.email"
             :placeholder='`${$t("register.inputPlaceholder.email")}`'
             :readonly="successRegister"
           ></el-input>
         </el-form-item>
         <el-form-item prop="card" :label='`${$t("register.label.card")}`'>
           <el-input
-            v-model="form.card"
+            v-model.trim="form.card"
             :placeholder='`${$t("register.inputPlaceholder.card")}`'
             :readonly="successRegister"
           ></el-input>
@@ -95,15 +95,15 @@
       <div class="mainBox-Main">
         <span class="info">
           <img src="../../../static/img/true.png" alt id="true" />
-          <span id="success">恭喜你注册成功，加入温暖的小区！</span>
+          <span id="success">{{$t("register.title.successItem")}}</span>
         </span>
         <div class="loading">
           <span id="return">
-            正在跳转至登录界面
-            <span id="runTime">{{runTime}}</span>
+            {{$t("register.title.returniItem")}}
+            <span id="runTime">{{runTime}} s</span>
           </span>
-          <img src="../../../static/img/loading.gif" id="load" />
-          <p class="load" @click="onCancle()">点击跳转登录界面</p>
+          <img src="../../../static/img/loading.gif" id="loadingPicture" />
+          <p class="load" @click="onCancle()">{{$t("register.title.clickItem")}}</p>
         </div>
       </div>
     </div>
@@ -126,10 +126,10 @@ export default {
       if (value === "") {
         callback(new Error(REGISTER_LOGIN_STATUS.INPUT_LOGINID));
       } else {
-        let loginId = self.form.loginId;
-        const response = await getUser(self, loginId);
-        let result = response.data[0];
-        if (result) {
+        let loginid = self.form.loginid;
+        const response = await getUser(self, loginid);
+        let result = response.data;
+        if (result == 'fail to register') {
           callback(new Error(REGISTER_LOGIN_STATUS.LOGINID_ISEXIST));
         }
         callback();
@@ -139,7 +139,7 @@ export default {
       if (value === "") {
         callback(new Error(REGISTER_LOGIN_STATUS.INPUT_PASSWORD));
       } else {
-        if (this.form.checkPass !== "") {
+        if (this.form.repeatpass !== "") {
           this.$refs.form.validateField("checkPass");
         }
         callback();
@@ -148,7 +148,7 @@ export default {
     const validateRepeatPass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error(REGISTER_LOGIN_STATUS.INPUT_REPEATPASSWORD));
-      } else if (value !== this.form.pass) {
+      } else if (value !== this.form.repeatpass) {
         callback(new Error(REGISTER_LOGIN_STATUS.REPEATPASSWORD_ERROR));
       } else {
         callback();
@@ -186,32 +186,33 @@ export default {
       runTime: "",
       timer: null,
       form: {
-        name: "",
-        loginId: "",
-        pass: "",
-        checkPass: "",
+        username: "",
+        loginid: "",
+        password: "",
+        repeatpass: "",
         email: "",
         phone: "",
         card: "",
-        sex: ""
+        sex: "",
+        login_id:"",
       },
       rules: {
-        name: [
+        username: [
           {
             required: true,
             message: REGISTER_LOGIN_STATUS.INPUT_NAME,
             trigger: "blur"
           }
         ],
-        loginId: [
+        loginid: [
           {
             required: true,
             validator: validateId,
             trigger: "blur"
           }
         ],
-        pass: [{ required: true, validator: validatePass, trigger: "blur" }],
-        checkPass: [
+        password: [{ required: true, validator: validatePass, trigger: "blur" }],
+        repeatpass: [
           { required: true, validator: validateRepeatPass, trigger: "blur" }
         ],
         email: [{ required: true, validator: validateEmail, trigger: "blur" }],
@@ -225,7 +226,7 @@ export default {
           }
         ]
       },
-      lang:'ZH'
+      lang:this.getLangName(sessionStorage.getItem("registerLang"))
     };
   },
   methods: {
@@ -233,8 +234,9 @@ export default {
       const self = this;
       self.$refs[formName].validate(valid => {
         if (valid) {
+          self.getDateTimes();
           const response = register(self.form, self);
-          if (response.data == "注册失败") {
+          if (response.data == "fail to register") {
             self.alertMessage();
           } else {
             self.successRegister = true;
@@ -242,7 +244,6 @@ export default {
           }
         } else {
           self.alertMessage();
-          console.log("error submit!!");
           return false;
         }
       });
@@ -265,17 +266,20 @@ export default {
         }, 1000);
       }
     },
-    // getDateTimes(str) {
-    //   const str = new Date(str);
-    //   return str;
-    // }
+    getDateTimes() {
+      const str = new Date().toString();
+      this.form.login_id = str;
+      console.log(this.form.login_id);
+      return this.form.login_id;
+    },
     alertMessage() {
-      this.$alert("注册失败", "警告", {
-        confirmButtonText: "确定"
+      this.$alert(this.$t("register.showMessage.register"), this.$t("manage.confirm.warning"), {
+        confirmButtonText: this.$t("button.ok")
       });
     },
     selectLang(command) {
       this.lang = this.getLangName(command);
+      sessionStorage.setItem("registerLang", this.lang)
       this.$i18n.locale = this.lang
       // location.reload();
     },
@@ -286,125 +290,17 @@ export default {
       };
       return langArr[key]
     }
-  }
+  },
 };
 </script>
 
-<style>
-.crumbs-register {
-  background-color: #324157;
-  height: 50px;
-  line-height: 50px;
+<style scoped>
+@import "../../../static/css/login/register.css";
+.el-dropdown {
+  float: right !important;
+  margin-right: 30px;
 }
-.register-title {
-  line-height: 50px;
-  margin: 0 auto;
-  width: 50px;
-  font-size: 16px;
-}
-.userContent {
-  width: 400px;
-  margin: 50px auto;
-}
-.select-sex {
-  width: 320px;
-}
-
-.wrapper {
-  height: auto;
-  position: relative;
-}
-
-.wrapper .mainBox {
-  position: absolute;
-  left: 50%;
-  margin-left: -14.5%;
-  margin-top: -475px;
-  width: 30%;
-  height: 273px;
-  background: #fff;
-  position: relative;
-}
-
-.wrapper .mainBox .mainBox-Main {
-  width: 569px;
-  height: 261px;
-  border: 3px dashed rgb(64, 238, 157);
-  position: absolute;
-  top: 3px;
-  text-align: center;
-}
-
-.wrapper .mainBox .mainBox-Main .info #true {
-  display: inline-block;
-  width: 45px;
-  height: 45px;
-}
-
-.wrapper .mainBox .mainBox-Main .info {
-  display: inline-block;
-  width: 560px;
-  position: relative;
-  text-align: left;
-}
-
-.wrapper .mainBox .mainBox-Main .info #success {
-  display: inline-block;
-  margin-left: 10px;
-  position: absolute;
-  top: 11px;
-  font-size: 22px;
-}
-
-.wrapper .mainBox .mainBox-Main .lamp {
-  display: inline-block;
-  width: 535px;
-  position: relative;
-  margin-top: 17px;
-  text-align: left;
-  margin-left: 20px;
-}
-#info1 {
-  display: inline-block;
-
-  background: linear-gradient(to left, rgb(236, 248, 182), rgb(246, 250, 184));
-}
-
-.wrapper .mainBox .mainBox-Main .lamp img {
-  width: 40px;
-  height: 30px;
-}
-.wrapper .mainBox .mainBox-Main .lamp #info1 {
-  position: absolute;
-  top: 8px;
-  font-size: 13px;
-}
-.wrapper .mainBox .mainBox-Main .loading {
-  width: 500px;
-  height: 150px;
-  margin: 20px auto;
-}
-.wrapper .mainBox .mainBox-Main .loading #return {
-  display: block;
-  font-size: 22px;
-  letter-spacing: 2px;
-}
-.wrapper .mainBox .mainBox-Main .loading #runTime {
-  color: rgb(250, 54, 54);
-  padding-left: 10px;
-}
-.wrapper .mainBox .mainBox-Main .loading #load {
-  display: block;
-  width: 200px;
-  height: 100px;
-  margin: 0 auto;
-}
-.wrapper .mainBox .mainBox-Main .loading a {
-  color: red;
-  float: right;
-  font-size: 13px;
-}
-.wrapper .mainBox .mainBox-Main .loading a:hover {
-  text-decoration: underline;
-}
-</style>
+ .el-form-item {
+  margin: 20px !important;
+ }
+</style>>
