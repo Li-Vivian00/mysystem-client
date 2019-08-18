@@ -19,8 +19,8 @@ import baseFacility from '../components/admin/villaCenter/baseFacility'
 import repairManage from '../components/admin/repairManage/repairManage'
 import opinionManage from '../components/admin/repairManage/opinionManage'
 import buildingManage from '../components/admin/buildingManage/buildingManage'
-import forgetPassword from '../components/common/forgetPassword/Login'
-
+import adminForget from '../components/login/adminForget'
+import userForget from '../components/login/userForget'
 Vue.use(Router)
 
 export default new Router({
@@ -125,8 +125,13 @@ export default new Router({
 
     //忘记密码
     {
-      path: '/forgetPassword',
-      component: forgetPassword
+      path: '/adminForget',
+      component: adminForget
+    },
+
+    {
+      path: '/userForget',
+      component: userForget
     }
   ]
 })

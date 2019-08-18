@@ -30,6 +30,10 @@ export default {
 }
 
 .v-modal {
-  position:inherit !important
+  position:inherit !important;
+}
+
+.el-form-item__label {
+  padding: 0 9px 0 0 !important;
 }
 </style>

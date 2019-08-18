@@ -65,6 +65,7 @@
             v-model.trim="form.phone"
             :placeholder='`${$t("register.inputPlaceholder.phone")}`'
             :readonly="successRegister"
+            oninput="if(value.length > 11)value = value.slice(0,11)"
           ></el-input>
         </el-form-item>
         <el-form-item prop="email" :label='`${$t("register.label.email")}`'>
@@ -115,68 +116,85 @@ import Util from "../../utils/utils";
 import {
   register,
   validateId,
-  getUser
+  getUserLoginid,
+  getUserPhone
 } from "../../service/login/register.service";
-import { REGISTER_LOGIN_STATUS } from "../../locales/login/register.const";
-import { constants } from 'crypto';
+// import { constants } from 'crypto';
 export default {
   data() {
+    const validateName = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error(this.$t("register.status.userName")));
+      } 
+        callback();
+    };
     const validateId = async (rule, value, callback) => {
       const self = this;
       if (value === "") {
-        callback(new Error(REGISTER_LOGIN_STATUS.INPUT_LOGINID));
+        callback(new Error(this.$t("register.status.loginId")));
       } else {
-        let loginid = self.form.loginid;
-        const response = await getUser(self, loginid);
+        const loginid = self.form.loginid;
+        const from = "loginid";
+        const response = await getUserLoginid(self, loginid,from);
         let result = response.data;
-        if (result == 'fail to register') {
-          callback(new Error(REGISTER_LOGIN_STATUS.LOGINID_ISEXIST));
+        if (result == 'loginid is exist') {
+          callback(new Error(this.$t("register.status.loginIdExist")));
         }
         callback();
       }
     };
     const validatePass = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error(REGISTER_LOGIN_STATUS.INPUT_PASSWORD));
+        callback(new Error(this.$t("register.status.password")));
       } else {
         if (this.form.repeatpass !== "") {
-          this.$refs.form.validateField("checkPass");
+          this.$refs.form.validateField("repeatpass");
         }
         callback();
       }
     };
     const validateRepeatPass = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error(REGISTER_LOGIN_STATUS.INPUT_REPEATPASSWORD));
-      } else if (value !== this.form.repeatpass) {
-        callback(new Error(REGISTER_LOGIN_STATUS.REPEATPASSWORD_ERROR));
+        callback(new Error(this.$t("register.status.repeatPassword")));
+      } else if (value !== this.form.password) {
+        callback(new Error(this.$t("register.status.repeatPasswordError")));
       } else {
         callback();
       }
     };
     const validateEmail = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error(REGISTER_LOGIN_STATUS.INPUT_EMAIL));
+        callback(new Error(this.$t("register.status.email")));
       } else if (!Util.emailReg.test(this.form.email)) {
-        callback(new Error(REGISTER_LOGIN_STATUS.INPUT_FORMATEMAIL));
+        callback(new Error(this.$t("register.status.formatEmail")));
       } else {
         callback();
       }
     };
-    const validatePhone = (rule, value, callback) => {
+    const validatePhone = async (rule, value, callback) => {
+      const self = this;
       if (value === "") {
-        callback(new Error(REGISTER_LOGIN_STATUS.INPUT_PHONE));
-      } else if (!Util.phoneReg.test(this.form.phone)) {
-        callback(new Error(REGISTER_LOGIN_STATUS.INPUT_FORMATPHONE));
+        callback(new Error(self.$t("register.status.phone")));
+      } else if (!Util.phoneReg.test(self.form.phone)) {
+        callback(new Error(self.$t("register.status.formatPhone")));
       } else {
+        const phone = self.form.phone;
+        console.log(phone)
+        const from = "phone"
+        const response = await getUserPhone(self, phone, from);
+        let result = response.data;
+        console.log(result)
+        if (result == 'phone is exist') {
+          callback(new Error(self.$t("register.status.phoneExist")));
+        }
         callback();
       }
     };
     const validateCard = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error(REGISTER_LOGIN_STATUS.INPUT_CARD));
+        callback(new Error(this.$t("register.status.card")));
       } else if (!Util.idCardReg.test(this.form.card)) {
-        callback(new Error(REGISTER_LOGIN_STATUS.INPUT_FORMATCARD));
+        callback(new Error(this.$t("register.status.formatCard")));
       } else {
         callback();
       }
@@ -186,21 +204,21 @@ export default {
       runTime: "",
       timer: null,
       form: {
-        username: "",
         loginid: "",
+        username: "",
         password: "",
         repeatpass: "",
-        email: "",
-        phone: "",
-        card: "",
         sex: "",
+        phone: "",
+        email: "",
+        card: "",
         login_id:"",
       },
       rules: {
         username: [
           {
             required: true,
-            message: REGISTER_LOGIN_STATUS.INPUT_NAME,
+            validator: validateName,
             trigger: "blur"
           }
         ],
@@ -221,24 +239,28 @@ export default {
         sex: [
           {
             required: true,
-            message: REGISTER_LOGIN_STATUS.INPUT_SEX,
+            message: this.$t("register.status.sex"),
             trigger: "blur"
           }
         ]
       },
-      lang:this.getLangName(sessionStorage.getItem("registerLang"))
+      lang:'ZH'
     };
+  },
+  mounted() {
+    this.selectLang(sessionStorage.getItem("userLang"));
   },
   methods: {
     onSubmit(formName) {
       const self = this;
-      self.$refs[formName].validate(valid => {
+      self.$refs[formName].validate( async (valid) => {
         if (valid) {
           self.getDateTimes();
-          const response = register(self.form, self);
+          const response = await register(self.form, self);
+          console.log(response)
           if (response.data == "fail to register") {
             self.alertMessage();
-          } else {
+          } else if(response.data == "success") {
             self.successRegister = true;
             self.timeGo();
           }
@@ -249,7 +271,9 @@ export default {
       });
     },
     onCancle() {
+        sessionStorage.clear();
       this.$router.push("/userLogin");
+      location.reload();
     },
     timeGo() {
       const timeCount = 5;
@@ -261,6 +285,7 @@ export default {
             clearInterval(this.timer);
             this.successRegister = false;
             this.timer = null;
+            sessionStorage.clear();
             this.$router.push("/userLogin");
           }
         }, 1000);
@@ -279,7 +304,7 @@ export default {
     },
     selectLang(command) {
       this.lang = this.getLangName(command);
-      sessionStorage.setItem("registerLang", this.lang)
+      sessionStorage.setItem("userLang", this.lang)
       this.$i18n.locale = this.lang
       // location.reload();
     },
@@ -294,8 +319,8 @@ export default {
 };
 </script>
 
-<style scoped>
-@import "../../../static/css/login/register.css";
+<style scoped lang="scss" >
+@import "../../../static/css/login/register.scss";
 .el-dropdown {
   float: right !important;
   margin-right: 30px;

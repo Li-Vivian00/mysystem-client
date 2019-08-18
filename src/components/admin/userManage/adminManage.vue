@@ -59,7 +59,7 @@
           </el-form>
         </template>
       </el-table-column>
-      <el-table-column label="ID" prop="id" sortable></el-table-column>
+      <el-table-column label="ID" prop="Id" sortable></el-table-column>
       <el-table-column :label='`${$t("manage.loginId")}`' prop="loginid" sortable></el-table-column>
       <el-table-column :label='`${$t("manage.userName")}`' prop="adminname" sortable></el-table-column>
       <el-table-column fixed="right" :label='`${$t("manage.operate")}`' width="120">
@@ -359,7 +359,7 @@ export default {
         } else {
           self.selectAll = false;
           const response = await searchAdmin(self, selValue, inpValue);
-          if (response.data === this.$t("manage.showMessage.userIsNull" || response.data == "")) {
+          if (response.data === "fail to get user info") {
             self.$alert(this.$t("manage.showMessage.userUndefined"), this.$t("manage.showMessage.searchError"), {
               confirmButtonText: this.$t("button.ok")
             });
@@ -407,7 +407,4 @@ export default {
   font: 16px !important;
 }
 
-.el-form-item__label {
-  padding: 0 9px 0 0 !important;
-}
 </style>

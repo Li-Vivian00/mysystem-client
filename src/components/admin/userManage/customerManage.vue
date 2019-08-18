@@ -1,7 +1,7 @@
 <template>
   <div class="userManage">
     <el-button type="primary" @click="batchDelect" class="batchDelect">{{$t('manage.batchDelete')}}</el-button>{{$t("manage.keyWord")}}
-    <el-select v-model="value" clearable @change="selectItem">
+    <el-select v-model="value" clearable @change="selectItem" :placeholder='`${$t("manage.selectHolder")}`'>
       <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
     </el-select>
     <el-input
@@ -55,7 +55,7 @@
           </el-form>
         </template>
       </el-table-column>
-      <el-table-column label="ID" prop="id" sortable></el-table-column>
+      <el-table-column label="ID" prop="Id" sortable></el-table-column>
       <el-table-column :label='`${$t("manage.loginId")}`' prop="loginid" sortable></el-table-column>
       <el-table-column :label='`${$t("manage.userName")}`' prop="username" sortable></el-table-column>
       <el-table-column fixed="right" :label='`${$t("manage.operate")}`' width="120">
@@ -349,7 +349,7 @@ export default {
         } else {
           self.selectAll = false;
           const response = await searchUser(self, selValue, inpValue);
-          if (response.data === this.$t("manage.showMessage.userIsNull")) {
+          if (response.data === "fail to get user info") {
             self.$alert(this.$t("manage.showMessage.userUndefined"), this.$t("manage.showMessage.searchError"), {
             confirmButtonText: this.$t("button.ok")              
             });

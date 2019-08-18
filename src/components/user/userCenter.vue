@@ -51,7 +51,7 @@ export default {
   methods: {
     async getUserData() {
       const self = this;
-      const userLoginId = localStorage.getItem("userLoginId");
+      const userLoginId = sessionStorage.getItem("userLoginId");
       const response = await userCenter(self, userLoginId);
       if (response.status == 200){
           let result = response.data[0];
@@ -62,11 +62,8 @@ export default {
           self.form.card = result.card;
           self.form.sex = result.sex;
           self.form.Id = result.Id;
-          sessionStorage.setItem("ms_userId", result.Id);
+          // sessionStorage.setItem("ms_userId", result.Id);
       }
-      // .then(function(error) {
-      //   console.log("error", error);
-      // });
     }
   },
   mounted() {

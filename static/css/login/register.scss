@@ -1,0 +1,118 @@
+.crumbs-register {
+  background-color: #324157;
+  height: 50px;
+  line-height: 50px;
+}
+.register-title {
+  display: inline-block;
+  line-height: 50px;
+  margin: 0 auto;
+  width: 100px;
+  font-size: 16px;
+}
+.userContent {
+  width: 440px;
+  margin: auto;
+  padding: 27px;
+}
+.select-sex {
+  width: 308px;
+}
+
+.wrapper {
+  height: auto;
+  position: relative;
+  .mainBox {
+    position: absolute;
+    left: 50%;
+    margin-left: -14.5%;
+    margin-top: -475px;
+    width: 30%;
+    height: 273px;
+    background: #fff;
+    position: relative;
+    .mainBox-Main {
+      background: #fff;
+      width: 569px;
+      height: 261px;
+      border: 3px dashed rgb(64, 238, 157);
+      position: absolute;
+      top: 3px;
+      text-align: center;
+      .info {
+        display: inline-block;
+        width: 560px;
+        position: relative;
+        text-align: left;
+        #true {
+          display: inline-block;
+          width: 45px;
+          height: 45px;
+        }
+      }
+      .lamp {
+        display: inline-block;
+        width: 535px;
+        position: relative;
+        margin-top: 17px;
+        text-align: left;
+        margin-left: 20px;
+      }
+      #info1 {
+        display: inline-block;
+        background: linear-gradient(to left, rgb(236, 248, 182), rgb(246, 250, 184));
+      }
+      .lamp {
+        img {
+          width: 40px;
+          height: 30px;
+          #info1 {
+            position: absolute;
+            top: 8px;
+            font-size: 13px;
+          }
+        }
+      }
+      .loading {
+        width: 500px;
+        height: 150px;
+        margin: 20px auto;
+        #return {
+          display: block;
+          font-size: 22px;
+          letter-spacing: 2px;
+          color: black;
+        }
+        #runTime {
+          color: rgb(250, 98, 98);
+          padding-left: 10px;
+        }
+        #loadingPicture {
+          display: block;
+          width: 200px;
+          height: 100px;
+          margin: 0 auto;
+        }
+        .load {
+          color: rgb(250, 98, 98);
+          float: right;
+          font-size: 13px;
+          cursor: pointer;
+          text-indent: 2em;
+        }
+      }
+    }
+  }
+}
+
+#success {
+  display: inline-block;
+  margin-left: 10px;
+  position: absolute;
+  top: 11px;
+  font-size: 22px;
+}
+
+.el-breadcrumb__item {
+  float: none !important;
+}

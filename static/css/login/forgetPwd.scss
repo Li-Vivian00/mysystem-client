@@ -1,0 +1,105 @@
+
+
+.bg_bank {
+  width: 100%;
+  height: 100%;
+}
+
+
+.bg_bank .bg_color {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  position: fixed;
+}
+
+.el-input-phone {
+  display: block;
+  width: 27%;
+  margin: 28px auto;
+  /* float: left; */
+}
+.el-input-pwd {
+  display: block;
+  width: 27%;
+  margin: 28px auto;
+}
+
+
+.reto_code {
+  display: inline-block;
+  position: absolute;
+  right: 24%;
+  bottom:51%;
+}
+.btn_login {
+  display: block;
+  font-size: 16px;
+  text-align: center;
+  margin: 16px auto;
+}
+
+.userContent {
+  width: 400px;
+  margin: 8% 40%;
+}
+.wrapper {
+  margin: 0 auto;
+  width: 60%;
+  .mainBox-Main {
+    margin: 0 auto;
+    background: #fff;
+    width: 569px;
+    height: 261px;
+    border: 3px dashed rgb(64, 238, 157);
+    text-align: center;
+
+    .info {
+      display: inline-block;
+      width: 560px;
+      position: relative;
+      text-align: left;
+      #true {
+        display: inline-block;
+        width: 45px;
+        height: 45px;
+      }
+      #success {
+        display: inline-block;
+        margin-left: 10px;
+        position: absolute;
+        top: 11px;
+        font-size: 22px;
+      }
+    }
+
+    .loading {
+      width: 500px;
+      height: 150px;
+      margin: 20px auto;
+      #return {
+        display: block;
+        font-size: 22px;
+        letter-spacing: 2px;
+        color: black;
+      }
+      #runTime {
+        color: rgb(250, 98, 98);
+        padding-left: 10px;
+      }
+      #loadingPicture {
+        display: block;
+        width: 200px;
+        height: 100px;
+        margin: 0 auto;
+      }
+      .load {
+        color: rgb(250, 98, 98);
+        float: right;
+        font-size: 13px;
+        cursor: pointer;
+        text-indent: 2em;
+      }
+    }
+  }
+}

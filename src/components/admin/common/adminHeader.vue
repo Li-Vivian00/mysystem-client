@@ -2,20 +2,22 @@
   <div class="header">
     <div class="logo">{{$t("header.adminHeader")}}</div>
     <div class="user-info">
-      <el-dropdown  @command="handleCommand">
+      <el-dropdown @command="handleCommand">
         <span class="el-dropdown-link">
-        {{username}}
+          {{username}}
           <img class="user-logo" src="../../../../static/img/img.jpg" />
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="userCenter">{{$t("header.userCenter")}}</el-dropdown-item>
+          <el-dropdown-item command="adminCenter">{{$t("header.userCenter")}}</el-dropdown-item>
           <el-dropdown-item command="loginout">{{$t("header.logout")}}</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <el-dropdown @command="selectLang">
+      <el-dropdown @command="selectLang" v-model="lang">
         <span class="el-dropdown-link">
           {{lang == 'ZH'? $t("header.zh"):$t("header.en")}}
-          <i class="el-icon-arrow-down el-icon--right"></i>
+          <i
+            class="el-icon-arrow-down el-icon--right"
+          ></i>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="ZH">{{$t("header.zh")}}</el-dropdown-item>
@@ -30,9 +32,11 @@ export default {
   data() {
     return {
       name: "Hi,admin",
-        lang: this.getLangName(sessionStorage.getItem("adminLang"))
-      // lang: this.$t("header.zh")
+      lang: "",
     };
+  },
+  mounted() {
+    this.selectLang(sessionStorage.getItem("adminLang"));
   },
   computed: {
     username() {
@@ -43,17 +47,17 @@ export default {
   methods: {
     handleCommand(command) {
       if (command == "loginout") {
-        sessionStorage.removeItem("adminLoginId");
+        sessionStorage.clear();
         this.$router.push("/adminLogin");
-      } else if (command == "userCenter") {
+        location.reload();
+      } else if (command == "adminCenter") {
         this.$router.push("/adminCenter");
       }
     },
     selectLang(command) {
-      this.lang = this.getLangName(command);
-      sessionStorage.setItem("adminLang", this.lang)
-      this.$i18n.locale = this.lang;
-      // location.reload();
+        this.lang = this.getLangName(command);
+        sessionStorage.setItem("adminLang", this.lang);
+        this.$i18n.locale = this.lang
     },
     getLangName(key) {
       const langArr = {
@@ -62,7 +66,7 @@ export default {
       };
       return langArr[key];
     }
-  },
+  }
 };
 </script>
 <style scoped>

@@ -1,5 +1,5 @@
-export const register = (form, self) => {
-  let result = self.$http
+export const register = async (form, self) => {
+  let result = await self.$http
     .post("/api/userLogin/addUser", form)
     .catch(error => {
       console.log(error.message)
@@ -7,11 +7,25 @@ export const register = (form, self) => {
   return result
 }
 
-export const getUser = async (self, loginId) => {
+export const getUserLoginid = async (self, loginid, from) => {
   const result = await self.$http
-    .get("/api/userLogin/getUser", {
+    .get("/api/userLogin/getUserLoginid", {
       params: {
-        loginId: loginId
+        from:from,
+        loginid: loginid
+      }
+    }).catch(error => {
+      console.log(error)
+    })
+    return result
+}
+
+export const getUserPhone = async (self, phone, from) => {
+  const result = await self.$http
+    .get("/api/userLogin/getUserPhone", {
+      params: {
+        from:from,
+        loginid: phone
       }
     }).catch(error => {
       console.log(error)

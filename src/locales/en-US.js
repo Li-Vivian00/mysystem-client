@@ -6,26 +6,30 @@ export default {
       code: "Please input code",
       load: "Load",
       register: "Register",
-      adminLogin:"AdminLogin",
-      forgetPwd:"ForgetPassword?"
+      adminLogin: "AdminLogin",
+      forgetPwd: "ForgetPassword?",
     },
 
     adminLogin: {
       inputPlaceholder: "Please input admin loginid",
       password: "Please input password",
       code: "Please input code",
-      userLogin:"UserLogin",
-      forgetPwd:"ForgetPassword?"
+      userLogin: "UserLogin",
+      load: "Load",
+      forgetPwd: "ForgetPassword?",
+      loginIdNotExist:"Loginid is not exist",
     },
+    identifyCodes:"1234567890",
+    loadingError:"Fail to loading",
   },
 
   register: {
     label: {
-      register:"Register",
+      register: "Register",
       loginId: "LoginId:",
       userName: "UserName:",
       password: "Password:",
-      repeatError:"The two passwords did not match",
+      repeatError: "The two passwords did not match",
       repeatPassword: "RepeatPwd:",
       sex: "Sex:",
       phone: "Phone:",
@@ -45,13 +49,33 @@ export default {
       email: "Please input email",
       card: "Please input card"
     },
+
     title: {
       successItem: "Congratulations on your successful registration and joining the warm community!",
       returniItem: "Jumping to the login interface",
       clickItem: "Click on the jump login interface"
     },
+
     showMessage: {
       register: "Registration failed",
+    },
+
+    status: {
+      loginId: "Please enter your login account",
+      userName: "Please enter user name",
+      password: "Please enter password",
+      repeatPassword: "Please enter your password again",
+      email: "Please enter your email",
+      formatEmail: "Please enter your correct email",
+      phone: "Please enter your phone",
+      formatPhone: "Please enter your correct phone",
+      card: "Please enter your card",
+      formatCard: "Please enter your correct card",
+      sex: "Please enter your sex",
+      loginIdExist: "The login account already exists",
+      passwordError: "Password mistake",
+      repeatPasswordError: "The two passwords did not match",
+      phoneExist:"The phone number has been registered"
     }
   },
 
@@ -68,7 +92,7 @@ export default {
     delete: "Delete",
     search: "Search",
     operate: "Operate",
-    selectHolder:"Please choose",
+    selectHolder: "Please choose",
     loadingText: "Loading",
     inputText: "Please input text",
     loginId: "LoginId",
@@ -86,7 +110,7 @@ export default {
       warning: "Warning",
     },
     showMessage: {
-      delteError:"Failed to delete user",
+      delteError: "Failed to delete user",
       deleteUserSuccess: "User deleted successfully",
 
       cancel: "Cancel the operation",
@@ -97,7 +121,6 @@ export default {
       updateUserSuccess: "User updated successfully",
 
       inputText: "The input cannot be empty. Enter the user you want to query",
-      userIsNull: "No user information is available",
       userUndefined: "No user information, please search again!",
       searchError: "Fail to query"
     }
@@ -110,5 +133,45 @@ export default {
     logout: "Logout",
     zh: "ZH",
     en: "EN",
+  },
+
+  sidebar: {
+    admin: {
+      villaCenter: "VillaCenter",
+      board: "Board",
+      baseInfo: "BaseInfo",
+      baseFacility: "BaseFacility",
+      propertyManage: "PropertyManage",
+      repairManage: "RepairManage",
+      opinionManage: "OpinionManage",
+      userManage: "UserManage",
+      customerManage: "CustomerManage",
+      adminManage: "AdminManage",
+      buildingManage: "BuildingManage",
+    }
+  },
+
+  forgetPwd: {
+    stepOne: "Verify phone number",
+    stepTwo: "Change password",
+    stepThree: "Finish",
+    nextStep: "Next step",
+    verif_code: "Get code",
+    phoneNotNull: "Cell phone number cannot be empty",
+    formatPhone: "Wrong format of phone number",
+    phoneNotExist: "The phone number is not registered",
+    codeNotNull: "The verification code cannot be empty",
+    codeError: "Verification code error",
+    sendLater: "s later send again",
+    message: {
+      verifySuccess: "Authentication is successful!",
+      sendMessage:",You are using the login function. This verification code is only used for authentication. It is valid for five minutes.",
+      modifyError:"Password change failed. Coming back!",
+      modifySuccess: "Password changed successfully!"
+    },
+    label: {
+      phone: "Phone:",
+      code: "Code:",
+    },
   }
 }

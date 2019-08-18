@@ -16,7 +16,7 @@ const store = new Vuex.Store({
     phone_Message(state,user_phone) {
       state.user_phone = user_phone
     },
-    verif_Message(state,user_verif,verif_code){
+    verif_Message(state,user_verif){
       state.user_verif=user_verif;
       state.verif_code = localStorage.getItem("verif_code");
     }

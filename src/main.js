@@ -11,16 +11,18 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import "babel-polyfill";
 import _ from 'lodash'
-import 'mint-ui/lib/style.css';
-import MintUI from 'mint-ui';
+// import 'mint-ui/lib/style.css';
+// import MintUI from 'mint-ui';
+import VueCookies from 'vue-cookies'
 
 Vue.config.productionTip = false
 
-Vue.use(MintUI);
+// Vue.use(MintUI);
 Vue.use(ElementUI)
 Vue.use(_)
 Vue.use(VueI18n)
 Vue.use(Vuex);
+Vue.use(VueCookies)
 
 Vue.prototype.$http = axios
 

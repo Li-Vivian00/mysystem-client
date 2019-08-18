@@ -30,9 +30,12 @@ export default {
   data() {
     return {
       name: "Hi,user",
-      lang: this.getLangName(sessionStorage.getItem("userLang"))
-      // lang: this.$t("header.zh")
+      // lang: this.getLangName(sessionStorage.getItem("userLang"))
+      lang:"",
     };
+  },
+  mounted() {
+   this.selectLang(sessionStorage.getItem("userLang")) 
   },
   computed: {
     username() {
@@ -43,7 +46,9 @@ export default {
   methods: {
     handleCommand(command) {
       if (command == "loginout") {
-        sessionStorage.removeItem("userLoginId");
+        sessionStorage.clear();
+        // sessionStorage.removeItem("userLoginId");
+        // sessionStorage.removeItem("userLang")
         this.$router.push("/userLogin");
       } else if (command == "userCenter") {
         this.$router.push("/userCenter");
@@ -51,7 +56,7 @@ export default {
     },
     selectLang(command) {
       this.lang = this.getLangName(command);
-      sessionStorage.setItem("userLang", this.lang)
+      // sessionStorage.setItem("userLang", this.lang)
       this.$i18n.locale = this.lang;
       // location.reload();
     },

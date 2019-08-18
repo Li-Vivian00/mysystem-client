@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import {modifyPassword} from '../../service/user/modifyPassword.service'
+import {userModifyPassword} from '../../service/user/modifyPassword.service'
 export default {
   data() {
     const validatePass = (rule, value, callback) => {
@@ -78,7 +78,7 @@ export default {
       console.log("id:", formData.id);
       self.$refs[formName].validate(valid => {
         if (valid) {
-          const response = modifyPassword(self, formData);
+          const response = userModifyPassword(self, formData);
           if (response.data === -1) {
             console.log("change pwd is wrong");
           } else {

@@ -24,6 +24,7 @@
           ></el-input>
           <span>{{errAccountInfo}}</span>
         </el-form-item>
+
         <el-form-item prop="password">
           <el-input
             type="password"
@@ -33,6 +34,15 @@
           ></el-input>
           <span>{{errPwdInfo}}</span>
         </el-form-item>
+
+        <div class="radio">
+          <p class="language">Language:</p>
+            <template>
+              <el-radio v-model="radio" label="ZH" @change="selectRadio">中文</el-radio>
+              <el-radio v-model="radio" label="EN" @change="selectRadio">英文</el-radio>
+            </template> 
+        </div>
+
         <el-form-item prop="validate">
           <el-input
             v-model="ruleForm.validate"
@@ -56,19 +66,30 @@
 <script>
 import SIdentify from "./Identity";
 import { adminLogin } from "../../service/login/adminLogin.service";
-import { ADMIN_LOGIN_STATUS } from "../../locales/login/adminLogin.const";
-import { constants } from 'crypto';
+// import { constants } from 'crypto';
 export default {
   name: "adminLogin",
   data() {
+    const validateLoginId = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error(this.$t("login.userLogin.inputPlaceholder")));
+      } 
+        callback();
+    };
+    const validatePassoword = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error(this.$t("login.adminLogin.password")));
+      } 
+        callback();
+    };
     const checkVal = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error(ADMIN_LOGIN_STATUS.INPUT_CODE));
+        return callback(new Error(this.$t("login.adminLogin.code")));
         this.tureVali = false;
       }
       setTimeout(() => {
         if (this.ruleForm.validate != this.identifyCode) {
-          callback(new Error(ADMIN_LOGIN_STATUS.ERROR_CODE));
+          callback(new Error(this.$t("forgetPwd.codeError")));
           this.tureVali = false;
         } else {
           this.tureVali = true;
@@ -76,7 +97,7 @@ export default {
       }, 100);
     };
     return {
-      identifyCodes: ADMIN_LOGIN_STATUS.IDENTIFYCODES,
+      identifyCodes: "1234567890",
       identifyCode: "",
       errAccountInfo: "",
       errPwdInfo: "",
@@ -90,31 +111,29 @@ export default {
         loginId: [
           {
             required: true,
-            message: ADMIN_LOGIN_STATUS.INPUT_NAME,
+            validator: validateLoginId,
             trigger: "blur"
           }
         ],
         password: [
           {
             required: true,
-            message: ADMIN_LOGIN_STATUS.INPUT_PASSWORD,
+            validator: validatePassoword,
             trigger: "blur"
           }
         ],
         validate: [
-          {
-            required: true,
-            message: ADMIN_LOGIN_STATUS.INPUT_CODE,
-            trigger: "blur"
-          },
-          { validator: checkVal, trigger: "blur" }
+          { required: true, validator: checkVal, trigger: "blur" }
         ]
-      }
+      },
+      radio: "ZH",
+      lang: "ZH",
     };
   },
   mounted() {
     this.identifyCode = "";
     this.makeCode(this.identifyCodes, 4);
+    this.selectRadio(this.lang)
   },
   components: {
     SIdentify
@@ -123,14 +142,15 @@ export default {
     async submitForm(formName) {
       const self = this;
       if (self.tureVali) {
-        const response = await adminLogin(self.ruleForm, self);
+        const from = "loginid"
+        const response = await adminLogin(self.ruleForm, self, from);
         console.log(response);
         if (response.data == "loginid not exist") {
-          self.errAccountInfo = ADMIN_LOGIN_STATUS.LOGINID_NOT_EXIST;
+          self.errAccountInfo = self.$t("login.adminLogin.loginIdNotExist");
           self.errPwdInfo = "";
         } else if (response.data == "password not correct") {
           self.errAccountInfo = "";
-          self.errPwdInfo = ADMIN_LOGIN_STATUS.PASSWORD_ERROR;
+          self.errPwdInfo = self.$t("register.status.passwordError");
         } else if (response.status == 200) {
           self.errAccountInfo = "";
           self.errPwdInfo = "";
@@ -141,7 +161,7 @@ export default {
       } else {
         self.$message({
           type: "error",
-          message: ADMIN_LOGIN_STATUS.LOADING_ERROR
+          message: self.$t("login.loadingError")
         });
         return false;
       }
@@ -162,15 +182,33 @@ export default {
       console.log(this.identifyCode);
     },
     userLogin() {
+      sessionStorage.clear();
       this.$router.push("/userLogin");
+      location.reload();
     },
     forgetPwd() {
-
+      this.$router.push("/adminForget");
+    },
+    selectRadio(value) {
+      this.lang = value;
+      this.lang = this.getLangName(value);
+      // this.$cookies.set("adminLang",this.lang)
+      // localStorage.setItem("adminLang",this.lang);
+      sessionStorage.setItem("adminLang",this.lang);
+      this.$i18n.locale = this.lang;
+    },
+    getLangName(key) {
+      const langArr = {
+        EN: "EN",
+        ZH: "ZH"
+      };
+      return langArr[key];
     }
   }
 };
 </script>
 
-<style scoped>
-@import "../../../static/css/login/adminLogin.css";
+<style scoped lang="scss">
+@import "../../../static/css/login/adminLogin.scss";
+
 </style>
