@@ -212,7 +212,7 @@ export default {
         phone: "",
         email: "",
         card: "",
-        login_id:"",
+        date:"",
       },
       rules: {
         username: [
