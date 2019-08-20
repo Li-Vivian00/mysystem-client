@@ -146,7 +146,6 @@ export default {
         phone: "",
         email: "",
         card: "",
-        date:"",
       },
       options: [
         {

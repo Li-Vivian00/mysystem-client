@@ -149,8 +149,10 @@ export default {
         if (response.data == "loginid not exist") {
           self.errAccountInfo = self.$t("login.adminLogin.loginIdNotExist");
           self.errPwdInfo = "";
+        self.loading = false;
         } else if (response.data == "password not correct") {
           self.errAccountInfo = "";
+        self.loading = false;
           self.errPwdInfo = self.$t("register.status.passwordError");
         } else if (response.status == 200) {
           self.errAccountInfo = "";
@@ -164,7 +166,6 @@ export default {
           type: "error",
           message: self.$t("login.loadingError")
         });
-        return false;
       }
     },
     randomNum(min, max) {

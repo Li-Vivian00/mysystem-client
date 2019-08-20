@@ -209,8 +209,7 @@ export default {
         phone: "",
         email: "",
         card: "",
-        date:"",
-        date:"",
+        stay_date:"",
       },
       rules: {
         username: [
@@ -291,8 +290,8 @@ export default {
     },
     getDateTimes() {
       const str = new Date().toString();
-      this.form.date = str;
-      return this.form.date;
+      this.form.stay_date = str;
+      return this.form.stay_date;
     },
     alertMessage() {
       this.$alert(this.$t("register.showMessage.register"), this.$t("manage.confirm.warning"), {

@@ -53,7 +53,7 @@
               <span>{{ props.row.card }}</span>
             </el-form-item>
             <el-form-item :label='`${$t("register.label.card")}`'>
-              <span>{{ props.row.date }}</span>
+              <span>{{ props.row.stay_date }}</span>
             </el-form-item>
           </el-form>
         </template>
@@ -143,7 +143,7 @@ export default {
         phone: "",
         email: "",
         card: "",
-        data:"",
+        stay_date:"",
       },
       options: [
         {
@@ -227,7 +227,7 @@ export default {
       const self = this
       self.editFormVisible = true;
       self.editForm = Object.assign({}, row);
-      self.editForm.date = row.date
+      self.editForm.stay_date = row.stay_date
       self.isEdit = true;
     },
 
