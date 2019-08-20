@@ -131,13 +131,16 @@ export default {
       editFormVisible: false,
       showBtnOrdinary: true,
       editForm: {
+        Id:"",
         loginid: "",
         username: "",
         password: "",
+        repeatpass:"",
         sex: "",
         phone: "",
         email: "",
-        card: ""
+        card: "",
+        login_id:"1",
       },
       options: [
         {
@@ -153,7 +156,7 @@ export default {
           label: this.$t("manage.options.label.loginId")
         },
         {
-          value: "adminname",
+          value: "username",
           label: this.$t("manage.options.label.userName")
         }
       ],
@@ -170,13 +173,15 @@ export default {
         .$confirm(this.$t("manage.confirm.deleteAdmin"),
           this.$t("manage.warning"), {
           confirmButtonText: this.$t("button.ok"),
-            cancelButtonText: this.$t("button.cancel"),
+          cancelButtonText: this.$t("button.cancel"),
           type: "warning"
         })
         .then(() => {
+          const str = []
           const id = rows.id;
+          str.push(id)
           console.log(id);
-          const response = deleteUser(self, id);
+          const response = deleteUser(self, str);
           if (response.data === "fail to delete user") {
             self.$message({
               type: "error",
@@ -230,6 +235,7 @@ export default {
     //点击更新
     handleUpdate(formName) {
       const self = this;
+      self.editForm.login_id = '1';
       const loginid = self.editForm.loginid;
       const username = self.editForm.username;
       const password = self.editForm.password;
@@ -242,22 +248,17 @@ export default {
           cancelButtonText: this.$t("button.cancel"),
           type: "warning"
         })
-        .then(() => {
-          const response = updateUser(
+        .then(async () => {
+          const response = await updateUser(
             self,
-            loginid,
-            username,
-            password,
-            email,
-            phone,
-            card
+            self.editForm
           );
-          if (response.data === "fail to update user info") {
+          if (response.data === "fail to update") {
             self.$message({
               type: "error",
               message: this.$t("manage.showMessage.updateError")
             });
-          } else {
+          } else if (response.data == "success") {
             self.$message({
               type: "success",
               message: this.$t("manage.showMessage.updateUserSuccess")
@@ -292,11 +293,11 @@ export default {
               message: this.$t("manage.showMessage.deleteError")
             });
           } else {
-            self.getUserData();
             self.$message({
               type: "success",
               message: this.$t("manage.showMessage.deleteUserSuccess")
             });
+            self.getUserData();
           }
         })
         .catch(() => {
@@ -313,14 +314,9 @@ export default {
       self.multipleSelection = val;
     },
     formatId(val) {
-      let sqlId = "";
+      let sqlId = []
       for (let i = 0; i < val.length; i++) {
-        sqlId += val[i].Id;
-        if (i == val.length - 1) {
-          sqlId += "";
-        } else {
-          sqlId += ",";
-        }
+        sqlId.push(val[i].id)
       }
       return sqlId;
     },
@@ -342,9 +338,15 @@ export default {
       if (selValue == "all") {
         self.getUserData();
       } else {
-        if (_.isEmpty(inpValue) && !_.isEmpty(self.selectValue)) {
-          self.$alert(this.$t("manage.showMessage.inputText"), this.$t("manage.confirm.warning"), {
-            confirmButtonText: this.$t("button.ok")            
+        if (_.isEmpty(self.selectValue))
+        {
+          self.$alert(self.$t("manage.showMessage.selectType"), self.$t("manage.confirm.warning"), {
+            confirmButtonText: self.$t("button.ok")
+          });
+        }
+        else if (_.isEmpty(self.inpValue)) {
+          self.$alert(self.$t("manage.showMessage.inputText"), self.$t("manage.confirm.warning"), {
+            confirmButtonText: self.$t("button.ok")
           });
         } else {
           self.selectAll = false;
@@ -354,6 +356,7 @@ export default {
             confirmButtonText: this.$t("button.ok")              
             });
             self.input = " ";
+            self.form = [];
           } else {
             self.form = response.data;
           }

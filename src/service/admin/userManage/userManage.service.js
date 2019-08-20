@@ -1,34 +1,27 @@
 export const getAllUser = async (self, username) => {
   const result = await self.$http
     .get("/api/userManage/getUser", {
-      
+
     }).catch(error => {
       console.log(error)
     })
   return result
 }
 
-export const deleteUser = (self, id) => {
+export const deleteUser = (self, Id) => {
   const result = self.$http
-    .post("/api/userManage/deleteUser", {
-      Id: id
-    }, {}).catch(error => {
+    .post("/api/userManage/deleteUser",
+      Id, {}).catch(error => {
       console.log(error)
     })
   return result
 }
 
-export const updateUser = (self, loginid, username, password, email, phone, card) => {
-  const result = self.$http
+export const updateUser = async (self, form) => {
+  const result = await self.$http
     .post(
-      "/api/userManage/updateUser", {
-        loginid: loginid,
-        username: username,
-        password: password,
-        email: email,
-        phone: phone,
-        card: card
-      }, {}
+      "/api/userManage/updateUser",
+      form, {}
     ).catch(error => {
       console.log(error)
     })
@@ -36,11 +29,14 @@ export const updateUser = (self, loginid, username, password, email, phone, card
 }
 
 export const searchUser = async (self, selValue, inpValue) => {
-    const result = await self.$http
+  const result = await self.$http
     .get("/api/userManage/getOneUser", {
-      params: { id: selValue, name: inpValue }
+      params: {
+        item: selValue,
+        name: inpValue
+      }
     }).catch(error => {
-        console.log(error)
+      console.log(error)
     })
-    return result
+  return result
 }

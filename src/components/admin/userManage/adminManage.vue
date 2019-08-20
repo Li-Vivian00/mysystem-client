@@ -138,13 +138,15 @@ export default {
       editFormVisible: false,
       showBtnOrdinary: true,
       editForm: {
+        Id:"",
         loginid: "",
         adminname: "",
         password: "",
         sex: "",
         phone: "",
         email: "",
-        card: ""
+        card: "",
+        login_id:"1",
       },
       options: [
         {
@@ -184,8 +186,10 @@ export default {
           }
         )
         .then(() => {
-          const id = rows.Id;
-          const response = deleteAdmin(self, id);
+          const str = []
+          const id = rows.id;
+          str.push(id)
+          const response = deleteAdmin(self, str);
           if (
             response.data === "fail to delete user"
           ) {
@@ -240,6 +244,7 @@ export default {
     //点击更新
     handleUpdate(formName) {
       const self = this;
+      self.editForm.login_id = '1';
       const loginid = self.editForm.loginid;
       const adminname = self.editForm.adminname;
       const password = self.editForm.password;
@@ -252,22 +257,17 @@ export default {
           cancelButtonText: this.$t("button.cancel"),
           type: "warning"
         })
-        .then(() => {
-          const response = updateAdmin(
+        .then(async () => {
+          const response = await updateAdmin(
             self,
-            loginid,
-            adminname,
-            password,
-            email,
-            phone,
-            card
+            self.editForm
           );
-          if (response.data === "fail to update user info") {
+          if (response.data === "fail to update") {
             his.$message({
               type: "error",
               message: this.$t("manage.showMessage.updateError")
             });
-          } else {
+          } else if (response.data == "success"){
             self.$message({
               type: "success",
               message: this.$t("manage.showMessage.updateUserSuccess")
@@ -302,11 +302,11 @@ export default {
               message: this.$t("manage.showMessage.deleteError")
             });
           } else {
-            self.getAdminData();
             self.$message({
               type: "success",
               message: this.$t("manage.showMessage.deleteUserSuccess")
             });
+            self.getAdminData();
           }
         })
         .catch(() => {
@@ -323,14 +323,16 @@ export default {
       self.multipleSelection = val;
     },
     formatId(val) {
-      let sqlId = "";
+      // let sqlId = "";
+      let sqlId = []
       for (let i = 0; i < val.length; i++) {
-        sqlId += val[i].Id;
-        if (i == val.length - 1) {
-          sqlId += "";
-        } else {
-          sqlId += ",";
-        }
+        sqlId.push(val[i].id)
+        // sqlId += val[i].Id;
+        // if (i == val.length - 1) {
+        //   sqlId += "";
+        // } else {
+        //   sqlId += ",";
+        // }
       }
       return sqlId;
     },
@@ -352,18 +354,31 @@ export default {
       if (selValue == "all") {
         self.getAdminData();
       } else {
-        if (_.isEmpty(inpValue) && !_.isEmpty(self.selectValue)) {
-          self.$alert(this.$t("manage.showMessage.inputText"), this.$t("manage.confirm.warning"), {
-            confirmButtonText: this.$t("button.ok")
+        if (_.isEmpty(self.selectValue))
+        {
+          self.$alert(self.$t("manage.showMessage.selectType"), self.$t("manage.confirm.warning"), {
+            confirmButtonText: self.$t("button.ok")
+          });
+        }
+        else if (_.isEmpty(self.inpValue)) {
+          self.$alert(self.$t("manage.showMessage.inputText"), self.$t("manage.confirm.warning"), {
+            confirmButtonText: self.$t("button.ok")
           });
         } else {
           self.selectAll = false;
           const response = await searchAdmin(self, selValue, inpValue);
+<<<<<<< Updated upstream
           if (response.data === "fail to get user info") {
             self.$alert(this.$t("manage.showMessage.userUndefined"), this.$t("manage.showMessage.searchError"), {
               confirmButtonText: this.$t("button.ok")
+=======
+          if (response.data === self.$t("manage.showMessage.userIsNull" || response.data == "")) {
+            self.$alert(self.$t("manage.showMessage.userUndefined"), self.$t("manage.showMessage.searchError"), {
+              confirmButtonText: self.$t("button.ok")
+>>>>>>> Stashed changes
             });
             self.input = " ";
+            self.form = [];
           } else {
             self.form = response.data;
           }

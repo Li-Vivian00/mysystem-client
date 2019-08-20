@@ -121,6 +121,7 @@ export default {
       updateError: "更新用户失败",
       updateUserSuccess: "用户更新成功",
 
+      selectType:"请选择查询关键字",
       inputText: "输入不能为空，请输入需要查询的用户",
       userUndefined: "无该用户信息，请重新搜索！",
       searchError: "查询失败"

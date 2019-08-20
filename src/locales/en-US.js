@@ -119,7 +119,8 @@ export default {
 
       updateError: "Failed to update user",
       updateUserSuccess: "User updated successfully",
-
+      
+      selectType:"Please select the query keyword",
       inputText: "The input cannot be empty. Enter the user you want to query",
       userUndefined: "No user information, please search again!",
       searchError: "Fail to query"
