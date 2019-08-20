@@ -96,6 +96,7 @@ export default {
     loadingText: "Loading",
     inputText: "Please input text",
     loginId: "LoginId",
+    id:"ID",
     userName: "UserName",
     options: {
       label: {
@@ -163,7 +164,7 @@ export default {
     phoneNotExist: "The phone number is not registered",
     codeNotNull: "The verification code cannot be empty",
     codeError: "Verification code error",
-    sendLater: "s later send again",
+    sendLater: "Already send",
     message: {
       verifySuccess: "Authentication is successful!",
       sendMessage:",You are using the login function. This verification code is only used for authentication. It is valid for five minutes.",

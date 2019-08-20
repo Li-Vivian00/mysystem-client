@@ -44,7 +44,7 @@
             <el-button type="info" id="btn" @click="send_code" @disabled="isSend">{{$t(verif_code)}}</el-button>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" class="btn_login" @click="login" id="nextBtn">{{$t("forgetPwd.nextStep")}}</el-button>
+            <el-button type="primary" class="btn_login" @click="nextClick" id="nextBtn">{{$t("forgetPwd.nextStep")}}</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -121,16 +121,13 @@ export default {
       } else {
         const self = this;
         const phone = self.user_phone;
-        console.log(phone)
-        const from = "phone"
-        const response = await getAdminPhone(self, phone, from);
+        const response = await getAdminPhone(self, phone);
         let result = response.data;
-        console.log(result)
-        if (result == 'phone is not exist') {
+        if (result == 'phone not exist') {
           this.isCorrect = false;
           callback(new Error(this.$t("forgetPwd.phoneNotExist")));          
         }
-        else if (result == 'success') {
+        else if (result == 'phone is exist') {
           callback();
           this.isCorrect = true; 
         }
@@ -188,7 +185,7 @@ export default {
     verif_code_store: state => store.state.verif_code // 获取发送的验证码组件的传输值
   },
   methods: {
-    login() {
+    nextClick() {
       if (
         this.user_phone_store === "" ||
         !/^1[34578]\d{9}$/.test(this.user_phone_store) ||
@@ -230,7 +227,7 @@ export default {
               //倒计时;
               {
                 if (times > 0 && times <= count) {
-                  this.verif_code = times-- + this.$t("forgetPwd.sendLater");
+                  this.verif_code = "forgetPwd.sendLater";
                 } else {
                   this.isSend = true; //按钮可用
                   this.verif_code = this.$t("forgetPwd.verif_code");
@@ -284,10 +281,8 @@ export default {
     onSubmit(formName) {
       const self = this;
       let formData = {
-        from: "phone",
         phone: self.user_phone_store,
         password: self.form.password,
-        repeatpass: self.form.repeatPassword
       };
       self.$refs[formName].validate(async valid => {
         if (valid) {
@@ -297,13 +292,6 @@ export default {
               type: "error",
               message: this.$t("forgetPwd.message.modifyError")
             });
-            // setTimeout(() => {
-            //   location.reload();
-            //     (this.user_phone = ""),
-            //     (this.user_verif = " "),
-            //     (this.user_phone_store = ""),
-            //     (this.user_verif_store = "");
-            // }, 3000);
           } else if (response.data == "success") {
             self.$message({
               type: "success",

@@ -11,8 +11,7 @@ export const getUserLoginid = async (self, loginid, from) => {
   const result = await self.$http
     .get("/api/userLogin/getUserLoginid", {
       params: {
-        from:from,
-        loginid: loginid
+        loginId: loginid
       }
     }).catch(error => {
       console.log(error)
@@ -20,12 +19,11 @@ export const getUserLoginid = async (self, loginid, from) => {
     return result
 }
 
-export const getUserPhone = async (self, phone, from) => {
+export const getUserPhone = async (self, phone) => {
   const result = await self.$http
     .get("/api/userLogin/getUserPhone", {
       params: {
-        from:from,
-        loginid: phone
+        phone: phone
       }
     }).catch(error => {
       console.log(error)

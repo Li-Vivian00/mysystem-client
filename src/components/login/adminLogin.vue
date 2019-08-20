@@ -55,7 +55,7 @@
           </div>
         </el-form-item>
         <div class="login-btn">
-          <el-button type="primary" @click="submitForm('ruleForm')">{{$t('login.adminLogin.load')}}</el-button>
+          <el-button type="primary" :loading="loading" @click="submitForm('ruleForm')">{{$t('login.adminLogin.load')}}</el-button>
         </div>
         <p class="forgetPwd" @click="forgetPwd">{{$t('login.adminLogin.forgetPwd')}}</p>
       </el-form>
@@ -128,6 +128,7 @@ export default {
       },
       radio: "ZH",
       lang: "ZH",
+      loading: false
     };
   },
   mounted() {
@@ -142,8 +143,8 @@ export default {
     async submitForm(formName) {
       const self = this;
       if (self.tureVali) {
-        const from = "loginid"
-        const response = await adminLogin(self.ruleForm, self, from);
+        self.loading = true;
+        const response = await adminLogin(self.ruleForm, self);
         console.log(response);
         if (response.data == "loginid not exist") {
           self.errAccountInfo = self.$t("login.adminLogin.loginIdNotExist");
@@ -156,7 +157,7 @@ export default {
           self.errPwdInfo = "";
           sessionStorage.setItem("adminLoginId", self.ruleForm.loginId);
           self.$router.push("/adminHome");
-          // sessionStorage.setItem("admin", JSON.stringify(self.ruleForm));
+          self.loading = false;
         }
       } else {
         self.$message({

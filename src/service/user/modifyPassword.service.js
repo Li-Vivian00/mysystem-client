@@ -18,12 +18,11 @@ export const adminModifyPassword = async (self, formData) => {
 }
 
 
-export const getAdminPhone = async (self, phone, from) => {
+export const getAdminPhone = async (self, phone) => {
   const result = await self.$http
     .get("/api/adminLogin/getAdminPhone", {
       params: {
-        from:from,
-        loginid: phone
+        phone: phone
       }
     }).catch(error => {
       console.log(error)

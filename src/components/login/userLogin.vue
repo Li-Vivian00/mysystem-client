@@ -57,7 +57,7 @@
           </div>
         </el-form-item>
         <div class="login-btn">
-          <el-button type="primary" @click="submitForm('ruleForm')">{{$t('login.userLogin.load')}}</el-button>
+          <el-button type="primary" :loading="loading" @click="submitForm('ruleForm')">{{$t('login.userLogin.load')}}</el-button>
         </div>
         <p class="register" @click="handleCommand">{{$t('login.userLogin.register')}}</p>
         <p class="forgetPwd" @click="forgetPwd">{{$t('login.userLogin.forgetPwd')}}</p>
@@ -130,7 +130,8 @@ export default {
         ]
       },
       radio: "ZH",
-      lang:"ZH"
+      lang:"ZH",
+      loading:false
     };
   },
   mounted() {
@@ -148,6 +149,7 @@ export default {
       const self = this;
       const from = "loginid"
       if (self.tureVali) {
+        self.loading = true;
         const response = await userLogin(self.ruleForm, self, from);
         console.log(response)
         if (response.data == "loginid not exist") {
@@ -161,8 +163,8 @@ export default {
           self.errPwdInfo = "";
           sessionStorage.setItem("userLoginId", self.ruleForm.loginId);
           self.$router.push("/userHome");
-          // sessionStorage.setItem("user", JSON.stringify(self.ruleForm));
         }
+        self.loading = false;
       } else {
         self.$message({
           type: "error",

@@ -97,6 +97,7 @@ export default {
     loadingText: "拼命加载中",
     inputText: "请输入内容",
     loginId: "登陆账号",
+    id:"ID",
     userName: "用户名",
     options: {
       label: {
@@ -164,7 +165,7 @@ export default {
     phoneNotExist: "该手机号未被注册",
     codeNotNull: "验证码不能为空",
     codeError: "验证码错误",
-    sendLater: "s后重新发送",
+    sendLater: "已发送",
     message: {
       verifySuccess: "验证成功!",
       sendMessage:",您正在使用登陆功能,该验证码仅用于身份验证,在五分钟之内有效，请勿泄露给其他人使用。",

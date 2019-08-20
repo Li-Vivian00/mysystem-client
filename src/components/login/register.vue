@@ -119,7 +119,6 @@ import {
   getUserLoginid,
   getUserPhone
 } from "../../service/login/register.service";
-// import { constants } from 'crypto';
 export default {
   data() {
     const validateName = (rule, value, callback) => {
@@ -134,8 +133,7 @@ export default {
         callback(new Error(this.$t("register.status.loginId")));
       } else {
         const loginid = self.form.loginid;
-        const from = "loginid";
-        const response = await getUserLoginid(self, loginid,from);
+        const response = await getUserLoginid(self, loginid);
         let result = response.data;
         if (result == 'loginid is exist') {
           callback(new Error(this.$t("register.status.loginIdExist")));
@@ -179,9 +177,8 @@ export default {
         callback(new Error(self.$t("register.status.formatPhone")));
       } else {
         const phone = self.form.phone;
-        console.log(phone)
-        const from = "phone"
-        const response = await getUserPhone(self, phone, from);
+        // const from = "phone"
+        const response = await getUserPhone(self, phone);
         let result = response.data;
         console.log(result)
         if (result == 'phone is exist') {
@@ -212,6 +209,7 @@ export default {
         phone: "",
         email: "",
         card: "",
+        date:"",
         date:"",
       },
       rules: {
@@ -293,9 +291,8 @@ export default {
     },
     getDateTimes() {
       const str = new Date().toString();
-      this.form.login_id = str;
-      console.log(this.form.login_id);
-      return this.form.login_id;
+      this.form.date = str;
+      return this.form.date;
     },
     alertMessage() {
       this.$alert(this.$t("register.showMessage.register"), this.$t("manage.confirm.warning"), {
@@ -306,7 +303,6 @@ export default {
       this.lang = this.getLangName(command);
       sessionStorage.setItem("userLang", this.lang)
       this.$i18n.locale = this.lang
-      // location.reload();
     },
     getLangName (key) {
       const langArr = {

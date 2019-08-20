@@ -18,7 +18,7 @@
               v-for="(subItem,i) in item.subs"
               :key="i"
               :index="subItem.index"
-            >{{ subItem.title }}</el-menu-item>
+            >{{ $t(subItem.title) }}</el-menu-item>
           </el-submenu>
         </template>
         <template v-else>

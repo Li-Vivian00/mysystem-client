@@ -2,7 +2,7 @@
   <div class="userManage">
     <el-button type="primary" @click="batchDelect" class="batchDelect">{{$t('manage.batchDelete')}}</el-button>{{$t("manage.keyWord")}}
     <el-select v-model="value" clearable @change="selectItem" :placeholder='`${$t("manage.selectHolder")}`'>
-      <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      <el-option v-for="item in options" :key="item.value" :label='`${$t(item.label)}`' :value="item.value"></el-option>
     </el-select>
     <el-input
       :placeholder='`${$t("manage.inputText")}`'
@@ -52,10 +52,13 @@
             <el-form-item :label='`${$t("register.label.card")}`'>
               <span>{{ props.row.card }}</span>
             </el-form-item>
+            <el-form-item :label='`${$t("register.label.card")}`'>
+              <span>{{ props.row.date }}</span>
+            </el-form-item>
           </el-form>
         </template>
       </el-table-column>
-      <el-table-column label="ID" prop="Id" sortable></el-table-column>
+      <el-table-column :label='`${$t("manage.id")}`' prop="id" sortable></el-table-column>
       <el-table-column :label='`${$t("manage.loginId")}`' prop="loginid" sortable></el-table-column>
       <el-table-column :label='`${$t("manage.userName")}`' prop="username" sortable></el-table-column>
       <el-table-column fixed="right" :label='`${$t("manage.operate")}`' width="120">
@@ -131,7 +134,7 @@ export default {
       editFormVisible: false,
       showBtnOrdinary: true,
       editForm: {
-        Id:"",
+        // Id:"",
         loginid: "",
         username: "",
         password: "",
@@ -140,24 +143,24 @@ export default {
         phone: "",
         email: "",
         card: "",
-        login_id:"1",
+        data:"",
       },
       options: [
         {
           value: "all",
-          label: this.$t("manage.options.label.all")
+          label: "manage.options.label.all"
         },
         {
           value: "Id",
-          label: "ID"
+          label: "manage.id"
         },
         {
           value: "loginid",
-          label: this.$t("manage.options.label.loginId")
+          label: "manage.options.label.loginId"
         },
         {
           value: "username",
-          label: this.$t("manage.options.label.userName")
+          label: "manage.options.label.userName"
         }
       ],
       value: "",
@@ -224,6 +227,7 @@ export default {
       const self = this
       self.editFormVisible = true;
       self.editForm = Object.assign({}, row);
+      self.editForm.date = row.date
       self.isEdit = true;
     },
 
@@ -235,13 +239,6 @@ export default {
     //点击更新
     handleUpdate(formName) {
       const self = this;
-      self.editForm.login_id = '1';
-      const loginid = self.editForm.loginid;
-      const username = self.editForm.username;
-      const password = self.editForm.password;
-      const email = self.editForm.email;
-      const phone = self.editForm.phone;
-      const card = self.editForm.card;
       self
         .$confirm(this.$t("manage.confirm.updateUserInfo"), this.$t("manage.confirm.warning"), {
           confirmButtonText: this.$t("button.ok"),
@@ -338,13 +335,13 @@ export default {
       if (selValue == "all") {
         self.getUserData();
       } else {
-        if (_.isEmpty(self.selectValue))
+        if (_.isEmpty(selValue))
         {
           self.$alert(self.$t("manage.showMessage.selectType"), self.$t("manage.confirm.warning"), {
             confirmButtonText: self.$t("button.ok")
           });
         }
-        else if (_.isEmpty(self.inpValue)) {
+        else if (_.isEmpty(inpValue)) {
           self.$alert(self.$t("manage.showMessage.inputText"), self.$t("manage.confirm.warning"), {
             confirmButtonText: self.$t("button.ok")
           });
@@ -352,9 +349,6 @@ export default {
           self.selectAll = false;
           const response = await searchUser(self, selValue, inpValue);
           if (response.data === "fail to get user info") {
-            self.$alert(this.$t("manage.showMessage.userUndefined"), this.$t("manage.showMessage.searchError"), {
-            confirmButtonText: this.$t("button.ok")              
-            });
             self.input = " ";
             self.form = [];
           } else {

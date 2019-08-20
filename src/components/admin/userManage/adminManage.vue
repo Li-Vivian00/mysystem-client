@@ -6,7 +6,7 @@
       class="batchDelect"
     >{{$t('manage.batchDelete')}}</el-button>{{$t("manage.keyWord")}}
     <el-select v-model="value" clearable @change="selectItem" :placeholder='`${$t("manage.selectHolder")}`'>
-      <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      <el-option v-for="item in options" :key="item.value" :label='`${$t(item.label)}`' :value="item.value"></el-option>
     </el-select>
     <el-input
       :placeholder='`${$t("manage.inputText")}`'
@@ -59,7 +59,7 @@
           </el-form>
         </template>
       </el-table-column>
-      <el-table-column label="ID" prop="Id" sortable></el-table-column>
+      <el-table-column :label='`${$t("manage.id")}`' prop="id" sortable></el-table-column>
       <el-table-column :label='`${$t("manage.loginId")}`' prop="loginid" sortable></el-table-column>
       <el-table-column :label='`${$t("manage.userName")}`' prop="adminname" sortable></el-table-column>
       <el-table-column fixed="right" :label='`${$t("manage.operate")}`' width="120">
@@ -146,24 +146,24 @@ export default {
         phone: "",
         email: "",
         card: "",
-        login_id:"1",
+        date:"",
       },
       options: [
         {
           value: "all",
-          label: this.$t("manage.options.label.all")
+          label: "manage.options.label.all"
         },
         {
           value: "Id",
-          label: "ID"
+          label: "manage.id"
         },
         {
           value: "loginid",
-          label: this.$t("manage.options.label.loginId")
+          label: "manage.options.label.loginId"
         },
         {
           value: "adminname",
-          label: this.$t("manage.options.label.userName")
+          label: "manage.options.label.userName"
         }
       ],
       value: "",
@@ -244,13 +244,6 @@ export default {
     //点击更新
     handleUpdate(formName) {
       const self = this;
-      self.editForm.login_id = '1';
-      const loginid = self.editForm.loginid;
-      const adminname = self.editForm.adminname;
-      const password = self.editForm.password;
-      const email = self.editForm.email;
-      const phone = self.editForm.phone;
-      const card = self.editForm.card;
       self
         .$confirm(this.$t("manage.confirm.updateUserInfo"), this.$t("manage.confirm.warning"), {
           confirmButtonText: this.$t("button.ok"),
@@ -354,29 +347,20 @@ export default {
       if (selValue == "all") {
         self.getAdminData();
       } else {
-        if (_.isEmpty(self.selectValue))
+        if (_.isEmpty(selValue))
         {
           self.$alert(self.$t("manage.showMessage.selectType"), self.$t("manage.confirm.warning"), {
             confirmButtonText: self.$t("button.ok")
           });
         }
-        else if (_.isEmpty(self.inpValue)) {
+        else if (_.isEmpty(inpValue)) {
           self.$alert(self.$t("manage.showMessage.inputText"), self.$t("manage.confirm.warning"), {
             confirmButtonText: self.$t("button.ok")
           });
         } else {
           self.selectAll = false;
           const response = await searchAdmin(self, selValue, inpValue);
-<<<<<<< Updated upstream
           if (response.data === "fail to get user info") {
-            self.$alert(this.$t("manage.showMessage.userUndefined"), this.$t("manage.showMessage.searchError"), {
-              confirmButtonText: this.$t("button.ok")
-=======
-          if (response.data === self.$t("manage.showMessage.userIsNull" || response.data == "")) {
-            self.$alert(self.$t("manage.showMessage.userUndefined"), self.$t("manage.showMessage.searchError"), {
-              confirmButtonText: self.$t("button.ok")
->>>>>>> Stashed changes
-            });
             self.input = " ";
             self.form = [];
           } else {
