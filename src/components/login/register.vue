@@ -289,7 +289,8 @@ export default {
       }
     },
     getDateTimes() {
-      const str = new Date().toString();
+      // const str = date + " " + time
+      const str = new Date().toLocaleString("chinese",{hour12:false})
       this.form.stay_date = str;
       return this.form.stay_date;
     },
