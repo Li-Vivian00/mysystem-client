@@ -39,6 +39,7 @@
             type="password"
             :placeholder='`${$t("register.inputPlaceholder.password")}`'
             :readonly="successRegister"
+            show-password
           ></el-input>
         </el-form-item>
         <el-form-item prop="repeatpass" :label='`${$t("register.label.repeatPassword")}`'>
@@ -47,6 +48,7 @@
             type="password"
             :placeholder='`${$t("register.inputPlaceholder.repeatPassword")}`'
             :readonly="successRegister"
+            show-password
           ></el-input>
         </el-form-item>
         <el-form-item prop="sex" :label='`${$t("register.label.sex")}`'>
@@ -177,7 +179,6 @@ export default {
         callback(new Error(self.$t("register.status.formatPhone")));
       } else {
         const phone = self.form.phone;
-        // const from = "phone"
         const response = await getUserPhone(self, phone);
         let result = response.data;
         console.log(result)
@@ -212,34 +213,14 @@ export default {
         stay_date:"",
       },
       rules: {
-        username: [
-          {
-            required: true,
-            validator: validateName,
-            trigger: "blur"
-          }
-        ],
-        loginid: [
-          {
-            required: true,
-            validator: validateId,
-            trigger: "blur"
-          }
-        ],
+        username: [{required: true, validator: validateName, trigger: "blur"}],
+        loginid: [{required: true,validator: validateId,trigger: "blur"}],
         password: [{ required: true, validator: validatePass, trigger: "blur" }],
-        repeatpass: [
-          { required: true, validator: validateRepeatPass, trigger: "blur" }
-        ],
+        repeatpass: [{ required: true, validator: validateRepeatPass, trigger: "blur" }],
         email: [{ required: true, validator: validateEmail, trigger: "blur" }],
         phone: [{ required: true, validator: validatePhone, trigger: "blur" }],
         card: [{ required: true, validator: validateCard, trigger: "blur" }],
-        sex: [
-          {
-            required: true,
-            message: this.$t("register.status.sex"),
-            trigger: "blur"
-          }
-        ]
+        sex: [{required: true,message: this.$t("register.status.sex"),trigger: "blur"}]
       },
       lang:'ZH'
     };
@@ -248,9 +229,9 @@ export default {
     this.selectLang(sessionStorage.getItem("userLang"));
   },
   methods: {
-    onSubmit(formName) {
+    onSubmit(value) {
       const self = this;
-      self.$refs[formName].validate( async (valid) => {
+      self.$refs[value].validate( async (valid) => {
         if (valid) {
           self.getDateTimes();
           const response = await register(self.form, self);

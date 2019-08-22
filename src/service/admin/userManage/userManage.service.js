@@ -8,8 +8,8 @@ export const getAllUser = async (self, username) => {
   return result
 }
 
-export const deleteUser = (self, Id) => {
-  const result = self.$http
+export const deleteUser = async (self, Id) => {
+  const result = await self.$http
     .post("/api/userManage/deleteUser",
       Id, {}).catch(error => {
       console.log(error)

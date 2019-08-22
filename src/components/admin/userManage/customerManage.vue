@@ -52,7 +52,7 @@
             <el-form-item :label='`${$t("register.label.card")}`'>
               <span>{{ props.row.card }}</span>
             </el-form-item>
-            <el-form-item :label='`${$t("register.label.card")}`'>
+            <el-form-item :label='`${$t("register.label.stay_date")}`'>
               <span>{{ props.row.stay_date }}</span>
             </el-form-item>
           </el-form>
@@ -81,26 +81,26 @@
       class="edit-form"
       :before-close="handleClose"
     >
-      <el-form :model="editForm" label-width="80px" ref="editForm">
-        <el-form-item :label='`${$t("register.label.loginId")}`'>
+      <el-form :model="editForm" label-width="80px" ref="editForm" :rules="rules">
+        <el-form-item prop="loginid" :label='`${$t("register.label.loginId")}`'>
           <el-input v-model="editForm.loginid" auto-complete="off" disabled>{{form.loginid}}</el-input>
         </el-form-item>
-        <el-form-item :label='`${$t("register.label.userName")}`'>
+        <el-form-item prop="username" :label='`${$t("register.label.userName")}`'>
           <el-input v-model="editForm.username" auto-complete="off">{{form.username}}</el-input>
         </el-form-item>
-        <el-form-item :label='`${$t("register.label.password")}`'>
-          <el-input v-model="editForm.password" auto-complete="off">{{form.password}}</el-input>
+        <el-form-item prop="password" :label='`${$t("register.label.password")}`'>
+          <el-input v-model="editForm.password" show-password auto-complete="off">{{form.password}}</el-input>
         </el-form-item>
-        <el-form-item :label='`${$t("register.label.sex")}`'>
+        <el-form-item prop="sex" :label='`${$t("register.label.sex")}`'>
           <el-input v-model="editForm.sex" auto-complete="off" disabled>{{form.sex}}</el-input>
         </el-form-item>
-        <el-form-item :label='`${$t("register.label.phone")}`'>
+        <el-form-item prop="phone" :label='`${$t("register.label.phone")}`'>
           <el-input v-model="editForm.phone" auto-complete="off">{{form.phone}}</el-input>
         </el-form-item>
-        <el-form-item :label='`${$t("register.label.email")}`'>
+        <el-form-item prop="email" :label='`${$t("register.label.email")}`'>
           <el-input v-model="editForm.email" auto-complete="off">{{form.email}}</el-input>
         </el-form-item>
-        <el-form-item :label='`${$t("register.label.card")}`'>
+        <el-form-item prop="card" :label='`${$t("register.label.card")}`'>
           <el-input v-model="editForm.card" auto-complete="off" disabled>{{form.card}}</el-input>
         </el-form-item>
       </el-form>
@@ -113,7 +113,7 @@
 </template>
 
 <script>
-// import Util from "../../../utils/utils";
+import Util from "../../../utils/utils";
 import _ from "lodash";
 import {
   getAllUser,
@@ -121,9 +121,53 @@ import {
   updateUser,
   searchUser
 } from "../../../service/admin/userManage/userManage.service";
+import {
+  getUserPhone
+} from "../../../service/login/register.service";
 import { constants } from 'crypto';
 export default {
   data() {
+    const validateName = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error(this.$t("register.status.userName")));
+      } 
+        callback();
+    };
+    const validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error(this.$t("register.status.password")));
+      }
+        callback();
+    };
+    const validateEmail = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error(this.$t("register.status.email")));
+      } else if (!Util.emailReg.test(this.editForm.email)) {
+        callback(new Error(this.$t("register.status.formatEmail")));
+      } else {
+        callback();
+      }
+    };
+    const validatePhone = async (rule, value, callback) => {
+      const self = this;
+      if (value === "") {
+        callback(new Error(self.$t("register.status.phone")));
+      } else if (!Util.phoneReg.test(self.editForm.phone)) {
+        callback(new Error(self.$t("register.status.formatPhone")));
+      } else {
+        if(self.editForm.phone == self.form.phone) {
+          callback();
+        }
+        else {
+          const phone = self.editForm.phone;
+          const response = await getUserPhone(self, phone);
+          let result = response.data;
+          if (result == 'phone is exist') {
+            callback(new Error(self.$t("register.status.phoneExist")));
+          }
+        }
+      }
+    };
     return {
       form: [],
       showBtn: [],
@@ -163,6 +207,12 @@ export default {
           label: "manage.options.label.userName"
         }
       ],
+       rules: {
+        username: [{required: true, validator: validateName, trigger: "blur"}],
+        password: [{ required: true, validator: validatePass, trigger: "blur" }],
+        email: [{ required: true, validator: validateEmail, trigger: "blur" }],
+        phone: [{ required: true, validator: validatePhone, trigger: "blur" }],
+      },
       value: "",
       input: "",
       selectValue: ""
@@ -179,12 +229,11 @@ export default {
           cancelButtonText: this.$t("button.cancel"),
           type: "warning"
         })
-        .then(() => {
+        .then( async () => {
           const str = []
           const id = rows.id;
           str.push(id)
-          console.log(id);
-          const response = deleteUser(self, str);
+          const response = await deleteUser(self, str);
           if (response.data === "fail to delete user") {
             self.$message({
               type: "error",
@@ -239,6 +288,8 @@ export default {
     //点击更新
     handleUpdate(formName) {
       const self = this;
+      self.$refs[formName].validate( async (valid) => {
+        if (valid) {
       self
         .$confirm(this.$t("manage.confirm.updateUserInfo"), this.$t("manage.confirm.warning"), {
           confirmButtonText: this.$t("button.ok"),
@@ -270,8 +321,9 @@ export default {
             message: this.$t("manage.showMessage.cancel")
           });
         });
+        }
+        })
     },
-
     //批量删除
     batchDelect() {
       const self = this;

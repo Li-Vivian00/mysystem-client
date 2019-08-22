@@ -35,8 +35,10 @@ export default {
       phone: "Phone:",
       email: "Email:",
       card: "Card:",
-      male: "Male:",
-      female: "Female:"
+      male: "Male",
+      female: "Female",
+      room_id: "Room_Id:",
+      stay_date: "Stay_Date:"
     },
 
     inputPlaceholder: {

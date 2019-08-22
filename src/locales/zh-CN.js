@@ -36,7 +36,9 @@ export default {
       email: "邮箱：",
       card: "身份证：",
       male: "男",
-      female: "女"
+      female: "女",
+      room_id: "房间号：",
+      stay_date: "入住时间："
     },
 
     inputPlaceholder: {
