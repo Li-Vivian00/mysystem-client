@@ -64,7 +64,6 @@ export default {
         self.form.card = result.card;
         self.form.sex = result.sex;
         self.form.Id = result.Id;
-        // sessionStorage.setItem("ms_userId", result.Id);
       }
     }
   },

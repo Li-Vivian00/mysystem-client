@@ -117,6 +117,9 @@ export default {
       deleteError: "删除用户失败",
       deleteUserSuccess: "删除用户成功！",
 
+      operateError: "操作失败",
+      operateSuccess: "操作成功",
+      
       cancel: "取消操作",
 
       getUserError: "获取用户信息失败",

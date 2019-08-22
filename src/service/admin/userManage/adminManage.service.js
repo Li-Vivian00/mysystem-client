@@ -1,5 +1,5 @@
-export const deleteAdmin = (self, Id) => {
-  const result = self.$http
+export const deleteAdmin = async (self, Id) => {
+  const result = await self.$http
     .post("/api/adminManage/deleteAdmin",
       Id, {}).catch(error => {
       console.log(error.message)
@@ -7,10 +7,9 @@ export const deleteAdmin = (self, Id) => {
   return result
 }
 
-export const getAllAdmin = async (self, adminname) => {
+export const getAllAdmin = async (self) => {
   const result = await self.$http
     .get("/api/adminManage/getAdmin", {
-
     }).catch(error => {
       console.log(error.message)
     })

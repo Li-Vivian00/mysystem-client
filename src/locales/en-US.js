@@ -119,6 +119,9 @@ export default {
       cancel: "Cancel the operation",
 
       getUserError: "Failed to retrieve user information",
+      
+      operateError: "Failed to operate",
+      operateSuccess: "Success to operate",
 
       updateError: "Failed to update user",
       updateUserSuccess: "User updated successfully",

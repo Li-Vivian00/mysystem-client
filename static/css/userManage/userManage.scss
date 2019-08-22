@@ -1,0 +1,33 @@
+.demo-table-expand {
+  font-size: 0;
+
+  label {
+    width: 90px;
+    color: #a4a6a8;
+  }
+
+  .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 50%;
+  }
+}
+.manage {
+  width: 100%;
+  position: absolute;
+  top: 10px;
+}
+.batchDelect {
+  float: left;
+  margin-left: 15px;
+  margin-bottom: 22px;
+}
+.tableFont {
+  font: 16px !important;
+}
+
+.searchInput {
+  width: 210px;
+  margin-left: 12px;
+  margin-right: 10px;
+}
