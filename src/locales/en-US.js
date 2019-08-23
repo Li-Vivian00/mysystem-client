@@ -180,5 +180,11 @@ export default {
       phone: "Phone:",
       code: "Code:",
     },
+  },
+
+  villaCenter: {
+    noticeBoard: "Bulletin board information editing",
+    infrastructure: "Infrastructure information editing",
+    baseInfo: "Basic information editing"
   }
 }

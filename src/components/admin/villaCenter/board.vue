@@ -1,15 +1,18 @@
 <template>
-    <div class="">
-        <p>公告栏</p>
+  <div class="center_page">
+    <div class="title">
+      <span class="edit_title">{{$t("villaCenter.noticeBoard")}}</span>
+      <i class="el-icon-edit"></i>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
-    name:"board"
-}
+  name: "board"
+};
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+@import "../../../../static/css/villaCenter/villaCenter";
 </style>

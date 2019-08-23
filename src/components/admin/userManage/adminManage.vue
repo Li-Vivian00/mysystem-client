@@ -6,6 +6,7 @@
     {{$t("manage.keyWord")}}
     <el-select v-model="value"
                clearable
+               filterable
                @change="selectItem"
                :placeholder='`${$t("manage.selectHolder")}`'>
       <el-option v-for="item in options"

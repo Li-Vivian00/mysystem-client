@@ -1,15 +1,19 @@
 <template>
-    <div class="">
-        <p>基础设施</p>
+  <div class="center_page">
+    <div class="title">
+      <span class="edit_title">{{$t("villaCenter.infrastructure")}}</span>
+      <i class="el-icon-edit"></i>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
-    name:"baseFacility"
-}
+  name: "baseFacility"
+};
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+@import "../../../../static/css/villaCenter/villaCenter";
 </style>
+

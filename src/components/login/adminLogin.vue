@@ -19,6 +19,7 @@
         <p class="login-enter" @click="userLogin">{{$t('login.adminLogin.userLogin')}}</p>
         <el-form-item prop="loginId">
           <el-input
+            clearable
             v-model="ruleForm.loginId"
             :placeholder='`${$t("login.adminLogin.inputPlaceholder")}`'
           ></el-input>
@@ -45,6 +46,7 @@
 
         <el-form-item prop="validate">
           <el-input
+            clearable
             v-model="ruleForm.validate"
             class="validate-code"
             :placeholder='`${$t("login.adminLogin.code")}`'

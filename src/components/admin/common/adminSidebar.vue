@@ -39,7 +39,7 @@ export default {
       items: [
         {
           icon: "el-icon-setting",
-          index: "villaCenter",
+          index: "baseInfo",
           title: "sidebar.admin.villaCenter",
           subs: [
             {

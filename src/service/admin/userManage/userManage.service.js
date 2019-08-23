@@ -1,8 +1,7 @@
-export const getAllUser = async (self, username) => {
-  const result = await self.$http
-    .get("/api/userManage/getUser", {
-
-    }).catch(error => {
+export const getAllUser = (self) => {
+  const result = self.$http
+    .get("/api/userManage/getUser", {})
+    .catch(error => {
       console.log(error)
     })
   return result
@@ -10,8 +9,8 @@ export const getAllUser = async (self, username) => {
 
 export const deleteUser = async (self, Id) => {
   const result = await self.$http
-    .post("/api/userManage/deleteUser",
-      Id, {}).catch(error => {
+    .post("/api/userManage/deleteUser",Id, {})
+    .catch(error => {
       console.log(error)
     })
   return result
@@ -19,10 +18,8 @@ export const deleteUser = async (self, Id) => {
 
 export const updateUser = async (self, form) => {
   const result = await self.$http
-    .post(
-      "/api/userManage/updateUser",
-      form, {}
-    ).catch(error => {
+    .post("/api/userManage/updateUser",form, {})
+    .catch(error => {
       console.log(error)
     })
   return result

@@ -12,7 +12,6 @@ import adminCenter from '../components/admin/adminCenter'
 import modifyPassword from '../components/user/modifyPassword'
 import customerManage from '../components/admin/userManage/customerManage'
 import adminManage from '../components/admin/userManage/adminManage'
-import villaCenter from '../components/admin/villaCenter/villaCenter'
 import board from '../components/admin/villaCenter/board'
 import baseInfor from '../components/admin/villaCenter/baseInfo'
 import baseFacility from '../components/admin/villaCenter/baseFacility'
@@ -78,10 +77,6 @@ export default new Router({
         },
 
         //别墅中心
-        {
-          path: '/villaCenter',
-          component: villaCenter
-        },
         {
           path: '/board',
           component: board

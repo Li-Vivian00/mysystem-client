@@ -6,6 +6,7 @@
     {{$t("manage.keyWord")}}
     <el-select v-model="value"
                clearable
+               filterable
                @change="selectItem"
                :placeholder='`${$t("manage.selectHolder")}`'>
       <el-option v-for="item in options"
@@ -64,6 +65,10 @@
             </el-form-item>
             <el-form-item :label='`${$t("register.label.stay_date")}`'>
               <span>{{ props.row.stay_date }}</span>
+            </el-form-item>
+            <el-form-item :label='`${$t("register.label.room_id")}`'>
+              <span>{{ props.row.room_id }}</span>
+              <el-link :underline="false">查看<i class="el-icon-view el-icon--right"></i> </el-link>
             </el-form-item>
           </el-form>
         </template>

@@ -150,7 +150,7 @@ export default {
       baseInfo: "基本信息",
       baseFacility: "基础设施",
       propertyManage: "物业管理",
-      repairManage: "网上报修处理",
+      repairManage: "网上报修管理",
       opinionManage: "意见/投诉管理",
       userManage: "用户管理",
       customerManage: "住户管理",
@@ -181,5 +181,11 @@ export default {
       phone: "手机号:",
       code: "验证码:",
     },
+  },
+
+  villaCenter: {
+    noticeBoard: "公告栏信息编辑",
+    infrastructure: "基础设施信息编辑",
+    baseInfo: "基本信息编辑"
   }
 }

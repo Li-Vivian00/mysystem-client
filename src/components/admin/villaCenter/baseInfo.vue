@@ -1,14 +1,18 @@
 <template>
-  <div class>
-    <p>基本信息</p>
+  <div class="center_page">
+    <div class="title">
+      <span class="edit_title">{{$t("villaCenter.baseInfo")}}</span>
+      <i class="el-icon-edit"></i>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "baseInfo"
+  name: "villaCenter"
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import "../../../../static/css/villaCenter/villaCenter";
 </style>
