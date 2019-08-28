@@ -22,7 +22,7 @@
     <el-button type="primary"
                @click="searchAdmin"
                plain>{{$t("manage.search")}}</el-button>
-    <el-table :data="form"
+    <el-table :data="form.slice((currentPage-1) * pagesize, currentPage * pagesize)"
               style="width: 100%"
               :default-sort="{prop: 'Id', order: 'ascending'}"
               height="468"
@@ -88,14 +88,13 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page="currentPage"
-      :page-sizes="[5, 10, 20, 40]" 
-      :page-size="pagesize"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="form.length">
+    <el-pagination @size-change="handleSizeChange"
+                   @current-change="handleCurrentChange"
+                   :current-page="currentPage"
+                   :page-sizes="[5, 10, 20, 40]"
+                   :page-size="pagesize"
+                   layout="total, sizes, prev, pager, next, jumper"
+                   :total="form.length">
     </el-pagination>
     <el-dialog :title='`${$t("manage.edit")}`'
                :visible.sync="editFormVisible"
@@ -476,10 +475,14 @@ export default {
       );
     },
 
-    handleSizeChange(size) {
+    handleSizeChange (size) {
       this.pagesize = size;
+      console.log(this.pagesize)
     },
-
+    handleCurrentChange (currentPage) {
+      this.currentPage = currentPage
+      console.log(this.currentPage)
+    }
   }
 };
 </script>

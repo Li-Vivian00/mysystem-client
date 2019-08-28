@@ -18,7 +18,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-  background: #93defe;
+  background: url("../static/img/1.jpg");
+  background-size: 100% 100%;
   padding: 0px;
   margin: 0px;
   position: absolute;
@@ -30,10 +31,17 @@ export default {
 }
 
 .v-modal {
-  position:inherit !important;
+  position: inherit !important;
 }
 
 .el-form-item__label {
   padding: 0 9px 0 0 !important;
 }
+
+.input .el-input__inner,
+.validate-code .el-input__inner {
+  background: transparent !important;
+  color: #faecec;
+}
 </style>
+

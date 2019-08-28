@@ -1,68 +1,68 @@
 <template>
   <div class="login_box">
-    <div class="login_l_img">
-      <img src="../../../static/img/login_img.png" />
-    </div>
     <div class="ms-login">
-      <el-form
-        :model="ruleForm"
-        :rules="rules"
-        ref="ruleForm"
-        label-width="0px"
-        class="demo-ruleForm"
-      >
+      <el-form :model="ruleForm"
+               :rules="rules"
+               ref="ruleForm"
+               label-width="0px">
         <div class="login_logo">
           <a href="#">
             <img src="../../../static/img/login_logo.png" />
           </a>
         </div>
-        <p class="login-enter" @click="adminLogin">{{$t('login.userLogin.adminLogin')}}</p>
+        <p class="login-enter"
+           @click="adminLogin">{{$t('login.userLogin.adminLogin')}}</p>
         <el-form-item prop="loginId">
-          <el-input
-            clearable
-            v-model="ruleForm.loginId"
-            :placeholder='`${$t("login.userLogin.inputPlaceholder")}`'
-            @keyup.enter.native="submitForm('ruleForm')"
-          >
+          <el-input clearable
+                    class="input"
+                    v-model="ruleForm.loginId"
+                    :placeholder='`${$t("login.userLogin.inputPlaceholder")}`'
+                    @keyup.enter.native="submitForm('ruleForm')">
           </el-input>
           <span>{{errAccountInfo}}</span>
         </el-form-item>
 
         <el-form-item prop="password">
-          <el-input
-            type="password"
-            :placeholder='`${$t("login.userLogin.password")}`'
-            v-model="ruleForm.password"
-            @keyup.enter.native="submitForm('ruleForm')"
-            show-password
-          ></el-input>
+          <el-input type="password"
+                    class="input"
+                    :placeholder='`${$t("login.userLogin.password")}`'
+                    v-model="ruleForm.password"
+                    @keyup.enter.native="submitForm('ruleForm')"
+                    show-password></el-input>
           <span>{{errPwdInfo}}</span>
         </el-form-item>
 
         <div class="radio">
           <p class="language">Language:</p>
-            <template>
-              <el-radio v-model="radio" label="ZH" @change="selectRadio">中文</el-radio>
-              <el-radio v-model="radio" label="EN" @change="selectRadio">英文</el-radio>
-            </template> 
+          <template>
+            <el-radio v-model="radio"
+                      label="ZH"
+                      @change="selectRadio">中文</el-radio>
+            <el-radio v-model="radio"
+                      label="EN"
+                      @change="selectRadio">英文</el-radio>
+          </template>
         </div>
         <el-form-item prop="validate">
-          <el-input
-            clearable
-            v-model="ruleForm.validate"
-            class="validate-code"
-            :placeholder='`${$t("login.userLogin.code")}`'
-            @keyup.enter.native="submitForm('ruleForm')"
-          ></el-input>
-          <div class="code" @click="refreshCode">
+          <el-input clearable
+                    v-model="ruleForm.validate"
+                    class="validate-code"
+                    :placeholder='`${$t("login.userLogin.code")}`'
+                    @keyup.enter.native="submitForm('ruleForm')"></el-input>
+          <div class="code"
+               @click="refreshCode">
             <SIdentify :identifyCode="identifyCode"></SIdentify>
           </div>
         </el-form-item>
         <div class="login-btn">
-          <el-button type="primary" :loading="loading" @click="submitForm('ruleForm')">{{$t('login.userLogin.load')}}</el-button>
+          <el-button type="primary"
+                     :loading="loading"
+                     @click="submitForm('ruleForm')">{{$t('login.userLogin.load')}}</el-button>
         </div>
-        <p class="register" @click="handleCommand">{{$t('login.userLogin.register')}}</p>
-        <p class="forgetPwd" @click="forgetPwd">{{$t('login.userLogin.forgetPwd')}}</p>
+        <p class="register"
+           @click="handleCommand">{{$t('login.userLogin.register')}}</p>
+        <p class="forgetPwd"
+           @click="forgetPwd">{{$t('login.userLogin.forgetPwd')}}</p>
       </el-form>
     </div>
   </div>
@@ -74,39 +74,39 @@ import { userLogin } from "../../service/login/userLogin.service";
 import { constants } from 'crypto';
 export default {
   name: "userLogin",
-  data() {
+  data () {
     const validateLoginId = (rule, value, callback) => {
       if (value === "") {
         callback(new Error(this.$t("login.userLogin.inputPlaceholder")));
-      } 
-        callback();
+      }
+      callback();
     };
     const validatePassoword = (rule, value, callback) => {
       if (value === "") {
         callback(new Error(this.$t("login.adminLogin.password")));
-      } 
-        callback();
+      }
+      callback();
     };
     const checkVal = (rule, value, callback) => {
       if (!value) {
         return callback(new Error(this.$t("login.adminLogin.code")));
-        this.tureVali = false;
+        this.correctCode = false;
       }
       setTimeout(() => {
         if (this.ruleForm.validate != this.identifyCode) {
           callback(new Error(this.$t("forgetPwd.codeError")));
-          this.tureVali = false;
+          this.correctCode = false;
         } else {
-          this.tureVali = true;
+          this.correctCode = true;
         }
       }, 100);
     };
     return {
-      identifyCodes:"1234567890",
+      identifyCodes: "1234567890",
       identifyCode: "",
       errAccountInfo: "",
       errPwdInfo: "",
-      tureVali: false,
+      correctCode: false,
       ruleForm: {
         loginId: "",
         password: "",
@@ -128,15 +128,15 @@ export default {
           }
         ],
         validate: [
-          { required: true , validator: checkVal, trigger: "blur" }
+          { required: true, validator: checkVal, trigger: "blur" }
         ]
       },
       radio: "ZH",
-      lang:"ZH",
-      loading:false
+      lang: "ZH",
+      loading: false
     };
   },
-  mounted() {
+  mounted () {
     this.identifyCode = "";
     this.makeCode(this.identifyCodes, 4);
     this.selectRadio(this.lang);
@@ -147,10 +147,10 @@ export default {
     SIdentify
   },
   methods: {
-    async submitForm(formName) {
+    async submitForm (formName) {
       const self = this;
       const from = "loginid"
-      if (self.tureVali) {
+      if (self.correctCode) {
         self.loading = true;
         const response = await userLogin(self.ruleForm, self, from);
         console.log(response)
@@ -175,22 +175,22 @@ export default {
         return false;
       }
     },
-    handleCommand() {
+    handleCommand () {
       this.$router.push("/register");
     },
-    adminLogin() {
+    adminLogin () {
       sessionStorage.clear()
       this.$router.push("/adminLogin");
       location.reload()
     },
-    randomNum(min, max) {
+    randomNum (min, max) {
       return Math.floor(Math.random() * (max - min) + min);
     },
-    refreshCode() {
+    refreshCode () {
       this.identifyCode = "";
       this.makeCode(this.identifyCodes, 4);
     },
-    makeCode(o, l) {
+    makeCode (o, l) {
       for (let i = 0; i < l; i++) {
         this.identifyCode += this.identifyCodes[
           this.randomNum(0, this.identifyCodes.length)
@@ -198,17 +198,17 @@ export default {
       }
       console.log(this.identifyCode);
     },
-    forgetPwd() {
+    forgetPwd () {
       this.$router.push("/userForget");
     },
-    selectRadio(value) {
+    selectRadio (value) {
       this.lang = value;
       this.lang = this.getLangName(value);
       // localStorage.setItem("userLang",this.lang);
-      sessionStorage.setItem("userLang",this.lang)
+      sessionStorage.setItem("userLang", this.lang)
       this.$i18n.locale = this.lang;
     },
-    getLangName(key) {
+    getLangName (key) {
       const langArr = {
         EN: "EN",
         ZH: "ZH"
@@ -221,5 +221,4 @@ export default {
 
 <style scoped lang="scss">
 @import "../../../static/css/login/adminLogin.scss";
-
 </style>

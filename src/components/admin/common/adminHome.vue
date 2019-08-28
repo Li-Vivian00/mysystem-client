@@ -3,7 +3,8 @@
     <v-head></v-head>
     <v-sidebar></v-sidebar>
     <div class="content">
-      <transition name="move" mode="out-in">
+      <transition name="move"
+                  mode="out-in">
         <router-view></router-view>
       </transition>
     </div>
@@ -32,11 +33,12 @@ export default {
 }
 .content {
   position: absolute;
-  top:105px;
-  left:249px;
+  top: 105px;
+  left: 249px;
   width: 80%;
-  height:570px;
-  border: 1px solid #d3d6da;
+  height: 84%;
+  /* border: 2px solid #9fd9ff; */
+  box-shadow: 0px 2px 9px #dc8181;
   /* float: right; */
 }
 </style>
