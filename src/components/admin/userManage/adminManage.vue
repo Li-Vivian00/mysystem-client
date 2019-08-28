@@ -88,6 +88,15 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-sizes="[5, 10, 20, 40]" 
+      :page-size="pagesize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="form.length">
+    </el-pagination>
     <el-dialog :title='`${$t("manage.edit")}`'
                :visible.sync="editFormVisible"
                :close-on-click-modal="false"
@@ -199,6 +208,8 @@ export default {
     };
     return {
       form: [],
+      currentPage: 1,
+      pagesize: 5,
       showBtn: [],
       isEdit: false,
       selectAll: true,
@@ -463,7 +474,12 @@ export default {
           confirmButtonText: this.$t("button.ok")
         }
       );
-    }
+    },
+
+    handleSizeChange(size) {
+      this.pagesize = size;
+    },
+
   }
 };
 </script>
