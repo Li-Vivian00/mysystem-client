@@ -1,8 +1,12 @@
 <template>
-  <div class="userManage">
+  <div class="userManage"
+       style="margin-top: 8px;">
     <el-button type="primary"
                @click="batchDelect"
                class="batchDelect">{{$t('manage.batchDelete')}}</el-button>
+    <el-button type="primary"
+               @click="addUser"
+               class="batchDelect">{{$t('manage.addUser')}}</el-button>
     {{$t("manage.keyWord")}}
     <el-select v-model="value"
                clearable
@@ -67,7 +71,7 @@
               <span>{{ props.row.stay_date }}</span>
             </el-form-item>
             <el-form-item :label='`${$t("register.label.room_id")}`'>
-              <span>{{ props.row.room_id }}</span>
+              <span>{{ props.row.room_id }}</span>&nbsp;&nbsp;&nbsp;&nbsp;
               <el-link :underline="false">查看<i class="el-icon-view el-icon--right"></i> </el-link>
             </el-form-item>
           </el-form>
@@ -99,7 +103,7 @@
     <el-pagination @size-change="handleSizeChange"
                    @current-change="handleCurrentChange"
                    :current-page="currentPage"
-                   :page-sizes="[5, 10, 20, 40]"
+                   :page-sizes="[10, 15, 20, 40]"
                    :page-size="pagesize"
                    layout="total, sizes, prev, pager, next, jumper"
                    :total="form.length">
@@ -117,40 +121,47 @@
                       :label='`${$t("register.label.loginId")}`'>
           <el-input v-model="editForm.loginid"
                     auto-complete="off"
-                    disabled>{{form.loginid}}</el-input>
+                    disabled
+                    class="inputWidth">{{form.loginid}}</el-input>
         </el-form-item>
         <el-form-item prop="username"
                       :label='`${$t("register.label.userName")}`'>
           <el-input v-model="editForm.username"
-                    auto-complete="off">{{form.username}}</el-input>
+                    auto-complete="off"
+                    class="inputWidth">{{form.username}}</el-input>
         </el-form-item>
         <el-form-item prop="password"
                       :label='`${$t("register.label.password")}`'>
           <el-input v-model="editForm.password"
                     show-password
-                    auto-complete="off">{{form.password}}</el-input>
+                    auto-complete="off"
+                    class="inputWidth">{{form.password}}</el-input>
         </el-form-item>
         <el-form-item prop="sex"
                       :label='`${$t("register.label.sex")}`'>
           <el-input v-model="editForm.sex"
                     auto-complete="off"
-                    disabled>{{form.sex}}</el-input>
+                    disabled
+                    class="inputWidth">{{form.sex}}</el-input>
         </el-form-item>
         <el-form-item prop="phone"
                       :label='`${$t("register.label.phone")}`'>
           <el-input v-model="editForm.phone"
-                    auto-complete="off">{{form.phone}}</el-input>
+                    auto-complete="off"
+                    class="inputWidth">{{form.phone}}</el-input>
         </el-form-item>
         <el-form-item prop="email"
                       :label='`${$t("register.label.email")}`'>
           <el-input v-model="editForm.email"
-                    auto-complete="off">{{form.email}}</el-input>
+                    auto-complete="off"
+                    class="inputWidth">{{form.email}}</el-input>
         </el-form-item>
         <el-form-item prop="card"
                       :label='`${$t("register.label.card")}`'>
           <el-input v-model="editForm.card"
                     auto-complete="off"
-                    disabled>{{form.card}}</el-input>
+                    disabled
+                    class="inputWidth">{{form.card}}</el-input>
         </el-form-item>
       </el-form>
       <div slot="footer"
@@ -217,7 +228,7 @@ export default {
     return {
       form: [],
       currentPage: 1,
-      pagesize: 5,
+      pagesize: 10,
       showBtn: [],
       isEdit: false,
       selectAll: true,
@@ -234,7 +245,8 @@ export default {
         phone: "",
         email: "",
         card: "",
-        stay_date: ""
+        stay_date: "",
+        room_id: "",
       },
       options: [
         {
@@ -283,7 +295,7 @@ export default {
       self
         .$confirm(
           this.$t("manage.confirm.deleteAdmin"),
-          this.$t("manage.warning"),
+          this.$t("manage.confirm.warning"),
           {
             confirmButtonText: this.$t("button.ok"),
             cancelButtonText: this.$t("button.cancel"),
@@ -365,6 +377,11 @@ export default {
             });
         }
       });
+    },
+
+    //添加用户
+    addUser () {
+
     },
 
     //批量删除

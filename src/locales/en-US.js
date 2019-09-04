@@ -1,190 +1,223 @@
 export default {
   login: {
     userLogin: {
-      inputPlaceholder: "Please input user loginid",
-      password: "Please input password",
-      code: "Please input code",
-      load: "Load",
-      register: "Register",
-      adminLogin: "AdminLogin",
-      forgetPwd: "ForgetPassword?",
+      inputPlaceholder: 'Please input user loginid',
+      password: 'Please input password',
+      code: 'Please input code',
+      load: 'Load',
+      register: 'Register',
+      adminLogin: 'AdminLogin',
+      forgetPwd: 'ForgetPassword?'
     },
 
     adminLogin: {
-      inputPlaceholder: "Please input admin loginid",
-      password: "Please input password",
-      code: "Please input code",
-      userLogin: "UserLogin",
-      load: "Load",
-      forgetPwd: "ForgetPassword?",
-      loginIdNotExist:"Loginid is not exist",
+      inputPlaceholder: 'Please input admin loginid',
+      password: 'Please input password',
+      code: 'Please input code',
+      userLogin: 'UserLogin',
+      load: 'Load',
+      forgetPwd: 'ForgetPassword?',
+      loginIdNotExist: 'Loginid is not exist'
     },
-    identifyCodes:"1234567890",
-    loadingError:"Fail to loading",
+    identifyCodes: '1234567890',
+    loadingError: 'Fail to loading'
   },
 
   register: {
     label: {
-      register: "Register",
-      loginId: "LoginId:",
-      userName: "UserName:",
-      password: "Password:",
-      repeatError: "The two passwords did not match",
-      repeatPassword: "RepeatPwd:",
-      sex: "Sex:",
-      phone: "Phone:",
-      email: "Email:",
-      card: "Card:",
-      male: "Male",
-      female: "Female",
-      room_id: "Room_Id:",
-      stay_date: "Stay_Date:"
+      register: 'Register',
+      loginId: 'LoginId:',
+      userName: 'UserName:',
+      password: 'Password:',
+      repeatError: 'The two passwords did not match',
+      repeatPassword: 'RepeatPwd:',
+      sex: 'Sex:',
+      phone: 'Phone:',
+      email: 'Email:',
+      card: 'Card:',
+      male: 'Male',
+      female: 'Female',
+      room_id: 'Room Id:',
+      stay_date: 'Stay_Date:'
     },
 
     inputPlaceholder: {
-      loginId: "Please input LoginId",
-      userName: "Please input userName",
-      password: "Please input password",
-      repeatPassword: "Please input repeatPassword",
-      sex: "Please input sex",
-      phone: "Please input phone",
-      email: "Please input email",
-      card: "Please input card"
+      loginId: 'Please input LoginId',
+      userName: 'Please input userName',
+      password: 'Please input password',
+      repeatPassword: 'Please input repeatPassword',
+      sex: 'Please input sex',
+      phone: 'Please input phone',
+      email: 'Please input email',
+      card: 'Please input card'
     },
 
     title: {
-      successItem: "Congratulations on your successful registration and joining the warm community!",
-      returniItem: "Jumping to the login interface",
-      clickItem: "Click on the jump login interface"
+      successItem:
+        'Congratulations on your successful registration and joining the warm community!',
+      returniItem: 'Jumping to the login interface',
+      clickItem: 'Click on the jump login interface'
     },
 
     showMessage: {
-      register: "Registration failed",
+      register: 'Registration failed'
     },
 
     status: {
-      loginId: "Please enter your login account",
-      userName: "Please enter user name",
-      password: "Please enter password",
-      repeatPassword: "Please enter your password again",
-      email: "Please enter your email",
-      formatEmail: "Please enter your correct email",
-      phone: "Please enter your phone",
-      formatPhone: "Please enter your correct phone",
-      card: "Please enter your card",
-      formatCard: "Please enter your correct card",
-      sex: "Please enter your sex",
-      loginIdExist: "The login account already exists",
-      passwordError: "Password mistake",
-      repeatPasswordError: "The two passwords did not match",
-      phoneExist:"The phone number has been registered"
+      loginId: 'Please enter your login account',
+      userName: 'Please enter user name',
+      password: 'Please enter password',
+      repeatPassword: 'Please enter your password again',
+      email: 'Please enter your email',
+      formatEmail: 'Please enter your correct email',
+      phone: 'Please enter your phone',
+      formatPhone: 'Please enter your correct phone',
+      card: 'Please enter your card',
+      formatCard: 'Please enter your correct card',
+      sex: 'Please enter your sex',
+      loginIdExist: 'The login account already exists',
+      passwordError: 'Password mistake',
+      repeatPasswordError: 'The two passwords did not match',
+      phoneExist: 'The phone number has been registered'
     }
   },
 
   button: {
-    ok: "ok",
-    cancel: "cancel",
-    update: "update"
+    ok: 'ok',
+    cancel: 'cancel',
+    update: 'update'
   },
 
   manage: {
-    batchDelete: "Batch Delete",
-    keyWord: "KeyWord:",
-    edit: "Edit",
-    delete: "Delete",
-    search: "Search",
-    operate: "Operate",
-    selectHolder: "Please choose",
-    loadingText: "Loading",
-    inputText: "Please input text",
-    loginId: "LoginId",
-    id:"ID",
-    userName: "UserName",
+    batchDelete: 'Batch Delete',
+    addUser: 'Add User',
+    keyWord: 'KeyWord:',
+    edit: 'Edit',
+    delete: 'Delete',
+    search: 'Search',
+    operate: 'Operate',
+    selectHolder: 'Please choose',
+    loadingText: 'Loading',
+    inputText: 'Please input text',
+    loginId: 'LoginId',
+    id: 'ID',
+    userName: 'UserName',
     options: {
       label: {
-        all: "All",
-        loginId: "LoginId",
-        userName: "UserName"
+        all: 'All',
+        loginId: 'LoginId',
+        userName: 'UserName'
       }
     },
     confirm: {
-      deleteAdmin: "This operation deletes the user. Do you want to continue?",
-      updateUserInfo: "Whether to update the user information",
-      warning: "Warning",
+      deleteAdmin: 'This operation deletes the user. Do you want to continue?',
+      updateUserInfo: 'Whether to update the user information',
+      warning: 'Warning'
     },
     showMessage: {
-      delteError: "Failed to delete user",
-      deleteUserSuccess: "User deleted successfully",
+      delteError: 'Failed to delete user',
+      deleteUserSuccess: 'User deleted successfully',
 
-      cancel: "Cancel the operation",
+      cancel: 'Cancel the operation',
 
-      getUserError: "Failed to retrieve user information",
-      
-      operateError: "Failed to operate",
-      operateSuccess: "Success to operate",
+      getUserError: 'Failed to retrieve user information',
 
-      updateError: "Failed to update user",
-      updateUserSuccess: "User updated successfully",
-      
-      selectType:"Please select the query keyword",
-      inputText: "The input cannot be empty. Enter the user you want to query",
-      userUndefined: "No user information, please search again!",
-      searchError: "Fail to query"
+      operateError: 'Failed to operate',
+      operateSuccess: 'Success to operate',
+
+      updateError: 'Failed to update user',
+      updateUserSuccess: 'User updated successfully',
+
+      selectType: 'Please select the query keyword',
+      inputText: 'The input cannot be empty. Enter the user you want to query',
+      userUndefined: 'No user information, please search again!',
+      searchError: 'Fail to query'
     }
   },
 
   header: {
-    adminHeader: "Admin System",
-    userHeader: "User System",
-    userCenter: "User Center",
-    logout: "Logout",
-    zh: "ZH",
-    en: "EN",
+    adminHeader: 'Admin System',
+    userHeader: 'User System',
+    userCenter: 'User Center',
+    logout: 'Logout',
+    zh: 'ZH',
+    en: 'EN'
   },
 
   sidebar: {
     admin: {
-      villaCenter: "VillaCenter",
-      board: "Board",
-      baseInfo: "BaseInfo",
-      baseFacility: "BaseFacility",
-      propertyManage: "PropertyManage",
-      repairManage: "RepairManage",
-      opinionManage: "OpinionManage",
-      userManage: "UserManage",
-      customerManage: "CustomerManage",
-      adminManage: "AdminManage",
-      buildingManage: "BuildingManage",
+      villaCenter: 'VillaCenter',
+      board: 'Board',
+      baseInfo: 'BaseInfo',
+      baseFacility: 'BaseFacility',
+      propertyManage: 'PropertyManage',
+      repairManage: 'RepairManage',
+      opinionManage: 'OpinionManage',
+      userManage: 'UserManage',
+      customerManage: 'CustomerManage',
+      adminManage: 'AdminManage',
+      buildingManage: 'BuildingManage'
     }
   },
 
   forgetPwd: {
-    stepOne: "Verify phone number",
-    stepTwo: "Change password",
-    stepThree: "Finish",
-    nextStep: "Next step",
-    verif_code: "Get code",
-    phoneNotNull: "Cell phone number cannot be empty",
-    formatPhone: "Wrong format of phone number",
-    phoneNotExist: "The phone number is not registered",
-    codeNotNull: "The verification code cannot be empty",
-    codeError: "Verification code error",
-    sendLater: "Already send",
+    stepOne: 'Verify phone number',
+    stepTwo: 'Change password',
+    stepThree: 'Finish',
+    nextStep: 'Next step',
+    verif_code: 'Get code',
+    phoneNotNull: 'Cell phone number cannot be empty',
+    formatPhone: 'Wrong format of phone number',
+    phoneNotExist: 'The phone number is not registered',
+    codeNotNull: 'The verification code cannot be empty',
+    codeError: 'Verification code error',
+    sendLater: 'Already send',
     message: {
-      verifySuccess: "Authentication is successful!",
-      sendMessage:",You are using the login function. This verification code is only used for authentication. It is valid for five minutes.",
-      modifyError:"Password change failed. Coming back!",
-      modifySuccess: "Password changed successfully!"
+      verifySuccess: 'Authentication is successful!',
+      sendMessage:
+        ',You are using the login function. This verification code is only used for authentication. It is valid for five minutes.',
+      modifyError: 'Password change failed. Coming back!',
+      modifySuccess: 'Password changed successfully!'
     },
     label: {
-      phone: "Phone:",
-      code: "Code:",
-    },
+      phone: 'Phone:',
+      code: 'Code:'
+    }
   },
 
   villaCenter: {
-    noticeBoard: "Bulletin board information editing",
-    infrastructure: "Infrastructure information editing",
-    baseInfo: "Basic information editing"
+    noticeBoard: 'Bulletin board information editing',
+    infrastructure: 'Infrastructure information editing',
+    baseInfo: 'Basic information editing',
+    phoneModule: 'Convenient telephone module',
+    warningModule: 'Tips module',
+    Id: 'Id',
+    phoneType: 'Phone Type',
+    phoneNumber: 'Phone Number',
+    phoneNumberEdit: 'PhoneNumber:',
+    police: '警察(Police)',
+    fire: '火警(Fire)',
+    ambulance: '救护车(Ambulance)',
+    planeBooking: '飞机订票(PlaneBooking)',
+    trainBooking: '火车订票(TrainBooking)',
+    busHotline: '交通热线(BusHotline)',
+    consumerComplaints: '消费者投诉热线(ConsumerComplaints)',
+    weatherForecast: '天气预报热线(WeatherForecast)',
+    waterResources: '水利资源(WaterResources)',
+    environmentalComplaint: '环境保护投诉(EnvironmentalComplaint)',
+    customerService: '消费者服务(CustomerService)',
+    repairService: '维修服务(RepairService)',
+    '警察(Police)': 'police',
+    '火警(Fire)': 'fire',
+    '救护车(Ambulance)': 'ambulance',
+    '飞机订票(PlaneBooking)': 'planeBooking',
+    '火车订票(TrainBooking)': 'trainBooking',
+    '交通热线(BusHotline)': 'busHotline',
+    '消费者投诉热线(ConsumerComplaints)': 'consumerComplaints',
+    '天气预报热线(WeatherForecast)': 'weatherForecast',
+    '水利资源(WaterResources)': 'waterResources',
+    '环境保护投诉(EnvironmentalComplaint)': 'environmentalComplaint',
+    '消费者服务(CustomerService)': 'customerService',
+    '维修服务(RepairService)': 'repairService'
   }
-}
+};

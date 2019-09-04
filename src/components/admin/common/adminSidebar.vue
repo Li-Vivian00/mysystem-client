@@ -1,12 +1,10 @@
 <template>
   <div class="sidebar">
-    <el-menu
-      :default-active="onRoutes"
-      class="el-menu-vertical-demo"
-      theme="dark"
-      unique-opened
-      router
-    >
+    <el-menu :default-active="onRoutes"
+             class="el-menu-vertical-demo"
+             theme="dark"
+             unique-opened
+             router>
       <template v-for="item in items">
         <template v-if="item.subs">
           <el-submenu :index="item.index">
@@ -14,11 +12,9 @@
               <i :class="item.icon"></i>
               {{ $t(item.title) }}
             </template>
-            <el-menu-item
-              v-for="(subItem,i) in item.subs"
-              :key="i"
-              :index="subItem.index"
-            >{{ $t(subItem.title) }}</el-menu-item>
+            <el-menu-item v-for="(subItem,i) in item.subs"
+                          :key="i"
+                          :index="subItem.index">{{ $t(subItem.title) }}</el-menu-item>
           </el-submenu>
         </template>
         <template v-else>
@@ -34,7 +30,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       items: [
         {
@@ -43,7 +39,7 @@ export default {
           title: "sidebar.admin.villaCenter",
           subs: [
             {
-              index: "board",
+              index: "phoneModule",
               title: "sidebar.admin.board"
             },
             {
@@ -95,7 +91,7 @@ export default {
     };
   },
   computed: {
-    onRoutes() {
+    onRoutes () {
       return this.$route.path.replace("/", "");
     }
   },

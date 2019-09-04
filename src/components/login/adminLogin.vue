@@ -19,7 +19,6 @@
                     :placeholder='`${$t("login.adminLogin.inputPlaceholder")}`'></el-input>
           <span>{{errAccountInfo}}</span>
         </el-form-item>
-
         <el-form-item prop="password">
           <el-input type="password"
                     class="input"
@@ -28,7 +27,6 @@
                     show-password></el-input>
           <span>{{errPwdInfo}}</span>
         </el-form-item>
-
         <div class="radio">
           <p class="language">Language:</p>
           <template>
@@ -40,7 +38,6 @@
                       @change="selectRadio">英文</el-radio>
           </template>
         </div>
-
         <el-form-item prop="validate">
           <el-input clearable
                     v-model="ruleForm.validate"

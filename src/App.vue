@@ -36,12 +36,17 @@ export default {
 
 .el-form-item__label {
   padding: 0 9px 0 0 !important;
+  width: 113px !important;
 }
 
 .input .el-input__inner,
 .validate-code .el-input__inner {
   background: transparent !important;
   color: #faecec;
+}
+
+.el-dialog {
+  width: 40%;
 }
 </style>
 

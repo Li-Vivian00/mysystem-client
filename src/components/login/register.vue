@@ -1,7 +1,8 @@
 <template>
   <div class="wrapper">
     <div class="crumbs crumbs-register">
-      <el-breadcrumb separator="/" class="register-title">
+      <el-breadcrumb separator="/"
+                     class="register-title">
         <el-breadcrumb-item>
           <i class="el-icon-setting"></i>{{$t("register.label.register")}}
         </el-breadcrumb-item>
@@ -18,86 +19,86 @@
       </el-dropdown>
     </div>
     <div class="userContent">
-      <el-form ref="form" :model="form" :rules="rules" label-width="92px" label-position="right">
-        <el-form-item prop="loginid" :label='`${$t("register.label.loginId")}`'>
-          <el-input
-            v-model.trim="form.loginid"
-            :placeholder='`${$t("register.inputPlaceholder.loginId")}`'
-            :readonly="successRegister"
-          ></el-input>
+      <el-form ref="form"
+               :model="form"
+               :rules="rules"
+               label-width="92px"
+               label-position="right">
+        <el-form-item prop="loginid"
+                      :label='`${$t("register.label.loginId")}`'>
+          <el-input v-model.trim="form.loginid"
+                    :placeholder='`${$t("register.inputPlaceholder.loginId")}`'
+                    :readonly="successRegister"></el-input>
         </el-form-item>
-        <el-form-item prop="username" :label='`${$t("register.label.userName")}`'>
-          <el-input
-            v-model.trim="form.username"
-            :placeholder='`${$t("register.inputPlaceholder.userName")}`'
-            :readonly="successRegister"
-          ></el-input>
+        <el-form-item prop="username"
+                      :label='`${$t("register.label.userName")}`'>
+          <el-input v-model.trim="form.username"
+                    :placeholder='`${$t("register.inputPlaceholder.userName")}`'
+                    :readonly="successRegister"></el-input>
         </el-form-item>
-        <el-form-item prop="password" :label='`${$t("register.label.password")}`'>
-          <el-input
-            v-model.trim="form.password"
-            type="password"
-            :placeholder='`${$t("register.inputPlaceholder.password")}`'
-            :readonly="successRegister"
-            show-password
-          ></el-input>
+        <el-form-item prop="password"
+                      :label='`${$t("register.label.password")}`'>
+          <el-input v-model.trim="form.password"
+                    type="password"
+                    :placeholder='`${$t("register.inputPlaceholder.password")}`'
+                    :readonly="successRegister"
+                    show-password></el-input>
         </el-form-item>
-        <el-form-item prop="repeatpass" :label='`${$t("register.label.repeatPassword")}`'>
-          <el-input
-            v-model.trim="form.repeatpass"
-            type="password"
-            :placeholder='`${$t("register.inputPlaceholder.repeatPassword")}`'
-            :readonly="successRegister"
-            show-password
-          ></el-input>
+        <el-form-item prop="repeatpass"
+                      :label='`${$t("register.label.repeatPassword")}`'>
+          <el-input v-model.trim="form.repeatpass"
+                    type="password"
+                    :placeholder='`${$t("register.inputPlaceholder.repeatPassword")}`'
+                    :readonly="successRegister"
+                    show-password></el-input>
         </el-form-item>
-        <el-form-item prop="sex" :label='`${$t("register.label.sex")}`'>
-          <el-select
-            class="select-sex"
-            v-model.trim="form.sex"
-            :placeholder='`${$t("register.inputPlaceholder.sex")}`'
-            :disabled="successRegister"
-          >
-            <el-option :label='`${$t("register.label.male")}`' value="male"></el-option>
-            <el-option :label='`${$t("register.label.female")}`' value="female"></el-option>
+        <el-form-item prop="sex"
+                      :label='`${$t("register.label.sex")}`'>
+          <el-select class="select-sex"
+                     v-model.trim="form.sex"
+                     :placeholder='`${$t("register.inputPlaceholder.sex")}`'
+                     :disabled="successRegister">
+            <el-option :label='`${$t("register.label.male")}`'
+                       value="male"></el-option>
+            <el-option :label='`${$t("register.label.female")}`'
+                       value="female"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item prop="phone" :label='`${$t("register.label.phone")}`'>
-          <el-input
-            v-model.trim="form.phone"
-            :placeholder='`${$t("register.inputPlaceholder.phone")}`'
-            :readonly="successRegister"
-            oninput="if(value.length > 11)value = value.slice(0,11)"
-          ></el-input>
+        <el-form-item prop="phone"
+                      :label='`${$t("register.label.phone")}`'>
+          <el-input v-model.trim="form.phone"
+                    :placeholder='`${$t("register.inputPlaceholder.phone")}`'
+                    :readonly="successRegister"
+                    oninput="if(value.length > 11)value = value.slice(0,11)"></el-input>
         </el-form-item>
-        <el-form-item prop="email" :label='`${$t("register.label.email")}`'>
-          <el-input
-            v-model.trim="form.email"
-            :placeholder='`${$t("register.inputPlaceholder.email")}`'
-            :readonly="successRegister"
-          ></el-input>
+        <el-form-item prop="email"
+                      :label='`${$t("register.label.email")}`'>
+          <el-input v-model.trim="form.email"
+                    :placeholder='`${$t("register.inputPlaceholder.email")}`'
+                    :readonly="successRegister"></el-input>
         </el-form-item>
-        <el-form-item prop="card" :label='`${$t("register.label.card")}`'>
-          <el-input
-            v-model.trim="form.card"
-            :placeholder='`${$t("register.inputPlaceholder.card")}`'
-            :readonly="successRegister"
-          ></el-input>
+        <el-form-item prop="card"
+                      :label='`${$t("register.label.card")}`'>
+          <el-input v-model.trim="form.card"
+                    :placeholder='`${$t("register.inputPlaceholder.card")}`'
+                    :readonly="successRegister"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button
-            type="primary"
-            @click="onSubmit('form')"
-            :disabled="successRegister"
-          >{{$t('button.ok')}}</el-button>
-          <el-button @click="onCancle()" :disabled="successRegister">{{$t('button.cancel')}}</el-button>
+          <el-button type="primary"
+                     @click="onSubmit('form')"
+                     :disabled="successRegister">{{$t('button.ok')}}</el-button>
+          <el-button @click="onCancle()"
+                     :disabled="successRegister">{{$t('button.cancel')}}</el-button>
         </el-form-item>
       </el-form>
     </div>
-    <div class="mainBox" v-show="successRegister">
+    <div class="mainBox"
+         v-show="successRegister">
       <div class="mainBox-Main">
         <span class="info">
-          <img src="../../../static/img/true.png" alt id="true" />
+          <img src="../../../static/img/true.png"
+               alt
+               id="true" />
           <span id="success">{{$t("register.title.successItem")}}</span>
         </span>
         <div class="loading">
@@ -105,8 +106,10 @@
             {{$t("register.title.returniItem")}}
             <span id="runTime">{{runTime}} s</span>
           </span>
-          <img src="../../../static/img/loading.gif" id="loadingPicture" />
-          <p class="load" @click="onCancle()">{{$t("register.title.clickItem")}}</p>
+          <img src="../../../static/img/loading.gif"
+               id="loadingPicture" />
+          <p class="load"
+             @click="onCancle()">{{$t("register.title.clickItem")}}</p>
         </div>
       </div>
     </div>
@@ -122,14 +125,14 @@ import {
   getUserPhone
 } from "../../service/login/register.service";
 export default {
-  data() {
+  data () {
     const validateName = (rule, value, callback) => {
       if (value === "") {
         callback(new Error(this.$t("register.status.userName")));
-      } 
-        callback();
+      }
+      callback();
     };
-    const validateId = async (rule, value, callback) => {
+    const validateLoginId = async (rule, value, callback) => {
       const self = this;
       if (value === "") {
         callback(new Error(this.$t("register.status.loginId")));
@@ -210,35 +213,35 @@ export default {
         phone: "",
         email: "",
         card: "",
-        stay_date:"",
+        stay_date: "",
       },
       rules: {
-        username: [{required: true, validator: validateName, trigger: "blur"}],
-        loginid: [{required: true,validator: validateId,trigger: "blur"}],
+        username: [{ required: true, validator: validateName, trigger: "blur" }],
+        loginid: [{ required: true, validator: validateLoginId, trigger: "blur" }],
         password: [{ required: true, validator: validatePass, trigger: "blur" }],
         repeatpass: [{ required: true, validator: validateRepeatPass, trigger: "blur" }],
         email: [{ required: true, validator: validateEmail, trigger: "blur" }],
         phone: [{ required: true, validator: validatePhone, trigger: "blur" }],
         card: [{ required: true, validator: validateCard, trigger: "blur" }],
-        sex: [{required: true,message: this.$t("register.status.sex"),trigger: "blur"}]
+        sex: [{ required: true, message: this.$t("register.status.sex"), trigger: "blur" }]
       },
-      lang:'ZH'
+      lang: 'ZH'
     };
   },
-  mounted() {
+  mounted () {
     this.selectLang(sessionStorage.getItem("userLang"));
   },
   methods: {
-    onSubmit(value) {
+    onSubmit (value) {
       const self = this;
-      self.$refs[value].validate( async (valid) => {
+      self.$refs[value].validate(async (valid) => {
         if (valid) {
           self.getDateTimes();
           const response = await register(self.form, self);
           console.log(response)
           if (response.data == "fail to register") {
             self.alertMessage();
-          } else if(response.data == "success") {
+          } else if (response.data == "success") {
             self.successRegister = true;
             self.timeGo();
           }
@@ -248,12 +251,12 @@ export default {
         }
       });
     },
-    onCancle() {
-        sessionStorage.clear();
+    onCancle () {
+      sessionStorage.clear();
       this.$router.push("/userLogin");
       location.reload();
     },
-    timeGo() {
+    timeGo () {
       const timeCount = 5;
       if (!this.timer) {
         this.runTime = timeCount;
@@ -269,18 +272,18 @@ export default {
         }, 1000);
       }
     },
-    getDateTimes() {
+    getDateTimes () {
       // const str = date + " " + time
-      const str = new Date().toLocaleString("chinese",{hour12:false})
+      const str = new Date().toLocaleString("chinese", { hour12: false })
       this.form.stay_date = str;
       return this.form.stay_date;
     },
-    alertMessage() {
+    alertMessage () {
       this.$alert(this.$t("register.showMessage.register"), this.$t("manage.confirm.warning"), {
         confirmButtonText: this.$t("button.ok")
       });
     },
-    selectLang(command) {
+    selectLang (command) {
       this.lang = this.getLangName(command);
       sessionStorage.setItem("userLang", this.lang)
       this.$i18n.locale = this.lang
@@ -302,7 +305,7 @@ export default {
   float: right !important;
   margin-right: 30px;
 }
- .el-form-item {
+.el-form-item {
   margin: 20px !important;
- }
+}
 </style>>

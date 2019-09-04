@@ -1,7 +1,8 @@
 <template>
   <div class="admincenter">
     <div class="crumbs">
-      <el-breadcrumb separator="/" class="centerItem">
+      <el-breadcrumb separator="/"
+                     class="centerItem">
         <el-breadcrumb-item>
           <span>
             <i class="el-icon-user"></i>{{$t("header.userCenter")}}
@@ -10,35 +11,150 @@
       </el-breadcrumb>
     </div>
     <div class="adminContent">
-      <el-form ref="form" :model="form" label-width="80px">
-        <el-form-item :label='`${$t("register.label.loginId")}`'>
-          <el-input v-model="form.loginid" readonly></el-input>
+      <el-form ref="form"
+               :model="form"
+               label-width="80px"
+               :rules="rules">
+        <el-form-item :label='`${$t("register.label.loginId")}`'
+                      prop="loginid">
+          <el-input v-model.trim="form.loginid"
+                    class="inputWidth"
+                    readonly></el-input>
         </el-form-item>
-        <el-form-item :label='`${$t("register.label.userName")}`'>
-          <el-input v-model="form.adminname" readonly></el-input>
+        <el-form-item :label='`${$t("register.label.userName")}`'
+                      prop="adminname">
+          <el-input v-model.trim="form.adminname"
+                    :readonly="isNotEdit"
+                    class="inputWidth"></el-input>
         </el-form-item>
         <el-form-item :label='`${$t("register.label.sex")}`'>
-          <el-input v-model="form.sex" readonly></el-input>
+          <el-select class="inputWidth"
+                     v-model.trim="form.sex"
+                     :placeholder='`${$t("register.inputPlaceholder.sex")}`'
+                     :disabled="isNotEdit">
+            <el-option :label='`${$t("register.label.male")}`'
+                       :value='`${$t("register.label.male")}`'></el-option>
+            <el-option :label='`${$t("register.label.female")}`'
+                       :value='`${$t("register.label.female")}`'></el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item :label='`${$t("register.label.phone")}`'>
-          <el-input v-model="form.phone" readonly></el-input>
+        <el-form-item prop="password"
+                      :label='`${$t("register.label.password")}`'>
+          <el-input v-model.trim="form.password"
+                    type="password"
+                    :placeholder='`${$t("register.inputPlaceholder.password")}`'
+                    :readonly="isNotEdit"
+                    show-password
+                    class="inputWidth"></el-input>
         </el-form-item>
-        <el-form-item :label='`${$t("register.label.card")}`'>
-          <el-input v-model="form.card" readonly></el-input>
+        <el-form-item :label='`${$t("register.label.phone")}`'
+                      prop="phone">
+          <el-input v-model.trim="form.phone"
+                    :readonly="isNotEdit"
+                    class="inputWidth"></el-input>
         </el-form-item>
-        <el-form-item :label='`${$t("register.label.email")}`'>
-          <el-input v-model="form.email" readonly></el-input>
+        <el-form-item :label='`${$t("register.label.card")}`'
+                      prop="card">
+          <el-input v-model.trim="form.card"
+                    :readonly="isNotEdit"
+                    class="inputWidth"></el-input>
+        </el-form-item>
+        <el-form-item :label='`${$t("register.label.email")}`'
+                      prop="email">
+          <el-input v-model.trim="form.email"
+                    :readonly="isNotEdit"
+                    class="inputWidth"></el-input>
         </el-form-item>
       </el-form>
+      <el-button type="primary"
+                 @click="editInfo"
+                 class="editInfo">{{$t('manage.edit')}}</el-button>
     </div>
   </div>
 </template>
 
 <script>
 import { adminCenter } from "../../service/admin/adminCenter.service";
+import _ from "lodash"
+import Util from "../../utils/utils";
 export default {
-  data() {
+  data () {
+    const validateName = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error(this.$t("register.status.userName")));
+      }
+      callback();
+    };
+    const validateLoginId = async (rule, value, callback) => {
+      const self = this;
+      if (value === "") {
+        callback(new Error(this.$t("register.status.loginId")));
+      } else {
+        const loginid = self.form.loginid;
+        const response = await getUserLoginid(self, loginid);
+        let result = response.data;
+        if (result == 'loginid is exist') {
+          callback(new Error(this.$t("register.status.loginIdExist")));
+        }
+        callback();
+      }
+    };
+    const validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error(this.$t("register.status.password")));
+      } else {
+        if (this.form.repeatpass !== "") {
+          this.$refs.form.validateField("repeatpass");
+        }
+        callback();
+      }
+    };
+    const validateRepeatPass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error(this.$t("register.status.repeatPassword")));
+      } else if (value !== this.form.password) {
+        callback(new Error(this.$t("register.status.repeatPasswordError")));
+      } else {
+        callback();
+      }
+    };
+    const validateEmail = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error(this.$t("register.status.email")));
+      } else if (!Util.emailReg.test(this.form.email)) {
+        callback(new Error(this.$t("register.status.formatEmail")));
+      } else {
+        callback();
+      }
+    };
+    const validatePhone = async (rule, value, callback) => {
+      const self = this;
+      if (value === "") {
+        callback(new Error(self.$t("register.status.phone")));
+      } else if (!Util.phoneReg.test(self.form.phone)) {
+        callback(new Error(self.$t("register.status.formatPhone")));
+      } else {
+        // const phone = self.form.phone;
+        // const response = await getUserPhone(self, phone);
+        // let result = response.data;
+        // console.log(result)
+        // if (result == 'phone is exist') {
+        //   callback(new Error(self.$t("register.status.phoneExist")));
+        // }
+        callback();
+      }
+    };
+    const validateCard = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error(this.$t("register.status.card")));
+      } else if (!Util.idCardReg.test(this.form.card)) {
+        callback(new Error(this.$t("register.status.formatCard")));
+      } else {
+        callback();
+      }
+    };
     return {
+      isNotEdit: true,
       form: {
         adminname: "",
         loginid: "",
@@ -47,16 +163,26 @@ export default {
         card: "",
         sex: "",
         Id: ""
-      }
+      },
+      rules: {
+        adminname: [{ required: true, validator: validateName, trigger: "blur" }],
+        loginid: [{ required: true, validator: validateLoginId, trigger: "blur" }],
+        password: [{ required: true, validator: validatePass, trigger: "blur" }],
+        email: [{ required: true, validator: validateEmail, trigger: "blur" }],
+        phone: [{ required: true, validator: validatePhone, trigger: "blur" }],
+        card: [{ required: true, validator: validateCard, trigger: "blur" }],
+        sex: [{ required: true, message: this.$t("register.status.sex"), trigger: "blur" }]
+      },
     };
   },
   methods: {
-    async getUserData() {
+    async getUserData () {
       const self = this;
       const adminLoginId = sessionStorage.getItem("adminLoginId");
       const response = await adminCenter(self, adminLoginId);
-      if (response.status == 200) {
-        let result = response.data;
+      console.log(response.data[0])
+      if (!_.isEmpty(response)) {
+        let result = response.data[0];
         self.form.adminname = result.adminname;
         self.form.loginid = result.loginid;
         self.form.email = result.email;
@@ -65,9 +191,14 @@ export default {
         self.form.sex = result.sex;
         self.form.Id = result.Id;
       }
+    },
+
+    editInfo () {
+      const self = this;
+      self.isNotEdit = false;
     }
   },
-  mounted() {
+  mounted () {
     this.getUserData();
   }
 };
@@ -86,6 +217,9 @@ export default {
   .adminContent {
     width: 400px;
     margin: 0 auto;
+    .inputWidth {
+      width: 88% !important;
+    }
   }
   // .select-sex {
   //   width: 320px;
