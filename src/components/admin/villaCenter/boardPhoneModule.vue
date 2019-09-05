@@ -33,12 +33,13 @@
               :element-loading-text='`${$t("manage.loadingText")}`'
               element-loading-spinner="el-icon-loading"
               element-loading-background="rgba(0, 0, 0, 0.8)"
-              height="442"
-              style="width: 100%"
+              height="84%"
+              style="width: 100%;"
               @selection-change="handleSelectionChange">
       <el-table-column type="selection"
                        width="55"></el-table-column>
-      <el-table-column type="index"></el-table-column>
+      <el-table-column type="index"
+                       width="200"></el-table-column>
       <el-table-column prop="item"
                        :label='`${$t("villaCenter.phoneType")}`'
                        width="340"
@@ -103,16 +104,16 @@
                ref="addPhoneForm"
                :rules="rules">
         <el-form-item prop="item"
-                        :label='`${$t("villaCenter.phoneType")}`'>
-            <el-input v-model.trim="addPhoneForm.item"
-                      auto-complete="off"
-                      class="inputPhone"></el-input>
+                      :label='`${$t("villaCenter.phoneType")}`'>
+          <el-input v-model.trim="addPhoneForm.item"
+                    auto-complete="off"
+                    class="inputPhone"></el-input>
         </el-form-item>
         <el-form-item prop="phone"
-                        :label='`${$t("villaCenter.phoneNumberEdit")}`'>
-            <el-input v-model.trim="addPhoneForm.phone"
-                      auto-complete="off"
-                      class="inputPhone"></el-input>
+                      :label='`${$t("villaCenter.phoneNumberEdit")}`'>
+          <el-input v-model.trim="addPhoneForm.phone"
+                    auto-complete="off"
+                    class="inputPhone"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer"
@@ -173,11 +174,7 @@ export default {
           label: "manage.options.label.all"
         },
         {
-          value: "Id",
-          label: "villaCenter.Id"
-        },
-        {
-          value: "loginid",
+          value: "item",
           label: "villaCenter.phoneType"
         },
       ],
@@ -190,7 +187,7 @@ export default {
       addPhoneForm: {
         id: "",
         item: "",
-        phone:"",
+        phone: "",
       },
       rules: {
         item: [{ required: true, validator: validatePhoneType, trigger: "blur" }],
@@ -238,6 +235,10 @@ export default {
     //批量删除
     batchDelect () {
       const self = this;
+      if (_.isEmpty(self.multipleSelection)) {
+        self.showWarningBatchDelete();
+        return;
+      }
       const formatId = self.formatId(self.multipleSelection);
       self
         .$confirm(
@@ -277,6 +278,8 @@ export default {
       }
       return sqlId;
     },
+
+    //获取全部phoneModule
     async getAllPhoneModuleInfo () {
       const self = this;
       const response = await getAllPhoneModuleInfo(self)
@@ -284,9 +287,9 @@ export default {
         self.showErrorMessageBox();
       } else {
         self.form = response.data;
-        for (let i = 0; i < self.form.length; i++) {
-          self.form[i].item = self.$t("villaCenter." + self.form[i].item)
-        }
+        // for (let i = 0; i < self.form.length; i++) {
+        //   self.form[i].item = self.$t("villaCenter." + self.form[i].item)
+        // }
       }
     },
 
@@ -305,8 +308,8 @@ export default {
       const self = this;
       self.editFormVisible = true;
       self.editForm = Object.assign({}, row);
-      self.editForm.phone = row.phone;
-      self.id = row.id;
+      // self.editForm.phone = row.phone;
+      // self.id = row.id;
       self.editForm.item = self.$t("villaCenter." + row.item);
       self.isEdit = true;
     },
@@ -356,7 +359,7 @@ export default {
     },
 
     //点击添加电话类型
-    addPhoneModule() {
+    addPhoneModule () {
       const self = this;
       self.addPhoneFormVisible = true;
     },
@@ -365,8 +368,8 @@ export default {
     handleAddPhoneModule (formName) {
       const self = this;
       self.$refs[formName].validate(async value => {
-        if(value) {
-           self
+        if (value) {
+          self
             .$confirm(
               this.$t("manage.confirm.addUserInfo"),
               this.$t("manage.confirm.warning"),
@@ -407,8 +410,8 @@ export default {
           self.showWarningInputeValue()
         } else {
           self.selectAll = false;
-          const response = await getOnePhoneModule(self, selValue, inpValue);
-          if (_.isEqual(response.data, "fail to get user info")) {
+          const response = await getOnePhoneModule(self, inpValue);
+          if (_.isEmpty(response)) {
             self.input = " ";
             self.form = [];
           } else {
@@ -450,6 +453,16 @@ export default {
       );
     },
 
+    showWarningBatchDelete () {
+      this.$alert(
+        this.$t("manage.showMessage.batchDeleteEmpty"),
+        this.$t("manage.confirm.warning"),
+        {
+          confirmButtonText: this.$t("button.ok")
+        }
+      );
+    },
+
     showWarningInputeValue () {
       this.$alert(
         this.$t("manage.showMessage.inputText"),
@@ -474,6 +487,7 @@ export default {
 <style lang="scss" scoped>
 @import "../../../../static/css/userManage/userManage";
 .phoneModule {
+  height: 95%;
   .inputPhone {
     width: 88% !important;
   }

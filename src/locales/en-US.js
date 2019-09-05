@@ -113,7 +113,7 @@ export default {
     confirm: {
       deleteAdmin: 'This operation deletes the user. Do you want to continue?',
       updateUserInfo: 'Whether to update the user information?',
-      addUserInfo: 'Whether to add the user information?',      
+      addUserInfo: 'Whether to add the user information?',
       warning: 'Warning'
     },
     showMessage: {
@@ -133,7 +133,8 @@ export default {
       selectType: 'Please select the query keyword',
       inputText: 'The input cannot be empty. Enter the user you want to query',
       userUndefined: 'No user information, please search again!',
-      searchError: 'Fail to query'
+      searchError: 'Fail to query',
+      batchDeleteEmpty: 'Please select the info which you want to delete'
     }
   },
 
@@ -197,40 +198,16 @@ export default {
     phoneType: 'Phone Type',
     phoneNumber: 'Phone Number',
     phoneNumberEdit: 'PhoneNumber:',
-    police: '警察',
-    fire: '火警',
-    ambulance: '救护车',
-    planeBooking: '飞机订票',
-    trainBooking: '火车订票',
-    busHotline: '交通热线',
-    consumerComplaints: '消费者投诉热线',
-    weatherForecast: '天气预报热线',
-    waterResources: '水利资源',
-    environmentalComplaint: '环境保护投诉',
-    customerService: '消费者服务',
-    repairService: '维修服务',
-    '警察': 'police',
-    '火警': 'fire',
-    '救护车': 'ambulance',
-    '飞机订票': 'planeBooking',
-    '火车订票': 'trainBooking',
-    '交通热线': 'busHotline',
-    '消费者投诉热线': 'consumerComplaints',
-    '天气预报热线': 'weatherForecast',
-    '水利资源': 'waterResources',
-    '环境保护投诉': 'environmentalComplaint',
-    '消费者服务': 'customerService',
-    '维修服务': 'repairService',
 
     confirm: {
-      deletePhone: 'Whether to delete the phone type?',
+      deletePhone: 'Whether to delete the phone type?'
     },
 
-    addPhoneModule: 'Add phone module',
-    inputPhoneType: 'Pleast enter the type of phone module',
+    addPhoneModule: 'Add Phone Module',
+    inputPhoneType: 'Pleast enter the type of phone module'
   },
 
   adminCenter: {
-    editMessage: "You can begin to edit info"
+    editMessage: 'You can begin to edit info'
   }
 };

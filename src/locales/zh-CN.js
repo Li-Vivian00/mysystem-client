@@ -133,7 +133,8 @@ export default {
       selectType: '请选择查询关键字',
       inputText: '输入不能为空，请输入需要查询的用户',
       userUndefined: '无该用户信息，请重新搜索！',
-      searchError: '查询失败'
+      searchError: '查询失败',
+      batchDeleteEmpty: '请选择需要删除的信息'
     }
   },
 
@@ -196,40 +197,16 @@ export default {
     phoneType: '电话类型',
     phoneNumber: '电话号码',
     phoneNumberEdit: '电话号码：',
-    police: '警察',
-    fire: '火警',
-    ambulance: '救护车',
-    planeBooking: '飞机订票',
-    trainBooking: '火车订票',
-    busHotline: '交通热线',
-    consumerComplaints: '消费者投诉热线',
-    weatherForecast: '天气预报热线',
-    waterResources: '水利资源',
-    environmentalComplaint: '环境保护投诉',
-    customerService: '消费者服务',
-    repairService: '维修服务',
-    '警察': 'police',
-    '火警': 'fire',
-    '救护车': 'ambulance',
-    '飞机订票': 'planeBooking',
-    '火车订票': 'trainBooking',
-    '交通热线': 'busHotline',
-    '消费者投诉热线': 'consumerComplaints',
-    '天气预报热线': 'weatherForecast',
-    '水利资源': 'waterResources',
-    '环境保护投诉': 'environmentalComplaint',
-    '消费者服务': 'customerService',
-    '维修服务': 'repairService',
 
     confirm: {
-      deletePhone: '是否删除该电话类型？',
+      deletePhone: '是否删除该电话类型？'
     },
 
     addPhoneModule: '添加电话类型',
-    inputPhoneType: '请输入电话类型名称',
+    inputPhoneType: '请输入电话类型名称'
   },
 
   adminCenter: {
-    editMessage: "用户可开始进行编辑操作"
+    editMessage: '用户可开始进行编辑操作'
   }
 };

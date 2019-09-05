@@ -325,16 +325,16 @@ export default {
       }
     };
     const validateSex = (rule, value, callback) => {
-       if (_.isEmpty(value)) {
+      if (_.isEmpty(value)) {
         callback(new Error(this.$t("register.status.sex")));
-        } else {
+      } else {
         callback();
       }
     };
     const validateRoomId = (rule, value, callback) => {
-       if (_.isEmpty(value)) {
+      if (_.isEmpty(value)) {
         callback(new Error(this.$t("register.status.room_id")));
-        } else {
+      } else {
         callback();
       }
     }
@@ -376,10 +376,6 @@ export default {
         {
           value: "all",
           label: "manage.options.label.all"
-        },
-        {
-          value: "Id",
-          label: "manage.id"
         },
         {
           value: "loginid",
@@ -464,7 +460,6 @@ export default {
       const self = this;
       self.editFormVisible = true;
       self.editForm = Object.assign({}, row);
-      self.editForm.stay_date = row.stay_date;
       self.oldPhone = row.phone;
       self.isEdit = true;
     },
@@ -514,7 +509,7 @@ export default {
     },
 
     //点击添加用户
-    addUser() {
+    addUser () {
       const self = this;
       self.addUserFormVisible = true;
     },
@@ -523,8 +518,8 @@ export default {
     handleAddUser (formName) {
       const self = this;
       self.$refs[formName].validate(async value => {
-        if(value) {
-           self
+        if (value) {
+          self
             .$confirm(
               this.$t("manage.confirm.addUserInfo"),
               this.$t("manage.confirm.warning"),
@@ -555,6 +550,10 @@ export default {
     //批量删除
     batchDelect () {
       const self = this;
+      if (_.isEmpty(self.multipleSelection)) {
+        self.showWarningBatchDelete();
+        return;
+      }
       const formatId = self.formatId(self.multipleSelection);
       self
         .$confirm(
@@ -660,6 +659,16 @@ export default {
     showWarningSelectType () {
       this.$alert(
         this.$t("manage.showMessage.selectType"),
+        this.$t("manage.confirm.warning"),
+        {
+          confirmButtonText: this.$t("button.ok")
+        }
+      );
+    },
+
+    showWarningBatchDelete () {
+      this.$alert(
+        this.$t("manage.showMessage.batchDeleteEmpty"),
         this.$t("manage.confirm.warning"),
         {
           confirmButtonText: this.$t("button.ok")

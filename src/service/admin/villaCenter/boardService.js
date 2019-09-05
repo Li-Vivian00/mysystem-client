@@ -23,18 +23,17 @@ export const deletePhoneModule = async (self, id) => {
       console.log(error);
     });
   return result;
-}
+};
 
-export const getOnePhoneModule = async (self, selValue, inpValue) => {
+export const getOnePhoneModule = async (self, inpValue) => {
   const result = await self.$http
-    .get('/api/villaCenter/getOnePhoneType', {
+    .get('/api/villaCenter/getOnePhoneModule', {
       params: {
-        item: selValue,
-        phone: inpValue
+        item: inpValue
       }
     })
     .catch(error => {
       console.log(error);
     });
   return result;
-}
+};
