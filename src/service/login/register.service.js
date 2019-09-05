@@ -7,7 +7,7 @@ export const register = async (form, self) => {
   return result
 }
 
-export const getUserLoginid = async (self, loginid, from) => {
+export const getUserLoginid = async (self, loginid) => {
   const result = await self.$http
     .get("/api/userLogin/getUserLoginid", {
       params: {

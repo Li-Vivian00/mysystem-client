@@ -78,7 +78,8 @@ export default {
       loginIdExist: 'The login account already exists',
       passwordError: 'Password mistake',
       repeatPasswordError: 'The two passwords did not match',
-      phoneExist: 'The phone number has been registered'
+      phoneExist: 'The phone number has been registered',
+      room_id: 'Please enter room id'
     }
   },
 
@@ -111,7 +112,8 @@ export default {
     },
     confirm: {
       deleteAdmin: 'This operation deletes the user. Do you want to continue?',
-      updateUserInfo: 'Whether to update the user information',
+      updateUserInfo: 'Whether to update the user information?',
+      addUserInfo: 'Whether to add the user information?',      
       warning: 'Warning'
     },
     showMessage: {
@@ -195,29 +197,40 @@ export default {
     phoneType: 'Phone Type',
     phoneNumber: 'Phone Number',
     phoneNumberEdit: 'PhoneNumber:',
-    police: '警察(Police)',
-    fire: '火警(Fire)',
-    ambulance: '救护车(Ambulance)',
-    planeBooking: '飞机订票(PlaneBooking)',
-    trainBooking: '火车订票(TrainBooking)',
-    busHotline: '交通热线(BusHotline)',
-    consumerComplaints: '消费者投诉热线(ConsumerComplaints)',
-    weatherForecast: '天气预报热线(WeatherForecast)',
-    waterResources: '水利资源(WaterResources)',
-    environmentalComplaint: '环境保护投诉(EnvironmentalComplaint)',
-    customerService: '消费者服务(CustomerService)',
-    repairService: '维修服务(RepairService)',
-    '警察(Police)': 'police',
-    '火警(Fire)': 'fire',
-    '救护车(Ambulance)': 'ambulance',
-    '飞机订票(PlaneBooking)': 'planeBooking',
-    '火车订票(TrainBooking)': 'trainBooking',
-    '交通热线(BusHotline)': 'busHotline',
-    '消费者投诉热线(ConsumerComplaints)': 'consumerComplaints',
-    '天气预报热线(WeatherForecast)': 'weatherForecast',
-    '水利资源(WaterResources)': 'waterResources',
-    '环境保护投诉(EnvironmentalComplaint)': 'environmentalComplaint',
-    '消费者服务(CustomerService)': 'customerService',
-    '维修服务(RepairService)': 'repairService'
+    police: '警察',
+    fire: '火警',
+    ambulance: '救护车',
+    planeBooking: '飞机订票',
+    trainBooking: '火车订票',
+    busHotline: '交通热线',
+    consumerComplaints: '消费者投诉热线',
+    weatherForecast: '天气预报热线',
+    waterResources: '水利资源',
+    environmentalComplaint: '环境保护投诉',
+    customerService: '消费者服务',
+    repairService: '维修服务',
+    '警察': 'police',
+    '火警': 'fire',
+    '救护车': 'ambulance',
+    '飞机订票': 'planeBooking',
+    '火车订票': 'trainBooking',
+    '交通热线': 'busHotline',
+    '消费者投诉热线': 'consumerComplaints',
+    '天气预报热线': 'weatherForecast',
+    '水利资源': 'waterResources',
+    '环境保护投诉': 'environmentalComplaint',
+    '消费者服务': 'customerService',
+    '维修服务': 'repairService',
+
+    confirm: {
+      deletePhone: 'Whether to delete the phone type?',
+    },
+
+    addPhoneModule: 'Add phone module',
+    inputPhoneType: 'Pleast enter the type of phone module',
+  },
+
+  adminCenter: {
+    editMessage: "You can begin to edit info"
   }
 };

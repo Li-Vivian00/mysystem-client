@@ -77,9 +77,7 @@
           </el-form>
         </template>
       </el-table-column>
-      <el-table-column :label='`${$t("manage.id")}`'
-                       prop="id"
-                       sortable></el-table-column>
+      <el-table-column type="index"></el-table-column>
       <el-table-column :label='`${$t("manage.loginId")}`'
                        prop="loginid"
                        sortable></el-table-column>
@@ -139,10 +137,14 @@
         </el-form-item>
         <el-form-item prop="sex"
                       :label='`${$t("register.label.sex")}`'>
-          <el-input v-model="editForm.sex"
-                    auto-complete="off"
-                    disabled
-                    class="inputWidth">{{form.sex}}</el-input>
+          <el-select class="inputWidth"
+                     v-model="editForm.sex"
+                     :placeholder='`${$t("register.inputPlaceholder.sex")}`'>
+            <el-option :label='`${$t("register.label.male")}`'
+                       :value='`${$t("register.label.male")}`'></el-option>
+            <el-option :label='`${$t("register.label.female")}`'
+                       :value='`${$t("register.label.female")}`'></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item prop="phone"
                       :label='`${$t("register.label.phone")}`'>
@@ -171,6 +173,77 @@
                    @click.native="handleUpdate('editForm')">{{$t("button.update")}}</el-button>
       </div>
     </el-dialog>
+    <el-dialog :title='`${$t("manage.addUser")}`'
+               :visible.sync="addUserFormVisible"
+               :close-on-click-modal="false"
+               class="edit-form"
+               :before-close="handleAddUserClose">
+      <el-form :model="addUserForm"
+               label-width="80px"
+               ref="addUserForm"
+               :rules="rules">
+        <el-form-item prop="loginid"
+                      :label='`${$t("register.label.loginId")}`'>
+          <el-input v-model.trim="addUserForm.loginid"
+                    auto-complete="off"
+                    class="inputWidth"></el-input>
+        </el-form-item>
+        <el-form-item prop="username"
+                      :label='`${$t("register.label.userName")}`'>
+          <el-input v-model.trim="addUserForm.username"
+                    auto-complete="off"
+                    class="inputWidth"></el-input>
+        </el-form-item>
+        <el-form-item prop="password"
+                      :label='`${$t("register.label.password")}`'>
+          <el-input v-model.trim="addUserForm.password"
+                    show-password
+                    auto-complete="off"
+                    class="inputWidth"></el-input>
+        </el-form-item>
+        <el-form-item prop="sex"
+                      :label='`${$t("register.label.sex")}`'>
+          <el-select class="inputWidth"
+                     v-model="addUserForm.sex"
+                     :placeholder='`${$t("register.inputPlaceholder.sex")}`'>
+            <el-option :label='`${$t("register.label.male")}`'
+                       :value='`${$t("register.label.male")}`'></el-option>
+            <el-option :label='`${$t("register.label.female")}`'
+                       :value='`${$t("register.label.female")}`'></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="phone"
+                      :label='`${$t("register.label.phone")}`'>
+          <el-input v-model.trim="addUserForm.phone"
+                    auto-complete="off"
+                    class="inputWidth"></el-input>
+        </el-form-item>
+        <el-form-item prop="email"
+                      :label='`${$t("register.label.email")}`'>
+          <el-input v-model.trim="addUserForm.email"
+                    auto-complete="off"
+                    class="inputWidth"></el-input>
+        </el-form-item>
+        <el-form-item prop="card"
+                      :label='`${$t("register.label.card")}`'>
+          <el-input v-model.trim="addUserForm.card"
+                    auto-complete="off"
+                    class="inputWidth"></el-input>
+        </el-form-item>
+        <el-form-item prop="card"
+                      :label='`${$t("register.label.room_id")}`'>
+          <el-input v-model.trim="addUserForm.room_id"
+                    auto-complete="off"
+                    class="inputWidth"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer"
+           class="dialog-footer">
+        <el-button @click.native="addUserFormVisible = false">{{$t("button.cancel")}}</el-button>
+        <el-button type="primary"
+                   @click.native="handleAddUser('addUserForm')">{{$t("button.update")}}</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -181,12 +254,29 @@ import {
   getAllUser,
   deleteUser,
   updateUser,
-  searchUser
+  searchUser,
 } from "../../../service/admin/userManage/userManage.service";
-import { getUserPhone } from "../../../service/login/register.service";
+import { getUserPhone, getUserLoginid } from "../../../service/login/register.service";
 import { constants } from "crypto";
+import { async } from 'q';
 export default {
   data () {
+    const validateLoginId = async (rule, value, callback) => {
+      const self = this;
+      if (!self.editFormVisible) {
+        if (_.isEmpty(value)) {
+          callback(new Error(this.$t("register.status.loginId")));
+        } else {
+          const loginid = value;
+          const response = await getUserLoginid(self, loginid);
+          let result = response.data;
+          if (result == 'loginid is exist') {
+            callback(new Error(this.$t("register.status.loginIdExist")));
+          }
+          callback();
+        }
+      }
+    };
     const validateName = (rule, value, callback) => {
       if (_.isEmpty(value)) {
         callback(new Error(this.$t("register.status.userName")));
@@ -202,7 +292,7 @@ export default {
     const validateEmail = (rule, value, callback) => {
       if (_.isEmpty(value)) {
         callback(new Error(this.$t("register.status.email")));
-      } else if (!Util.emailReg.test(this.editForm.email)) {
+      } else if (!Util.emailReg.test(value)) {
         callback(new Error(this.$t("register.status.formatEmail")));
       } else {
         callback();
@@ -212,12 +302,12 @@ export default {
       const self = this;
       if (_.isEmpty(value)) {
         callback(new Error(self.$t("register.status.phone")));
-      } else if (!Util.phoneReg.test(self.editForm.phone)) {
+      } else if (!Util.phoneReg.test(value)) {
         callback(new Error(self.$t("register.status.formatPhone")));
       } else if (_.isEqual(value, self.oldPhone)) {
         callback();
       } else {
-        const phone = self.editForm.phone;
+        const phone = value;
         const response = await getUserPhone(self, phone);
         let result = response.data;
         if (_.isEqual(result, "phone is exist")) {
@@ -225,6 +315,29 @@ export default {
         }
       }
     };
+    const validateCard = (rule, value, callback) => {
+      if (_.isEmpty(value)) {
+        callback(new Error(this.$t("register.status.card")));
+      } else if (!Util.idCardReg.test(value)) {
+        callback(new Error(this.$t("register.status.formatCard")));
+      } else {
+        callback();
+      }
+    };
+    const validateSex = (rule, value, callback) => {
+       if (_.isEmpty(value)) {
+        callback(new Error(this.$t("register.status.sex")));
+        } else {
+        callback();
+      }
+    };
+    const validateRoomId = (rule, value, callback) => {
+       if (_.isEmpty(value)) {
+        callback(new Error(this.$t("register.status.room_id")));
+        } else {
+        callback();
+      }
+    }
     return {
       form: [],
       currentPage: 1,
@@ -235,12 +348,23 @@ export default {
       multipleSelection: [],
       loading: true,
       editFormVisible: false,
-      showBtnOrdinary: true,
+      addUserFormVisible: false,
       editForm: {
         loginid: "",
         username: "",
         password: "",
         repeatpass: "",
+        sex: "",
+        phone: "",
+        email: "",
+        card: "",
+        stay_date: "",
+        room_id: "",
+      },
+      addUserForm: {
+        loginid: "",
+        username: "",
+        password: "",
         sex: "",
         phone: "",
         email: "",
@@ -267,6 +391,7 @@ export default {
         }
       ],
       rules: {
+        loginid: [{ required: true, validator: validateLoginId, trigger: "blur" }],
         username: [
           { required: true, validator: validateName, trigger: "blur" }
         ],
@@ -274,7 +399,10 @@ export default {
           { required: true, validator: validatePass, trigger: "blur" }
         ],
         email: [{ required: true, validator: validateEmail, trigger: "blur" }],
-        phone: [{ required: true, validator: validatePhone, trigger: "blur" }]
+        phone: [{ required: true, validator: validatePhone, trigger: "blur" }],
+        card: [{ required: true, validator: validateCard, trigger: "blur" }],
+        sex: [{ required: true, validator: validateSex, trigger: "blur" }],
+        room_id: [{ required: true, validator: validateRoomId, trigger: "blur" }]
       },
       value: "",
       input: "",
@@ -341,10 +469,16 @@ export default {
       self.isEdit = true;
     },
 
-    //关闭dialog
+    //关闭编辑用户dialog
     handleClose (done) {
       const self = this;
       self.editFormVisible = false;
+    },
+
+    //关闭添加用户dialog
+    handleAddUserClose (done) {
+      const self = this;
+      self.addUserFormVisible = false;
     },
 
     //点击更新
@@ -379,9 +513,43 @@ export default {
       });
     },
 
-    //添加用户
-    addUser () {
+    //点击添加用户
+    addUser() {
+      const self = this;
+      self.addUserFormVisible = true;
+    },
 
+    //添加用户
+    handleAddUser (formName) {
+      const self = this;
+      self.$refs[formName].validate(async value => {
+        if(value) {
+           self
+            .$confirm(
+              this.$t("manage.confirm.addUserInfo"),
+              this.$t("manage.confirm.warning"),
+              {
+                confirmButtonText: this.$t("button.ok"),
+                cancelButtonText: this.$t("button.cancel"),
+                type: "warning"
+              }
+            )
+            .then(async () => {
+              self.getDateTimes();
+              const response = await updateUser(self, self.addUserForm);
+              if (_.isEqual(response.data, "fail to add user")) {
+                self.showErrorMessageBox();
+              } else if (_.isEqual(response.data, "success")) {
+                self.getUserData();
+                self.showSuccessMessageBox();
+                self.addUserFormVisible = false;
+              }
+            })
+            .catch(() => {
+              self.showCancelMessageBox()
+            });
+        }
+      })
     },
 
     //批量删除
@@ -459,6 +627,12 @@ export default {
           }
         }
       }
+    },
+
+    getDateTimes () {
+      const str = new Date().toLocaleString("chinese", { hour12: false })
+      this.addUserForm.stay_date = str;
+      return this.addUserForm.stay_date;
     },
 
     //showMessageBox

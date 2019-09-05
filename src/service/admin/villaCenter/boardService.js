@@ -15,3 +15,26 @@ export const updatePhoneModuleInfo = async (self, form) => {
     });
   return result;
 };
+
+export const deletePhoneModule = async (self, id) => {
+  const result = await self.$http
+    .post('/api/villaCenter/deletePhoneModule', id, {})
+    .catch(error => {
+      console.log(error);
+    });
+  return result;
+}
+
+export const getOnePhoneModule = async (self, selValue, inpValue) => {
+  const result = await self.$http
+    .get('/api/villaCenter/getOnePhoneType', {
+      params: {
+        item: selValue,
+        phone: inpValue
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  return result;
+}

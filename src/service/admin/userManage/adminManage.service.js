@@ -38,3 +38,16 @@ export const searchAdmin = async (self, selValue, inpValue) => {
     });
   return result;
 };
+
+export const getAdminLoginid = async (self, loginid) => {
+  const result = await self.$http
+    .get('/api/adminLogin/getAdminLoginid', {
+      params: {
+        loginId: loginid
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  return result;
+};

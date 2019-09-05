@@ -238,7 +238,6 @@ export default {
         if (valid) {
           self.getDateTimes();
           const response = await register(self.form, self);
-          console.log(response)
           if (response.data == "fail to register") {
             self.alertMessage();
           } else if (response.data == "success") {
@@ -273,7 +272,6 @@ export default {
       }
     },
     getDateTimes () {
-      // const str = date + " " + time
       const str = new Date().toLocaleString("chinese", { hour12: false })
       this.form.stay_date = str;
       return this.form.stay_date;

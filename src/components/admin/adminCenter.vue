@@ -24,51 +24,37 @@
         <el-form-item :label='`${$t("register.label.userName")}`'
                       prop="adminname">
           <el-input v-model.trim="form.adminname"
-                    :readonly="isNotEdit"
                     class="inputWidth"></el-input>
         </el-form-item>
         <el-form-item :label='`${$t("register.label.sex")}`'>
-          <el-select class="inputWidth"
-                     v-model.trim="form.sex"
-                     :placeholder='`${$t("register.inputPlaceholder.sex")}`'
-                     :disabled="isNotEdit">
-            <el-option :label='`${$t("register.label.male")}`'
-                       :value='`${$t("register.label.male")}`'></el-option>
-            <el-option :label='`${$t("register.label.female")}`'
-                       :value='`${$t("register.label.female")}`'></el-option>
-          </el-select>
+          <el-input v-model.trim="form.sex"
+                    auto-complete="off"
+                    class="inputWidth"></el-input>
         </el-form-item>
         <el-form-item prop="password"
                       :label='`${$t("register.label.password")}`'>
           <el-input v-model.trim="form.password"
                     type="password"
                     :placeholder='`${$t("register.inputPlaceholder.password")}`'
-                    :readonly="isNotEdit"
                     show-password
                     class="inputWidth"></el-input>
         </el-form-item>
         <el-form-item :label='`${$t("register.label.phone")}`'
                       prop="phone">
           <el-input v-model.trim="form.phone"
-                    :readonly="isNotEdit"
                     class="inputWidth"></el-input>
         </el-form-item>
         <el-form-item :label='`${$t("register.label.card")}`'
                       prop="card">
           <el-input v-model.trim="form.card"
-                    :readonly="isNotEdit"
                     class="inputWidth"></el-input>
         </el-form-item>
         <el-form-item :label='`${$t("register.label.email")}`'
                       prop="email">
           <el-input v-model.trim="form.email"
-                    :readonly="isNotEdit"
                     class="inputWidth"></el-input>
         </el-form-item>
       </el-form>
-      <el-button type="primary"
-                 @click="editInfo"
-                 class="editInfo">{{$t('manage.edit')}}</el-button>
     </div>
   </div>
 </template>
@@ -84,20 +70,6 @@ export default {
         callback(new Error(this.$t("register.status.userName")));
       }
       callback();
-    };
-    const validateLoginId = async (rule, value, callback) => {
-      const self = this;
-      if (value === "") {
-        callback(new Error(this.$t("register.status.loginId")));
-      } else {
-        const loginid = self.form.loginid;
-        const response = await getUserLoginid(self, loginid);
-        let result = response.data;
-        if (result == 'loginid is exist') {
-          callback(new Error(this.$t("register.status.loginIdExist")));
-        }
-        callback();
-      }
     };
     const validatePass = (rule, value, callback) => {
       if (value === "") {
@@ -166,7 +138,6 @@ export default {
       },
       rules: {
         adminname: [{ required: true, validator: validateName, trigger: "blur" }],
-        loginid: [{ required: true, validator: validateLoginId, trigger: "blur" }],
         password: [{ required: true, validator: validatePass, trigger: "blur" }],
         email: [{ required: true, validator: validateEmail, trigger: "blur" }],
         phone: [{ required: true, validator: validatePhone, trigger: "blur" }],
@@ -180,22 +151,10 @@ export default {
       const self = this;
       const adminLoginId = sessionStorage.getItem("adminLoginId");
       const response = await adminCenter(self, adminLoginId);
-      console.log(response.data[0])
       if (!_.isEmpty(response)) {
         let result = response.data[0];
-        self.form.adminname = result.adminname;
-        self.form.loginid = result.loginid;
-        self.form.email = result.email;
-        self.form.phone = result.phone;
-        self.form.card = result.card;
-        self.form.sex = result.sex;
-        self.form.Id = result.Id;
+        self.form = result;
       }
-    },
-
-    editInfo () {
-      const self = this;
-      self.isNotEdit = false;
     }
   },
   mounted () {

@@ -80,13 +80,15 @@ export default {
       }
       callback();
     };
-    const checkVal = (rule, value, callback) => {
+    const validateCode = (rule, value, callback) => {
       if (!value) {
         return callback(new Error(this.$t("login.adminLogin.code")));
         this.correctCode = false;
       }
       setTimeout(() => {
         if (this.ruleForm.validate != this.identifyCode) {
+          this.identifyCode = "";
+          this.refreshCode();
           callback(new Error(this.$t("forgetPwd.codeError")));
           this.correctCode = false;
         } else {
@@ -121,7 +123,7 @@ export default {
           }
         ],
         validate: [
-          { required: true, validator: checkVal, trigger: "blur" }
+          { required: true, validator: validateCode, trigger: "blur" }
         ]
       },
       radio: "ZH",
@@ -143,7 +145,6 @@ export default {
       if (self.correctCode) {
         self.loading = true;
         const response = await adminLogin(self.ruleForm, self);
-        console.log(response);
         if (response.data == "loginid not exist") {
           self.errAccountInfo = self.$t("login.adminLogin.loginIdNotExist");
           self.errPwdInfo = "";
@@ -160,6 +161,7 @@ export default {
           self.loading = false;
         }
       } else {
+        self.refreshCode()
         self.$message({
           type: "error",
           message: self.$t("login.loadingError")
@@ -192,8 +194,6 @@ export default {
     selectRadio (value) {
       this.lang = value;
       this.lang = this.getLangName(value);
-      // this.$cookies.set("adminLang",this.lang)
-      // localStorage.setItem("adminLang",this.lang);
       sessionStorage.setItem("adminLang", this.lang);
       this.$i18n.locale = this.lang;
     },
