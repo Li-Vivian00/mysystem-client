@@ -33,7 +33,7 @@
               :element-loading-text='`${$t("manage.loadingText")}`'
               element-loading-spinner="el-icon-loading"
               element-loading-background="rgba(0, 0, 0, 0.8)"
-              height="84%"
+              height="468"
               style="width: 100%;"
               @selection-change="handleSelectionChange">
       <el-table-column type="selection"
@@ -89,7 +89,7 @@
       </el-form>
       <div slot="footer"
            class="dialog-footer">
-        <el-button @click.native="editFormVisible = false">{{$t("button.cancel")}}</el-button>
+        <el-button @click.native="handleCancel">{{$t("button.cancel")}}</el-button>
         <el-button type="primary"
                    @click.native="handleUpdate('editForm')">{{$t("button.update")}}</el-button>
       </div>
@@ -282,14 +282,11 @@ export default {
     //获取全部phoneModule
     async getAllPhoneModuleInfo () {
       const self = this;
-      const response = await getAllPhoneModuleInfo(self)
+      const response = await getAllPhoneModuleInfo (self)
       if (_.isEqual(response.data, "fail to get phoneModuleInfo")) {
         self.showErrorMessageBox();
       } else {
         self.form = response.data;
-        // for (let i = 0; i < self.form.length; i++) {
-        //   self.form[i].item = self.$t("villaCenter." + self.form[i].item)
-        // }
       }
     },
 
@@ -308,12 +305,14 @@ export default {
       const self = this;
       self.editFormVisible = true;
       self.editForm = Object.assign({}, row);
-      // self.editForm.phone = row.phone;
-      // self.id = row.id;
-      self.editForm.item = self.$t("villaCenter." + row.item);
+      // self.editForm.item = self.$t("villaCenter." + row.item);
       self.isEdit = true;
     },
 
+    //取消编辑
+    handleClose() {
+      editFormVisible = false;
+    },
     //关闭编辑电话号码dialog
     handleClose (done) {
       const self = this;
@@ -342,6 +341,7 @@ export default {
               }
             )
             .then(async () => {
+              console.log(self.editForm)
               const response = await updatePhoneModuleInfo(self, self.editForm);
               if (_.isEqual(response.data, "fail to update")) {
                 self.showErrorMessageBox();
@@ -384,9 +384,10 @@ export default {
               if (_.isEqual(response.data, "fail to add user")) {
                 self.showErrorMessageBox();
               } else if (_.isEqual(response.data, "success")) {
+                self.addPhoneFormVisible = false;
                 self.getAllPhoneModuleInfo();
                 self.showSuccessMessageBox();
-                self.addPhoneFormVisible = false;
+                self.addPhoneForm = {};
               }
             })
             .catch(() => {

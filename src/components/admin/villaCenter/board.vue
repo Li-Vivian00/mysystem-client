@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { constants } from 'crypto';
 export default {
   name: "board",
   data () {
@@ -36,11 +37,11 @@ export default {
       items: [
         {
           index: "phoneModule",
-          label: "villaCenter.phoneModule"
+          label: "villaCenter.phoneModuleTitle"
         },
         {
           index: "warningModule",
-          label: "villaCenter.warningModule"
+          label: "villaCenter.warningModuleTitle"
         }
       ]
     }

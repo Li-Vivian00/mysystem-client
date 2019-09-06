@@ -192,19 +192,39 @@ export default {
     noticeBoard: 'Bulletin board information editing',
     infrastructure: 'Infrastructure information editing',
     baseInfo: 'Basic information editing',
-    phoneModule: 'Convenient telephone module',
-    warningModule: 'Tips module',
+    phoneModuleTitle: 'Convenient telephone module',
+    warningModuleTitle: 'Tips module',
     Id: 'Id',
     phoneType: 'Phone Type',
     phoneNumber: 'Phone Number',
     phoneNumberEdit: 'PhoneNumber:',
 
     confirm: {
-      deletePhone: 'Whether to delete the phone type?'
+      deletePhone: 'Whether to delete the phone type?',
+      changeContent: 'Whether to update the content?'
     },
 
     addPhoneModule: 'Add Phone Module',
-    inputPhoneType: 'Pleast enter the type of phone module'
+    inputPhoneType: 'Pleast enter the type of phone module',
+
+    warningModule: {
+      title: "Title:",
+      content: "Content:",
+      inputTitle: "Please input Title"
+    }
+  },
+
+  repairManage: {
+    type: 'Type',
+    problemDescription: 'Problem Description',
+    time: 'submission Time',
+    status: 'Status',
+    remark: 'Remark',
+    room_id: 'Room ID',
+    phone: 'Contact Number',
+    keyWord: 'Query Criteria: ',
+    processed: 'Processed',
+    pending: 'Pending',
   },
 
   adminCenter: {

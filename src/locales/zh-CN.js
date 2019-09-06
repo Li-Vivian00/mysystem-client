@@ -191,19 +191,39 @@ export default {
     noticeBoard: '公告栏信息编辑',
     infrastructure: '基础设施信息编辑',
     baseInfo: '基本信息编辑',
-    phoneModule: '便民电话模块',
-    warningModule: '温馨提示模块',
+    phoneModuleTitle: '便民电话模块',
+    warningModuleTitle: '温馨提示模块',
     Id: 'Id',
     phoneType: '电话类型',
     phoneNumber: '电话号码',
     phoneNumberEdit: '电话号码：',
 
     confirm: {
-      deletePhone: '是否删除该电话类型？'
+      deletePhone: '是否删除该电话类型？',
+      changeContent: '是否更新此内容？'
     },
 
     addPhoneModule: '添加电话类型',
-    inputPhoneType: '请输入电话类型名称'
+    inputPhoneType: '请输入电话类型名称',
+
+    warningModule: {
+      title: "标题：",
+      content: "内容：",
+      inputTitle: "请输入标题"
+    }
+  },
+
+  repairManage: {
+    type: '类型',
+    problemDescription: '问题描述',
+    time: '提交时间',
+    status: '状态',
+    remark: '备注',
+    room_id: '房间号',
+    phone: '联系电话',
+    keyWord: '查询条件：',
+    processed: '已处理',
+    pending: '待处理',
   },
 
   adminCenter: {
