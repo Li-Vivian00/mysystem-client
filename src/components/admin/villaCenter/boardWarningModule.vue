@@ -3,28 +3,24 @@
     <div class="ModuleContent">
       <div class="title">
         <span>{{$t("villaCenter.warningModule.title")}}</span>
-        <el-input
-          class="inputWidth"
-          type="text"
-          :placeholder='`${$t("villaCenter.warningModule.inputTitle")}`'
-          v-model="updateInfo.title"
-          show-word-limit
-          @change="isEdit"
-          clearable
-        ></el-input>
+        <el-input class="inputWidth"
+                  type="text"
+                  :placeholder='`${$t("villaCenter.warningModule.inputTitle")}`'
+                  v-model="updateInfo.title"
+                  show-word-limit
+                  @change="isEdit"
+                  clearable></el-input>
       </div>
       <div class="context">
         <span>{{$t("villaCenter.warningModule.content")}}</span>
-        <el-input
-          class="inputWidth"
-          type="textarea"
-          :placeholder='`${$t("manage.inputText")}`'
-          v-model="updateInfo.content"
-          maxlength="800"
-          show-word-limit
-          rows="13"
-          @change="isEdit"
-        ></el-input>
+        <el-input class="inputWidth"
+                  type="textarea"
+                  :placeholder='`${$t("manage.inputText")}`'
+                  v-model="updateInfo.content"
+                  maxlength="800"
+                  show-word-limit
+                  rows="13"
+                  @change="isEdit"></el-input>
       </div>
     </div>
   </div>
@@ -34,39 +30,42 @@
 import { getWarningModuleInfo, updatePhoneModuleInfo, updateWarningModuleInfo } from "../../../service/admin/villaCenter/boardService"
 export default {
   name: "boardWarningModule",
-  data() {
+  data () {
     return {
       updateInfo:
-        { 
-          Id: "",
-          title: "",
-          content: "",
-        }
+      {
+        Id: "",
+        title: "",
+        content: "",
+      }
     };
   },
 
-  mounted() {
+  mounted () {
     this.getWarningModuleInfo();
   },
 
   methods: {
     // get all warning module info
-    async getWarningModuleInfo() {
+    async getWarningModuleInfo () {
       const self = this;
       const response = await getWarningModuleInfo(self);
+      if (_.isEmpty(response.data)) {
+        return;
+      }
       self.updateInfo = response.data[0];
     },
 
     // edit warning module info
-    isEdit() {
+    isEdit () {
       const self = this;
       self
         .$confirm(
-          this.$t("villaCenter.confirm.changeContent"),
-          this.$t("manage.confirm.warning"),
+          self.$t("villaCenter.confirm.changeContent"),
+          self.$t("manage.confirm.warning"),
           {
-            confirmButtonText: this.$t("button.ok"),
-            cancelButtonText: this.$t("button.cancel"),
+            confirmButtonText: self.$t("button.ok"),
+            cancelButtonText: self.$t("button.cancel"),
             type: "warning"
           }
         )
@@ -105,6 +104,16 @@ export default {
         type: "info",
         message: this.$t("manage.showMessage.cancel")
       });
+    },
+
+    showWarningCompleteFilling () {
+      this.$alert(
+        this.$t("villaCenter.warningModule.conpleteFilling"),
+        this.$t("manage.confirm.warning"),
+        {
+          confirmButtonText: this.$t("button.ok")
+        }
+      );
     },
   }
 };

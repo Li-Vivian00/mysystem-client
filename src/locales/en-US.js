@@ -208,9 +208,10 @@ export default {
     inputPhoneType: 'Pleast enter the type of phone module',
 
     warningModule: {
-      title: "Title:",
-      content: "Content:",
-      inputTitle: "Please input Title"
+      title: 'Title:',
+      content: 'Content:',
+      inputTitle: 'Please input Title',
+      conpleteFilling: 'Please fill in the complete information'
     }
   },
 
@@ -225,6 +226,7 @@ export default {
     keyWord: 'Query Criteria: ',
     processed: 'Processed',
     pending: 'Pending',
+    isProcessed: 'Has the problem been processed?'
   },
 
   adminCenter: {

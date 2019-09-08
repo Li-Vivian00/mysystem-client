@@ -207,9 +207,10 @@ export default {
     inputPhoneType: '请输入电话类型名称',
 
     warningModule: {
-      title: "标题：",
-      content: "内容：",
-      inputTitle: "请输入标题"
+      title: '标题：',
+      content: '内容：',
+      inputTitle: '请输入标题',
+      conpleteFilling: '请填写完整信息'
     }
   },
 
@@ -224,6 +225,7 @@ export default {
     keyWord: '查询条件：',
     processed: '已处理',
     pending: '待处理',
+    isProcessed: '是否已处理该问题？'
   },
 
   adminCenter: {

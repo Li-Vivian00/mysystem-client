@@ -33,7 +33,7 @@
               :element-loading-text='`${$t("manage.loadingText")}`'
               element-loading-spinner="el-icon-loading"
               element-loading-background="rgba(0, 0, 0, 0.8)"
-              height="468"
+              height="360"
               style="width: 100%;"
               @selection-change="handleSelectionChange">
       <el-table-column type="selection"
@@ -282,7 +282,7 @@ export default {
     //获取全部phoneModule
     async getAllPhoneModuleInfo () {
       const self = this;
-      const response = await getAllPhoneModuleInfo (self)
+      const response = await getAllPhoneModuleInfo(self)
       if (_.isEqual(response.data, "fail to get phoneModuleInfo")) {
         self.showErrorMessageBox();
       } else {
@@ -310,7 +310,7 @@ export default {
     },
 
     //取消编辑
-    handleClose() {
+    handleClose () {
       editFormVisible = false;
     },
     //关闭编辑电话号码dialog
