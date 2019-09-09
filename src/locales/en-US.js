@@ -226,7 +226,12 @@ export default {
     keyWord: 'Query Criteria: ',
     processed: 'Processed',
     pending: 'Pending',
-    isProcessed: 'Has the problem been processed?'
+    isProcessed: 'Has the problem been processed?',
+    repairManageTitle: 'Online Repair Management'
+  },
+
+  opinionManage: {
+    opinionManageTitle: 'Opinions/Complaint Management'
   },
 
   adminCenter: {

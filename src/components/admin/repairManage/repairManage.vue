@@ -1,5 +1,9 @@
 <template>
   <div class="repairManage">
+    <div class="title">
+      <span class="edit_title">{{$t("repairManage.repairManageTitle")}}</span>
+      <i class="el-icon-edit"></i>
+    </div>
     {{$t("repairManage.keyWord")}}
     <el-select v-model="value"
                clearable
@@ -22,7 +26,7 @@
               :element-loading-text='`${$t("manage.loadingText")}`'
               element-loading-spinner="el-icon-loading"
               element-loading-background="rgba(0, 0, 0, 0.8)"
-              height="455"
+              height="416"
               style="width: 100%; margin-top:20px;">
       <el-table-column type="index"></el-table-column>
       <el-table-column prop="type"
@@ -73,7 +77,7 @@
 import Util from "../../../utils/utils";
 import _ from "lodash";
 import { setTimeout } from "timers";
-import { getAllRepairInfo, updateRepairInfo } from "../../../service/admin/repairManage/repairManage.Service";
+import { getAllRepairInfo, updateRepairInfo, getRepirInfoByItem } from "../../../service/admin/repairManage/repairManage.Service";
 import { async } from 'q';
 export default {
   name: "repairManage",
@@ -119,12 +123,6 @@ export default {
         self.showErrorMessageBox();
       } else {
         self.form = response.data;
-        for (let i = 0; i < self.form.length; i++) {
-          if (_.isEqual(self.form[i].status, 1)) {
-            self.isPending = false;
-            console.log(self.form[i].status)
-          }
-        }
       }
     },
 
@@ -168,13 +166,13 @@ export default {
         if (_.isEmpty(selValue)) {
           self.showWarningSelectType();
         } else {
-          //   const response = await getOnePhoneModule(self, inpValue);
-          //   if (_.isEmpty(response)) {
-          //     self.input = " ";
-          //     self.form = [];
-          //   } else {
-          //     self.form = response.data;
-          //   }
+          const response = await getRepirInfoByItem(self, selValue);
+          if (_.isEmpty(response)) {
+            self.input = " ";
+            self.form = [];
+          } else {
+            self.form = response.data;
+          }
         }
       }
     },
@@ -213,5 +211,11 @@ export default {
 .repairManage {
   width: 100%;
   margin-top: 20px;
+  .title {
+    margin-bottom: 18px;
+  }
+  .processed {
+    color: rgb(248, 128, 128);
+  }
 }
-</style>
+</style>;

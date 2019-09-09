@@ -225,7 +225,12 @@ export default {
     keyWord: '查询条件：',
     processed: '已处理',
     pending: '待处理',
-    isProcessed: '是否已处理该问题？'
+    isProcessed: '是否已处理该问题？',
+    repairManageTitle: '网上报修管理'
+  },
+
+  opinionManage: {
+    opinionManageTitle: '意见/投诉管理'
   },
 
   adminCenter: {
