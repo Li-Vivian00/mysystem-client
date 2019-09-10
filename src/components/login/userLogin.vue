@@ -72,6 +72,7 @@
 import SIdentify from "./Identity";
 import { userLogin } from "../../service/login/userLogin.service";
 import { constants } from 'crypto';
+import showMessageBox from "../../mixin/showMessageBox"
 export default {
   name: "userLogin",
   data () {
@@ -137,6 +138,7 @@ export default {
       loading: false
     };
   },
+  mixins: [showMessageBox],
   mounted () {
     this.identifyCode = "";
     this.makeCode(this.identifyCodes, 4);
@@ -167,29 +169,31 @@ export default {
         }
         self.loading = false;
       } else {
-        self.refreshCode()
-        self.$message({
-          type: "error",
-          message: this.$t("login.loadingError")
-        });
+        self.refreshCode();
+        self.loginError();
         return false;
       }
     },
+
     handleCommand () {
       this.$router.push("/register");
     },
+
     adminLogin () {
       sessionStorage.clear()
       this.$router.push("/adminLogin");
       location.reload()
     },
+
     randomNum (min, max) {
       return Math.floor(Math.random() * (max - min) + min);
     },
+
     refreshCode () {
       this.identifyCode = "";
       this.makeCode(this.identifyCodes, 4);
     },
+
     makeCode (o, l) {
       for (let i = 0; i < l; i++) {
         this.identifyCode += this.identifyCodes[
@@ -198,15 +202,18 @@ export default {
       }
       console.log(this.identifyCode);
     },
+
     forgetPwd () {
       this.$router.push("/userForget");
     },
+
     selectRadio (value) {
       this.lang = value;
       this.lang = this.getLangName(value);
       sessionStorage.setItem("userLang", this.lang)
       this.$i18n.locale = this.lang;
     },
+    
     getLangName (key) {
       const langArr = {
         EN: "EN",

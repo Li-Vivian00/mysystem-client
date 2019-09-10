@@ -12,16 +12,23 @@
     width: 50%;
   }
 }
+
 .manage {
   width: 100%;
   position: absolute;
   top: 10px;
 }
+
 .batchDelect {
   float: left;
-  margin-left: 15px;
-  margin-bottom: 22px;
+  margin-left: 16px;
+  margin-bottom: 16px;
+  background: white;
+  color: #3a3838;
+  border-color: #3a3838;
+  padding: 8px;
 }
+
 .tableFont {
   font: 16px !important;
 }
@@ -36,4 +43,7 @@
   .inputWidth {
     width: 88% !important;
   }
+}
+.el-icon-delete, .el-icon-edit, .el-icon-download {
+  font-size: 16px;
 }

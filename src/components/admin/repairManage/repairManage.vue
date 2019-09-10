@@ -77,8 +77,9 @@
 import Util from "../../../utils/utils";
 import _ from "lodash";
 import { setTimeout } from "timers";
-import { getAllRepairInfo, updateRepairInfo, getRepirInfoByItem } from "../../../service/admin/repairManage/repairManage.Service";
+import { getAllRepairInfo, updateRepairInfo, getRepairInfoByItem } from "../../../service/admin/repairManage/repairManage.Service";
 import { async } from 'q';
+import showMessageBox from "../../../mixin/showMessageBox"
 export default {
   name: "repairManage",
   data () {
@@ -88,8 +89,7 @@ export default {
       currentPage: 1,
       pagesize: 5,
       selectValue: "",
-      selectAll: true,
-      isPending: true,
+      // selectAll: true,
       value: "",
       options: [
         {
@@ -108,6 +108,7 @@ export default {
       updatePending: {}
     };
   },
+  mixins: [showMessageBox],
   mounted () {
     setTimeout(() => {
       this.loading = false;
@@ -166,7 +167,7 @@ export default {
         if (_.isEmpty(selValue)) {
           self.showWarningSelectType();
         } else {
-          const response = await getRepirInfoByItem(self, selValue);
+          const response = await getRepairInfoByItem(self, selValue);
           if (_.isEmpty(response)) {
             self.input = " ";
             self.form = [];
@@ -175,31 +176,6 @@ export default {
           }
         }
       }
-    },
-
-    handleSizeChange (size) {
-      this.pagesize = size;
-    },
-
-    handleCurrentChange (currentPage) {
-      this.currentPage = currentPage
-    },
-
-    showWarningSelectType () {
-      this.$alert(
-        this.$t("manage.showMessage.selectType"),
-        this.$t("manage.confirm.warning"),
-        {
-          confirmButtonText: this.$t("button.ok")
-        }
-      );
-    },
-
-    showCancelMessageBox () {
-      this.$message({
-        type: "info",
-        message: this.$t("manage.showMessage.cancel")
-      });
     },
   }
 };

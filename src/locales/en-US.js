@@ -96,6 +96,7 @@ export default {
     edit: 'Edit',
     delete: 'Delete',
     search: 'Search',
+    export: 'Export All',
     operate: 'Operate',
     selectHolder: 'Please choose',
     loadingText: 'Loading',
@@ -231,7 +232,17 @@ export default {
   },
 
   opinionManage: {
-    opinionManageTitle: 'Opinions/Complaint Management'
+    opinionManageTitle: 'Opinions/Complaint Management',
+    replied: 'Replied',
+    noReply: 'No Reply',
+    userName: 'User Name',
+    phone: 'Contact Number',
+    require: 'Require',
+    type: 'Type of opinion / complaint',
+    content: 'Content of complaint / opinion',
+    emergencyDegree: 'Emergency Degree',
+    date: 'Submission Time',
+    answerContent: 'Reply to content'
   },
 
   adminCenter: {

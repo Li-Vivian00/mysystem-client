@@ -16,7 +16,7 @@ export const updateRepairInfo = async (self, form) => {
   return result;
 };
 
-export const getRepirInfoByItem = async (self, selValue) => {
+export const getRepairInfoByItem = async (self, selValue) => {
   const result = await self.$http
     .get('/api/repairManage/getRepairInfoByItem', {
       params: { item: selValue }

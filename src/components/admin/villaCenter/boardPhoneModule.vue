@@ -56,10 +56,10 @@
           <el-button type="text"
                      size="small"
                      @click.native="handleEdit(scope.$index, scope.row)"
-                     v-if="!showBtn[scope.$index]">{{$t("manage.edit")}}</el-button>
+                     v-if="!showBtn[scope.$index]"><i class="el-icon-edit"></i></el-button>
           <el-button @click="deleteRow(scope.$index, scope.row)"
                      type="text"
-                     size="small">{{$t("manage.delete")}}</el-button>
+                     size="small"><i class="el-icon-delete"></i></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -131,6 +131,7 @@ import Util from "../../../utils/utils";
 import _ from "lodash"
 import { getAllPhoneModuleInfo, updatePhoneModuleInfo, deletePhoneModule, getOnePhoneModule } from "../../../service/admin/villaCenter/boardService"
 import { setTimeout } from 'timers';
+import showMessageBox from "../../../mixin/showMessageBox"
 export default {
   name: "phoneModule",
   data () {
@@ -195,6 +196,7 @@ export default {
       },
     }
   },
+  mixins: [showMessageBox],
   mounted () {
     setTimeout(() => {
       this.loading = false;
@@ -421,66 +423,6 @@ export default {
         }
       }
     },
-
-    //showMessageBox
-    showErrorMessageBox () {
-      this.$message({
-        type: "error",
-        message: this.$t("manage.showMessage.operateError")
-      });
-    },
-
-    showCancelMessageBox () {
-      this.$message({
-        type: "info",
-        message: this.$t("manage.showMessage.cancel")
-      });
-    },
-
-    showSuccessMessageBox () {
-      this.$message({
-        type: "success",
-        message: this.$t("manage.showMessage.operateSuccess")
-      });
-    },
-
-    showWarningSelectType () {
-      this.$alert(
-        this.$t("manage.showMessage.selectType"),
-        this.$t("manage.confirm.warning"),
-        {
-          confirmButtonText: this.$t("button.ok")
-        }
-      );
-    },
-
-    showWarningBatchDelete () {
-      this.$alert(
-        this.$t("manage.showMessage.batchDeleteEmpty"),
-        this.$t("manage.confirm.warning"),
-        {
-          confirmButtonText: this.$t("button.ok")
-        }
-      );
-    },
-
-    showWarningInputeValue () {
-      this.$alert(
-        this.$t("manage.showMessage.inputText"),
-        this.$t("manage.confirm.warning"),
-        {
-          confirmButtonText: this.$t("button.ok")
-        }
-      );
-    },
-
-    handleSizeChange (size) {
-      this.pagesize = size;
-    },
-
-    handleCurrentChange (currentPage) {
-      this.currentPage = currentPage
-    }
   }
 }
 </script>

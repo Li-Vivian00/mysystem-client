@@ -27,6 +27,7 @@
             <el-input
             @input="phone_Message"
             v-model="user_phone"
+            class="inputStyle"
             name="phone"
             :placeholder='`${$t("register.inputPlaceholder.phone")}`'
             prefix-icon="el-icon-mobile-phone"
@@ -36,6 +37,7 @@
             <el-input
             @input="verif_Message"
             v-model="user_verif"
+            class="inputStyle"
             name="code"
             :placeholder='`${$t("login.adminLogin.code")}`'
             prefix-icon="el-icon-check"/>
@@ -51,12 +53,13 @@
       <div v-show="stepTwo">
         <el-form ref="form" :model="form" :rules="rules" label-width="80px">
           <el-form-item prop="password" :label='`${$t("register.label.password")}`' class="el-input-pwd">
-            <el-input v-model="form.password" type="password" :placeholder='`${$t("register.inputPlaceholder.password")}`'></el-input>
+            <el-input v-model="form.password" class="inputStyle" type="password" :placeholder='`${$t("register.inputPlaceholder.password")}`'></el-input>
           </el-form-item>
           <el-form-item prop="repeatPassword" :label='`${$t("register.label.repeatPassword")}`' class="el-input-pwd">
             <el-input
               v-model="form.repeatPassword"
               type="password"
+              class="inputStyle"
               :placeholder='`${$t("register.inputPlaceholder.repeatPassword")}`'
               :readonly="isValue"
             />
@@ -88,6 +91,7 @@ import { store } from "../../Vuex/store";
 import { mapGetters } from "vuex";
 import { adminModifyPassword, getAdminPhone } from "../../service/user/modifyPassword.service";
 import { constants } from 'crypto';
+import showMessageBox from "../../mixin/showMessageBox"
 export default {
   name: "Login",
   data() {
@@ -175,6 +179,7 @@ export default {
       lang: ""
     };
   },
+  mixins: [showMessageBox],
   mounted() {
    this.selectLang(sessionStorage.getItem("adminLang")) 
   },
@@ -194,21 +199,20 @@ export default {
       ) {
         return;
       } else {
-        this.$message({
-          type: "success",
-          message: this.$t("forgetPwd.message.verifySuccess")
-        });
+        this.verifySuccess();
         this.active++;
         this.stepOne = false;
         this.stepTwo = true;
       }
     },
+
+    //Vuex 将user_phone的状态保存到创库中
     phone_Message() {
-      //Vuex 将user_phone的状态保存到创库中
       store.commit("phone_Message", this.user_phone);
     },
+
+    //发送随机验证码
     send_code() {
-      //发送随机验证码
       if (this.user_phone === "") {
         return;
       } else if (!/^1[34578]\d{9}$/.test(this.user_phone)) {
@@ -239,8 +243,9 @@ export default {
           }
         }
     },
-    send_note(tel, code) {
+
       //发送短信模板
+    send_note(tel, code) {
       const text = this.$t("forgetPwd.label.code") + code + this.$t("forgetPwd.message.sendMessage"); //短信内容模板，已经在sms平台绑定此内容，所以会比普通的更快到达用户手机。
       let param = new URLSearchParams();
       param.append("Uid", "kinglww");
@@ -257,8 +262,9 @@ export default {
           console.log(response);
         });
     },
+
+    //生成随机6位验证码
     random_code() {
-      //生成随机6位验证码
       let code = "";
       let code_lenght = 6;
 
@@ -274,10 +280,13 @@ export default {
       console.log("随机生成验证码:" + this.code);
       return this.code;
     },
+    
+    //Vuex 将user_verif的状态保存到创库中
     verif_Message() {
-      //Vuex 将user_verif的状态保存到创库中
       store.commit("verif_Message", this.user_verif, this.code);
     },
+
+    //提交
     onSubmit(formName) {
       const self = this;
       let formData = {
@@ -288,15 +297,9 @@ export default {
         if (valid) {
           const response = await adminModifyPassword(self, formData);
           if (response.data == "fail to update password") {
-            self.$message({
-              type: "error",
-              message: this.$t("forgetPwd.message.modifyError")
-            });
+            self.modifyPwdError();
           } else if (response.data == "success") {
-            self.$message({
-              type: "success",
-              message: this.$t("forgetPwd.message.modifySuccess")
-            });
+            self.modifyPwdSuccess();
             self.active++;
             self.stepOne = false;
             self.stepTwo = false;
@@ -304,14 +307,12 @@ export default {
             self.timeGo();
           }
         } else {
-          self.$message({
-            type: "error",
-            message: this.$t("forgetPwd.message.modifyError")
-          });
+          self.modifyPwdError();
           return false;
         }
       });
     },
+
     timeGo() {
       const timeCount = 5;
       if (!this.loadTimer) {
@@ -329,17 +330,18 @@ export default {
         }, 1000);
       }
     },
+
     onCancle() {
         sessionStorage.clear();
         this.$router.push("/adminLogin");
         location.reload();
     },
+
     selectLang(command) {
       this.lang = this.getLangName(command);
-      // sessionStorage.setItem("userLang", this.lang)
       this.$i18n.locale = this.lang;
-      // location.reload();
     },
+
     getLangName(key) {
       const langArr = {
         EN: "EN",
@@ -358,4 +360,7 @@ export default {
   margin: 35px;
 }
 
+.inputStyle {
+    width:250px;
+  }
 </style>

@@ -28,6 +28,7 @@
 
 <script>
 import { getWarningModuleInfo, updatePhoneModuleInfo, updateWarningModuleInfo } from "../../../service/admin/villaCenter/boardService"
+import showMessageBox from "../../../mixin/showMessageBox"
 export default {
   name: "boardWarningModule",
   data () {
@@ -40,7 +41,7 @@ export default {
       }
     };
   },
-
+  mixins: [showMessageBox],
   mounted () {
     this.getWarningModuleInfo();
   },
@@ -82,38 +83,6 @@ export default {
           self.getWarningModuleInfo();
           self.showCancelMessageBox();
         });
-    },
-
-    //showMessageBox
-    showErrorMessageBox () {
-      this.$message({
-        type: "error",
-        message: this.$t("manage.showMessage.operateError")
-      });
-    },
-
-    showSuccessMessageBox () {
-      this.$message({
-        type: "success",
-        message: this.$t("manage.showMessage.operateSuccess")
-      });
-    },
-
-    showCancelMessageBox () {
-      this.$message({
-        type: "info",
-        message: this.$t("manage.showMessage.cancel")
-      });
-    },
-
-    showWarningCompleteFilling () {
-      this.$alert(
-        this.$t("villaCenter.warningModule.conpleteFilling"),
-        this.$t("manage.confirm.warning"),
-        {
-          confirmButtonText: this.$t("button.ok")
-        }
-      );
     },
   }
 };

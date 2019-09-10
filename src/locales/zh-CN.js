@@ -96,6 +96,7 @@ export default {
     edit: '编辑',
     delete: '删除',
     search: '搜索',
+    export: '导出所有',
     operate: '操作',
     selectHolder: '请选择',
     loadingText: '拼命加载中',
@@ -224,13 +225,23 @@ export default {
     phone: '联系电话',
     keyWord: '查询条件：',
     processed: '已处理',
-    pending: '待处理',
+    pending: '未处理',
     isProcessed: '是否已处理该问题？',
     repairManageTitle: '网上报修管理'
   },
 
   opinionManage: {
-    opinionManageTitle: '意见/投诉管理'
+    opinionManageTitle: '意见/投诉管理',
+    replied: '已回复',
+    noReply: '回复',
+    userName: '用户名',
+    phone: '联系电话',
+    type: '意见/投诉类型',
+    content: '意见/投诉内容',
+    require: '提出要求',
+    emergencyDegree: '紧急程度',
+    date: '提交时间',
+    answerContent: '回复内容'
   },
 
   adminCenter: {

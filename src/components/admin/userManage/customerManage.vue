@@ -7,6 +7,9 @@
     <el-button type="primary"
                @click="addUser"
                class="batchDelect">{{$t('manage.addUser')}}</el-button>
+    <el-button type="primary" class="batchDelect" @click="exportUserData(form)">
+          <i class='el-icon-download'></i><span>{{$t('manage.export')}}</span>
+    </el-button>
     {{$t("manage.keyWord")}}
     <el-select v-model="value"
                clearable
@@ -86,15 +89,18 @@
                        sortable></el-table-column>
       <el-table-column fixed="right"
                        :label='`${$t("manage.operate")}`'
-                       width="120">
+                       width="150">
         <template slot-scope="scope">
           <el-button type="text"
                      size="small"
                      @click.native="handleEdit(scope.$index, scope.row)"
-                     v-if="!showBtn[scope.$index]">{{$t("manage.edit")}}</el-button>
+                     v-if="!showBtn[scope.$index]"><i class="el-icon-edit"></i></el-button>
           <el-button @click="deleteRow(scope.$index, scope.row)"
                      type="text"
-                     size="small">{{$t("manage.delete")}}</el-button>
+                     size="small"><i class="el-icon-delete"></i></el-button>
+          <el-button @click="exportUserData(scope.row)"
+                     type="text"
+                     size="small"><i class="el-icon-download"></i></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -259,6 +265,8 @@ import {
 import { getUserPhone, getUserLoginid } from "../../../service/login/register.service";
 import { constants } from "crypto";
 import { async } from 'q';
+import showMessageBox from "../../../mixin/showMessageBox"
+import exportUserData from "../../../mixin/exportUserData"
 export default {
   data () {
     const validateLoginId = async (rule, value, callback) => {
@@ -343,7 +351,6 @@ export default {
       currentPage: 1,
       pagesize: 10,
       showBtn: [],
-      isEdit: false,
       selectAll: true,
       multipleSelection: [],
       loading: true,
@@ -403,9 +410,11 @@ export default {
       value: "",
       input: "",
       selectValue: "",
-      oldPhone: ""
+      oldPhone: "",
+      isDisabled: true,
     };
   },
+  mixins: [showMessageBox, exportUserData],
   mounted () {
     setTimeout(() => {
       this.loading = false;
@@ -461,7 +470,6 @@ export default {
       self.editFormVisible = true;
       self.editForm = Object.assign({}, row);
       self.oldPhone = row.phone;
-      self.isEdit = true;
     },
 
     //关闭编辑用户dialog
@@ -629,71 +637,11 @@ export default {
     },
 
     getDateTimes () {
-      const str = new Date().toLocaleString("chinese", { hour12: false })
+      const str = new Date().toLocaleString("chinese", { hour12: false }).replace(/(\/)/g, '-');
+      console.log(str);
       this.addUserForm.stay_date = str;
       return this.addUserForm.stay_date;
     },
-
-    //showMessageBox
-    showErrorMessageBox () {
-      this.$message({
-        type: "error",
-        message: this.$t("manage.showMessage.operateError")
-      });
-    },
-
-    showSuccessMessageBox () {
-      this.$message({
-        type: "success",
-        message: this.$t("manage.showMessage.operateSuccess")
-      });
-    },
-
-    showCancelMessageBox () {
-      this.$message({
-        type: "info",
-        message: this.$t("manage.showMessage.cancel")
-      });
-    },
-
-    showWarningSelectType () {
-      this.$alert(
-        this.$t("manage.showMessage.selectType"),
-        this.$t("manage.confirm.warning"),
-        {
-          confirmButtonText: this.$t("button.ok")
-        }
-      );
-    },
-
-    showWarningBatchDelete () {
-      this.$alert(
-        this.$t("manage.showMessage.batchDeleteEmpty"),
-        this.$t("manage.confirm.warning"),
-        {
-          confirmButtonText: this.$t("button.ok")
-        }
-      );
-    },
-
-    showWarningInputeValue () {
-      this.$alert(
-        this.$t("manage.showMessage.inputText"),
-        this.$t("manage.confirm.warning"),
-        {
-          confirmButtonText: this.$t("button.ok")
-        }
-      );
-    },
-
-    handleSizeChange (size) {
-      this.pagesize = size;
-      console.log(this.pagesize)
-    },
-    handleCurrentChange (currentPage) {
-      this.currentPage = currentPage
-      console.log(this.currentPage)
-    }
   }
 };
 </script>

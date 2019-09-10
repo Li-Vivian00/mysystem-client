@@ -124,6 +124,7 @@ import {
   getUserLoginid,
   getUserPhone
 } from "../../service/login/register.service";
+import showMessageBox from "../../mixin/showMessageBox"
 export default {
   data () {
     const validateName = (rule, value, callback) => {
@@ -228,6 +229,7 @@ export default {
       lang: 'ZH'
     };
   },
+  mixins: [showMessageBox],
   mounted () {
     this.selectLang(sessionStorage.getItem("userLang"));
   },
@@ -272,14 +274,9 @@ export default {
       }
     },
     getDateTimes () {
-      const str = new Date().toLocaleString("chinese", { hour12: false })
+      const str = new Date().toLocaleString("chinese", { hour12: false }).replace(/(\/)/g, '-');
       this.form.stay_date = str;
       return this.form.stay_date;
-    },
-    alertMessage () {
-      this.$alert(this.$t("register.showMessage.register"), this.$t("manage.confirm.warning"), {
-        confirmButtonText: this.$t("button.ok")
-      });
     },
     selectLang (command) {
       this.lang = this.getLangName(command);
