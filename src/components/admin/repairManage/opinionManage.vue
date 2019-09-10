@@ -56,7 +56,7 @@
         <template slot-scope="scope">
           <el-button type="text"
                      v-if="scope.row.status == 0"
-                     @click.native="doneReply(scope.$index, scope.row)">{{$t("opinionManage.noReply")}}</el-button>
+                     @click.native="clickReply(scope.$index, scope.row)">{{$t("opinionManage.noReply")}}</el-button>
           <span type="text"
                 v-else
                 class="processed">{{$t("opinionManage.replied")}}</span>
@@ -71,6 +71,34 @@
                    layout="total, sizes, prev, pager, next, jumper"
                    :total="form.length">
     </el-pagination>
+    <el-dialog :title='`${$t("manage.edit")}`'
+               :visible.sync="updateReplyFormVisible"
+               :close-on-click-modal="false"
+               class="edit-form"
+               :before-close="handleClose">
+      <el-form :model="updateReplyForm"
+               ref="updateReplyForm">
+        <el-form-item prop="content"
+                      :label='`${$t("opinionManage.content")}`'>
+          <el-input v-model="updateReplyForm.content"
+                    auto-complete="off"
+                    readonly
+                    class="">{{form.content}}</el-input>
+        </el-form-item>
+        <el-form-item prop="answer_content"
+                      :label='`${$t("opinionManage.answerContent")}`'>
+          <el-input v-model="updateReplyForm.answer_content"
+                    type="textarea"
+                    auto-complete="off">{{form.answer_content}}</el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer"
+           class="dialog-footer">
+        <el-button @click.native="updateReplyFormVisible = false">{{$t("button.cancel")}}</el-button>
+        <el-button type="primary"
+                   @click.native="handleReply('updateReplyForm')">{{$t("button.update")}}</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -102,7 +130,18 @@ export default {
         }
       ],
       updateReplyForm: {},
-      updateReplyFormVisible: false
+      updateReplyFormVisible: false,
+      updateReplyForm: {
+        content: "",
+        date: "",
+        phone: "",
+        type: "",
+        username: "",
+        require: "",
+        emergency_degree: "",
+        status: "",
+        answer_content: "",
+      }
     }
   },
   mixins: [showMessageBox],
@@ -126,10 +165,11 @@ export default {
     },
 
     // 点击回复
-    async doneReply (index, row) {
+    clickReply (index, row) {
       const self = this;
       self.updateReplyForm = Object.assign({}, row);
       self.updateReplyFormVisible = true;
+      console.log(self.updateReplyForm);
       // self.updateReplyForm.status = 1;
       // self.$confirm(
       //   this.$t("repairManage.isProcessed"),
@@ -149,6 +189,17 @@ export default {
       //   .catch(() => {
       //     self.showCancelMessageBox();
       //   })
+    },
+
+    // 提交回复
+    handleReply () {
+
+    },
+
+    //关闭编辑用户dialog
+    handleClose (done) {
+      const self = this;
+      self.updateReplyFormVisible = false;
     },
 
     //关键字查询报修信息
