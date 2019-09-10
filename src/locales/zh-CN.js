@@ -86,7 +86,8 @@ export default {
   button: {
     ok: '确认',
     cancel: '取消',
-    update: '更新'
+    update: '更新',
+    submit: '提交'
   },
 
   manage: {
@@ -234,6 +235,7 @@ export default {
     opinionManageTitle: '意见/投诉管理',
     replied: '已回复',
     noReply: '回复',
+    waitReply: '待回复',
     userName: '用户名',
     phone: '联系电话',
     type: '意见/投诉类型',
@@ -241,7 +243,9 @@ export default {
     require: '提出要求',
     emergencyDegree: '紧急程度',
     date: '提交时间',
-    answerContent: '回复内容'
+    answerContent: '回复内容',
+    isHandleReply: '是否提交回复？',
+    answerContentIsNull: '请输入回复内容！'
   },
 
   adminCenter: {

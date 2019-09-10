@@ -86,7 +86,8 @@ export default {
   button: {
     ok: 'ok',
     cancel: 'cancel',
-    update: 'update'
+    update: 'update',
+    submit: 'Submit'
   },
 
   manage: {
@@ -235,6 +236,7 @@ export default {
     opinionManageTitle: 'Opinions/Complaint Management',
     replied: 'Replied',
     noReply: 'No Reply',
+    waitReply: 'No Reply',
     userName: 'User Name',
     phone: 'Contact Number',
     require: 'Require',
@@ -242,7 +244,9 @@ export default {
     content: 'Content of complaint / opinion',
     emergencyDegree: 'Emergency Degree',
     date: 'Submission Time',
-    answerContent: 'Reply to content'
+    answerContent: 'Reply to content',
+    isHandleReply: 'Whether to submit a response?',
+    answerContentIsNull: 'Please enter the reply!'
   },
 
   adminCenter: {

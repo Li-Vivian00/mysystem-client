@@ -71,7 +71,7 @@
                    layout="total, sizes, prev, pager, next, jumper"
                    :total="form.length">
     </el-pagination>
-    <el-dialog :title='`${$t("manage.edit")}`'
+    <el-dialog :title='`${$t("opinionManage.replied")}`'
                :visible.sync="updateReplyFormVisible"
                :close-on-click-modal="false"
                class="edit-form"
@@ -79,24 +79,26 @@
       <el-form :model="updateReplyForm"
                ref="updateReplyForm">
         <el-form-item prop="content"
-                      :label='`${$t("opinionManage.content")}`'>
+                      :label='`${$t("opinionManage.content")}`'
+                      class="labelStyle">
           <el-input v-model="updateReplyForm.content"
                     auto-complete="off"
                     readonly
                     class="">{{form.content}}</el-input>
         </el-form-item>
         <el-form-item prop="answer_content"
-                      :label='`${$t("opinionManage.answerContent")}`'>
+                      :label='`${$t("opinionManage.answerContent")}`'
+                      class="labelStyle">
           <el-input v-model="updateReplyForm.answer_content"
                     type="textarea"
-                    auto-complete="off">{{form.answer_content}}</el-input>
+                    auto-complete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer"
            class="dialog-footer">
         <el-button @click.native="updateReplyFormVisible = false">{{$t("button.cancel")}}</el-button>
         <el-button type="primary"
-                   @click.native="handleReply('updateReplyForm')">{{$t("button.update")}}</el-button>
+                   @click.native="handleReply()">{{$t("button.submit")}}</el-button>
       </div>
     </el-dialog>
   </div>
@@ -104,7 +106,7 @@
 
 <script>
 import showMessageBox from "../../../mixin/showMessageBox"
-import {getAllOpinionInfo, updateOpinionInfo, getOpinionInfoByItem} from "../../../service/admin/repairManage/opinionManage.Service"
+import { getAllOpinionInfo, updateOpinionInfo, getOpinionInfoByItem } from "../../../service/admin/repairManage/opinionManage.Service"
 export default {
   name: "opinionManage",
   data () {
@@ -126,34 +128,27 @@ export default {
         },
         {
           value: "0",
-          label: "opinionManage.noReply"
+          label: "opinionManage.waitReply"
         }
       ],
-      updateReplyForm: {},
       updateReplyFormVisible: false,
       updateReplyForm: {
+        Id: "",
         content: "",
-        date: "",
-        phone: "",
-        type: "",
-        username: "",
-        require: "",
-        emergency_degree: "",
-        status: "",
         answer_content: "",
-      }
+      },
     }
   },
   mixins: [showMessageBox],
-  mounted() {
-  setTimeout(() => {
+  mounted () {
+    setTimeout(() => {
       this.loading = false;
     }, 1000);
-  this.getAllOpinionInfo();
+    this.getAllOpinionInfo();
   },
   methods: {
 
-  //get all repair info
+    //get all repair info
     async getAllOpinionInfo () {
       const self = this;
       const response = await getAllOpinionInfo(self);
@@ -165,35 +160,39 @@ export default {
     },
 
     // 点击回复
-    clickReply (index, row) {
+    async clickReply (index, row) {
       const self = this;
-      self.updateReplyForm = Object.assign({}, row);
       self.updateReplyFormVisible = true;
-      console.log(self.updateReplyForm);
-      // self.updateReplyForm.status = 1;
-      // self.$confirm(
-      //   this.$t("repairManage.isProcessed"),
-      //   this.$t("manage.confirm.warning"),
-      //   {
-      //     confirmButtonText: this.$t("button.ok"),
-      //     cancelButtonText: this.$t("button.cancel"),
-      //     type: "warning"
-      //   }
-      // )
-      //   .then(async () => {
-      //     const response = await updateRepairInfo(self, self.updateReplyForm);
-      //     if (response.data == "success to update") {
-      //       self.getAllOpinionInfo();
-      //     }
-      //   })
-      //   .catch(() => {
-      //     self.showCancelMessageBox();
-      //   })
+      self.updateReplyForm = Object.assign({}, row);
     },
 
     // 提交回复
     handleReply () {
-
+      const self = this;
+      if (_.isEmpty(self.updateReplyForm.answer_content)) {
+        self.answerContentIsNull();
+      }
+      else {
+        self.$confirm(
+          this.$t("opinionManage.isHandleReply"),
+          this.$t("manage.confirm.warning"),
+          {
+            confirmButtonText: this.$t("button.ok"),
+            cancelButtonText: this.$t("button.cancel"),
+            type: "warning"
+          }
+        )
+          .then(async () => {
+            self.updateReplyForm.status = 1;
+            const response = await updateOpinionInfo(self, self.updateReplyForm);
+            if (response.data == "success to update") {
+              self.getAllOpinionInfo();
+            }
+          })
+          .catch(() => {
+            self.showCancelMessageBox();
+          })
+      }
     },
 
     //关闭编辑用户dialog
@@ -204,23 +203,23 @@ export default {
 
     //关键字查询报修信息
     async searchOpinionByItem () {
-      // const self = this;
-      // const selValue = self.selectValue;
-      // if (_.isEqual(selValue, "all")) {
-      //   self.getAllOpinionInfo();
-      // } else {
-      //   if (_.isEmpty(selValue)) {
-      //     self.showWarningSelectType();
-      //   } else {
-      //     const response = await getRepirInfoByItem(self, selValue);
-      //     if (_.isEmpty(response)) {
-      //       self.input = " ";
-      //       self.form = [];
-      //     } else {
-      //       self.form = response.data;
-      //     }
-      //   }
-      // }
+      const self = this;
+      const selValue = self.selectValue;
+      if (_.isEqual(selValue, "all")) {
+        self.getAllOpinionInfo();
+      } else {
+        if (_.isEmpty(selValue)) {
+          self.showWarningSelectType();
+        } else {
+          const response = await getOpinionInfoByItem(self, selValue);
+          if (_.isEmpty(response)) {
+            self.input = " ";
+            self.form = [];
+          } else {
+            self.form = response.data;
+          }
+        }
+      }
     },
 
     //选择器取值
@@ -243,6 +242,11 @@ export default {
 
   .processed {
     color: rgb(248, 128, 128);
+  }
+
+  .el-input,
+  .el-textarea {
+    width: 78% !important;
   }
 }
 </style>
