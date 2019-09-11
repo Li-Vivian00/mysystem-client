@@ -184,8 +184,9 @@ export default {
         )
           .then(async () => {
             self.updateReplyForm.status = 1;
-            const response = await updateOpinionInfo(self, self.updateReplyForm);
+            const response = await updateOpinionInfo(self, self.updateReplyForm.status, self.updateReplyForm.id, self.updateReplyForm.answer_content);
             if (response.data == "success to update") {
+              self.updateReplyFormVisible = false;
               self.getAllOpinionInfo();
             }
           })
