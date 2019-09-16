@@ -95,6 +95,7 @@ import {
   getUserPhone
 } from "../../service/login/register.service";
 import showMessageBox from "../../mixin/showMessageBox"
+import getLangName from '../../mixin/getLangName';
 export default {
   name: "Login",
   data() {
@@ -136,7 +137,7 @@ export default {
         }
         else if (result == 'phone is exist') {
           callback();
-          this.isCorrect = true; 
+          this.isCorrect = true;
         }
       }
     };
@@ -180,9 +181,9 @@ export default {
       lang: "",
     };
   },
-  mixins: [showMessageBox],
+  mixins: [showMessageBox, getLangName],
   mounted() {
-   this.selectLang(sessionStorage.getItem("userLang")) 
+   this.selectLang(sessionStorage.getItem("userLang"))
   },
   computed: {
     //Vuex 组件之间传值
@@ -200,7 +201,7 @@ export default {
       ) {
         return;
       } else {
-        this.verifySuccess();
+        // this.verifySuccess();
         this.active++;
         this.stepOne = false;
         this.stepTwo = true;
@@ -210,6 +211,11 @@ export default {
     //Vuex 将user_phone的状态保存到创库中
     phone_Message() {
       store.commit("phone_Message", this.user_phone);
+    },
+
+    //Vuex 将user_verif的状态保存到创库中
+    verif_Message() {
+      store.commit("verif_Message", this.user_verif, this.code);
     },
 
     //发送随机验证码
@@ -277,11 +283,6 @@ export default {
       return this.code;
     },
 
-    //Vuex 将user_verif的状态保存到创库中
-    verif_Message() {
-      store.commit("verif_Message", this.user_verif, this.code);
-    },
-
     //提交
     onSubmit(formName) {
       const self = this;
@@ -338,14 +339,6 @@ export default {
       this.lang = this.getLangName(command);
       this.$i18n.locale = this.lang;
     },
-    
-    getLangName(key) {
-      const langArr = {
-        EN: "EN",
-        ZH: "ZH"
-      };
-      return langArr[key];
-    }
   }
 };
 </script>

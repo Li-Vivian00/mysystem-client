@@ -73,6 +73,9 @@ import SIdentify from "./Identity";
 import { userLogin } from "../../service/login/userLogin.service";
 import { constants } from 'crypto';
 import showMessageBox from "../../mixin/showMessageBox"
+import createCode from "../../mixin/createCode"
+import getLangName from "../../mixin/getLangName"
+import { create } from 'domain';
 export default {
   name: "userLogin",
   data () {
@@ -138,12 +141,11 @@ export default {
       loading: false
     };
   },
-  mixins: [showMessageBox],
+  mixins: [showMessageBox, createCode, getLangName],
   mounted () {
     this.identifyCode = "";
     this.makeCode(this.identifyCodes, 4);
     this.selectRadio(this.lang);
-
   },
   components: {
     SIdentify
@@ -185,24 +187,6 @@ export default {
       location.reload()
     },
 
-    randomNum (min, max) {
-      return Math.floor(Math.random() * (max - min) + min);
-    },
-
-    refreshCode () {
-      this.identifyCode = "";
-      this.makeCode(this.identifyCodes, 4);
-    },
-
-    makeCode (o, l) {
-      for (let i = 0; i < l; i++) {
-        this.identifyCode += this.identifyCodes[
-          this.randomNum(0, this.identifyCodes.length)
-        ];
-      }
-      console.log(this.identifyCode);
-    },
-
     forgetPwd () {
       this.$router.push("/userForget");
     },
@@ -213,14 +197,6 @@ export default {
       sessionStorage.setItem("userLang", this.lang)
       this.$i18n.locale = this.lang;
     },
-    
-    getLangName (key) {
-      const langArr = {
-        EN: "EN",
-        ZH: "ZH"
-      };
-      return langArr[key];
-    }
   }
 };
 </script>

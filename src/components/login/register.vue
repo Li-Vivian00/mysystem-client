@@ -125,6 +125,7 @@ import {
   getUserPhone
 } from "../../service/login/register.service";
 import showMessageBox from "../../mixin/showMessageBox"
+import getLangName from '../../mixin/getLangName';
 export default {
   data () {
     const validateName = (rule, value, callback) => {
@@ -229,7 +230,7 @@ export default {
       lang: 'ZH'
     };
   },
-  mixins: [showMessageBox],
+  mixins: [showMessageBox, getLangName],
   mounted () {
     this.selectLang(sessionStorage.getItem("userLang"));
   },
@@ -283,13 +284,6 @@ export default {
       sessionStorage.setItem("userLang", this.lang)
       this.$i18n.locale = this.lang
     },
-    getLangName (key) {
-      const langArr = {
-        'EN': 'EN',
-        'ZH': 'ZH',
-      };
-      return langArr[key]
-    }
   },
 };
 </script>

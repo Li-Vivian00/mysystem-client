@@ -66,6 +66,8 @@ import SIdentify from "./Identity";
 import { adminLogin } from "../../service/login/adminLogin.service";
 // import { constants } from 'crypto';
 import showMessageBox from "../../mixin/showMessageBox"
+import createCode from "../../mixin/createCode"
+import getLangName from "../../mixin/getLangName"
 export default {
   name: "adminLogin",
   data () {
@@ -132,7 +134,7 @@ export default {
       loading: false
     };
   },
-  mixins: [showMessageBox],
+  mixins: [showMessageBox, createCode, getLangName],
   mounted () {
     this.identifyCode = "";
     this.makeCode(this.identifyCodes, 4);
@@ -168,24 +170,6 @@ export default {
       }
     },
 
-    randomNum (min, max) {
-      return Math.floor(Math.random() * (max - min) + min);
-    },
-
-    refreshCode () {
-      this.identifyCode = "";
-      this.makeCode(this.identifyCodes, 4);
-    },
-
-    makeCode (o, l) {
-      for (let i = 0; i < l; i++) {
-        this.identifyCode += this.identifyCodes[
-          this.randomNum(0, this.identifyCodes.length)
-        ];
-      }
-      console.log(this.identifyCode);
-    },
-
     userLogin () {
       sessionStorage.clear();
       this.$router.push("/userLogin");
@@ -203,13 +187,6 @@ export default {
       this.$i18n.locale = this.lang;
     },
 
-    getLangName (key) {
-      const langArr = {
-        EN: "EN",
-        ZH: "ZH"
-      };
-      return langArr[key];
-    }
   }
 };
 </script>

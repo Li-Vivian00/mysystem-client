@@ -28,6 +28,7 @@
   </div>
 </template>
 <script>
+import getLangName from "../../../mixin/getLangName"
 export default {
   data() {
     return {
@@ -35,6 +36,7 @@ export default {
       lang: "",
     };
   },
+  mixins: [getLangName],
   mounted() {
     this.selectLang(sessionStorage.getItem("adminLang"));
   },
@@ -59,13 +61,6 @@ export default {
         sessionStorage.setItem("adminLang", this.lang);
         this.$i18n.locale = this.lang
     },
-    getLangName(key) {
-      const langArr = {
-        EN: "EN",
-        ZH: "ZH"
-      };
-      return langArr[key];
-    }
   }
 };
 </script>
