@@ -9,13 +9,17 @@ export const getAllOpinionInfo = async self => {
 
 export const updateOpinionInfo = async (self, status, Id, answerContent) => {
   const result = await self.$http
-    .get('/api/repairManage/updateOpinionInfo', {
-      params: {
-        status: status,
-        Id: Id,
-        answer_content: answerContent
-      }
-    }, {})
+    .get(
+      '/api/repairManage/updateOpinionInfo',
+      {
+        params: {
+          status: status,
+          Id: Id,
+          answer_content: answerContent
+        }
+      },
+      {}
+    )
     .catch(error => {
       console.log(error);
     });
@@ -29,6 +33,15 @@ export const getOpinionInfoByItem = async (self, selValue) => {
         item: selValue
       }
     })
+    .catch(error => {
+      console.log(error);
+    });
+  return result;
+};
+
+export const deleteOpinionInfo = async (self, Id) => {
+  const result = await self.$http
+    .post('/api/repairManage/deleteOpinionInfo', Id, {})
     .catch(error => {
       console.log(error);
     });

@@ -226,7 +226,7 @@ export default {
     phone: '联系电话',
     keyWord: '查询条件：',
     processed: '已处理',
-    pending: '未处理',
+    pending: '待处理',
     isProcessed: '是否已处理该问题？',
     repairManageTitle: '网上报修管理'
   },
@@ -234,7 +234,7 @@ export default {
   opinionManage: {
     opinionManageTitle: '意见/投诉管理',
     replied: '已回复',
-    noReply: '回复',
+    noReply: '待回复',
     waitReply: '待回复',
     userName: '用户名',
     phone: '联系电话',

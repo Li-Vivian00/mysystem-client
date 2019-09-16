@@ -2,7 +2,7 @@ export const deleteAdmin = async (self, Id) => {
   const result = await self.$http
     .post('/api/adminManage/deleteAdmin', Id, {})
     .catch(error => {
-      console.log(error.message);
+      console.log(error);
     });
   return result;
 };

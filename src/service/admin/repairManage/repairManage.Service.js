@@ -26,3 +26,12 @@ export const getRepairInfoByItem = async (self, selValue) => {
     });
   return result;
 };
+
+export const deleteRepairInfo = async (self, Id) => {
+  const result = await self.$http
+    .post('/api/repairManage/deleteRepairInfo', Id, {})
+    .catch(error => {
+      console.log(error);
+    });
+  return result;
+};

@@ -59,6 +59,10 @@
           <span type="text"
                 v-else
                 class="processed">{{$t("repairManage.processed")}}</span>
+          <el-button @click="deleteRow(scope.$index, scope.row)"
+                     type="text"
+                     size="small"
+                     v-if="scope.row.status == 1"><i class="el-icon-delete"></i></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -77,7 +81,7 @@
 import Util from "../../../utils/utils";
 import _ from "lodash";
 import { setTimeout } from "timers";
-import { getAllRepairInfo, updateRepairInfo, getRepairInfoByItem } from "../../../service/admin/repairManage/repairManage.Service";
+import { getAllRepairInfo, updateRepairInfo, getRepairInfoByItem, deleteRepairInfo } from "../../../service/admin/repairManage/repairManage.Service";
 import { async } from 'q';
 import showMessageBox from "../../../mixin/showMessageBox"
 export default {
@@ -116,6 +120,37 @@ export default {
     this.getAllRepairInfo();
   },
   methods: {
+
+    //单个移除
+    deleteRow (index, row) {
+      const self = this;
+      self
+        .$confirm(
+          this.$t("manage.confirm.deleteAdmin"),
+          this.$t("manage.confirm.warning"),
+          {
+            confirmButtonText: this.$t("button.ok"),
+            cancelButtonText: this.$t("button.cancel"),
+            type: "warning"
+          }
+        )
+        .then(async () => {
+          const str = [];
+          const id = row.id;
+          str.push(id);
+          const response = await deleteRepairInfo(self, str);
+          if (_.isEqual(response.data, "fail to delete user")) {
+            self.showErrorMessageBox();
+          } else {
+            self.getAllRepairInfo();
+            self.showSuccessMessageBox();
+          }
+        })
+        .catch(() => {
+          self.showCancelMessageBox();
+        });
+    },
+
     //get all repair info
     async getAllRepairInfo () {
       const self = this;

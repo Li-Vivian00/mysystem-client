@@ -60,6 +60,10 @@
           <span type="text"
                 v-else
                 class="processed">{{$t("opinionManage.replied")}}</span>
+          <el-button @click="deleteRow(scope.$index, scope.row)"
+                     type="text"
+                     size="small"
+                     v-if="scope.row.status == 1"><i class="el-icon-delete"></i></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -106,7 +110,7 @@
 
 <script>
 import showMessageBox from "../../../mixin/showMessageBox"
-import { getAllOpinionInfo, updateOpinionInfo, getOpinionInfoByItem } from "../../../service/admin/repairManage/opinionManage.Service"
+import { getAllOpinionInfo, updateOpinionInfo, getOpinionInfoByItem, deleteOpinionInfo } from "../../../service/admin/repairManage/opinionManage.Service"
 export default {
   name: "opinionManage",
   data () {
@@ -147,6 +151,36 @@ export default {
     this.getAllOpinionInfo();
   },
   methods: {
+
+    //单个移除
+    deleteRow (index, row) {
+      const self = this;
+      self
+        .$confirm(
+          this.$t("manage.confirm.deleteAdmin"),
+          this.$t("manage.confirm.warning"),
+          {
+            confirmButtonText: this.$t("button.ok"),
+            cancelButtonText: this.$t("button.cancel"),
+            type: "warning"
+          }
+        )
+        .then(async () => {
+          const str = [];
+          const id = row.id;
+          str.push(id);
+          const response = await deleteOpinionInfo(self, str);
+          if (_.isEqual(response.data, "fail to delete user")) {
+            self.showErrorMessageBox();
+          } else {
+            self.getAllOpinionInfo();
+            self.showSuccessMessageBox();
+          }
+        })
+        .catch(() => {
+          self.showCancelMessageBox();
+        });
+    },
 
     //get all repair info
     async getAllOpinionInfo () {
