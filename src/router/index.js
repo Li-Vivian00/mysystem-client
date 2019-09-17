@@ -15,7 +15,9 @@ import adminManage from '../components/admin/userManage/adminManage';
 import board from '../components/admin/villaCenter/board';
 import phoneModule from '../components/admin/villaCenter/boardPhoneModule';
 import warningModule from '../components/admin/villaCenter/boardWarningModule';
-import baseInfor from '../components/admin/villaCenter/baseInfo';
+import baseInfo from '../components/admin/villaCenter/baseInfo';
+import baseInfoAboutUs from '../components/admin/villaCenter/baseInfoAboutUs';
+import baseInfoAboutBuilding from '../components/admin/villaCenter/baseInfoAboutBuilding';
 import baseFacility from '../components/admin/villaCenter/baseFacility';
 import repairManage from '../components/admin/repairManage/repairManage';
 import opinionManage from '../components/admin/repairManage/opinionManage';
@@ -94,8 +96,18 @@ export default new Router({
           ]
         },
         {
-          path: '/baseInfo',
-          component: baseInfor
+          path: '/baseInfoAboutUs',
+          component: baseInfo,
+          children: [
+            {
+              path: '/baseInfoAboutUs',
+              component: baseInfoAboutUs
+            },
+            {
+              path: '/baseInfoAboutBuilding',
+              component: baseInfoAboutBuilding
+            }
+          ]
         },
         {
           path: '/baseFacility',

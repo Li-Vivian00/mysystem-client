@@ -193,7 +193,7 @@ export default {
   villaCenter: {
     noticeBoard: 'Bulletin board information editing',
     infrastructure: 'Infrastructure information editing',
-    baseInfo: 'Basic information editing',
+    baseInfoTitle: 'Basic information editing',
     phoneModuleTitle: 'Convenient telephone module',
     warningModuleTitle: 'Tips module',
     Id: 'Id',
@@ -214,6 +214,11 @@ export default {
       content: 'Content:',
       inputTitle: 'Please input Title',
       conpleteFilling: 'Please fill in the complete information'
+    },
+
+    baseInfo: {
+      baseInfoAboutUs: 'About Us',
+      baseInfoBuilding: 'About Building'
     }
   },
 

@@ -192,7 +192,7 @@ export default {
   villaCenter: {
     noticeBoard: '公告栏信息编辑',
     infrastructure: '基础设施信息编辑',
-    baseInfo: '基本信息编辑',
+    baseInfoTitle: '基本信息编辑',
     phoneModuleTitle: '便民电话模块',
     warningModuleTitle: '温馨提示模块',
     Id: 'Id',
@@ -213,6 +213,11 @@ export default {
       content: '内容：',
       inputTitle: '请输入标题',
       conpleteFilling: '请填写完整信息'
+    },
+
+    baseInfo: {
+      baseInfoAboutUs: '关于我们',
+      baseInfoBuilding: '楼宇信息'
     }
   },
 

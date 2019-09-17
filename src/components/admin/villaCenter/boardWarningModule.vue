@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { getWarningModuleInfo, updatePhoneModuleInfo, updateWarningModuleInfo } from "../../../service/admin/villaCenter/boardService"
+import { getWarningModuleInfo, updateWarningModuleInfo } from "../../../service/admin/villaCenter/boardService"
 import showMessageBox from "../../../mixin/showMessageBox"
 export default {
   name: "boardWarningModule",

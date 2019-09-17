@@ -23,7 +23,6 @@
         <router-view></router-view>
       </transition>
     </div>
-
   </div>
 </template>
 

@@ -89,7 +89,7 @@
       </el-form>
       <div slot="footer"
            class="dialog-footer">
-        <el-button @click.native="handleCancel">{{$t("button.cancel")}}</el-button>
+        <el-button @click.native="editFormVisible = false">{{$t("button.cancel")}}</el-button>
         <el-button type="primary"
                    @click.native="handleUpdate('editForm')">{{$t("button.update")}}</el-button>
       </div>

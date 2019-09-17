@@ -43,7 +43,7 @@ export default {
               title: "sidebar.admin.board"
             },
             {
-              index: "baseInfo",
+              index: "baseInfoAboutUs",
               title: "sidebar.admin.baseInfo"
             },
             {
