@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
-    <v-head></v-head>
-    <!-- <v-sidebar></v-sidebar> -->
+    <v-header></v-header>
+    <v-center></v-center>
     <div class="content">
       <transition name="move"
                   mode="out-in">
@@ -12,21 +12,20 @@
 </template>
 
 <script>
-import vHead from "./userHeader.vue";
-// import vSidebar from "./userSidebar.vue";
+import vHeader from "./homeHeader";
+import vCenter from "./homeCenter";
 export default {
   components: {
-    vHead,
-    // vSidebar
+    vHeader,
+    vCenter
   }
-};
+}
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .wrapper {
   width: 100%;
   height: 100%;
-  top: 0px;
-  background-color: #ffffff;
+  background: #fff !important;
 }
 </style>

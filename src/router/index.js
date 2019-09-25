@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import HelloWorld from '@/components/HelloWorld';
+import homePage from '../components/common/homePage';
 import adminLogin from '../components/login/adminLogin';
 import userLogin from '../components/login/userLogin';
 import register from '../components/login/register';
@@ -29,6 +30,11 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
+      path: '/homePage',
+      name: 'homePage',
+      component: homePage
+    },
+    {
       path: '/',
       name: 'userLogin',
       component: userLogin
@@ -50,10 +56,10 @@ export default new Router({
       path: '/userHome',
       component: userHome,
       children: [
-        {
-          path: '/readme',
-          component: Readme
-        },
+        // {
+        //   path: '/readme',
+        //   component: Readme
+        // },
         {
           path: '/userCenter',
           component: userCenter // 拖拽列表组件
@@ -68,11 +74,11 @@ export default new Router({
       path: '/adminHome',
       component: adminHome,
       children: [
-        //首页
-        {
-          path: '/readme',
-          component: Readme
-        },
+        // //首页
+        // {
+        //   path: '/readme',
+        //   component: Readme
+        // },
 
         //个人中心
         {

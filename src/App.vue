@@ -48,5 +48,9 @@ export default {
 .el-dialog {
   width: 40%;
 }
+
+.el-menu--horizontal > .el-submenu .el-submenu__title {
+  font-size: 17px !important;
+}
 </style>
 

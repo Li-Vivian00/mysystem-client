@@ -256,5 +256,15 @@ export default {
 
   adminCenter: {
     editMessage: 'You can begin to edit info'
+  },
+
+  homePage: {
+    homeHeader: {
+      home: 'Home',
+      login: 'Login',
+      adminLogin: 'Admin Login',
+      userLogin: 'User Login',
+      aboutUs: 'About Us'
+    }
   }
 };

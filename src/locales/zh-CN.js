@@ -255,5 +255,15 @@ export default {
 
   adminCenter: {
     editMessage: '用户可开始进行编辑操作'
+  },
+
+  homePage: {
+    homeHeader: {
+      home: '首页',
+      login: '登录',
+      adminLogin: '管理员登录',
+      userLogin: '用户登录',
+      aboutUs: '关于幸福港'
+    }
   }
 };
