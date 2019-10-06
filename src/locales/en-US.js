@@ -87,7 +87,8 @@ export default {
     ok: 'ok',
     cancel: 'cancel',
     update: 'update',
-    submit: 'Submit'
+    submit: 'Submit',
+    add: 'Add'
   },
 
   manage: {
@@ -265,6 +266,18 @@ export default {
       adminLogin: 'Admin Login',
       userLogin: 'User Login',
       aboutUs: 'About Us'
+    },
+    homeCenter: {
+      forestItem: 'Forests City Of Happiness Harbor',
+      forestDetailItem:
+        'The ground of forest city is all a park, vehicles are running through the ground, the ground is pollution-free rail transit, the outer wall of the building is full of vertically distributed plants, every day, people are living in the garden, breathing in the forest, pleasure from...',
+      learnMore: 'Learn More >',
+      realEstate: 'Real Estate',
+      agricultural: 'Agricultural',
+      property: 'Property',
+      hotel: 'Hotel',
+      customerCenter: 'Customer Center',
+      other: 'Others'
     }
   }
 };

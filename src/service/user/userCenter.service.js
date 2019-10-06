@@ -1,12 +1,12 @@
 export const userCenter = async (self, userLoginId) => {
   const result = await self.$http
-    .get("/api/user/getUser", {
+    .get('/api/user/getUserCenterInfo', {
       params: {
-        userLoginId: userLoginId
+        loginId: userLoginId
       }
     })
     .catch(error => {
-      console.log(error)
-    })
-  return result
-}
+      console.log(error);
+    });
+  return result;
+};

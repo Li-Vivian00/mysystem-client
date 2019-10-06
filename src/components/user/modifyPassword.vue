@@ -1,29 +1,27 @@
 <template>
   <div>
-    <!-- <div class="crumbs">
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item>
-          <i class="el-icon-edit"></i> 个人中心
-        </el-breadcrumb-item>
-        <el-breadcrumb-item>修改密码</el-breadcrumb-item>
-      </el-breadcrumb>
-    </div>-->
     <div class="userContent">
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item prop="pass" label="密码">
-          <el-input v-model="form.pass" type="password" placeholder="请输入密码"></el-input>
+      <el-form ref="form"
+               :model="form"
+               :rules="rules"
+               label-width="80px">
+        <el-form-item prop="pass"
+                      :label='`${$t("register.label.password")}`'>
+          <el-input v-model="form.pass"
+                    type="password"
+                    :placeholder='`${$t("login.adminLogin.password")}`'></el-input>
         </el-form-item>
-        <el-form-item prop="checkPass" label="确认密码">
-          <el-input
-            v-model="form.checkPass"
-            type="password"
-            placeholder="请再次输入密码"
-            :readonly="isValue"
-          ></el-input>
+        <el-form-item prop="checkPass"
+                      :label='`${$t("register.label.repeatPassword")}`'>
+          <el-input v-model="form.checkPass"
+                    type="password"
+                    :placeholder='`${$t("register.inputPlaceholder.repeatPassword")}`'
+                    :readonly="isValue"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit('form')">确定</el-button>
-          <el-button @click="onCancle()">取消</el-button>
+          <el-button type="primary"
+                     @click="onSubmit('form')">{{$t("button.ok")}}</el-button>
+          <el-button @click="onCancle()">{{$t("button.cancel")}}</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -31,9 +29,9 @@
 </template>
 
 <script>
-import {userModifyPassword} from '../../service/user/modifyPassword.service'
+import { userModifyPassword } from '../../service/user/modifyPassword.service'
 export default {
-  data() {
+  data () {
     const validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error(this.$t("register.inputPlaceholder.password")));
@@ -68,14 +66,13 @@ export default {
     };
   },
   methods: {
-    onSubmit(formName) {
+    onSubmit (formName) {
       const self = this;
       let formData = {
         id: parseInt(sessionStorage.getItem("ms_userId")),
         pass: self.form.pass,
         checkPass: self.form.checkPass
       };
-      console.log("id:", formData.id);
       self.$refs[formName].validate(valid => {
         if (valid) {
           const response = userModifyPassword(self, formData);
@@ -90,7 +87,7 @@ export default {
         }
       });
     },
-    onCancle() {
+    onCancle () {
       // const
       (this.form.pass = ""), (this.form.checkPass = "");
       // this.$router.push("/userCenter");
@@ -99,10 +96,13 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
 .userContent {
   width: 400px;
-  margin: 8% 40%;
+  margin: 8% 30%;
+  .el-input {
+    width: 88% !important;
+  }
 }
 </style>
    

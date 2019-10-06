@@ -1,18 +1,20 @@
 <template>
   <div class="header">
-    <div class="logo">{{$t("header.userHeader")}}</div>
+    <!-- <div class="logo">{{$t("header.adminHeader")}}</div> -->
     <div class="user-info">
-      <el-dropdown  @command="handleCommand">
+      <el-dropdown @command="handleCommand">
         <span class="el-dropdown-link">
           {{username}}
-          <img class="user-logo" src="../../../../static/img/img.jpg" />
+          <img class="user-logo"
+               src="../../../../static/img/img.jpg" />
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="userCenter">{{$t("header.userCenter")}}</el-dropdown-item>
+          <el-dropdown-item command="adminCenter">{{$t("header.userCenter")}}</el-dropdown-item>
           <el-dropdown-item command="loginout">{{$t("header.logout")}}</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-       <el-dropdown @command="selectLang">
+      <el-dropdown @command="selectLang"
+                   v-model="lang">
         <span class="el-dropdown-link">
           {{lang == 'ZH'? $t("header.zh"):$t("header.en")}}
           <i class="el-icon-arrow-down el-icon--right"></i>
@@ -28,34 +30,36 @@
 <script>
 import getLangName from "../../../mixin/getLangName"
 export default {
-  data() {
+  data () {
     return {
-      name: "Hi,user",
-      lang:"",
+      name: "Hi,admin",
+      lang: "",
     };
   },
   mixins: [getLangName],
-  mounted() {
-   this.selectLang(sessionStorage.getItem("userLang"))
+  mounted () {
+    this.selectLang(sessionStorage.getItem("adminLang"));
   },
   computed: {
-    username() {
-      let username = "Hello," + sessionStorage.getItem("userLoginId");
+    username () {
+      let username = "Hello," + sessionStorage.getItem("adminLoginId");
       return username ? username : this.name;
     }
   },
   methods: {
-    handleCommand(command) {
+    handleCommand (command) {
       if (command == "loginout") {
         sessionStorage.clear();
-        this.$router.push("/userLogin");
-      } else if (command == "userCenter") {
-        this.$router.push("/userCenter");
+        this.$router.push("/adminLogin");
+        location.reload();
+      } else if (command == "adminCenter") {
+        this.$router.push("/adminCenter");
       }
     },
-    selectLang(command) {
+    selectLang (command) {
       this.lang = this.getLangName(command);
-      this.$i18n.locale = this.lang;
+      sessionStorage.setItem("adminLang", this.lang);
+      this.$i18n.locale = this.lang
     },
   }
 };
@@ -65,10 +69,14 @@ export default {
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  height: 70px;
+  height: 119px;
   font-size: 22px;
   line-height: 70px;
   /* color: #fff; */
+  background-image: url("../../../../static/img/bg.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  font-family: "dincond-medium";
 }
 .header .logo {
   float: left;
@@ -80,19 +88,21 @@ export default {
   padding-right: 50px;
   font-size: 16px;
   color: #fff;
+  line-height: 119px;
 }
 .user-info .el-dropdown-link {
   position: relative;
   display: inline-block;
   padding-left: 50px;
-  color: #fff;
+  /* color: #fff; */
   cursor: pointer;
   vertical-align: middle;
+  inline-size: 119px;
 }
 .user-info .user-logo {
   position: absolute;
   left: 0;
-  top: 15px;
+  top: 35px;
   width: 40px;
   height: 40px;
   border-radius: 50%;

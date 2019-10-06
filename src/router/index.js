@@ -1,30 +1,30 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import HelloWorld from '@/components/HelloWorld';
-import homePage from '../components/common/homePage';
-import adminLogin from '../components/login/adminLogin';
-import userLogin from '../components/login/userLogin';
-import register from '../components/login/register';
-import userHome from '../components/user/common/userHome';
-import adminHome from '../components/admin/common/adminHome';
-import Readme from '../components/Readme';
-import userCenter from '../components/user/userCenter';
+import homePage from '../components/page/HomePage';
+import homeCenter from '../components/page/HomeCenter';
+import adminLogin from '../components/login/AdminLogin';
+import userLogin from '../components/login/UserLogin';
+import register from '../components/login/Register';
+import adminHome from '../components/admin/common/AdminHome';
+import userCenter from '../components/user/UserCenter';
+import userHome from '../components/user/UserHome';
 import adminCenter from '../components/admin/adminCenter';
-import modifyPassword from '../components/user/modifyPassword';
-import customerManage from '../components/admin/userManage/customerManage';
-import adminManage from '../components/admin/userManage/adminManage';
-import board from '../components/admin/villaCenter/board';
-import phoneModule from '../components/admin/villaCenter/boardPhoneModule';
-import warningModule from '../components/admin/villaCenter/boardWarningModule';
-import baseInfo from '../components/admin/villaCenter/baseInfo';
-import baseInfoAboutUs from '../components/admin/villaCenter/baseInfoAboutUs';
-import baseInfoAboutBuilding from '../components/admin/villaCenter/baseInfoAboutBuilding';
-import baseFacility from '../components/admin/villaCenter/baseFacility';
-import repairManage from '../components/admin/repairManage/repairManage';
-import opinionManage from '../components/admin/repairManage/opinionManage';
-import buildingManage from '../components/admin/buildingManage/buildingManage';
-import adminForget from '../components/login/adminForget';
-import userForget from '../components/login/userForget';
+import modifyPassword from '../components/user/ModifyPassword';
+import customerManage from '../components/admin/userManage/CustomerManage';
+import adminManage from '../components/admin/userManage/AdminManage';
+import board from '../components/admin/villaCenter/Board';
+import phoneModule from '../components/admin/villaCenter/BoardPhoneModule';
+import warningModule from '../components/admin/villaCenter/BoardWarningModule';
+import baseInfo from '../components/admin/villaCenter/BaseInfo';
+import baseInfoAboutUs from '../components/admin/villaCenter/BaseInfoAboutUs';
+import baseInfoAboutBuilding from '../components/admin/villaCenter/BaseInfoAboutBuilding';
+import baseFacility from '../components/admin/villaCenter/BaseFacility';
+import repairManage from '../components/admin/repairManage/RepairManage';
+import opinionManage from '../components/admin/repairManage/OpinionManage';
+import buildingManage from '../components/admin/buildingManage/BuildingManage';
+import adminForget from '../components/login/AdminForget';
+import userForget from '../components/login/UserForget';
 Vue.use(Router);
 
 export default new Router({
@@ -32,7 +32,27 @@ export default new Router({
     {
       path: '/homePage',
       name: 'homePage',
-      component: homePage
+      component: homePage,
+      children: [
+        {
+          path: '/homeCenter',
+          component: homeCenter
+        },
+        {
+          path: '/userHome',
+          component: userHome,
+          children: [
+            {
+              path: '/userCenter',
+              component: userCenter
+            },
+            {
+              path: '/modifyPassword',
+              component: modifyPassword
+            }
+          ]
+        }
+      ]
     },
     {
       path: '/',
@@ -52,24 +72,24 @@ export default new Router({
       path: '/userlogin',
       component: userLogin
     },
-    {
-      path: '/userHome',
-      component: userHome,
-      children: [
-        // {
-        //   path: '/readme',
-        //   component: Readme
-        // },
-        {
-          path: '/userCenter',
-          component: userCenter // 拖拽列表组件
-        },
-        {
-          path: '/modifyPassword',
-          component: modifyPassword
-        }
-      ]
-    },
+    // {
+    //   path: '/userHome',
+    //   component: userHome,
+    //   children: [
+    //     // {
+    //     //   path: '/readme',
+    //     //   component: Readme
+    //     // },
+    //     {
+    //       path: '/userCenter',
+    //       component: userCenter // 拖拽列表组件
+    //     },
+    //     {
+    //       path: '/modifyPassword',
+    //       component: modifyPassword
+    //     }
+    //   ]
+    // },
     {
       path: '/adminHome',
       component: adminHome,

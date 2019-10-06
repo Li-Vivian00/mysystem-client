@@ -87,7 +87,8 @@ export default {
     ok: '确认',
     cancel: '取消',
     update: '更新',
-    submit: '提交'
+    submit: '提交',
+    add: '添加'
   },
 
   manage: {
@@ -264,6 +265,18 @@ export default {
       adminLogin: '管理员登录',
       userLogin: '用户登录',
       aboutUs: '关于幸福港'
+    },
+    homeCenter: {
+      forestItem: '幸福港森林城市',
+      forestDetailItem:
+        '森林城市地面都是公园，车辆在底层穿行，地面是无污染轨道交通，建筑外墙长满垂直分布的植物，每一天，人们就都生活在花园里，呼吸在森林里，愉悦在自...',
+      learnMore: '了解更多 >',
+      realEstate: '地产',
+      agricultural: '农业',
+      property: '物业',
+      hotel: '酒店',
+      customerCenter: '客服中心',
+      other: '其他'
     }
   }
 };

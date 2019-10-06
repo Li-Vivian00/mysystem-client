@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import Util from "../../../utils/utils";
+import Util from "../../../utils/utilsReg";
 import _ from "lodash";
 import { setTimeout } from "timers";
 import { getAllRepairInfo, updateRepairInfo, getRepairInfoByItem, deleteRepairInfo } from "../../../service/admin/repairManage/repairManage.Service";

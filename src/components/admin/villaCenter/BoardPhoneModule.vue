@@ -127,7 +127,7 @@
 </template>
 
 <script>
-import Util from "../../../utils/utils";
+import Util from "../../../utils/utilsReg";
 import _ from "lodash"
 import { getAllPhoneModuleInfo, updatePhoneModuleInfo, deletePhoneModule, getOnePhoneModule } from "../../../service/admin/villaCenter/boardService"
 import { setTimeout } from 'timers';

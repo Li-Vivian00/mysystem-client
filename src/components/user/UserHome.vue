@@ -12,9 +12,10 @@
 </template>
 
 <script>
-import vHead from "./adminHeader.vue";
-import vSidebar from "./adminSidebar.vue";
+import vHead from "../page/HomeHeader";
+import vSidebar from "./UserSidebar";
 export default {
+  name: "userHome",
   components: {
     vHead,
     vSidebar
@@ -30,7 +31,11 @@ export default {
   height: 100%;
   top: 0px;
   background-color: #ffffff;
+  /* background-image: url("../../../../static/img/bg.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%; */
 }
+
 .content {
   position: absolute;
   top: 105px;

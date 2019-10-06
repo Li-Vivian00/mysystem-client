@@ -22,8 +22,8 @@
                     readonly></el-input>
         </el-form-item>
         <el-form-item :label='`${$t("register.label.userName")}`'
-                      prop="adminname">
-          <el-input v-model.trim="form.adminname"
+                      prop="username">
+          <el-input v-model.trim="form.username"
                     class="inputWidth"></el-input>
         </el-form-item>
         <el-form-item :label='`${$t("register.label.sex")}`'>
@@ -62,7 +62,7 @@
 <script>
 import { adminCenter } from "../../service/admin/adminCenter.service";
 import _ from "lodash"
-import Util from "../../utils/utils";
+import Util from "../../utils/utilsReg";
 export default {
   data () {
     const validateName = (rule, value, callback) => {
@@ -128,7 +128,7 @@ export default {
     return {
       isNotEdit: true,
       form: {
-        adminname: "",
+        username: "",
         loginid: "",
         email: "",
         phone: "",
@@ -137,7 +137,7 @@ export default {
         Id: ""
       },
       rules: {
-        adminname: [{ required: true, validator: validateName, trigger: "blur" }],
+        username: [{ required: true, validator: validateName, trigger: "blur" }],
         password: [{ required: true, validator: validatePass, trigger: "blur" }],
         email: [{ required: true, validator: validateEmail, trigger: "blur" }],
         phone: [{ required: true, validator: validatePhone, trigger: "blur" }],

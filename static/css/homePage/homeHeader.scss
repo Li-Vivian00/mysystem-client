@@ -1,0 +1,93 @@
+* {
+  font-size: 17px;
+}
+.homeHeader {
+  width: 100%;
+  height: 14%;
+  position: relative;
+  box-sizing: border-box;
+  line-height: 70px;
+  .logo {
+    position: absolute;
+    width: 18%;
+    height: 100%;
+    margin-left: 6%;
+
+    img {
+      width: 230px;
+      height: 130px;
+      position: relative;
+      top: -22%;
+    }
+  }
+
+  .menuBox {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    float: right;
+    .menu {
+      border: none;
+      position: absolute;
+      right: 47%;
+      // margin-right: 20px;
+      margin-top: 20px;
+      el-menu-item {
+        font-size: 17px !important;
+      }
+      el-menu-item:active {
+        color: rgb(255, 184, 184);
+      }
+    }
+
+    .langBox {
+      float: right;
+      position: relative;
+      top: 6px;
+      .language {
+        float: right;
+        margin-right: 20px;
+        margin-top: 8px;
+        height: 100%;
+
+        .el-dropdown-link {
+          position: relative;
+          display: inline-block;
+          padding-left: 50px;
+          color: #fff;
+          cursor: pointer;
+          vertical-align: middle;
+          padding: 0px !important;
+        }
+
+        .el-dropdown-menu__item {
+          text-align: center;
+        }
+        .el-dropdown-link {
+          color: rgb(156, 156, 156) !important;
+        }
+      }
+
+      .global {
+        margin-right: 6px;
+        margin-bottom: -10px;
+      }
+
+      .item {
+        display: inline-block;
+        position: relative;
+        top: 9px;
+        right: 30px;
+        color: #909399;
+      }
+    }
+  }
+
+  .el-submenu__title {
+    font-size: 17px !important;
+  }
+}
+
+.el-menu--horizontal > .el-submenu .el-submenu__title {
+  font-size: 17px !important;
+}
