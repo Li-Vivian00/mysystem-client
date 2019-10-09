@@ -106,6 +106,27 @@ export default {
           confirmButtonText: this.$t('button.ok')
         }
       );
+    },
+
+    oldPasswordIsError() {
+      this.$message({
+        type: 'error',
+        message: this.$t('manage.showMessage.oldPasswordIsError')
+      });
+    },
+
+    seccessUpdateAndLogin() {
+      this.$alert(
+        this.$t('manage.showMessage.successUpdatePwd'),
+        this.$t('manage.confirm.warning'),
+        {
+          confirmButtonText: this.$t('button.ok'),
+          callback: action => {
+            sessionStorage.clear();
+            this.$router.push('/');
+          }
+        }
+      );
     }
   }
 };

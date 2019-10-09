@@ -8,7 +8,11 @@ export default {
       register: '注册',
       adminLogin: '管理员登录',
       forgetPwd: '忘记密码？',
-      loginIdNotExist: '用户账号不存在'
+      loginIdNotExist: '用户账号不存在',
+      oldPassword: '旧密码：',
+      placeholderOldPassword: '请输入旧密码',
+      newPassword: '新密码：',
+      placeholderNewPassword: '请输入新密码'
     },
 
     adminLogin: {
@@ -137,7 +141,9 @@ export default {
       inputText: '输入不能为空，请输入需要查询的用户',
       userUndefined: '无该用户信息，请重新搜索！',
       searchError: '查询失败',
-      batchDeleteEmpty: '请选择需要删除的信息'
+      batchDeleteEmpty: '请选择需要删除的信息',
+      oldPasswordIsError: '旧密码错误',
+      successUpdatePwd: '修改密码成功！点击确认后重新登陆。'
     }
   },
 
@@ -163,6 +169,10 @@ export default {
       customerManage: '住户管理',
       adminManage: '管理员管理',
       buildingManage: '楼栋管理'
+    },
+    user: {
+      onlineService: '网上报修',
+      comments: '意见/投诉'
     }
   },
 
@@ -277,6 +287,10 @@ export default {
       hotel: '酒店',
       customerCenter: '客服中心',
       other: '其他'
+    },
+    onlineService: {
+      addApplication: '申请报修',
+      title: '网上报修申请表'
     }
   }
 };

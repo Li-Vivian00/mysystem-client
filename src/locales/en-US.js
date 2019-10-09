@@ -7,7 +7,11 @@ export default {
       load: 'Load',
       register: 'Register',
       adminLogin: 'AdminLogin',
-      forgetPwd: 'ForgetPassword?'
+      forgetPwd: 'ForgetPassword?',
+      oldPassword: 'Old Password:',
+      placeholderOldPassword: 'Please input old password',
+      newPassword: 'New Password',
+      placeholderNewPassword: 'Please input new password'
     },
 
     adminLogin: {
@@ -137,7 +141,9 @@ export default {
       inputText: 'The input cannot be empty. Enter the user you want to query',
       userUndefined: 'No user information, please search again!',
       searchError: 'Fail to query',
-      batchDeleteEmpty: 'Please select the info which you want to delete'
+      batchDeleteEmpty: 'Please select the info which you want to delete',
+      oldPasswordIsError: 'The old password is wrong',
+      successUpdatePwd: 'Change password successfully! Click ok to login again.'
     }
   },
 
@@ -163,6 +169,10 @@ export default {
       customerManage: 'CustomerManage',
       adminManage: 'AdminManage',
       buildingManage: 'BuildingManage'
+    },
+    user: {
+      onlineService: 'Online service',
+      comments: 'Comments/complaints'
     }
   },
 
@@ -278,6 +288,10 @@ export default {
       hotel: 'Hotel',
       customerCenter: 'Customer Center',
       other: 'Others'
+    },
+    onlineService: {
+      addApplication: 'To apply for the repair',
+      title: 'Online application form'
     }
   }
 };

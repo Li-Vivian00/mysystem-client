@@ -115,7 +115,7 @@
 <script>
 import { store } from "../../Vuex/store";
 import { mapGetters } from "vuex";
-import { adminModifyPassword, userModifyPassword } from "../../service/user/modifyPassword.service";
+import { adminModifyPassword, userModifyPasswordByPhone } from "../../service/user/modifyPassword.service";
 import {
   getUserPhone
 } from "../../service/login/register.service";
@@ -317,7 +317,7 @@ export default {
       };
       self.$refs[formName].validate(async valid => {
         if (valid) {
-          const response = await userModifyPassword(self, formData);
+          const response = await userModifyPasswordByPhone(self, formData);
           if (response.data == "fail to update password") {
             self.modifyPwdError();
           } else if (response.data == "success") {

@@ -8,9 +8,11 @@ import userLogin from '../components/login/UserLogin';
 import register from '../components/login/Register';
 import adminHome from '../components/admin/common/AdminHome';
 import userCenter from '../components/user/UserCenter';
+import userOnlineService from '../components/user/UserOnlineService';
+import userComment from '../components/user/UserComment';
 import userHome from '../components/user/UserHome';
 import adminCenter from '../components/admin/adminCenter';
-import modifyPassword from '../components/user/ModifyPassword';
+import modifyPassword from '../components/user/UserModifyPassword';
 import customerManage from '../components/admin/userManage/CustomerManage';
 import adminManage from '../components/admin/userManage/AdminManage';
 import board from '../components/admin/villaCenter/Board';
@@ -49,6 +51,14 @@ export default new Router({
             {
               path: '/modifyPassword',
               component: modifyPassword
+            },
+            {
+              path: '/onlineService',
+              component: userOnlineService
+            },
+            {
+              path: '/userComment',
+              component: userComment
             }
           ]
         }

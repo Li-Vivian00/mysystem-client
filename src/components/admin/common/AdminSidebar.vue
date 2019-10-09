@@ -30,6 +30,7 @@
 
 <script>
 export default {
+  name: "AdminSidebar",
   data () {
     return {
       items: [

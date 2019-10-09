@@ -41,7 +41,7 @@ export default {
   top: 105px;
   left: 249px;
   width: 80%;
-  height: 84%;
+  height: 100%;
   /* border: 2px solid #9fd9ff; */
   box-shadow: 0px 2px 9px #dc8181;
   /* float: right; */

@@ -35,27 +35,24 @@
 
 <script>
 export default {
+  name: "userSidebar",
   data () {
     return {
       items: [
         {
+          icon: "el-icon-service",
+          index: "onlineService",
+          title: "sidebar.user.onlineService",
+        },
+        {
+          icon: "el-icon-chat-line-round",
+          index: "userComment",
+          title: "sidebar.user.comments",
+        },
+        {
           icon: "el-icon-user",
           index: "userCenter",
           title: "sidebar.admin.baseInfo",
-          // subs: [
-          //   {
-          //     index: "phoneModule",
-          //     title: "sidebar.admin.board"
-          //   },
-          //   {
-          //     index: "baseInfoAboutUs",
-          //     title: "sidebar.admin.baseInfo"
-          //   },
-          //   {
-          //     index: "baseFacility",
-          //     title: "sidebar.admin.baseFacility"
-          //   }
-          // ]
         },
         {
           icon: "el-icon-mobile",
@@ -68,9 +65,7 @@ export default {
   computed: {
     onRoutes () {
       return this.$route.path.replace("/", "");
-    }
-  },
-  computed: {
+    },
     username () {
       let username = "Welcome! " + sessionStorage.getItem("userLoginId");
       return sessionStorage.getItem("userLoginId") ? username : "";
@@ -96,14 +91,14 @@ export default {
     img {
       position: relative;
       display: inline-block;
-      width: 33%;
+      width: 35%;
       /* left: -57px; */
       /* float: left; */
-      height: 50%;
+      height: 60%;
       margin-bottom: 5px;
     }
     p {
-      color: #333333;
+      color: #8d8b8b;
       font-family: "dincond-medium";
     }
   }

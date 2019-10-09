@@ -59,7 +59,8 @@ export default {
         phone: "",
         card: "",
         sex: "",
-        Id: ""
+        Id: "",
+        password: ""
       }
     };
   },
@@ -77,7 +78,8 @@ export default {
         self.form.card = result.card;
         self.form.sex = result.sex;
         self.form.Id = result.Id;
-        // sessionStorage.setItem("ms_userId", result.Id);
+        self.form.password = result.password;
+        sessionStorage.setItem("userPwd", self.form.password);
       }
     }
   },
