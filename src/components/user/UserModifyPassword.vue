@@ -102,7 +102,7 @@ export default {
             self.form.oldPass = "";
             self.form.newPass = "";
             self.form.checkPass = "";
-            self.seccessUpdateAndLogin();
+            self.successUpdateAndLogin();
           }
         } else {
           return false;
@@ -128,4 +128,3 @@ export default {
   }
 }
 </style>
-   

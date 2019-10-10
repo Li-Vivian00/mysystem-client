@@ -42,7 +42,8 @@ export default {
       male: 'Male',
       female: 'Female',
       room_id: 'Room Id:',
-      stay_date: 'Stay_Date:'
+      stay_date: 'Stay_Date:',
+      name: 'Name',
     },
 
     inputPlaceholder: {
@@ -83,7 +84,10 @@ export default {
       passwordError: 'Password mistake',
       repeatPasswordError: 'The two passwords did not match',
       phoneExist: 'The phone number has been registered',
-      room_id: 'Please enter room id'
+      room_id: 'Please enter room id',
+      complaintType: 'Please select type',
+      complaintDetail: 'Please enter the detail',
+      userRequire: 'Please enter comments/suggestions, if not, fill in the "No" ',
     }
   },
 
@@ -289,9 +293,22 @@ export default {
       customerCenter: 'Customer Center',
       other: 'Others'
     },
-    onlineService: {
+    userRepair: {
       addApplication: 'To apply for the repair',
-      title: 'Online application form'
+      title: 'Online Application Form',
+      waitHandle: 'Wait to handle',
+      finishHandle: 'Processed ',
+    },
+    userOpinion: {
+      title: 'Complaint/Opinion Form',
+      addComplaint: 'Fill in form',
+      typePlaceholder: 'Please select type',
+      netWork: 'NetWork',
+      environment: 'Environment',
+      hydroelectricity: 'Hydroelectricity',
+      others: 'Others',
+      detail: 'Detailed content ',
+      require: 'Observations/recommendations ',
     }
   }
 };

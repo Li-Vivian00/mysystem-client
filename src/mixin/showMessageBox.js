@@ -51,15 +51,6 @@ export default {
         }
       );
     },
-
-    handleSizeChange(size) {
-      this.pagesize = size;
-    },
-
-    handleCurrentChange(currentPage) {
-      this.currentPage = currentPage;
-    },
-
     verifySuccess() {
       this.$message({
         type: 'success',
@@ -115,7 +106,7 @@ export default {
       });
     },
 
-    seccessUpdateAndLogin() {
+    successUpdateAndLogin() {
       this.$alert(
         this.$t('manage.showMessage.successUpdatePwd'),
         this.$t('manage.confirm.warning'),
@@ -127,6 +118,7 @@ export default {
           }
         }
       );
-    }
+    },
+
   }
 };

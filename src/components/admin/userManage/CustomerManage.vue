@@ -76,7 +76,7 @@
               <span>{{ props.row.stay_date }}</span>
             </el-form-item>
             <el-form-item :label='`${$t("register.label.room_id")}`'>
-              <span>{{ props.row.room_id }}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+              <span>{{ props.row.room_id }}</span>
               <el-link :underline="false">查看<i class="el-icon-view el-icon--right"></i> </el-link>
             </el-form-item>
           </el-form>
@@ -331,6 +331,7 @@ export default {
               }
             )
             .then(async () => {
+              console.log(formValue);
               const response = await updateUser(self, formValue);
               if (_.isEqual(response.data, "fail to update")) {
                 self.showErrorMessageBox();
@@ -353,6 +354,7 @@ export default {
       this.$nextTick(() => {
         this.$refs['inputForm'].$refs['editForm'].clearValidate();
       })
+      this.$refs['inputForm'].$refs['editForm'].resetFields();
     },
 
     //点击添加用户
@@ -450,6 +452,15 @@ export default {
       this.addUserForm.stay_date = str;
       return this.addUserForm.stay_date;
     },
+
+    handleSizeChange(size) {
+      this.pagesize = size;
+    },
+
+    handleCurrentChange(currentPage) {
+      this.currentPage = currentPage;
+    },
+
   }
 };
 </script>

@@ -64,3 +64,38 @@ export const validateLoginId = (rule, value, callback, self) => {
   }
   callback();
 };
+
+export const validatePhone = (rule, value, callback, self) => {
+  if (value === '') {
+    callback(new Error(self.$t('register.status.phone')));
+  } else if (!Util.phoneReg.test(value)) {
+    callback(new Error(self.$t('register.status.formatPhone')));
+  } else {
+    callback();
+  }
+};
+export const validateType = (rule, value, callback, self) => {
+  if (value === '') {
+    callback(new Error(self.$t('register.status.complaintType')));
+  }
+  callback();
+};
+export const validateDetail = (rule, value, callback, self) => {
+  if (value === '') {
+    callback(new Error(self.$t('register.status.complaintDetail')));
+  }
+  callback();
+};
+export const validateRequire = (rule, value, callback, self) => {
+  if (value === '') {
+    callback(new Error(self.$t('register.status.userRequire')));
+  }
+  callback();
+};
+
+export const validateRoomId = (rule, value, callback, self) => {
+  if (value === '') {
+    callback(new Error(self.$t('register.status.room_id')));
+  }
+  callback();
+};

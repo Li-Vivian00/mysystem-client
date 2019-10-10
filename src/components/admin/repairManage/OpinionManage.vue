@@ -36,19 +36,19 @@
       <el-table-column prop="phone"
                        :label='`${$t("opinionManage.phone")}`'
                        sortable></el-table-column>
-      <el-table-column prop="type"
+      <el-table-column prop="complaint_type"
                        :label='`${$t("opinionManage.type")}`'
                        sortable></el-table-column>
       <el-table-column prop="content"
                        :label='`${$t("opinionManage.content")}`'
                        sortable></el-table-column>
-      <el-table-column prop="require"
+      <el-table-column prop="suggestion"
                        :label='`${$t("opinionManage.require")}`'
                        sortable></el-table-column>
       <el-table-column prop="emergency_degree"
                        :label='`${$t("opinionManage.emergencyDegree")}`'
                        sortable></el-table-column>
-      <el-table-column prop="date"
+      <el-table-column prop="submit_date"
                        :label='`${$t("opinionManage.date")}`'
                        sortable></el-table-column>
       <el-table-column fixed="right"
@@ -261,6 +261,15 @@ export default {
     selectItem (val) {
       this.selectValue = val;
     },
+
+    handleSizeChange(size) {
+      this.pagesize = size;
+    },
+
+    handleCurrentChange(currentPage) {
+      this.currentPage = currentPage;
+    },
+
   }
 }
 </script>

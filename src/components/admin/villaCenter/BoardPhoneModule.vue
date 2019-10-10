@@ -423,6 +423,14 @@ export default {
         }
       }
     },
+
+     handleSizeChange(size) {
+      this.pagesize = size;
+    },
+
+    handleCurrentChange(currentPage) {
+      this.currentPage = currentPage;
+    },
   }
 }
 </script>

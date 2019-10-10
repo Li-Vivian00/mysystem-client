@@ -8,3 +8,12 @@ export const getUserOpinionInfo = async (self, loginid) => {
     });
   return result;
 };
+
+export const submitOpinion = async (self, form) => {
+  const result = await self.$http
+    .post('/api/userOpinion/submitOpinion', form, {})
+    .catch(error => {
+      console.log(error);
+    });
+  return result;
+};

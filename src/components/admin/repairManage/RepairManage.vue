@@ -29,7 +29,7 @@
               height="416"
               style="width: 100%; margin-top:20px;">
       <el-table-column type="index"></el-table-column>
-      <el-table-column prop="type"
+      <el-table-column prop="repair_type"
                        :label='`${$t("repairManage.type")}`'
                        sortable>
       </el-table-column>
@@ -211,6 +211,14 @@ export default {
           }
         }
       }
+    },
+
+    handleSizeChange(size) {
+      this.pagesize = size;
+    },
+
+    handleCurrentChange(currentPage) {
+      this.currentPage = currentPage;
     },
   }
 };

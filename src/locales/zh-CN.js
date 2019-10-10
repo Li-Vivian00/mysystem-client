@@ -42,7 +42,8 @@ export default {
       male: '男',
       female: '女',
       room_id: '房间号：',
-      stay_date: '入住时间：'
+      stay_date: '入住时间：',
+      name: '姓名',
     },
 
     inputPlaceholder: {
@@ -83,7 +84,10 @@ export default {
       passwordError: '密码错误',
       repeatPasswordError: '两次输入的密码不一致',
       phoneExist: '该手机号已被注册',
-      room_id: '请输入房间号'
+      room_id: '请输入房间号',
+      complaintType: '请选择类型',
+      complaintDetail: '请输入详细内容',
+      userRequire: '请输入意见/建议，如无则填写“无”',
     }
   },
 
@@ -252,7 +256,7 @@ export default {
     replied: '已回复',
     noReply: '待回复',
     waitReply: '待回复',
-    userName: '用户名',
+    userName: '联系人',
     phone: '联系电话',
     type: '意见/投诉类型',
     content: '意见/投诉内容',
@@ -288,9 +292,22 @@ export default {
       customerCenter: '客服中心',
       other: '其他'
     },
-    onlineService: {
+    userRepair: {
       addApplication: '申请报修',
-      title: '网上报修申请表'
+      title: '网上报修申请表',
+      waitHandle: '待处理',
+      finishHandle: '已处理',
+    },
+    userOpinion: {
+      title: '投诉/意见表',
+      addComplaint: '填写表格',
+      typePlaceholder: '请选择类型',
+      netWork: '网络',
+      environment: '环境',
+      hydroelectricity: '水电',
+      others: '其他',
+      detail: '详细内容',
+      require: '意见/建议',
     }
   }
 };

@@ -318,6 +318,7 @@ export default {
       this.$nextTick(() => {
         this.$refs['inputForm'].$refs['editForm'].clearValidate();
       })
+      this.$refs['inputForm'].$refs['editForm'].resetFields();
     },
 
     //点击添加用户
@@ -410,6 +411,15 @@ export default {
         }
       }
     },
+
+    handleSizeChange(size) {
+      this.pagesize = size;
+    },
+
+    handleCurrentChange(currentPage) {
+      this.currentPage = currentPage;
+    },
+
   }
 };
 </script>
