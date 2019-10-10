@@ -1,14 +1,13 @@
 import _ from 'lodash';
-import {
-  exportUserData
-} from '../plugins/excelHelper'
-
+import { exportUserData } from '../plugins/excelHelper';
+import getDateTimes from '../mixin/getDateTimes';
 export default {
   data() {
     return {
-      result: [],
-    }
+      result: []
+    };
   },
+  mixins: [getDateTimes],
   methods: {
     async exportUserData(data) {
       if (!_.isArray(data)) {
@@ -28,8 +27,8 @@ export default {
           email: item.email,
           roomId: item.room_id,
           stayDate: item.stay_date
-        }
-      })
+        };
+      });
       const time = this.getDateTimes();
       const fileName = `User Detail-${time}`;
       exportUserData({
@@ -40,13 +39,6 @@ export default {
         sheetName: 'User Data Table'
       });
       this.result = [];
-    },
-
-    getDateTimes() {
-      const time = new Date().toLocaleString("chinese", {
-        hour12: false
-      }).replace(/(\/)/g, '-');
-      return time;
-    },
+    }
   }
-}
+};

@@ -45,11 +45,14 @@
       <el-table-column prop="suggestion"
                        :label='`${$t("opinionManage.require")}`'
                        sortable></el-table-column>
-      <el-table-column prop="emergency_degree"
-                       :label='`${$t("opinionManage.emergencyDegree")}`'
-                       sortable></el-table-column>
       <el-table-column prop="submit_date"
                        :label='`${$t("opinionManage.date")}`'
+                       sortable></el-table-column>
+      <el-table-column prop="answer_date"
+                       :label='`${$t("repairManage.handleTime")}`'
+                       sortable></el-table-column>
+      <el-table-column prop="answer_content"
+                       :label='`${$t("opinionManage.answerContent")}`'
                        sortable></el-table-column>
       <el-table-column fixed="right"
                        :label='`${$t("repairManage.status")}`'>
@@ -110,6 +113,7 @@
 
 <script>
 import showMessageBox from "../../../mixin/showMessageBox"
+import getDateTimes from "../../../mixin/getDateTimes"
 import { getAllOpinionInfo, updateOpinionInfo, getOpinionInfoByItem, deleteOpinionInfo } from "../../../service/admin/repairManage/opinionManage.Service"
 export default {
   name: "opinionManage",
@@ -140,10 +144,11 @@ export default {
         Id: "",
         content: "",
         answer_content: "",
+        answer_date: "",
       },
     }
   },
-  mixins: [showMessageBox],
+  mixins: [showMessageBox, getDateTimes],
   mounted () {
     setTimeout(() => {
       this.loading = false;
@@ -218,7 +223,9 @@ export default {
         )
           .then(async () => {
             self.updateReplyForm.status = 1;
-            const response = await updateOpinionInfo(self, self.updateReplyForm.status, self.updateReplyForm.id, self.updateReplyForm.answer_content);
+            self.updateReplyForm.answer_date = self.getDateTimes();
+            console.log(self.updateReplyForm);
+            const response = await updateOpinionInfo(self, self.updateReplyForm.status, self.updateReplyForm.id, self.updateReplyForm.answer_content, self.updateReplyForm.answer_date);
             if (response.data == "success to update") {
               self.updateReplyFormVisible = false;
               self.getAllOpinionInfo();
@@ -262,11 +269,11 @@ export default {
       this.selectValue = val;
     },
 
-    handleSizeChange(size) {
+    handleSizeChange (size) {
       this.pagesize = size;
     },
 
-    handleCurrentChange(currentPage) {
+    handleCurrentChange (currentPage) {
       this.currentPage = currentPage;
     },
 

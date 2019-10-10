@@ -43,7 +43,7 @@ export default {
       female: '女',
       room_id: '房间号：',
       stay_date: '入住时间：',
-      name: '姓名',
+      name: '姓名'
     },
 
     inputPlaceholder: {
@@ -87,7 +87,7 @@ export default {
       room_id: '请输入房间号',
       complaintType: '请选择类型',
       complaintDetail: '请输入详细内容',
-      userRequire: '请输入意见/建议，如无则填写“无”',
+      userRequire: '请输入意见/建议，如无则填写“无”'
     }
   },
 
@@ -240,6 +240,7 @@ export default {
     type: '类型',
     problemDescription: '问题描述',
     time: '提交时间',
+    handleTime: '处理时间',
     status: '状态',
     remark: '备注',
     room_id: '房间号',
@@ -297,6 +298,11 @@ export default {
       title: '网上报修申请表',
       waitHandle: '待处理',
       finishHandle: '已处理',
+      repairType: '报修类型',
+      netWrok: '网络故障',
+      environment: '环境恶劣',
+      hydroelectricity: '水电供应',
+      emergencyHandle: '紧急处理'
     },
     userOpinion: {
       title: '投诉/意见表',
@@ -307,7 +313,7 @@ export default {
       hydroelectricity: '水电',
       others: '其他',
       detail: '详细内容',
-      require: '意见/建议',
+      require: '意见/建议'
     }
   }
 };

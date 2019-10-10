@@ -12,7 +12,8 @@
               :element-loading-text='`${$t("manage.loadingText")}`'
               element-loading-spinner="el-icon-loading"
               element-loading-background="rgba(0, 0, 0, 0.8)"
-              style="width: 100%; margin-top:20px;">
+              style="width: 100%; margin-top:20px;"
+              height="437">
       <el-table-column type="index"></el-table-column>
       <el-table-column prop="username"
                        :label='`${$t("opinionManage.userName")}`'
@@ -33,10 +34,17 @@
       <el-table-column prop="submit_date"
                        :label='`${$t("opinionManage.date")}`'
                        sortable></el-table-column>
+      <el-table-column prop="answer_date"
+                       :label='`${$t("repairManage.handleTime")}`'
+                       sortable></el-table-column>
+      <el-table-column prop="answer_content"
+                       :label='`${$t("opinionManage.answerContent")}`'
+                       sortable></el-table-column>
       <el-table-column fixed="right"
                        :label='`${$t("repairManage.status")}`'>
         <template slot-scope="scope">
-          <span v-if="scope.row.status == 0" class="waitHandle">{{$t("homePage.userRepair.waitHandle")}}</span>
+          <span v-if="scope.row.status == 0"
+                class="waitHandle">{{$t("homePage.userRepair.waitHandle")}}</span>
           <span v-else
                 class="processed">{{$t("homePage.userRepair.finishHandle")}}</span>
           <el-button @click="deleteRow(scope.$index, scope.row)"
@@ -63,46 +71,53 @@
                label-width="100px"
                class="demo-ruleForm"
                label-position="right">
-        <el-form-item :label='`${$t("register.label.name")}`' prop="username">
+        <el-form-item :label='`${$t("register.label.name")}`'
+                      prop="username">
           <el-input v-model="editForm.username"
                     class="inputWidth"></el-input>
         </el-form-item>
-        <el-form-item :label='`${$t("register.label.phone")}`' prop="phone">
+        <el-form-item :label='`${$t("register.label.phone")}`'
+                      prop="phone">
           <el-input v-model="editForm.phone"
                     class="inputWidth"></el-input>
         </el-form-item>
-        <el-form-item :label='`${$t("opinionManage.type")}`' prop="complaint_type">
-        <el-select v-model="editForm.complaint_type"
-                   :placeholder='`${$t("homePage.userOpinion.typePlaceholder")}`'
-                   class="selectStyle">
-          <el-option :label='`${$t("homePage.userOpinion.netWork")}`'
-                     :value='`${$t("homePage.userOpinion.netWork")}`'></el-option>
-          <el-option :label='`${$t("homePage.userOpinion.environment")}`'
-                     :value='`${$t("homePage.userOpinion.environment")}`'></el-option>
-          <el-option :label='`${$t("homePage.userOpinion.hydroelectricity")}`'
-                     :value='`${$t("homePage.userOpinion.hydroelectricity")}`'></el-option>
-          <el-option :label='`${$t("homePage.userOpinion.others")}`'
-                     :value='`${$t("homePage.userOpinion.others")}`'></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item :label='`${$t("homePage.userOpinion.detail")}`' prop="content">
-        <el-input type="textarea"
-                  v-model="editForm.content"
-                  class="textStyle"
-                  maxlength="300"
-                  show-word-limit></el-input>
-      </el-form-item>
-      <el-form-item :label='`${$t("homePage.userOpinion.require")}`' prop="suggestion">
-        <el-input type="textarea"
-                  v-model="editForm.suggestion"
-                  class="textStyle"
-                  maxlength="200"
-                  show-word-limit></el-input>
-      </el-form-item>
+        <el-form-item :label='`${$t("opinionManage.type")}`'
+                      prop="complaint_type">
+          <el-select v-model="editForm.complaint_type"
+                     :placeholder='`${$t("homePage.userOpinion.typePlaceholder")}`'
+                     class="selectStyle">
+            <el-option :label='`${$t("homePage.userOpinion.netWork")}`'
+                       :value='`${$t("homePage.userOpinion.netWork")}`'></el-option>
+            <el-option :label='`${$t("homePage.userOpinion.environment")}`'
+                       :value='`${$t("homePage.userOpinion.environment")}`'></el-option>
+            <el-option :label='`${$t("homePage.userOpinion.hydroelectricity")}`'
+                       :value='`${$t("homePage.userOpinion.hydroelectricity")}`'></el-option>
+            <el-option :label='`${$t("homePage.userOpinion.others")}`'
+                       :value='`${$t("homePage.userOpinion.others")}`'></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item :label='`${$t("homePage.userOpinion.detail")}`'
+                      prop="content">
+          <el-input type="textarea"
+                    v-model="editForm.content"
+                    class="textStyle"
+                    maxlength="300"
+                    show-word-limit></el-input>
+        </el-form-item>
+        <el-form-item :label='`${$t("homePage.userOpinion.require")}`'
+                      prop="suggestion">
+          <el-input type="textarea"
+                    v-model="editForm.suggestion"
+                    class="textStyle"
+                    maxlength="200"
+                    show-word-limit></el-input>
+        </el-form-item>
       </el-form>
-      <span slot="footer" class="dialog-footer">
+      <span slot="footer"
+            class="dialog-footer">
         <el-button @click="handleClose">{{$t("button.cancel")}}</el-button>
-        <el-button type="primary" @click="submitForm('editForm')">{{$t("button.submit")}}</el-button>
+        <el-button type="primary"
+                   @click="submitForm('editForm')">{{$t("button.submit")}}</el-button>
       </span>
     </el-dialog>
   </div>
@@ -111,12 +126,13 @@
 <script>
 import { getUserOpinionInfo, submitOpinion } from '../../service/user/userOpinion';
 import showMessageBox from "../../mixin/showMessageBox"
-import { validateName, validatePhone, validateType, validateDetail, validateRequire} from "../../utils/utilsValidate";
-import {deleteOpinionInfo} from "../../service/admin/repairManage/opinionManage.Service";
+import getDateTimes from "../../mixin/getDateTimes"
+import { validateName, validatePhone, validateType, validateDetail, validateRequire } from "../../utils/utilsValidate";
+import { deleteOpinionInfo } from "../../service/admin/repairManage/opinionManage.Service";
 export default {
   name: "userOpinion",
   data () {
-    const self= this;
+    const self = this;
     return {
       form: [],
       loading: true,
@@ -144,7 +160,7 @@ export default {
       }
     };
   },
-  mixins: [showMessageBox],
+  mixins: [showMessageBox, getDateTimes],
   mounted () {
     setTimeout(() => {
       this.loading = false;
@@ -167,7 +183,7 @@ export default {
               }
             )
             .then(async () => {
-              self.getDateTimes();
+              self.editForm.submit_date = self.getDateTimes();
               self.editForm.loginid = sessionStorage.getItem("userLoginId");
               const response = await submitOpinion(self, self.editForm);
               if (_.isEqual(response.data, "fail to submit")) {
@@ -235,15 +251,15 @@ export default {
         });
     },
 
-    handleSizeChange(size) {
+    handleSizeChange (size) {
       this.pagesize = size;
     },
 
-    handleCurrentChange(currentPage) {
+    handleCurrentChange (currentPage) {
       this.currentPage = currentPage;
     },
 
-    handleClose() {
+    handleClose () {
       this.dialogVisible = false;
       this.$nextTick(() => {
         this.$refs['editForm'].clearValidate();
@@ -251,15 +267,10 @@ export default {
       this.$refs['editForm'].resetFields();
     },
 
-    getDateTimes () {
-      const str = new Date().toLocaleString("chinese", { hour12: false }).replace(/(\/)/g, '-');
-      this.editForm.submit_date = str;
-      return this.editForm.submit_date;
-    },
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '../../../static/css/user/userOnlineService.scss';
+@import "../../../static/css/user/userOnlineService.scss";
 </style>

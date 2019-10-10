@@ -12,7 +12,8 @@
               :element-loading-text='`${$t("manage.loadingText")}`'
               element-loading-spinner="el-icon-loading"
               element-loading-background="rgba(0, 0, 0, 0.8)"
-              style="width: 100%; margin-top:20px;">
+              style="width: 100%; margin-top:20px;"
+              height="437">
       <el-table-column type="index"></el-table-column>
       <el-table-column prop="username"
                        :label='`${$t("opinionManage.userName")}`'
@@ -36,7 +37,8 @@
       <el-table-column fixed="right"
                        :label='`${$t("repairManage.status")}`'>
         <template slot-scope="scope">
-          <span v-if="scope.row.status == 0" class="waitHandle">{{$t("homePage.userRepair.waitHandle")}}</span>
+          <span v-if="scope.row.status == 0"
+                class="waitHandle">{{$t("homePage.userRepair.waitHandle")}}</span>
           <span v-else
                 class="processed">{{$t("homePage.userRepair.finishHandle")}}</span>
           <el-button @click="deleteRow(scope.$index, scope.row)"
@@ -63,35 +65,37 @@
                label-width="100px"
                class="demo-ruleForm"
                label-position="right">
-        <el-form-item :label='`${$t("register.label.name")}`' prop="username">
+        <el-form-item :label='`${$t("register.label.name")}`'
+                      prop="username">
           <el-input v-model="editForm.username"
                     class="inputWidth"></el-input>
         </el-form-item>
-        <el-form-item :label='`${$t("register.label.phone")}`' prop="phone">
+        <el-form-item :label='`${$t("repairManage.phone")}`'
+                      prop="phone">
           <el-input v-model="editForm.phone"
                     class="inputWidth"></el-input>
         </el-form-item>
-        <el-form-item label="房间号"
+        <el-form-item :label='`${$t("repairManage.room_id")}`'
                       prop="room_id">
           <el-input v-model="editForm.room_id"
                     class="inputWidth"></el-input>
         </el-form-item>
-        <el-form-item label="报修类型"
+        <el-form-item :label='`${$t("homePage.userRepair.repairType")}`'
                       prop="repair_type">
           <el-select v-model="editForm.repair_type"
-                     placeholder="请选择报修类型"
+                     :placeholder='`${$t("homePage.userOpinion.typePlaceholder")}`'
                      class="selectStyle">
-            <el-option label="网络故障"
-                       value="shanghai"></el-option>
-            <el-option label="环境恶劣"
-                       value="beijing"></el-option>
-            <el-option label="水电供应"
-                       value="beijing"></el-option>
-            <el-option label="其他"
-                       value="beijing"></el-option>
+            <el-option :label='`${$t("homePage.userRepair.netWrok")}`'
+                       :value='`${$t("homePage.userRepair.netWrok")}`'></el-option>
+            <el-option :label='`${$t("homePage.userRepair.environment")}`'
+                       :value='`${$t("homePage.userRepair.environment")}`'></el-option>
+            <el-option :label='`${$t("homePage.userRepair.hydroelectricity")}`'
+                       :value='`${$t("homePage.userRepair.hydroelectricity")}`'></el-option>
+            <el-option :label='`${$t("homePage.userOpinion.others")}`'
+                       :value='`${$t("homePage.userOpinion.others")}`'></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="详细说明"
+        <el-form-item :label='`${$t("homePage.userOpinion.detail")}`'
                       prop="problem_description">
           <el-input type="textarea"
                     v-model="editForm.problem_description"
@@ -99,14 +103,17 @@
                     maxlength="100"
                     show-word-limit></el-input>
         </el-form-item>
-        <el-form-item label="紧急处理"
+        <el-form-item :label='`${$t("homePage.userRepair.emergencyHandle")}`'
                       prop="remark">
-          <el-switch v-model="editForm.remark" style="width: 103px"></el-switch>
+          <el-switch v-model="editForm.remark"
+                     style="width: 103px"></el-switch>
         </el-form-item>
       </el-form>
-      <span slot="footer" class="dialog-footer">
+      <span slot="footer"
+            class="dialog-footer">
         <el-button @click="handleClose">{{$t("button.cancel")}}</el-button>
-        <el-button type="primary" @click="submitForm('editForm')">{{$t("button.submit")}}</el-button>
+        <el-button type="primary"
+                   @click="submitForm('editForm')">{{$t("button.submit")}}</el-button>
       </span>
     </el-dialog>
   </div>
@@ -114,9 +121,10 @@
 
 <script>
 import showMessageBox from "../../mixin/showMessageBox"
-import {deleteRepairInfo} from "../../service/admin/repairManage/repairManage.Service";
-import {validateDetail, validateName, validatePhone, validateRoomId, validateType} from "../../utils/utilsValidate";
-import {getUserRepairInfo, submitRepair} from "../../service/user/userRepair";
+import getDateTimes from "../../mixin/getDateTimes"
+import { deleteRepairInfo } from "../../service/admin/repairManage/repairManage.Service";
+import { validateDetail, validateName, validatePhone, validateRoomId, validateType } from "../../utils/utilsValidate";
+import { getUserRepairInfo, submitRepair } from "../../service/user/userRepair";
 export default {
   name: "userOpinion",
   data () {
@@ -128,7 +136,7 @@ export default {
       pagesize: 5,
       dialogVisible: false,
       editForm: {
-        loginid:'',
+        loginid: '',
         username: '',
         phone: '',
         repair_type: '',
@@ -136,7 +144,8 @@ export default {
         remark: false,
         sub_time: '',
         handle_time: '',
-        room_id: ''
+        room_id: '',
+        status: '0',
       },
       rules: {
         username: [{ required: true, validator: ((rule, value, callback) => validateName(rule, value, callback, self)), trigger: "blur" }],
@@ -147,7 +156,7 @@ export default {
       }
     };
   },
-  mixins: [showMessageBox],
+  mixins: [showMessageBox, getDateTimes],
   mounted () {
     setTimeout(() => {
       this.loading = false;
@@ -170,8 +179,9 @@ export default {
               }
             )
             .then(async () => {
-              self.getDateTimes();
+              self.editForm.sub_time = this.getDateTimes();
               self.editForm.loginid = sessionStorage.getItem("userLoginId");
+              console.log(self.editForm);
               const response = await submitRepair(self, self.editForm);
               if (_.isEqual(response.data, "fail to submit")) {
                 self.showErrorMessageBox();
@@ -193,12 +203,8 @@ export default {
       const self = this;
       const loginid = sessionStorage.getItem("userLoginId");
       const response = await getUserRepairInfo(self, loginid);
-      if (_.isEmpty(response.data)) {
-        self.showErrorMessageBox();
-      } else {
-        console.log(response.data);
-        self.form = response.data;
-      }
+      self.form = response.data;
+
     },
 
     //点击添加用户
@@ -236,25 +242,25 @@ export default {
         });
     },
 
-    handleSizeChange(size) {
+    handleSizeChange (size) {
       this.pagesize = size;
     },
 
-    handleCurrentChange(currentPage) {
+    handleCurrentChange (currentPage) {
       this.currentPage = currentPage;
     },
 
-    handleClose(done) {
+    handleClose (done) {
       this.dialogVisible = false;
       this.$nextTick(() => {
         this.$refs['editForm'].clearValidate();
       });
       this.$refs['editForm'].resetFields();
-    }
+    },
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '../../../static/css/user/userOnlineService.scss';
+@import "../../../static/css/user/userOnlineService.scss";
 </style>

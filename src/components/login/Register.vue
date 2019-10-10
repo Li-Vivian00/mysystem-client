@@ -128,6 +128,7 @@ import {
   getUserPhone
 } from "../../service/login/register.service";
 import showMessageBox from "../../mixin/showMessageBox"
+import getDateTimes from "../../mixin/getDateTimes"
 import getLangName from '../../mixin/getLangName';
 export default {
   data () {
@@ -188,7 +189,7 @@ export default {
       lang: 'ZH'
     };
   },
-  mixins: [showMessageBox, getLangName],
+  mixins: [showMessageBox, getLangName, getDateTimes],
   mounted () {
     this.selectLang(sessionStorage.getItem("userLang"));
   },
@@ -197,7 +198,7 @@ export default {
       const self = this;
       self.$refs[value].validate(async (valid) => {
         if (valid) {
-          self.getDateTimes();
+          self.form.stay_date = this.getDateTimes();
           const response = await register(self.form, self);
           if (response.data == "fail to register") {
             self.alertMessage();
@@ -231,11 +232,6 @@ export default {
           }
         }, 1000);
       }
-    },
-    getDateTimes () {
-      const str = new Date().toLocaleString("chinese", { hour12: false }).replace(/(\/)/g, '-');
-      this.form.stay_date = str;
-      return this.form.stay_date;
     },
     selectLang (command) {
       this.lang = this.getLangName(command);

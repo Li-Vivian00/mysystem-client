@@ -7,7 +7,13 @@ export const getAllOpinionInfo = async self => {
   return result;
 };
 
-export const updateOpinionInfo = async (self, status, Id, answerContent) => {
+export const updateOpinionInfo = async (
+  self,
+  status,
+  Id,
+  answerContent,
+  answer_date
+) => {
   const result = await self.$http
     .get(
       '/api/repairManage/updateOpinionInfo',
@@ -15,7 +21,8 @@ export const updateOpinionInfo = async (self, status, Id, answerContent) => {
         params: {
           status: status,
           Id: Id,
-          answer_content: answerContent
+          answer_content: answerContent,
+          answer_date: answer_date
         }
       },
       {}

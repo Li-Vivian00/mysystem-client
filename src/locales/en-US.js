@@ -43,7 +43,7 @@ export default {
       female: 'Female',
       room_id: 'Room Id:',
       stay_date: 'Stay_Date:',
-      name: 'Name',
+      name: 'Name'
     },
 
     inputPlaceholder: {
@@ -87,7 +87,8 @@ export default {
       room_id: 'Please enter room id',
       complaintType: 'Please select type',
       complaintDetail: 'Please enter the detail',
-      userRequire: 'Please enter comments/suggestions, if not, fill in the "No" ',
+      userRequire:
+        'Please enter comments/suggestions, if not, fill in the "No" '
     }
   },
 
@@ -240,7 +241,8 @@ export default {
   repairManage: {
     type: 'Type',
     problemDescription: 'Problem Description',
-    time: 'submission Time',
+    time: 'Submission Time',
+    handleTime: 'Handle Time',
     status: 'Status',
     remark: 'Remark',
     room_id: 'Room ID',
@@ -298,6 +300,11 @@ export default {
       title: 'Online Application Form',
       waitHandle: 'Wait to handle',
       finishHandle: 'Processed ',
+      repairType: 'Repair Type',
+      netWrok: 'Network fault',
+      environment: 'Harsh',
+      hydroelectricity: 'Water and electricity supply',
+      emergencyHandle: 'Emergency treatment'
     },
     userOpinion: {
       title: 'Complaint/Opinion Form',
@@ -308,7 +315,7 @@ export default {
       hydroelectricity: 'Hydroelectricity',
       others: 'Others',
       detail: 'Detailed content ',
-      require: 'Observations/recommendations ',
+      require: 'Observations/recommendations '
     }
   }
 };

@@ -45,11 +45,14 @@
       <el-table-column prop="problem_description"
                        :label='`${$t("repairManage.problemDescription")}`'
                        sortable></el-table-column>
+      <el-table-column prop="remark"
+                       :label='`${$t("repairManage.remark")}`'></el-table-column>
       <el-table-column prop="sub_time"
                        :label='`${$t("repairManage.time")}`'
                        sortable></el-table-column>
-      <el-table-column prop="remark"
-                       :label='`${$t("repairManage.remark")}`'></el-table-column>
+      <el-table-column prop="handle_time"
+                       :label='`${$t("repairManage.handleTime")}`'
+                       sortable></el-table-column>
       <el-table-column fixed="right"
                        :label='`${$t("repairManage.status")}`'>
         <template slot-scope="scope">
@@ -84,6 +87,7 @@ import { setTimeout } from "timers";
 import { getAllRepairInfo, updateRepairInfo, getRepairInfoByItem, deleteRepairInfo } from "../../../service/admin/repairManage/repairManage.Service";
 import { async } from 'q';
 import showMessageBox from "../../../mixin/showMessageBox"
+import getDateTimes from '../../../mixin/getDateTimes';
 export default {
   name: "repairManage",
   data () {
@@ -109,10 +113,12 @@ export default {
           label: "repairManage.pending"
         }
       ],
-      updatePending: {}
+      updatePending: {
+        handle_time: '',
+      }
     };
   },
-  mixins: [showMessageBox],
+  mixins: [showMessageBox, getDateTimes],
   mounted () {
     setTimeout(() => {
       this.loading = false;
@@ -165,8 +171,6 @@ export default {
     // 点击待处理
     async donePending (index, row) {
       const self = this;
-      self.updatePending = Object.assign({}, row);
-      self.updatePending.status = 1;
       self.$confirm(
         this.$t("repairManage.isProcessed"),
         this.$t("manage.confirm.warning"),
@@ -177,6 +181,9 @@ export default {
         }
       )
         .then(async () => {
+          self.updatePending = Object.assign({}, row);
+          self.updatePending.status = 1;
+          self.updatePending.handle_time = self.getDateTimes();
           const response = await updateRepairInfo(self, self.updatePending);
           if (response.data == "success to update") {
             self.getAllRepairInfo();
@@ -213,11 +220,11 @@ export default {
       }
     },
 
-    handleSizeChange(size) {
+    handleSizeChange (size) {
       this.pagesize = size;
     },
 
-    handleCurrentChange(currentPage) {
+    handleCurrentChange (currentPage) {
       this.currentPage = currentPage;
     },
   }

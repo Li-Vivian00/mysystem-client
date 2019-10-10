@@ -142,6 +142,7 @@ import { getUserPhone, getUserLoginid } from "../../../service/login/register.se
 import { constants } from "crypto";
 import { async } from 'q';
 import showMessageBox from "../../../mixin/showMessageBox"
+import getDateTimes from "../../../mixin/getDateTimes"
 import exportUserData from "../../../mixin/exportUserData"
 export default {
   name: "CustomerManage",
@@ -256,7 +257,7 @@ export default {
       EditTitle: "",
     };
   },
-  mixins: [showMessageBox, exportUserData],
+  mixins: [showMessageBox, exportUserData, getDateTimes],
   mounted () {
     setTimeout(() => {
       this.loading = false;
@@ -447,17 +448,12 @@ export default {
       }
     },
 
-    getDateTimes () {
-      const str = new Date().toLocaleString("chinese", { hour12: false }).replace(/(\/)/g, '-');
-      this.addUserForm.stay_date = str;
-      return this.addUserForm.stay_date;
-    },
 
-    handleSizeChange(size) {
+    handleSizeChange (size) {
       this.pagesize = size;
     },
 
-    handleCurrentChange(currentPage) {
+    handleCurrentChange (currentPage) {
       this.currentPage = currentPage;
     },
 
