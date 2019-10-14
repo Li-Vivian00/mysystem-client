@@ -12,15 +12,21 @@
 </template>
 
 <script>
-import vHeader from "./homeHeader";
+import vHeader from "./HomeHeader";
 // import vCenter from "./homeCenter";
 export default {
+  name: "homePage",
+  data() {
+    return {
+    }
+  },
   components: {
     vHeader,
     // vCenter
   },
   mounted () {
-    this.$router.push("homeCenter")
+    // this.$router.push("homeCenter")
+    // this.activeIndex = 'homeCenter'
   }
 }
 </script>
@@ -37,8 +43,8 @@ export default {
   top: 105px;
   // left: 249px;
   width: 100%;
-  // height: 84%;
-  border: 2px solid #9fd9ff;
+  height: 100%;
+  // border: 2px solid #9fd9ff;
   // box-shadow: 0px 2px 9px #dc8181;
   /* float: right; */
 }

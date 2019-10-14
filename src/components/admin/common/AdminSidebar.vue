@@ -44,8 +44,8 @@ export default {
               title: "sidebar.admin.board"
             },
             {
-              index: "baseInfoAboutUs",
-              title: "sidebar.admin.baseInfo"
+              index: "baseInfoAboutBuilding",
+              title: "villaCenter.baseInfo.baseInfoBuilding"
             },
             {
               index: "baseFacility",

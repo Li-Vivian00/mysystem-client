@@ -5,11 +5,12 @@
            alt="">
       <p>{{username}}</p>
     </div>
-    <el-menu :default-active="onRoutes"
+    <el-menu :default-active="activeIndex"
              class="el-menu-vertical-demo"
              theme="dark"
              unique-opened
-             router>
+             router
+             @select="onRoutes">
       <template v-for="item in items">
         <template v-if="item.subs">
           <el-submenu :index="item.index">
@@ -38,6 +39,7 @@ export default {
   name: "userSidebar",
   data () {
     return {
+      activeIndex: "onlineService",
       items: [
         {
           icon: "el-icon-service",
@@ -62,15 +64,20 @@ export default {
       ]
     };
   },
+  mounted() {
+    this.$router.push("onlineService");
+  },
   computed: {
-    onRoutes () {
-      return this.$route.path.replace("/", "");
-    },
     username () {
       let username = "Welcome! " + sessionStorage.getItem("userLoginId");
       return sessionStorage.getItem("userLoginId") ? username : "";
     }
   },
+  methods: {
+    onRoutes () {
+      return this.$route.path.replace("/", "");
+    },
+  }
 };
 </script>
 

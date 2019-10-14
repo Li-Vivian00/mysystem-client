@@ -207,8 +207,8 @@ export default {
   },
 
   villaCenter: {
-    noticeBoard: 'Bulletin board information editing',
-    infrastructure: 'Infrastructure information editing',
+    noticeBoard: 'Bulletin board information',
+    infrastructure: 'Infrastructure information',
     baseInfoTitle: 'Basic information editing',
     phoneModuleTitle: 'Convenient telephone module',
     warningModuleTitle: 'Tips module',
@@ -281,7 +281,8 @@ export default {
       login: 'Login',
       adminLogin: 'Admin Login',
       userLogin: 'User Login',
-      aboutUs: 'About Us'
+      aboutUs: 'About Us',
+      dailyNews: 'Wonderful Moment',
     },
     homeCenter: {
       forestItem: 'Forests City Of Happiness Harbor',

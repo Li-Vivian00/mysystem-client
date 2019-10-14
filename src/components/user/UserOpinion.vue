@@ -206,12 +206,7 @@ export default {
       const self = this;
       const loginid = sessionStorage.getItem("userLoginId");
       const response = await getUserOpinionInfo(self, loginid);
-      if (_.isEmpty(response.data)) {
-        self.showErrorMessageBox();
-      } else {
-        console.log(response.data);
         self.form = response.data;
-      }
     },
 
     //点击添加用户

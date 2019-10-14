@@ -205,8 +205,8 @@ export default {
   },
 
   villaCenter: {
-    noticeBoard: '公告栏信息编辑',
-    infrastructure: '基础设施信息编辑',
+    noticeBoard: '公告栏',
+    infrastructure: '基础设施',
     baseInfoTitle: '基本信息编辑',
     phoneModuleTitle: '便民电话模块',
     warningModuleTitle: '温馨提示模块',
@@ -279,7 +279,8 @@ export default {
       login: '登录',
       adminLogin: '管理员登录',
       userLogin: '用户登录',
-      aboutUs: '关于幸福港'
+      aboutUs: '关于幸福港',
+      dailyNews: '精彩一刻',
     },
     homeCenter: {
       forestItem: '幸福港森林城市',

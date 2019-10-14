@@ -1,10 +1,10 @@
 <template>
   <div class="center_page">
     <div class="title">
-      <span class="edit_title">{{$t("villaCenter.baseInfoTitle")}}</span>
+      <span class="edit_title">{{$t("villaCenter.baseInfo.baseInfoBuilding")}}</span>
       <i class="el-icon-edit"></i>
     </div>
-    <el-menu @select="onRoutes"
+    <!-- <el-menu @select="onRoutes"
              :default-active="activeIndex"
              router
              class="el-menu-demo"
@@ -22,7 +22,7 @@
                   mode="out-in">
         <router-view></router-view>
       </transition>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -31,22 +31,22 @@ export default {
   name: "villaCenter",
   data () {
     return {
-      activeIndex: "baseInfoAboutUs",
-      items: [
-        {
-          index: "baseInfoAboutUs",
-          label: "villaCenter.baseInfo.baseInfoAboutUs"
-        },
-        {
-          index: "baseInfoAboutBuilding",
-          label: "villaCenter.baseInfo.baseInfoBuilding"
-        }
-      ]
+      // activeIndex: "baseInfoAboutUs",
+      // items: [
+      //   {
+      //     index: "baseInfoAboutUs",
+      //     label: "villaCenter.baseInfo.baseInfoAboutUs"
+      //   },
+      //   {
+      //     index: "baseInfoAboutBuilding",
+      //     label: "villaCenter.baseInfo.baseInfoBuilding"
+      //   }
+      // ]
     }
   },
-  mounted () {
-    this.$router.push("/baseInfoAboutUs")
-  },
+  // mounted () {
+  //   this.$router.push("/baseInfoAboutUs")
+  // },
   methods: {
     onRoutes (key, keyPath) {
       return this.$route.path.replace("/", "");

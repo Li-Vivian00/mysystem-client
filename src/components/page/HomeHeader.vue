@@ -7,19 +7,20 @@
     <div class="menuBox">
       <el-menu class="el-menu-demo menu"
                mode="horizontal"
-               @select="handleSelect"
-               router>
+               router
+               @select="handleSelect">
         <el-menu-item index="homeCenter">{{$t("homePage.homeHeader.home")}}</el-menu-item>
-        <el-menu-item index="homePage">{{$t("homePage.homeHeader.aboutUs")}}</el-menu-item>
+        <el-menu-item index="aboutUs">{{$t("homePage.homeHeader.aboutUs")}}</el-menu-item>
+        <el-menu-item index="dailyNews">{{$t("homePage.homeHeader.dailyNews")}}</el-menu-item>
         <el-submenu index="3"
                     v-if="username == ''">
           <template slot="title">{{$t("homePage.homeHeader.login")}}</template>
           <el-menu-item index="adminLogin">{{$t("homePage.homeHeader.adminLogin")}}</el-menu-item>
           <el-menu-item index="/">{{$t("homePage.homeHeader.userLogin")}}</el-menu-item>
         </el-submenu>
-        <el-submenu index="4"
+        <el-submenu index="userHome"
                     v-else>
-          <template slot="title">{{$t("header.userCenter")}}</template>
+          <template slot="title" style="border-bottom: 2px solid #fff;">{{$t("header.userCenter")}}</template>
           <el-menu-item index="userHome">{{$t("sidebar.admin.baseInfo")}}</el-menu-item>
           <el-menu-item index="/">{{$t("header.logout")}}</el-menu-item>
         </el-submenu>
@@ -56,19 +57,20 @@ export default {
   data () {
     return {
       lang: "",
-      activeIndex: 'homeCenter',
-      // name: "",
+      activeKey: ""
     }
   },
   mixins: [getLangName],
   mounted () {
     this.selectLang("ZH");
+    this.showHomeCenter();
   },
   computed: {
     username () {
       let username = "Welcome! " + sessionStorage.getItem("userLoginId");
       return sessionStorage.getItem("userLoginId") ? username : "";
-    }
+    },
+
   },
   methods: {
     selectLang (command) {
@@ -79,9 +81,13 @@ export default {
       if (key == '/') {
         sessionStorage.clear();
       }
+      // console.log(this.activeKey);
       return this.$route.path.replace("/", key);
-    }
-  }
+    },
+    showHomeCenter() {
+      this.$router.push("homeCenter");
+    },
+  },
 }
 </script>
 

@@ -145,7 +145,7 @@ export default {
           self.errAccountInfo = "";
           self.errPwdInfo = "";
           sessionStorage.setItem("userLoginId", self.ruleForm.loginId);
-          self.$router.push("/homePage");
+          self.$router.push("/homeCenter");
         }
         self.loading = false;
       } else {

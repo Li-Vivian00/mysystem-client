@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <v-head></v-head>
+    <h-head></h-head>
     <v-sidebar></v-sidebar>
     <div class="content">
       <transition name="move"
@@ -12,12 +12,17 @@
 </template>
 
 <script>
-import vHead from "../page/HomeHeader";
+import hHead from "../page/HomeHeader";
 import vSidebar from "./UserSidebar";
 export default {
   name: "userHome",
+  data() {
+    return {
+      // activeIndex: "userHome",
+    }
+  },
   components: {
-    vHead,
+    hHead,
     vSidebar
   }
 };
@@ -45,5 +50,10 @@ export default {
   /* border: 2px solid #9fd9ff; */
   box-shadow: 0px 2px 9px #dc8181;
   /* float: right; */
+}
+
+.el-menu-demo .el-menu-item{
+    border-bottom-color:#ffffff !important;
+    color: #909399;
 }
 </style>

@@ -3,6 +3,8 @@ import Router from 'vue-router';
 import HelloWorld from '@/components/HelloWorld';
 import homePage from '../components/page/HomePage';
 import homeCenter from '../components/page/HomeCenter';
+import aboutUs from '../components/page/AboutUs.vue';
+import dailyNews from '../components/page/dailyNews.vue';
 import adminLogin from '../components/login/AdminLogin';
 import userLogin from '../components/login/UserLogin';
 import register from '../components/login/Register';
@@ -39,6 +41,14 @@ export default new Router({
         {
           path: '/homeCenter',
           component: homeCenter
+        },
+        {
+          path: '/aboutUs',
+          component: aboutUs,
+        },
+        {
+          path: '/dailyNews',
+          component: dailyNews,
         },
         {
           path: '/userHome',
@@ -82,33 +92,10 @@ export default new Router({
       path: '/userlogin',
       component: userLogin
     },
-    // {
-    //   path: '/userHome',
-    //   component: userHome,
-    //   children: [
-    //     // {
-    //     //   path: '/readme',
-    //     //   component: Readme
-    //     // },
-    //     {
-    //       path: '/userCenter',
-    //       component: userCenter // 拖拽列表组件
-    //     },
-    //     {
-    //       path: '/modifyPassword',
-    //       component: modifyPassword
-    //     }
-    //   ]
-    // },
     {
       path: '/adminHome',
       component: adminHome,
       children: [
-        // //首页
-        // {
-        //   path: '/readme',
-        //   component: Readme
-        // },
 
         //个人中心
         {
@@ -118,7 +105,7 @@ export default new Router({
 
         //别墅中心
         {
-          path: '/phoneModule',
+          path: '/board',
           component: board,
           children: [
             {
@@ -132,18 +119,18 @@ export default new Router({
           ]
         },
         {
-          path: '/baseInfoAboutUs',
+          path: '/baseInfoAboutBuilding',
           component: baseInfo,
-          children: [
-            {
-              path: '/baseInfoAboutUs',
-              component: baseInfoAboutUs
-            },
-            {
-              path: '/baseInfoAboutBuilding',
-              component: baseInfoAboutBuilding
-            }
-          ]
+          // children: [
+          //   // {
+          //   //   path: '/baseInfoAboutUs',
+          //   //   component: baseInfoAboutUs
+          //   // },
+          //   {
+          //     path: '/baseInfoAboutBuilding',
+          //     component: baseInfoAboutBuilding
+          //   }
+          // ]
         },
         {
           path: '/baseFacility',
