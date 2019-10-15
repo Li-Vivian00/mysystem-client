@@ -4,8 +4,8 @@
       <span class="edit_title">{{$t("villaCenter.noticeBoard")}}</span>
       <i class="el-icon-edit"></i>
     </div>
-    <el-menu @select="onRoutes"
-             :default-active="activeIndex"
+    <el-menu
+             :default-active="onRoutes"
              router
              class="el-menu-demo"
              mode="horizontal">
@@ -48,10 +48,20 @@ export default {
   mounted () {
     this.$router.push("/phoneModule")
   },
-  methods: {
+  computed: {
     onRoutes (key, keyPath) {
       return this.$route.path.replace("/", "");
     }
+  },
+  methods: {
+    // onRoutes (key, keyPath) {
+    //   this.activeIndex = key;
+    //   console.log(key + '--' + keyPath + this.activeIndex);
+    //   if (keyPath == 'phoneModule') {
+    //     this.activeIndex = 'phoneModule'
+    //   }
+    //   return this.$route.path.replace("/", "");
+    // }
   }
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="onlineService">
-    <p>{{$t('homePage.userRepair.title')}}</p>
+    <p>{{$t('homePage.userOpinion.title')}}</p>
     <el-button type="primary"
                @click="addSubmit"
                class="addApplication">{{$t('homePage.userOpinion.addComplaint')}}</el-button>

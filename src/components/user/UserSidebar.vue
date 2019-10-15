@@ -44,12 +44,12 @@ export default {
         {
           icon: "el-icon-service",
           index: "onlineService",
-          title: "sidebar.user.comments",
+          title: "sidebar.user.onlineService",
         },
         {
           icon: "el-icon-chat-line-round",
           index: "userComment",
-          title: "sidebar.user.onlineService",
+          title: "sidebar.user.comments",
         },
         {
           icon: "el-icon-user",

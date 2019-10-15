@@ -50,7 +50,7 @@ export default {
 }
 
 .el-menu--horizontal > .el-submenu .el-submenu__title {
-  font-size: 17px !important;
+  font-size: 16px !important;
   margin-bottom: 2px solid #fff;
 }
 </style>

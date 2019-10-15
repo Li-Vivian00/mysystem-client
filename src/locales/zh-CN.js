@@ -315,6 +315,12 @@ export default {
       others: '其他',
       detail: '详细内容',
       require: '意见/建议'
+    },
+    dailyNews: {
+      serviceHotline: '服务热线',
+      setPoint: '我要去评分 >>>',
+      companyProfile: '公司简介',
+      corporateCulture: '企业文化',
     }
   }
 };

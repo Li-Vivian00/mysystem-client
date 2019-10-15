@@ -13,7 +13,6 @@
 
 <script>
 import vHeader from "./HomeHeader";
-// import vCenter from "./homeCenter";
 export default {
   name: "homePage",
   data() {
@@ -22,7 +21,6 @@ export default {
   },
   components: {
     vHeader,
-    // vCenter
   },
   mounted () {
     // this.$router.push("homeCenter")

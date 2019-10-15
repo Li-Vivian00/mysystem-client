@@ -68,6 +68,15 @@
            target="_blank">{{$t("homePage.homeCenter.learnMore")}}></a>
       </div>
     </div>
+    <div class="bottom">
+        <div class="bottom-main">
+          <a href="#">佛山市顺德区碧桂园物业发展有限公司版权所有 粤ICP备05055114号-1</a> <br>
+          <a href="#">法律声明 ·</a>
+          <a href="#">法律声明 ·</a>
+          <a href="#">法律声明</a><br>
+          <span>碧桂园总部服务监督电话：4008919338</span>
+        </div>
+      </div>
   </div>
 </template>
 
@@ -108,10 +117,13 @@ export default {
         },
       ]
     }
+  },
+  components: {
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import "../../../static/css/homePage/homeCenter";
+
 </style>

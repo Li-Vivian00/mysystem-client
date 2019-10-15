@@ -1,8 +1,10 @@
 <template>
   <div class="dailyNews">
     <div class="top">
-      <div class="top-left">上左</div>
+      <div class="top-left">上左
+      </div>
       <div class="top-right">
+        <p><el-link href="http://localhost:8081/#/userComment" type="warning" target="_blank">{{$t("homePage.dailyNews.setPoint")}}</el-link></p>
         <div id='unitChart'
              class="chartStyle"></div>
         <div id='pointChart'
@@ -10,25 +12,20 @@
       </div>
     </div>
     <div class="bottom">
-      <div class="bottom-left">下左</div>
-      <div class="bottom-right">
-
+      <div class="bottom-left">
+        <img src="../../../static/img/cellBoard.png" alt="cellBoard">
+        <ul class="left-ul">
+          <p>{{$t("homePage.dailyNews.serviceHotline")}}</p>
+          <li v-for="(i, index) in phoneList">{{i.item}}: {{i.phone}}</li>
+        </ul>
       </div>
-      <!-- <el-rate v-model="value"
-             show-text
-             allow-half
-             @change="getRate"></el-rate> -->
-      <!-- <div id='unitChart'
-         style='width: 300px; height: 300px'></div>
-    <div id='pointChart'
-         style='width: 300px; height: 300px'></div> -->
-
+      <div class="bottom-right">右下</div>
     </div>
   </div>
 </template>
 
 <script>
-import { getCountOfUser, getAvgScore } from '../../service/user/dailyNews.service'
+import { getCountOfUser, getAvgScore, getPhoneModule } from '../../service/user/dailyNews.service'
 import _ from "lodash"
 export default {
   name: "dailyNews",
@@ -36,7 +33,8 @@ export default {
     return {
       value: null,
       unitData: [],
-      pointData: []
+      pointData: [],
+      phoneList: [],
     }
   },
   components: {
@@ -46,6 +44,7 @@ export default {
     this.getCountOfUser();
     this.getAvgScore();
     this.drawLine();
+    this.getPhoneModule();
   },
   methods: {
     async getCountOfUser () {
@@ -53,6 +52,12 @@ export default {
       const result = await getCountOfUser(self);
       self.unitData = result.data;
       this.drawLine();
+    },
+
+    async getPhoneModule() {
+      const self = this;
+      const result = await getPhoneModule(self);
+      this.phoneList = result.data;
     },
     async getAvgScore () {
       const self = this;
@@ -69,10 +74,7 @@ export default {
       self.pointData = arr;
       this.drawLine();
     },
-    getRate (value) {
-      this.pointData[0] = value;
-      this.drawLine();
-    },
+
     drawLine () {
       // 基于准备好的dom，初始化echarts实例
       let unitChart = this.$echarts.init(document.getElementById('unitChart'))
@@ -117,64 +119,12 @@ export default {
           data: this.pointData,
         }]
       });
-    }
+    },
+
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.dailyNews {
-  width: 100%;
-  height: 100%;
-  background-image: url("../../../static/img/g3.jpg");
-  .top {
-    width: 100%;
-    height: 60%;
-    border: 1px solid blue;
-    position: relative;
-
-    .top-left {
-      // position: absolute;
-      width: 48%;
-      height: 100%;
-      border: 1px solid yellow;
-      display: inline-block;
-      float: left;
-    }
-    .top-right {
-      width: 50%;
-      height: 100%;
-      float: right;
-      border: 1px solid #800080;
-      display: inline-block;
-
-      .chartStyle {
-        width: 300px;
-        height: 300px;
-        display: inline-block;
-        margin-top: 45px;
-      }
-    }
-  }
-  .bottom {
-    width: 100%;
-    height: 60%;
-    border: 1px solid palevioletred;
-    position: relative;
-    .bottom-left {
-      width: 48%;
-      height: 100%;
-      border: 1px solid yellow;
-      display: inline-block;
-      float: left;
-    }
-    .bottom-right {
-      width: 50%;
-      height: 100%;
-      float: right;
-      border: 1px solid #800080;
-      display: inline-block;
-    }
-  }
-}
+@import "../../../static/css/homePage/dailyNews.scss";
 </style>

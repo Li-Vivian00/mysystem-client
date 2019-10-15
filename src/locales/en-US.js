@@ -317,6 +317,12 @@ export default {
       others: 'Others',
       detail: 'Detailed content ',
       require: 'Observations/recommendations '
+    },
+    dailyNews: {
+      serviceHotline: 'Service Hotline',
+      setPoint: 'Go to Give a Mark >>>',
+      companyProfile: 'Company Profile',
+      corporateCulture: 'Corporate Culture',
     }
   }
 };
