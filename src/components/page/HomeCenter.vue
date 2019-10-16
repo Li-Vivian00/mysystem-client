@@ -57,7 +57,7 @@
           </div>
         </div>
       </div>
-      <div class="main-right">
+      <div class="main-right" id="right">
         <div class="main-img">
           <img src="https://www.bgy.com.cn/upload/img/2018-10-15/a70a0ef4-3cc3-4ded-b65e-98fb84b32ec4.jpg"
                alt="">

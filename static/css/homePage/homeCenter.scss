@@ -172,6 +172,7 @@
       top: -19px;
       /* right: 0; */
       z-index: 3;
+      -webkit-animation: rightmove 1.5s infinite;
       .main-img {
         height: 203px;
         width: 98%;
@@ -240,4 +241,13 @@ a:hover {
   background: #f5f2f2;
   -webkit-transition: all 400ms;
   transition: all 400ms;
+}
+
+#right {
+  -webkit-animation-timing-function: ease;
+}
+
+@-webkit-keyframes rightmove {
+  from {right: 0px}
+  to {right: 41px;}
 }
