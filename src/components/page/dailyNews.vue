@@ -4,7 +4,11 @@
       <div class="top-left">上左
       </div>
       <div class="top-right">
-        <p><el-link href="http://localhost:8081/#/userComment" type="warning" target="_blank">{{$t("homePage.dailyNews.setPoint")}}</el-link></p>
+        <p>
+          <el-link href="http://localhost:8080/#/userComment"
+                   type="warning"
+                   target="_blank">{{$t("homePage.dailyNews.setPoint")}}</el-link>
+        </p>
         <div id='unitChart'
              class="chartStyle"></div>
         <div id='pointChart'
@@ -13,7 +17,8 @@
     </div>
     <div class="bottom">
       <div class="bottom-left">
-        <img src="../../../static/img/cellBoard.png" alt="cellBoard">
+        <img src="../../../static/img/cellBoard.png"
+             alt="cellBoard">
         <ul class="left-ul">
           <p>{{$t("homePage.dailyNews.serviceHotline")}}</p>
           <li v-for="(i, index) in phoneList">{{i.item}}: {{i.phone}}</li>
@@ -54,7 +59,7 @@ export default {
       this.drawLine();
     },
 
-    async getPhoneModule() {
+    async getPhoneModule () {
       const self = this;
       const result = await getPhoneModule(self);
       this.phoneList = result.data;

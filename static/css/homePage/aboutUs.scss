@@ -13,7 +13,8 @@
       padding: 0px;
       margin: 0px;
       li {
-        background: url("https://www.bgy.com.cn//upload/img/2017-08-03/4a43911e-9f1e-4de8-8388-fc0676baf6ff.jpg") center center no-repeat;
+        background: url("https://www.bgy.com.cn//upload/img/2017-08-03/4a43911e-9f1e-4de8-8388-fc0676baf6ff.jpg") center
+          center no-repeat;
         position: absolute;
         width: 100%;
         height: 100%;
@@ -26,71 +27,70 @@
     width: 100%;
     height: 7%;
     .submenuSub {
-      width: 68%;
+      width: 85%;
       height: 100%;
       margin: 0 auto;
       border-bottom: 1px solid rgb(231, 231, 231);
       text-align: center;
-        .homeIcon {
+      .homeIcon {
         width: 65px;
         height: 100%;
         font-size: 14px;
         color: rgb(153, 153, 153);
         float: left;
         background: rgb(244, 244, 244);
-        line-height: 65px;
-        }
-        a {
-          text-decoration: none;
-          font-size: 14px;
-          color: #848181;
-          line-height: 65px;
-          padding: 0 12px 0 20px;
-          float: left;
-          font-weight: bold;
-          .rightIcon {
-            color: #a3a0a0;
-            float: right;
-            font-size: 12px;
-            line-height: 65px;
-            margin-left: 12px;
-          }
-        }
-        span {
-          padding-left: 10px;
-          font-size: 14px;
-          color: #0e98a5;
-          font-weight: bold;
-          line-height: 65px;
-          float: left;
-        }
-        .selectItem {
-          margin: 0px;
+        line-height: 55px;
+      }
+      a {
+        text-decoration: none;
+        font-size: 14px;
+        color: #848181;
+        line-height: 55px;
+        padding: 0 12px 0 20px;
+        float: left;
+        font-weight: bold;
+        .rightIcon {
+          color: #a3a0a0;
           float: right;
-          font-size: 14px;
-          color: #848181;
-          line-height: 65px;
-          padding: 0 12px 0 20px;
-          font-weight: bold;
+          font-size: 12px;
+          line-height: 55px;
+          margin-left: 12px;
         }
-        .selectItem:hover {
-          color: #0e98a5;
-          border-bottom: 2px solid #0e98a5;
-          cursor: pointer;
-          transition-property: all;
-          transition-duration: 0.5s;
-          transition-timing-function: ease-out;
-          transition-delay: 0.3s;
-        }
-
+      }
+      span {
+        padding-left: 10px;
+        font-size: 14px;
+        color: #0e98a5;
+        font-weight: bold;
+        line-height: 55px;
+        float: left;
+      }
+      .selectItem {
+        margin: 0px;
+        float: right;
+        font-size: 14px;
+        color: #848181;
+        line-height: 55px;
+        padding: 0 12px 0 20px;
+        font-weight: bold;
+      }
+      .selectItem:hover {
+        color: #0e98a5;
+        border-bottom: 2px solid #0e98a5;
+        cursor: pointer;
+        transition-property: all;
+        transition-duration: 0.5s;
+        transition-timing-function: ease-out;
+        transition-delay: 0.3s;
+      }
     }
   }
   .main {
     width: 100%;
-    height: 80%;
+    height: 85%;
     margin-top: 2.5%;
     .main-center {
-      width: 68%;
+      width: 85%;
       height: 100%;
       margin: 0 auto;
       .center-top {
@@ -113,7 +113,7 @@
             font-size: 34px;
             color: #c8c8c8;
             font-weight: 300;
-            font-family: 'novecentowide-book';
+            font-family: "novecentowide-book";
             margin-left: 2%;
             margin-top: 0px;
             margin-bottom: 5px;
@@ -134,7 +134,7 @@
             em {
               font-size: 48px;
               color: #f6ad12;
-              font-family: 'novecentowide-book';
+              font-family: "novecentowide-book";
               float: left;
               margin-right: 10px;
               letter-spacing: -4px;

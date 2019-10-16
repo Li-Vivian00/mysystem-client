@@ -172,7 +172,7 @@
       top: -19px;
       /* right: 0; */
       z-index: 3;
-      -webkit-animation: rightmove 1.5s infinite;
+      -webkit-animation: rightmove 1.5s;
       .main-img {
         height: 203px;
         width: 98%;
@@ -216,13 +216,14 @@
     height: 8%;
     border-top: 1px solid #e7e7e7;
     position: absolute;
-    bottom: 14%;
+    bottom: -10%;
     .bottom-main {
       width: 68%;
       height: 100%;
       margin: 0 auto;
       text-align: left;
-      a, span{
+      a,
+      span {
         text-decoration: none;
         font-size: 14px;
         color: #8c8c8c;
@@ -231,7 +232,7 @@
         display: inline-block;
       }
       a:hover {
-        color:#0e98a5;
+        color: #0e98a5;
       }
     }
   }
@@ -248,6 +249,10 @@ a:hover {
 }
 
 @-webkit-keyframes rightmove {
-  from {right: 0px}
-  to {right: 41px;}
+  from {
+    right: 0px;
+  }
+  to {
+    right: 41px;
+  }
 }
