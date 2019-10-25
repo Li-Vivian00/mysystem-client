@@ -343,7 +343,6 @@ export default {
               }
             )
             .then(async () => {
-              console.log(self.editForm)
               const response = await updatePhoneModuleInfo(self, self.editForm);
               if (_.isEqual(response.data, "fail to update")) {
                 self.showErrorMessageBox();

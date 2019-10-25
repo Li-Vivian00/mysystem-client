@@ -1,11 +1,11 @@
 <template>
   <div class="bottom">
     <div class="bottom-main">
-      <a href="#">佛山市顺德区碧桂园物业发展有限公司版权所有 粤ICP备05055114号-1</a> <br>
-      <a href="#">法律声明 ·</a>
-      <a href="#">法律声明 ·</a>
-      <a href="#">法律声明</a><br>
-      <span>碧桂园总部服务监督电话：4008919338</span>
+      <a href="#">{{$t("homePage.foot.a1")}}</a> <br>
+      <a href="#">{{$t("homePage.foot.a2")}}</a>
+      <a href="#">{{$t("homePage.foot.a3")}}</a>
+      <a href="#">{{$t("homePage.foot.a4")}}</a><br>
+      <span>{{$t("homePage.foot.a5")}}</span>
     </div>
   </div>
 </template>

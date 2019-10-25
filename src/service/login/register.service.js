@@ -2,7 +2,7 @@ export const register = async (form, self) => {
   let result = await self.$http
     .post("/api/userLogin/addUser", form)
     .catch(error => {
-      console.log(error.message)
+      console.log(error)
     })
   return result
 }

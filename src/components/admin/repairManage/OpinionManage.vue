@@ -224,7 +224,6 @@ export default {
           .then(async () => {
             self.updateReplyForm.status = 1;
             self.updateReplyForm.answer_date = self.getDateTimes();
-            console.log(self.updateReplyForm);
             const response = await updateOpinionInfo(self, self.updateReplyForm.status, self.updateReplyForm.id, self.updateReplyForm.answer_content, self.updateReplyForm.answer_date);
             if (response.data == "success to update") {
               self.updateReplyFormVisible = false;

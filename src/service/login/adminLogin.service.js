@@ -6,7 +6,7 @@ export const adminLogin = async (ruleForm, self) => {
         loginid: ruleForm.loginId,
         password:ruleForm.password
       }).catch(error => {
-        console.log(error.message)
-      }) 
+        console.log(error)
+      })
       return result
   }

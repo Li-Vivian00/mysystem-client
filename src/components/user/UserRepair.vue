@@ -1,6 +1,6 @@
 <template>
   <div class="onlineService">
-    <p>{{$t('homePage.userOpinion.title')}}</p>
+    <p>{{$t('homePage.userRepair.title')}}</p>
     <el-button type="primary"
                @click="addSubmit"
                class="addApplication">{{$t('homePage.userOpinion.addComplaint')}}</el-button>
@@ -23,16 +23,19 @@
                        :label='`${$t("opinionManage.phone")}`'
                        sortable></el-table-column>
       <el-table-column prop="repair_type"
-                       :label='`${$t("opinionManage.type")}`'
+                       :label='`${$t("homePage.userRepair.repairType")}`'
                        sortable></el-table-column>
       <el-table-column prop="problem_description"
-                       :label='`${$t("opinionManage.content")}`'
+                       :label='`${$t("homePage.userRepair.repairContent")}`'
+                       sortable></el-table-column>
+      <el-table-column prop="remark"
+                       :label='`${$t("homePage.userRepair.emergencyHandle")}`'
                        sortable></el-table-column>
       <el-table-column prop="sub_time"
                        :label='`${$t("opinionManage.date")}`'
                        sortable></el-table-column>
       <el-table-column prop="handle_time"
-                       :label='`${$t("opinionManage.date")}`'
+                       :label='`${$t("repairManage.handleTime")}`'
                        sortable></el-table-column>
       <el-table-column fixed="right"
                        :label='`${$t("repairManage.status")}`'>
@@ -181,7 +184,6 @@ export default {
             .then(async () => {
               self.editForm.sub_time = this.getDateTimes();
               self.editForm.loginid = sessionStorage.getItem("userLoginId");
-              console.log(self.editForm);
               const response = await submitRepair(self, self.editForm);
               if (_.isEqual(response.data, "fail to submit")) {
                 self.showErrorMessageBox();
@@ -189,6 +191,7 @@ export default {
                 self.getAllRepairInfo();
                 self.showSuccessMessageBox();
                 self.dialogVisible = false;
+                self.$refs['editForm'].resetFields();
               }
             })
             .catch(() => {

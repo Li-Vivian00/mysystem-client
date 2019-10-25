@@ -10,4 +10,3 @@ export const adminCenter = async (self, adminLoginId) => {
       })
     return result
   }
-  

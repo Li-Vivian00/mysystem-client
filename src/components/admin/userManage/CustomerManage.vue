@@ -332,7 +332,6 @@ export default {
               }
             )
             .then(async () => {
-              console.log(formValue);
               const response = await updateUser(self, formValue);
               if (_.isEqual(response.data, "fail to update")) {
                 self.showErrorMessageBox();

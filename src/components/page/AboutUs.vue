@@ -10,35 +10,49 @@
           <i class="el-icon-s-home homeIcon"></i>
           <a href="#">{{$t("homePage.homeHeader.aboutUs")}} <i class="el-icon-caret-right rightIcon"></i></a>
           <span v-model="selectTitle">{{$t(selectTitle)}}</span>
-          <span href="#" class="selectItem" :class="activeClass == 'culture' ? 'active' : ''" @click="turnToPage('culture')">企业文化</span>
-          <span href="#" class="selectItem" :class="activeClass == 'company' ? 'active' : ''" @click="turnToPage('company')">公司简介</span>
+          <span href="#" class="selectItem" :class="activeClass == 'culture' ? 'active' : ''" @click="turnToPage('culture')">{{$t("homePage.aboutUs.corporateCulture")}}</span>
+          <span href="#" class="selectItem" :class="activeClass == 'company' ? 'active' : ''" @click="turnToPage('company')">{{$t("homePage.aboutUs.companyProfile")}}</span>
         </div>
       </div>
-      <div class="main" v-if="isCompany">
+      <div class="companyMain" v-if="isCompany">
         <div class="main-center">
           <div class="center-top">
           </div>
           <div class="center-main">
             <div class="main-left">
               <h2>SINCE 2019</h2>
-              <h3>富力港是中国新型城镇化进程的身体力行者是全球绿色生态智慧城市的建造者</h3>
-              <h5><em>1200+</em>城镇</h5>
-              <h5><em>400+</em>万业主</h5>
+              <h3>{{$t("homePage.aboutUs.leftTitle")}}</h3>
+              <h5><em>1200+</em>{{$t("homePage.aboutUs.town")}}</h5>
+              <h5><em>400+</em>{{$t("homePage.aboutUs.owners")}}</h5>
             </div>
             <div class="main-right">
-              <h3>碧桂园是什么<br>
-                  碧桂园是为全世界创造美好生活产品的高科技综合性企业。</h3>
-              <p><strong>我们一直致力于为追求美好生活的人提供好房子，好社区。</strong>20多年来，作为新型城镇化的身体力行者，以打造民生地产为己任，我们已为超过1200个城镇带来现代化的城市面貌。高科技的应用，让我们成为了绿色生态智慧建筑的建造者，我们首创立体分层现代都市建筑——森林城市，被《福布斯》评为“影响世界未来的5座城市”之首。</p>
-              <p><strong>我们一直致力于为追求美好生活的人提供好房子，好社区。</strong>20多年来，作为新型城镇化的身体力行者，以打造民生地产为己任，我们已为超过1200个城镇带来现代化的城市面貌。高科技的应用，让我们成为了绿色生态智慧建筑的建造者，我们首创立体分层现代都市建筑——森林城市，被《福布斯》评为“影响世界未来的5座城市”之首。</p>
-              <p><strong>我们一直致力于为追求美好生活的人提供好房子，好社区。</strong>20多年来，作为新型城镇化的身体力行者，以打造民生地产为己任，我们已为超过1200个城镇带来现代化的城市面貌。高科技的应用，让我们成为了绿色生态智慧建筑的建造者，我们首创立体分层现代都市建筑——森林城市，被《福布斯》评为“影响世界未来的5座城市”之首。</p>
-              <p><strong>我们一直致力于为追求美好生活的人提供好房子，好社区。</strong>20多年来，作为新型城镇化的身体力行者，以打造民生地产为己任，我们已为超过1200个城镇带来现代化的城市面貌。高科技的应用，让我们成为了绿色生态智慧建筑的建造者，我们首创立体分层现代都市建筑——森林城市，被《福布斯》评为“影响世界未来的5座城市”之首。</p>
-              <p><strong>我们一直致力于为追求美好生活的人提供好房子，好社区。</strong>20多年来，作为新型城镇化的身体力行者，以打造民生地产为己任，我们已为超过1200个城镇带来现代化的城市面貌。高科技的应用，让我们成为了绿色生态智慧建筑的建造者，我们首创立体分层现代都市建筑——森林城市，被《福布斯》评为“影响世界未来的5座城市”之首。</p>
-              <p><strong>我们一直致力于为追求美好生活的人提供好房子，好社区。</strong>20多年来，作为新型城镇化的身体力行者，以打造民生地产为己任，我们已为超过1200个城镇带来现代化的城市面貌。高科技的应用，让我们成为了绿色生态智慧建筑的建造者，我们首创立体分层现代都市建筑——森林城市，被《福布斯》评为“影响世界未来的5座城市”之首。</p>
+              <h3>{{$t("homePage.aboutUs.whatFuli")}}<br>
+                  {{$t("homePage.aboutUs.whatFuliTwo")}}</h3>
+              <p><strong>{{$t("homePage.aboutUs.titleOne")}}</strong>{{$t("homePage.aboutUs.titleOneSub")}}<br>{{$t("homePage.aboutUs.titleOneSubT")}}</p>
+              <p><strong>{{$t("homePage.aboutUs.titleTwo")}}</strong>{{$t("homePage.aboutUs.titleTwoSub")}}</p>
+              <p><strong>{{$t("homePage.aboutUs.titleThree")}}</strong>{{$t("homePage.aboutUs.titleThreeSub")}}</p>
+              <p><strong>{{$t("homePage.aboutUs.titleFour")}}</strong>{{$t("homePage.aboutUs.titleFourSub")}}</p>
             </div>
           </div>
         </div>
       </div>
-      <div v-else>culture</div>
+      <div v-else class="cultureMain">
+        <div class="main-center">
+          <div class="center-left">
+            <h3>核心文化理念</h3>
+            <h4>THE CORE CULTURE IDEA</h4>
+          </div>
+          <div class="center-right">
+            <p>{{$t("homePage.aboutUs.p1")}}</p>
+            <p>{{$t("homePage.aboutUs.p2")}}</p>
+            <p>{{$t("homePage.aboutUs.p3")}}</p>
+            <p>{{$t("homePage.aboutUs.p4")}}</p>
+            <p>{{$t("homePage.aboutUs.p5")}}</p>
+            <p>{{$t("homePage.aboutUs.p6")}}</p>
+            <p>{{$t("homePage.aboutUs.p7")}}</p>
+          </div>
+        </div>
+      </div>
       <v-foot></v-foot>
     </div>
 </template>
@@ -49,7 +63,7 @@ export default {
   name: "AboutUs",
   data() {
     return {
-      selectTitle: "homePage.dailyNews.companyProfile",
+      selectTitle: "homePage.aboutUs.companyProfile",
       activeClass:'',
       isCompany: true,
     }
@@ -58,16 +72,17 @@ export default {
     vFoot,
   },
   mounted () {
+    this.activeClass = 'company';
   },
   methods: {
     turnToPage(i) {
       this.activeClass = i;
       if (i == 'company'){
-        this.selectTitle = "homePage.dailyNews.companyProfile"
+        this.selectTitle = "homePage.aboutUs.companyProfile"
         this.isCompany = true;
       }
       else{
-        this.selectTitle = "homePage.dailyNews.corporateCulture"
+        this.selectTitle = "homePage.aboutUs.corporateCulture"
         this.isCompany = false;
       }
     }

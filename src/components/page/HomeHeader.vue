@@ -81,7 +81,6 @@ export default {
       if (key == '/') {
         sessionStorage.clear();
       }
-      // console.log(this.activeKey);
       return this.$route.path.replace("/", key);
     },
     showHomeCenter() {

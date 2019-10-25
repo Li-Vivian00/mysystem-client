@@ -1,6 +1,6 @@
 <template>
   <div class="onlineService">
-    <p>{{$t('homePage.userRepair.title')}}</p>
+    <p>{{$t('homePage.userOpinion.title')}}</p>
     <el-button type="primary"
                @click="addSubmit"
                class="addApplication">{{$t('homePage.userOpinion.addComplaint')}}</el-button>
@@ -216,7 +216,6 @@ export default {
 
     //单个移除
     deleteRow (index, row) {
-      console.log(row);
       const self = this;
       self
         .$confirm(
@@ -233,7 +232,6 @@ export default {
           const id = row.id;
           str.push(id);
           const response = await deleteOpinionInfo(self, str);
-          console.log(response);
           if (_.isEqual(response.data, "fail to delete user")) {
             self.showErrorMessageBox();
           } else {

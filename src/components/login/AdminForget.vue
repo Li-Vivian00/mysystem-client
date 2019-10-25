@@ -248,7 +248,6 @@ export default {
           if (!this.timer) {
             this.isSend = false; //按钮禁用
             this.code = this.random_code(); //调用随机生成随机验证码的方法
-            console.log("点击验证码code：" + this.code);
             localStorage.setItem("verif_code", this.code);
             this.send_note(this.user_phone, this.code); //调用发送短信的方法
             this.timer = setInterval(() =>

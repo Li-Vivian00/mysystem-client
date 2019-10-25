@@ -4,8 +4,8 @@
       <div class="top-left">上左
       </div>
       <div class="top-right">
-        <p>
-          <el-link href="http://localhost:8080/#/userComment"
+        <p v-if="userIsLogin">
+          <el-link href="http://localhost:8081/#/userPoint"
                    type="warning"
                    target="_blank">{{$t("homePage.dailyNews.setPoint")}}</el-link>
         </p>
@@ -126,6 +126,15 @@ export default {
       });
     },
 
+  },
+  computed: {
+    userIsLogin () {
+      let user = sessionStorage.getItem("userLoginId");
+      if (_.isEmpty(user)) {
+        return false;
+      }
+      return true;
+    }
   }
 }
 </script>

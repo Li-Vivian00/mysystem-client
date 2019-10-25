@@ -14,9 +14,10 @@
   width: 440px;
   margin: auto;
   padding: 27px;
+  height: 833px;
 }
 .select-sex {
-  width: 308px;
+  width: 287px;
 }
 
 .wrapper {
@@ -115,4 +116,9 @@
 
 .el-breadcrumb__item {
   float: none !important;
+}
+
+
+.el-input {
+  width: 93% !important;
 }

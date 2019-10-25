@@ -57,6 +57,11 @@ export default {
           title: "sidebar.admin.baseInfo",
         },
         {
+          icon: "el-icon-thumb",
+          index: "userPoint",
+          title: "sidebar.user.point",
+        },
+        {
           icon: "el-icon-mobile",
           index: "modifyPassword",
           title: "forgetPwd.stepTwo",

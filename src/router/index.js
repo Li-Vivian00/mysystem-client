@@ -11,6 +11,7 @@ import register from '../components/login/Register';
 import adminHome from '../components/admin/common/AdminHome';
 import userCenter from '../components/user/UserCenter';
 import userOnlineService from '../components/user/UserOpinion';
+import userPoint from '../components/user/userPoint';
 import userComment from '../components/user/UserRepair';
 import userHome from '../components/user/UserHome';
 import adminCenter from '../components/admin/adminCenter';
@@ -64,11 +65,15 @@ export default new Router({
             },
             {
               path: '/onlineService',
-              component: userOnlineService
+              component: userComment
             },
             {
               path: '/userComment',
-              component: userComment
+              component: userOnlineService
+            },
+            {
+              path: '/userPoint',
+              component: userPoint
             }
           ]
         }
