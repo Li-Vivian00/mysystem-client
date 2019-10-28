@@ -87,6 +87,11 @@ export default {
           icon: "el-icon-setting",
           index: "buildingManage",
           title: "sidebar.admin.buildingManage"
+        },
+        {
+          icon: "el-icon-wallet",
+          index: "billManage",
+          title: "sidebar.admin.billManage"
         }
       ]
     };

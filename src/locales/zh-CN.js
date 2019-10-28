@@ -172,7 +172,8 @@ export default {
       userManage: '用户管理',
       customerManage: '住户管理',
       adminManage: '管理员管理',
-      buildingManage: '楼栋管理'
+      buildingManage: '楼栋管理',
+      billManage: '账单管理',
     },
     user: {
       onlineService: '网上报修',
@@ -268,6 +269,10 @@ export default {
     answerContent: '回复内容',
     isHandleReply: '是否提交回复？',
     answerContentIsNull: '请输入回复内容！'
+  },
+
+  billManage: {
+    addBill: '添加账单',
   },
 
   adminCenter: {

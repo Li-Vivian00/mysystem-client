@@ -15,6 +15,7 @@ import userPoint from '../components/user/userPoint';
 import userComment from '../components/user/UserRepair';
 import userHome from '../components/user/UserHome';
 import adminCenter from '../components/admin/adminCenter';
+import billManage from '../components/admin/billManage/billManage.vue';
 import modifyPassword from '../components/user/UserModifyPassword';
 import customerManage from '../components/admin/userManage/CustomerManage';
 import adminManage from '../components/admin/userManage/AdminManage';
@@ -30,6 +31,7 @@ import opinionManage from '../components/admin/repairManage/OpinionManage';
 import buildingManage from '../components/admin/buildingManage/BuildingManage';
 import adminForget from '../components/login/AdminForget';
 import userForget from '../components/login/UserForget';
+import payPage from '../components/user/payPage.vue';
 Vue.use(Router);
 
 export default new Router({
@@ -79,24 +81,29 @@ export default new Router({
         }
       ]
     },
+
     {
       path: '/',
       name: 'userLogin',
       component: userLogin
     },
+
     {
       path: '/adminLogin',
       name: 'adminLogin',
       component: adminLogin
     },
+
     {
       path: '/register',
       component: register
     },
+
     {
       path: '/userlogin',
       component: userLogin
     },
+
     {
       path: '/adminHome',
       component: adminHome,
@@ -126,16 +133,6 @@ export default new Router({
         {
           path: '/baseInfoAboutBuilding',
           component: baseInfo,
-          // children: [
-          //   // {
-          //   //   path: '/baseInfoAboutUs',
-          //   //   component: baseInfoAboutUs
-          //   // },
-          //   {
-          //     path: '/baseInfoAboutBuilding',
-          //     component: baseInfoAboutBuilding
-          //   }
-          // ]
         },
         {
           path: '/baseFacility',
@@ -162,6 +159,11 @@ export default new Router({
           component: adminManage
         },
 
+        //账单管理
+        {
+          path: '/billManage',
+          component: billManage
+        },
         //楼栋管理
         {
           path: '/buildingManage',
@@ -170,7 +172,6 @@ export default new Router({
       ]
     },
 
-    //忘记密码
     {
       path: '/adminForget',
       component: adminForget
@@ -179,6 +180,11 @@ export default new Router({
     {
       path: '/userForget',
       component: userForget
+    },
+
+    {
+      path: '/payPage',
+      component: payPage
     }
   ]
 });

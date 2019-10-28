@@ -173,7 +173,8 @@ export default {
       userManage: 'UserManage',
       customerManage: 'CustomerManage',
       adminManage: 'AdminManage',
-      buildingManage: 'BuildingManage'
+      buildingManage: 'BuildingManage',
+      billManage: 'BillManage',
     },
     user: {
       onlineService: 'Online service',
@@ -270,6 +271,10 @@ export default {
     answerContent: 'Reply to content',
     isHandleReply: 'Whether to submit a response?',
     answerContentIsNull: 'Please enter the reply!'
+  },
+
+  billManage: {
+    addBill: 'Add Bill',
   },
 
   adminCenter: {
