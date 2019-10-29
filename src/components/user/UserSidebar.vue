@@ -66,6 +66,11 @@ export default {
           index: "modifyPassword",
           title: "forgetPwd.stepTwo",
         },
+        {
+          icon: "el-icon-wallet",
+          index: "userBill",
+          title: "sidebar.admin.billManage"
+        }
       ]
     };
   },
