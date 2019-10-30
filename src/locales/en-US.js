@@ -81,6 +81,7 @@ export default {
       formatCard: 'Please enter your correct card',
       sex: 'Please enter your sex',
       loginIdExist: 'The login account already exists',
+      loginIdNotExist: 'The login account is not exists',
       passwordError: 'Password mistake',
       repeatPasswordError: 'The two passwords did not match',
       phoneExist: 'The phone number has been registered',
@@ -275,6 +276,14 @@ export default {
 
   billManage: {
     addBill: 'Add Bill',
+    selectDate: 'Please select the start and end date',
+    waterRent: 'Water Rent',
+    powerRent: 'Power Rent',
+    managementFee: 'Property Management Fee',
+    garbageCharge: 'Garbage Charge',
+    unpaid: 'Unpaid',
+    PaidFee: 'Already Paid',
+    detail: 'Detail',
   },
 
   adminCenter: {

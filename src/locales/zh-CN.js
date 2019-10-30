@@ -81,6 +81,7 @@ export default {
       formatCard: '请输入正确的身份证号',
       sex: '请输入性别',
       loginIdExist: '登录账号已存在',
+      loginIdNotExist: '登录账号不存在',
       passwordError: '密码错误',
       repeatPasswordError: '两次输入的密码不一致',
       phoneExist: '该手机号已被注册',
@@ -273,6 +274,14 @@ export default {
 
   billManage: {
     addBill: '添加账单',
+    selectDate: '请选择起止日期',
+    waterRent: '水费',
+    powerRent: '电费',
+    managementFee: '物业管理费',
+    garbageCharge: '垃圾费',
+    unpaid: '未缴费',
+    PaidFee: '已缴费',
+    detail: '详细信息',
   },
 
   adminCenter: {

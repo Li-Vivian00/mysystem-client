@@ -99,3 +99,10 @@ export const validateRoomId = (rule, value, callback, self) => {
   }
   callback();
 };
+
+export const validateDate = (rule, value, callback, self) => {
+  if (value === '') {
+    callback(new Error(self.$t('billManage.selectDate')));
+  }
+  callback();
+};

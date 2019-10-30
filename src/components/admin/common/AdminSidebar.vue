@@ -18,10 +18,10 @@
           </el-submenu>
         </template>
         <template v-else>
-          <el-menu-item :index="item.index">
-            <i :class="item.icon"></i>
-            {{  $t(item.title) }}
-          </el-menu-item>
+            <el-menu-item :index="item.index">
+              <i :class="item.icon"></i>
+              {{  $t(item.title) }}
+            </el-menu-item>
         </template>
       </template>
     </el-menu>
