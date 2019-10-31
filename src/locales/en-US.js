@@ -149,7 +149,8 @@ export default {
       searchError: 'Fail to query',
       batchDeleteEmpty: 'Please select the info which you want to delete',
       oldPasswordIsError: 'The old password is wrong',
-      successUpdatePwd: 'Change password successfully! Click ok to login again.'
+      successUpdatePwd: 'Change password successfully! Click ok to login again.',
+      successSend: 'Success to remind!',
     }
   },
 
@@ -284,8 +285,28 @@ export default {
     unpaid: 'Unpaid',
     PaidFee: 'Already Paid',
     detail: 'Detail',
+    price: 'Price:',
+    count: 'Count:',
+    date: 'Date',
+    to: 'To',
+    start_date: 'Start Date',
+    end_date: 'End Date',
+    remark: 'Remark',
+    execute: 'Executing...',
+    remindPay: 'Reminders for payment',
+    total: 'Total Price',
   },
-
+  buildingManage: {
+    floorId: 'Floor Id',
+    floorName: 'Floor Name',
+    startDate: 'Start Date',
+    endDate: 'End Date',
+    floorHold: 'Floor Hold',
+    floorArea: 'Floor Area',
+    roomArea: 'Room Area',
+    roomType: 'Room Type',
+    score: 'User Rating ',
+  },
   adminCenter: {
     editMessage: 'You can begin to edit info'
   },

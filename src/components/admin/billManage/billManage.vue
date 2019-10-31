@@ -1,20 +1,22 @@
 <template>
   <div class="billManage">
     <el-button type="primary" @click="clickAddBill" class="batchDelect">{{$t('billManage.addBill')}}</el-button>
-    {{$t("manage.keyWord")}}
-    <el-select v-model="selectValue"
-               clearable
-               filterable
-               :placeholder='`${$t("manage.selectHolder")}`'>
-      <el-option v-for="item in options"
-                 :key="item.value"
-                 :label='`${$t(item.label)}`'
-                 :value="item.value"></el-option>
-    </el-select>
-    <el-button type="primary"
-               @click="searchBill"
-               class="searchUser"
-               plain>{{$t("manage.search")}}</el-button>
+    <div class="headerStyle">
+      {{$t("manage.keyWord")}}
+      <el-select v-model="selectValue"
+                clearable
+                filterable
+                :placeholder='`${$t("manage.selectHolder")}`'>
+        <el-option v-for="item in options"
+                  :key="item.value"
+                  :label='`${$t(item.label)}`'
+                  :value="item.value"></el-option>
+      </el-select>
+      <el-button type="primary"
+                @click="searchBill"
+                class="searchUser"
+                plain>{{$t("manage.search")}}</el-button>
+    </div>
     <el-table
       :data="form.slice((currentPage - 1) * pagesize, currentPage * pagesize)"
       style="width: 100%"
@@ -29,14 +31,14 @@
       element-loading-background="rgba(0, 0, 0, 0.8)"
       :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
     >
-      <el-table-column type="index"></el-table-column>
-      <el-table-column prop="username" label="username" width="180"></el-table-column>
-      <el-table-column prop="phone" label="phone" width="180"></el-table-column>
-      <el-table-column prop="room_id" label="room_id" width="180"></el-table-column>
-      <el-table-column prop="total" label="total" width="180"></el-table-column>
-      <el-table-column prop="start_date" label="start_date" width="180"></el-table-column>
-      <el-table-column prop="end_date" label="end_date" width="180"></el-table-column>
-      <el-table-column :label='`${$t("repairManage.status")}/${$t("manage.operate")}`'>
+      <el-table-column type="index" sortable></el-table-column>
+      <el-table-column sortable prop="username" :label='`${$t("opinionManage.userName")}`' width="150"></el-table-column>
+      <el-table-column sortable prop="phone" :label='`${$t("opinionManage.phone")}`' width="160"></el-table-column>
+      <el-table-column sortable prop="room_id" :label='`${$t("repairManage.room_id")}`' width="150"></el-table-column>
+      <el-table-column sortable prop="total" :label='`${$t("billManage.total")}`' width="150"></el-table-column>
+      <el-table-column sortable prop="start_date" :label='`${$t("billManage.start_date")}`' width="150"></el-table-column>
+      <el-table-column sortable prop="end_date" :label='`${$t("billManage.end_date")}`' width="150"></el-table-column>
+      <el-table-column :label='`${$t("repairManage.status")}/${$t("manage.operate")}`' width="150px">
         <template slot-scope="scope">
           <span v-if="scope.row.status == 0">{{$t("billManage.unpaid")}}
             <el-tooltip :content='`${$t("billManage.detail")}`' placement="top">
@@ -49,6 +51,8 @@
             <el-button type="text"
                       size="small"
                       @click="deleteBill(scope.row)"><i class="el-icon-delete"></i></el-button>
+            <el-button type="text"
+                       size="small" @click="showBillDetail(scope.row)"><i class="el-icon-view el-icon--right"></i></el-button>
           </span>
         </template>
       </el-table-column>
@@ -63,7 +67,7 @@
       :total="form.length"
     ></el-pagination>
 
-    <el-dialog title='新增账单'
+    <el-dialog :title='`${$t("billManage.addBill")}`'
                :visible.sync="editFormVisible"
                :close-on-click-modal="false"
                class="edit-form"
@@ -109,23 +113,23 @@
                        :value='`${$t("billManage.managementFee")}`'></el-option>
             <el-option :label='`${$t("billManage.garbageCharge")}`'
                        :value='`${$t("billManage.garbageCharge")}`'></el-option>
-          </el-select>
-          单价：<el-input-number v-model="editForm.price" :precision="2" :step="0.1" :min="1" size="medium"></el-input-number><br>
-          数量：<el-input-number v-model="editForm.count" :precision="2" :step="0.1" :min="1" size="medium"></el-input-number>
+          </el-select><br>
+          {{$t("billManage.price")}}<el-input-number v-model="editForm.price" :precision="2" :step="0.1" :min="1" size="small"></el-input-number>
+          {{$t("billManage.count")}}<el-input-number v-model="editForm.count" :precision="2" :step="0.1" :min="1" size="small"></el-input-number>
           <p v-show="editForm.type != ''"style="margin: 0px; text-align: left">{{editForm.type}}: {{editForm.price}} * {{editForm.count}} = {{total}}</p>
         </el-form-item>
-        <el-form-item label="起止日期" prop="date">
+        <el-form-item :label='`${$t("billManage.date")}`' prop="date" >
           <el-date-picker
             v-model="editForm.date"
             type="daterange"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
+            :range-separator='`${$t("billManage.to")}`'
+            :start-placeholder='`${$t("billManage.start_date")}`'
+            :end-placeholder='`${$t("billManage.end_date")}`'
             format="yyyy 年 MM 月 dd 日"
             value-format="yyyy-MM-dd"
             class="inputWidth"></el-date-picker>
         </el-form-item>
-        <el-form-item :label='`${$t("homePage.userOpinion.require")}`'
+        <el-form-item :label='`${$t("billManage.remark")}`'
                       prop="remark">
           <el-input type="textarea"
                     v-model="editForm.remark"
@@ -136,16 +140,16 @@
       </el-form>
       <div slot="footer"
            class="dialog-footer">
-        <el-button @click.native="handleClose">{{$t("button.cancel")}}</el-button>
+        <el-button @click="handleClose">{{$t("button.cancel")}}</el-button>
         <el-button type="primary"
-                   @click.native="submitBill('editForm')">{{$t("button.add")}}</el-button>
+                   @click="submitBill('editForm')">{{$t("button.add")}}</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { getAllBill, getBillByloginId, addBill, getBillByItem, deleteBill } from "../../../service/admin/billManage/billManage.Service";
+import { getAllBill, getBillByloginId, addBill, getBillByItem, deleteBill, getBillById } from "../../../service/admin/billManage/billManage.Service";
 import {validateName, validateLoginId, validatePhone, validateRoomId, validateType, validateDate} from '../../../utils/utilsValidate'
 import _ from 'lodash';
 import getDateTimes from "../../../mixin/getDateTimes"
@@ -237,6 +241,7 @@ export default {
     clickAddBill() {
       this.editFormVisible = true;
     },
+
     submitBill() {
       const self = this;
       self.$refs['editForm'].validate(async (valid) => {
@@ -284,7 +289,13 @@ export default {
       const h = this.$createElement;
       let msg = [];
       const self = this;
-      const result = await getBillByloginId(self, row.loginid);
+      let result = [];
+      if (self.selectValue == '1') {
+        result = await getBillById(self, row.id)
+      }
+      else {
+        result = await getBillByloginId(self, row.loginid);
+      }
       _.forEach(result.data, item => {
         msg.push(h('div', null, `类型: ${item.type} - 价格: ${item.price} - 数量: ${item.count} - 总价: ${item.total}元 - 缴费时间: ${item.pay_date?item.pay_date:'未缴费'} - 备注: ${item.remark?item.remark:'无'}` ));
       });
@@ -292,12 +303,12 @@ export default {
         title:`${row.username} Bill Details`,
         message: h('p', null, msg),
         showCancelButton: true,
-        confirmButtonText: '提醒缴费',
-        canceButtonTest: '取消',
+        confirmButtonText: this.selectValue == '1'?this.$t("button.ok"):this.$t("billManage.remindPay"),
+        cancelButtonText: this.$t("button.cancel"),
          beforeClose: (action, instance, done) => {
-            if (action === 'confirm') {
+            if (action === 'confirm' && this.selectValue != '1') {
               instance.confirmButtonLoading = true;
-              instance.confirmButtonText = '执行中...';
+              instance.confirmButtonText = this.$t("billManage.execute");
               setTimeout(() => {
                 done();
                 setTimeout(() => {
@@ -311,9 +322,9 @@ export default {
         }).then(action => {
           this.$message({
             type: 'info',
-            message: '已成功发送提醒消息！'
+            message: this.selectValue == '1'?this.$t("manage.showMessage.operateSuccess"):this.$t("manage.showMessage.successSend")
           });
-      });
+      }).catch(() => {});
     },
 
     handleClose () {
@@ -359,15 +370,14 @@ export default {
           }
         )
         .then(async () => {
-          const Id = row.id;
-          const response = await deleteBill(self, Id);
-          console.log(response.data);
-          // if (_.isEqual(response.data, "fail to delete user")) {
-          //   self.showErrorMessageBox();
-          // } else {
-          //   self.getAllBill();
-          //   self.showSuccessMessageBox();
-          // }
+          const value = row.id;
+          const response = await deleteBill(self, value);
+            if (_.isEqual(response.data, "succcess to delete")) {
+              self.getAllBill();
+              self.showSuccessMessageBox();
+            } else {
+              self.showErrorMessageBox();
+            }
         })
         .catch(() => {
           self.showCancelMessageBox();
@@ -393,8 +403,14 @@ export default {
   .batchDelect {
     margin-top: 10px;
   }
+  .headerStyle {
+    margin-top: 10px;
+  }
   .processed {
     color: rgb(248, 128, 128);
   }
+  .textStyle {
+      width: 88%;
+    }
 }
 </style>

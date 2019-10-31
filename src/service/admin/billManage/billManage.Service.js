@@ -38,9 +38,17 @@ export const getBillByItem = async (self, value) => {
 return result;
 }
 
-export const deleteBill = async (self, Id) => {
+export const deleteBill = async (self, val) => {
   const result = await self.$http
-  .post('/api/billManage/deleteBill', {params: {id: Id}})
+  .get('/api/billManage/deleteBill', {params: {val}})
+  .catch(error => {
+    console.log(error);
+  });
+return result;
+}
+export const getBillById = async (self, val) => {
+  const result = await self.$http
+  .get('/api/billManage/getBillById', {params: {val}})
   .catch(error => {
     console.log(error);
   });

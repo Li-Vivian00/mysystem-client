@@ -148,7 +148,8 @@ export default {
       searchError: '查询失败',
       batchDeleteEmpty: '请选择需要删除的信息',
       oldPasswordIsError: '旧密码错误',
-      successUpdatePwd: '修改密码成功！点击确认后重新登陆。'
+      successUpdatePwd: '修改密码成功！点击确认后重新登陆。',
+      successSend: '已成功发送提醒消息！',
     }
   },
 
@@ -282,6 +283,28 @@ export default {
     unpaid: '未缴费',
     PaidFee: '已缴费',
     detail: '详细信息',
+    price: '单价：',
+    count: '数量：',
+    date: '起止日期',
+    to: '至',
+    start_date: '开始日期',
+    end_date: '结束日期',
+    remark: '备注',
+    execute: '执行中...',
+    remindPay: '提醒缴费',
+    total: '合计',
+  },
+
+  buildingManage: {
+    floorId: '楼栋号',
+    floorName: '楼栋名称',
+    startDate: '开工时间',
+    endDate: '竣工时间',
+    floorHold: '得房率',
+    floorArea: '建筑面积',
+    roomArea: '房间面积',
+    roomType: '房间类型',
+    score: '用户评分',
   },
 
   adminCenter: {
