@@ -13,6 +13,7 @@
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(0, 0, 0, 0.8)"
       stripe
+      border
       height="468"
       v-if="isBuildingPage"
     >
@@ -25,7 +26,10 @@
       <el-table-column prop="floor_area" :label='`${$t("buildingManage.floorArea")}`' sortable></el-table-column>
       <el-table-column fixed="right" :label='`${$t("manage.operate")}`' width="150">
         <template slot-scope="scope">
-          <el-select v-model="selectValue" clearable placeholder="请选择" @change="selectBuilding">
+          <div>
+            <a href="#" v-for="item in optionsA"></a>
+          </div>
+          <!-- <el-select v-model="selectValue" clearable placeholder="请选择" @change="selectBuilding">
             <el-option
               v-if="scope.row.floor_id == 'A'"
               v-for="item in optionsA"
@@ -47,7 +51,7 @@
               :label="item.label"
               :value="item.value"
             ></el-option>
-          </el-select>
+          </el-select> -->
         </template>
       </el-table-column>
     </el-table>
@@ -60,6 +64,7 @@
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(0, 0, 0, 0.8)"
       stripe
+      border
       height="468"
       v-else
     >
@@ -112,6 +117,7 @@
 
 <script>
 import { getAllBuilding, getRoomByFloorId } from "../../../service/admin/buildingManage/buildingManage.Service.js";
+import _ from 'lodash'
 export default {
   name: "buildingManage",
   data() {
@@ -191,14 +197,16 @@ export default {
       if (response.data == null) {
         self.showErrorMessageBox();
       } else {
-        self.form = response.data;
+        self.form = self.formatForm(response.data);
       }
     },
+
     isBuildPage() {
       this.getAllBuilding();
       this.isBuildingPage = true;
       this.selectBuildingVal = ''
     },
+
     handleSizeChange (size) {
       this.pagesize = size;
     },
@@ -206,6 +214,15 @@ export default {
     handleCurrentChange (currentPage) {
       this.currentPage = currentPage;
     },
+
+    formatForm(val) {
+      val.forEach(item => {
+        if (item.loginid == null) {
+          item.loginid = '-'
+        }
+      })
+      return val;
+    }
   }
 };
 </script>
