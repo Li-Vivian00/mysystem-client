@@ -321,7 +321,7 @@ export default {
       dailyNews: 'Wonderful Moment',
     },
     homeCenter: {
-      forestItem: 'Forests City Of Happiness Harbor',
+      forestItem: 'Forests City Of Fuli Harbor',
       forestDetailItem:
         'The ground of forest city is all a park, vehicles are running through the ground, the ground is pollution-free rail transit, the outer wall of the building is full of vertically distributed plants, every day, people are living in the garden, breathing in the forest, pleasure from...',
       learnMore: 'Learn More >',

@@ -77,8 +77,12 @@
             </el-form-item>
             <el-form-item :label='`${$t("register.label.room_id")}`'>
               <span>{{ props.row.room_id }}</span>
-              <el-link :underline="false">查看<i class="el-icon-view el-icon--right"></i> </el-link>
+              <!-- <el-link :underline="false">查看<i class="el-icon-view el-icon--right"></i> </el-link> -->
             </el-form-item>
+            <!-- <el-form-item :label='`${$t("register.label.room_id")}`'>
+              <span>{{ props.row.room_id }}</span>
+              <el-link :underline="false">查看<i class="el-icon-view el-icon--right"></i> </el-link>
+            </el-form-item> -->
           </el-form>
         </template>
       </el-table-column>

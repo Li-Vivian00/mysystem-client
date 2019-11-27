@@ -36,7 +36,7 @@
           <div class="main-left-bottmLeft">
             <div class="leftPicture">
               <div class="leftItem">
-                <h3>幸福港是什么</h3>
+                <h3>富力港是什么</h3>
                 <h4>ABOUT US</h4>
               </div>
               <a href="">
@@ -57,7 +57,8 @@
           </div>
         </div>
       </div>
-      <div class="main-right" id="right">
+      <div class="main-right"
+           id="right">
         <div class="main-img">
           <img src="https://www.bgy.com.cn/upload/img/2018-10-15/a70a0ef4-3cc3-4ded-b65e-98fb84b32ec4.jpg"
                alt="">
@@ -69,14 +70,14 @@
       </div>
     </div>
     <div class="bottom">
-        <div class="bottom-main">
-          <a href="#">{{$t("homePage.foot.a1")}}</a> <br>
-          <a href="#">{{$t("homePage.foot.a2")}}</a>
-          <a href="#">{{$t("homePage.foot.a3")}}</a>
-          <a href="#">{{$t("homePage.foot.a4")}}</a><br>
-          <span>{{$t("homePage.foot.a5")}}</span>
-        </div>
+      <div class="bottom-main">
+        <a href="#">{{$t("homePage.foot.a1")}}</a> <br>
+        <a href="#">{{$t("homePage.foot.a2")}}</a>
+        <a href="#">{{$t("homePage.foot.a3")}}</a>
+        <a href="#">{{$t("homePage.foot.a4")}}</a><br>
+        <span>{{$t("homePage.foot.a5")}}</span>
       </div>
+    </div>
   </div>
 </template>
 
@@ -125,5 +126,4 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../../static/css/homePage/homeCenter";
-
 </style>

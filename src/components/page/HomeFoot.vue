@@ -22,7 +22,7 @@ export default {
   height: 8%;
   border-top: 1px solid rgb(231, 231, 231);
   position: absolute;
-  bottom: -50%;
+  bottom: -42%;
   .bottom-main {
     width: 68%;
     height: 100%;

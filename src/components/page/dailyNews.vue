@@ -1,7 +1,16 @@
 <template>
   <div class="dailyNews">
     <div class="top">
-      <div class="top-left">上左
+      <div class="top-left">
+        <!-- <img src="../../../static/img/cellBoard.png"
+             alt="cellBoard">
+        <ul class="left-ul">
+          <p>{{$t("homePage.dailyNews.serviceHotline")}}</p>
+          <li v-for="(i, index) in phoneList">{{i.item}}: {{i.phone}}</li>
+        </ul> -->
+        <p style="text-align: left; font-size:18px; margin:0px;padding:5px; font-weight: bolder">每日要闻</p>
+        <p style="font-weight: bolder; font-size: 18px; padding: 0px">{{warnTitle}}</p>
+        <p style="text-align: left; padding: 5px;text-indent: 20px; letter-spacing:2px; margin:0px">{{warnContent}}</p>
       </div>
       <div class="top-right">
         <p v-if="userIsLogin">
@@ -9,28 +18,23 @@
                    type="warning"
                    target="_blank">{{$t("homePage.dailyNews.setPoint")}}</el-link>
         </p>
+        <p class="explainChart">根据小区的科学智能统计，我港各小区均拥有数以百计的用户，每一个单元拥有用户数量均采用可视化柱状图显示可见。</p>
         <div id='unitChart'
              class="chartStyle"></div>
         <div id='pointChart'
              class="chartStyle"></div>
+
       </div>
     </div>
     <div class="bottom">
-      <div class="bottom-left">
-        <img src="../../../static/img/cellBoard.png"
-             alt="cellBoard">
-        <ul class="left-ul">
-          <p>{{$t("homePage.dailyNews.serviceHotline")}}</p>
-          <li v-for="(i, index) in phoneList">{{i.item}}: {{i.phone}}</li>
-        </ul>
-      </div>
+      <div class="bottom-left">左下</div>
       <div class="bottom-right">右下</div>
     </div>
   </div>
 </template>
 
 <script>
-import { getCountOfUser, getAvgScore, getPhoneModule } from '../../service/user/dailyNews.service'
+import { getCountOfUser, getAvgScore, getPhoneModule, getWarningModuleInfo } from '../../service/user/dailyNews.service'
 import _ from "lodash"
 export default {
   name: "dailyNews",
@@ -40,19 +44,22 @@ export default {
       unitData: [],
       pointData: [],
       phoneList: [],
+      warnTitle: '',
+      warnContent: ''
     }
   },
   components: {
 
   },
   mounted () {
-    this.getCountOfUser();
+    this.getUserNumber();
     this.getAvgScore();
-    this.drawLine();
+    // this.drawLine();
     this.getPhoneModule();
+    this.getWarningModuleInfo();
   },
   methods: {
-    async getCountOfUser () {
+    async getUserNumber () {
       const self = this;
       const result = await getCountOfUser(self);
       self.unitData = result.data;
@@ -125,6 +132,15 @@ export default {
         }]
       });
     },
+
+    async getWarningModuleInfo () {
+      const self = this;
+      const respone = await getWarningModuleInfo(self);
+      const result = respone.data;
+      console.log(result);
+      self.warnTitle = result[0].title;
+      self.warnContent = result[0].content;
+    }
 
   },
   computed: {

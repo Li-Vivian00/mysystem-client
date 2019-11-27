@@ -1,26 +1,35 @@
-export const getCountOfUser = async (self) => {
+export const getCountOfUser = async self => {
   const result = await self.$http
-    .get('/api/dailyNews/getCountOfUser',{})
+    .get('/api/dailyNews/getCountOfUser', {})
     .catch(error => {
       console.log(error);
     });
   return result;
-}
+};
 
-export const getAvgScore = async (self) => {
+export const getAvgScore = async self => {
   const result = await self.$http
-    .get('/api/dailyNews/getAvgScore',{})
+    .get('/api/dailyNews/getAvgScore', {})
     .catch(error => {
       console.log(error);
     });
   return result;
-}
+};
 
-export const getPhoneModule = async (self) => {
+export const getPhoneModule = async self => {
   const result = await self.$http
-    .get('/api/dailyNews/getPhoneModule',{})
+    .get('/api/dailyNews/getPhoneModule', {})
     .catch(error => {
       console.log(error);
     });
   return result;
-}
+};
+
+export const getWarningModuleInfo = async self => {
+  const result = await self.$http
+    .get('/api/villaCenter/getWarningModuleInfo', {})
+    .catch(error => {
+      console.log(error);
+    });
+  return result;
+};
