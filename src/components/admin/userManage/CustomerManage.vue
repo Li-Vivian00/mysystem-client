@@ -133,7 +133,7 @@
 
 <script>
 import Util from "../../../utils/utilsReg";
-import DialogForm from "../../common/DialogForm";
+import EditForm from "./EditForm";
 import { validateName, validateSex, validateEmail, validatePass, validateCard } from "../../../utils/utilsValidate";
 import _ from "lodash";
 import {
@@ -151,7 +151,7 @@ import exportUserData from "../../../mixin/exportUserData"
 export default {
   name: "CustomerManage",
   components: {
-    DialogForm,
+    EditForm,
   },
   data () {
     const self = this;

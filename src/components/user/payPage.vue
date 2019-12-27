@@ -10,9 +10,9 @@
         <input class="psd-input"
           type="password"
           readonly
-          v-for="(value,index) in passwordGroup"
+          v-for="(item,index) in passwordGroup"
           :key="index"
-          :value="value.value"/>
+          :value="item.value"/>
       </div>
       <div class="input-pan">
         <div class="pan-num"

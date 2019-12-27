@@ -112,7 +112,7 @@
 
 <script>
 import Util from "../../../utils/utilsReg";
-import DialogForm from "../../common/DialogForm";
+import EditForm from "./EditForm";
 import { validateName, validateSex, validateEmail, validatePass, validateCard } from "../../../utils/utilsValidate";
 import _ from "lodash";
 import { deleteAdmin, getAllAdmin, updateAdmin, searchAdmin, getAdminLoginid } from "../../../service/admin/userManage/adminManage.service";
@@ -122,7 +122,7 @@ import showMessageBox from "../../../mixin/showMessageBox"
 export default {
   name: "AdminManage",
   components: {
-    DialogForm,
+    EditForm,
   },
   data () {
     const self = this;
