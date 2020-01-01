@@ -149,8 +149,9 @@ export default {
       searchError: 'Fail to query',
       batchDeleteEmpty: 'Please select the info which you want to delete',
       oldPasswordIsError: 'The old password is wrong',
-      successUpdatePwd: 'Change password successfully! Click ok to login again.',
-      successSend: 'Success to remind!',
+      successUpdatePwd:
+        'Change password successfully! Click ok to login again.',
+      successSend: 'Success to remind!'
     }
   },
 
@@ -176,12 +177,12 @@ export default {
       customerManage: 'CustomerManage',
       adminManage: 'AdminManage',
       buildingManage: 'BuildingManage',
-      billManage: 'BillManage',
+      billManage: 'BillManage'
     },
     user: {
       onlineService: 'Online service',
       comments: 'Comments/complaints',
-      point: 'Online score',
+      point: 'Online score'
     }
   },
 
@@ -294,7 +295,7 @@ export default {
     remark: 'Remark',
     execute: 'Executing...',
     remindPay: 'Reminders for payment',
-    total: 'Total Price',
+    total: 'Total Price'
   },
   buildingManage: {
     floorId: 'Floor Id',
@@ -305,7 +306,7 @@ export default {
     floorArea: 'Floor Area',
     roomArea: 'Room Area',
     roomType: 'Room Type',
-    score: 'User Rating ',
+    score: 'User Rating '
   },
   adminCenter: {
     editMessage: 'You can begin to edit info'
@@ -318,7 +319,7 @@ export default {
       adminLogin: 'Admin Login',
       userLogin: 'User Login',
       aboutUs: 'About Us',
-      dailyNews: 'Wonderful Moment',
+      dailyNews: 'Wonderful Moment'
     },
     homeCenter: {
       forestItem: 'Forests City Of Fuli Harbor',
@@ -353,45 +354,68 @@ export default {
       hydroelectricity: 'Hydroelectricity',
       others: 'Others',
       detail: 'Detailed content ',
-      require: 'Observations/recommendations '
+      require: 'Observations/recommendations ',
+      userRating: 'Power user rating',
+      publicSecurity: 'Public security management:',
+      equipmentMaintenance: 'Equipment maintenance:',
+      serviceAttitude: 'Service attitude:',
+      environmentalAssessment: 'Environmental assessment:',
+      overallEvaluation: 'Overall evaluation'
     },
     dailyNews: {
       serviceHotline: 'Service Hotline',
       setPoint: 'Go to Give a Mark >>>',
       totalOwner: 'Total number of modules',
       totalPoint: 'Household score of each unit',
+      analysContent:
+        'According to the scientific and intelligent statistics of the community, each community in our port has hundreds of users, and the number of users per unit is displayed by visual bar chart.'
     },
     aboutUs: {
       companyProfile: 'Company Profile',
       corporateCulture: 'Corporate Culture',
-      leftTitle: "Fuli port is the practitioner of China's new urbanization process and the builder of global green ecological smart cities",
+      leftTitle:
+        "Fuli port is the practitioner of China's new urbanization process and the builder of global green ecological smart cities",
       town: 'Town',
       owners: 'Thousand Owners',
       whatFuli: 'What is FuLi',
-      whatFuliTwo: 'FuLi is a high-tech comprehensive enterprise that creates better life products for the whole world',
-      titleOne: 'We are committed to providing good homes, good communities for people who want a better life',
-      titleOneSub: 'For more than 20 years, as a practical practitioner of new urbanization, we have brought modern urban appearance to more than 1200 cities and towns in order to build Minsheng real estate. With the application of high technology, we have become the builders of green ecological intelligent architecture. We pioneered the three-dimensional layered modern urban architecture-Forest City, which was named "the top five cities affecting the future of the world" by Forbes. ',
-      titleOneSubT: 'Today, more than 4 million owners choose to live and work in country Garden. Entering the era of industrial 4.0, with the addition of construction robots, we will improve the safety, beauty, economy, applicability and durability of the house with the high performance and price ratio of craftsmen. High-tech intelligent community, let us always maintain the world-class community service level. The country Garden project has always been the beautiful scenery and business card of the city: garden landscape, life square makes the local people forget to return, clubhouse, property service makes people live comfortably and safely. ',
-      titleTwo: 'We are actively involved in intelligent manufacturing and development of science and technology.',
-      titleTwoSub: "Science and technology is the first productive force, intelligent manufacturing has great potential. As an enterprise with nearly 200000 employees and more than 1000 doctors, we invest a lot of money to build robot valley, invite top talents, do a good job of incubator, set up R & D team, turn the most advanced scientific research results into practical and cheap high-tech products, make people's lives better, help the national scientific and technological progress, and benefit all mankind.",
-      titleThree: 'We develop modern agriculture and revitalize the countryside.',
-      titleThreeSub: "We introduce the world's first-class agricultural production technology and equipment, and also use the research and development advantages of the robot, layout the whole industrial chain of agriculture, and through the retail of the community and the whole society of the Biguiyuan, and share the dividend of the development of modern agriculture with the farmers, and help the farmers to increase their income and become rich. At the same time, to produce and provide safe, delicious, affordable, rich agricultural products and daily necessities for each family at a lower price.",
+      whatFuliTwo:
+        'FuLi is a high-tech comprehensive enterprise that creates better life products for the whole world',
+      titleOne:
+        'We are committed to providing good homes, good communities for people who want a better life',
+      titleOneSub:
+        'For more than 20 years, as a practical practitioner of new urbanization, we have brought modern urban appearance to more than 1200 cities and towns in order to build Minsheng real estate. With the application of high technology, we have become the builders of green ecological intelligent architecture. We pioneered the three-dimensional layered modern urban architecture-Forest City, which was named "the top five cities affecting the future of the world" by Forbes. ',
+      titleOneSubT:
+        'Today, more than 4 million owners choose to live and work in country Garden. Entering the era of industrial 4.0, with the addition of construction robots, we will improve the safety, beauty, economy, applicability and durability of the house with the high performance and price ratio of craftsmen. High-tech intelligent community, let us always maintain the world-class community service level. The country Garden project has always been the beautiful scenery and business card of the city: garden landscape, life square makes the local people forget to return, clubhouse, property service makes people live comfortably and safely. ',
+      titleTwo:
+        'We are actively involved in intelligent manufacturing and development of science and technology.',
+      titleTwoSub:
+        "Science and technology is the first productive force, intelligent manufacturing has great potential. As an enterprise with nearly 200000 employees and more than 1000 doctors, we invest a lot of money to build robot valley, invite top talents, do a good job of incubator, set up R & D team, turn the most advanced scientific research results into practical and cheap high-tech products, make people's lives better, help the national scientific and technological progress, and benefit all mankind.",
+      titleThree:
+        'We develop modern agriculture and revitalize the countryside.',
+      titleThreeSub:
+        "We introduce the world's first-class agricultural production technology and equipment, and also use the research and development advantages of the robot, layout the whole industrial chain of agriculture, and through the retail of the community and the whole society of the Biguiyuan, and share the dividend of the development of modern agriculture with the farmers, and help the farmers to increase their income and become rich. At the same time, to produce and provide safe, delicious, affordable, rich agricultural products and daily necessities for each family at a lower price.",
       titleFour: 'We want society to be better because of our existence. ',
-      titleFourSub: 'Precision poverty alleviation and rural revitalization are also one of our main undertakings. To this end, we make unremitting efforts to create social value',
-      p1: 'Values: we should be sunshine enterprises with conscience and social responsibility. ',
-      p2: 'Corporate mission: hope that society will be better because of our existence ',
+      titleFourSub:
+        'Precision poverty alleviation and rural revitalization are also one of our main undertakings. To this end, we make unremitting efforts to create social value',
+      p1:
+        'Values: we should be sunshine enterprises with conscience and social responsibility. ',
+      p2:
+        'Corporate mission: hope that society will be better because of our existence ',
       p3: 'Enterprise spirit: good for people and good for society ',
       p4: 'Brand concept: give you a five-star home ',
       p5: 'Quality policy: process boutique, human settlements model',
-      p6: 'The concept of talents: the virtue of virtue is the virtue of virtue, and the talents and the talents are both unique and capable of being at the same time ',
-      p7: 'Strategic Vision: To be the most competitive real estate company in the world.',
+      p6:
+        'The concept of talents: the virtue of virtue is the virtue of virtue, and the talents and the talents are both unique and capable of being at the same time ',
+      p7:
+        'Strategic Vision: To be the most competitive real estate company in the world.'
     },
     foot: {
-      a1: 'Copyright Guangzhou Yuexiu district Fuligang property development co., Ltd all rights reserved by Guangdong icp no. 11111111-1 ',
+      a1:
+        'Copyright Guangzhou Yuexiu district Fuligang property development co., Ltd all rights reserved by Guangdong icp no. 11111111-1 ',
       a2: 'Legal Declaration  ·',
       a3: 'Site Map ·',
       a4: 'Technical Support',
-      a5: 'Fuli Port headquarters Service Supervisory telephone:400888888',
+      a5: 'Fuli Port headquarters Service Supervisory telephone:400888888'
     }
   }
 };

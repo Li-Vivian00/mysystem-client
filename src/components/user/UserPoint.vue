@@ -1,9 +1,9 @@
 <template>
   <div class="userPoint">
     <div class="main">
-      <p>超级用户评分</p>
-      <div><span>治安管理：</span>
-        <el-rate v-model="userPoint.ServicePoint"
+      <p>{{$t("homePage.userOpinion.userRating")}}</p>
+      <div><span>{{$t("homePage.userOpinion.publicSecurity")}}</span>
+        <el-rate v-model="userPoint.public_security"
                  show-score
                  allow-half
                  text-color="#ff9900"
@@ -11,8 +11,8 @@
                  score-template="{value}">
         </el-rate>
       </div>
-      <div><span>设备维护：</span>
-        <el-rate v-model="userPoint.devicePoint"
+      <div><span>{{$t("homePage.userOpinion.equipmentMaintenance")}}</span>
+        <el-rate v-model="userPoint.equipment_maintenance"
                  show-score
                  allow-half
                  text-color="#ff9900"
@@ -20,8 +20,8 @@
                  score-template="{value}">
         </el-rate>
       </div>
-      <div><span>服务态度：</span>
-        <el-rate v-model="userPoint.attitudePoint"
+      <div><span>{{$t("homePage.userOpinion.serviceAttitude")}}</span>
+        <el-rate v-model="userPoint.service_attitude"
                  show-score
                  allow-half
                  text-color="#ff9900"
@@ -29,8 +29,8 @@
                  score-template="{value}">
         </el-rate>
       </div>
-      <div><span>环境评价：</span>
-        <el-rate v-model="userPoint.EnvirPoint"
+      <div><span>{{$t("homePage.userOpinion.environmentalAssessment")}}</span>
+        <el-rate v-model="userPoint.environmental_assessment"
                  show-score
                  allow-half
                  text-color="#ff9900"
@@ -38,8 +38,8 @@
                  score-template="{value}">
         </el-rate>
       </div>
-      <div><span>整体评价：</span>
-        <el-rate v-model="userPoint.AllPoint"
+      <div><span>{{$t("homePage.userOpinion.overallEvaluation")}}</span>
+        <el-rate v-model="userPoint.overall_evaluation"
                  show-score
                  allow-half
                  text-color="#ff9900"
@@ -47,40 +47,47 @@
                  score-template="{value}">
         </el-rate>
       </div>
-      <el-button type="primary"
-                 @click.native="handlePoint()"
-                 style="margin-top: 10px">{{ (isSubmit) ? '已提交' : $t("button.submit")}}</el-button>
+      <div>
+        <el-button type="primary"
+                   @click.native="handlePoint"
+                   style="margin-top: 10px"
+                   :disabled="isSubmit">{{ (isSubmit) ? '已提交' : $t("button.submit")}}</el-button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { handlePoint } from '../../service/user/userPoint.service';
+import showMessageBox from "../../mixin/showMessageBox"
 export default {
   name: "userPoint",
   data () {
     return {
       isSubmit: false,
       userPoint: {
-        ServicePoint: null,
-        devicePoint: null,
-        attitudePoint: null,
-        EnvirPoint: null,
-        AllPoint: null,
-        score: null,
-        loginid: ""
+        public_security: null,
+        equipment_maintenance: null,
+        service_attitude: null,
+        environmental_assessment: null,
+        overall_evaluation: null,
+        loginid: "",
+        is_rate: 0
       }
-
     }
   },
+  mixins: [showMessageBox],
   mounted () {
-    this.handlePoint();
+    // this.handlePoint();
   },
   methods: {
     async handlePoint () {
       const self = this;
-      self.userPoint.score = (parseInt(self.userPoint.ServicePoint) + parseInt(self.userPoint.devicePoint) + parseInt(self.userPoint.attitudePoint) + parseInt(self.userPoint.EnvirPoint) + parseInt(self.userPoint.AllPoint)) / 5;
       self.userPoint.loginid = sessionStorage.getItem("userLoginId");
-      const respone = await handlePoint(self, userPoint);
+      self.userPoint.is_rate = 1;
+      const respone = await handlePoint(self, self.userPoint);
+      self.showSuccessMessageBox();
+      self.isSubmit = true;
     },
 
   }
@@ -94,7 +101,6 @@ export default {
   position: relative;
   .main {
     width: 45%;
-    height: 45%;
     border: 2px solid #b8ecfc;
     box-shadow: 10px 10px 10px #8adcf5;
     position: absolute;
@@ -103,6 +109,9 @@ export default {
 
     p span {
       font-family: "YouYuan";
+    }
+    span {
+      text-align: left;
     }
 
     div {

@@ -13,12 +13,13 @@
         <p style="text-align: left; padding: 5px;text-indent: 20px; letter-spacing:2px; margin:0px">{{warnContent}}</p>
       </div>
       <div class="top-right">
-        <p v-if="userIsLogin">
-          <el-link href="http://localhost:8081/#/userPoint"
+
+        <p class="explainChart">{{$t("homePage.dailyNews.analysContent")}}
+          <el-link v-if="userIsLogin"
+                   href="http://localhost:8081/#/userPoint"
                    type="warning"
                    target="_blank">{{$t("homePage.dailyNews.setPoint")}}</el-link>
         </p>
-        <p class="explainChart">根据小区的科学智能统计，我港各小区均拥有数以百计的用户，每一个单元拥有用户数量均采用可视化柱状图显示可见。</p>
         <div id='unitChart'
              class="chartStyle"></div>
         <div id='pointChart'
@@ -137,7 +138,6 @@ export default {
       const self = this;
       const respone = await getWarningModuleInfo(self);
       const result = respone.data;
-      console.log(result);
       self.warnTitle = result[0].title;
       self.warnContent = result[0].content;
     }

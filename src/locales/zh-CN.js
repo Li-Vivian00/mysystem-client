@@ -353,13 +353,20 @@ export default {
       hydroelectricity: '水电',
       others: '其他',
       detail: '详细内容',
-      require: '意见/建议'
+      require: '意见/建议',
+      userRating: '超级用户评分：',
+      publicSecurity: '治安管理：',
+      equipmentMaintenance: '设备维护：',
+      serviceAttitude: '服务态度：',
+      environmentalAssessment: '环境评价：',
+      overallEvaluation: '整体评价：'
     },
     dailyNews: {
       serviceHotline: '服务热线',
       setPoint: '我要去评分 >>>',
       totalOwner: '各单元总人数',
-      totalPoint: '各单元用户评分'
+      totalPoint: '各单元用户评分',
+      analysContent: '根据小区的科学智能统计，我港各小区均拥有数以百计的用户，每一个单元拥有用户数量均采用可视化柱状图显示可见。'
     },
 
     aboutUs: {
