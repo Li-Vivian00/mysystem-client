@@ -7,29 +7,29 @@
 <script>
 export default {
   name: "App",
-  data () {
-    return {
-      lastTime: null,
-      currentTime: null,
-      timeOut: 30*60*1000
-    }
+  data() {
+    // return {
+    //   lastTime: null,
+    //   currentTime: null,
+    //   timeOut: 30 * 60 * 1000
+    // };
   },
   create() {
-    this.lastTime = new Date().getTime();
+    // this.lastTime = new Date().getTime();
   },
   methods: {
-    isTimeOut() {
-      this.currentTime = new Date().getTime();
-      if (this.currentTime - this.lastTime > this.timeOut) {
-        if (sessionStorage.getItem("userLoginId")) {
-          this.$router.push("/userLogin");
-        } else {
-          this.lastTime = new Date().getTime()
-        }
-      } else {
-        this.lastTime = new Date().getTime();
-      }
-    }
+    // isTimeOut() {
+    //   this.currentTime = new Date().getTime();
+    //   if (this.currentTime - this.lastTime > this.timeOut) {
+    //     if (sessionStorage.getItem("userLoginId")) {
+    //       this.$router.push("/userLogin");
+    //     } else {
+    //       this.lastTime = new Date().getTime();
+    //     }
+    //   } else {
+    //     this.lastTime = new Date().getTime();
+    //   }
+    // }
   }
 };
 </script>
@@ -78,4 +78,3 @@ export default {
   margin-bottom: 2px solid #fff;
 }
 </style>
-

@@ -24,21 +24,14 @@
   height: auto;
   position: relative;
   .mainBox {
-    position: absolute;
-    left: 50%;
-    margin-left: -14.5%;
-    margin-top: -475px;
-    width: 30%;
-    height: 273px;
-    background: #fff;
-    position: relative;
     .mainBox-Main {
       background: #fff;
       width: 569px;
       height: 261px;
       border: 3px dashed rgb(64, 238, 157);
       position: absolute;
-      top: 3px;
+      top: 18%;
+      right: 30%;
       text-align: center;
       .info {
         display: inline-block;
@@ -117,7 +110,6 @@
 .el-breadcrumb__item {
   float: none !important;
 }
-
 
 .el-input {
   width: 93% !important;

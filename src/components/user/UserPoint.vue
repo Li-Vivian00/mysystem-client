@@ -1,68 +1,95 @@
 <template>
   <div class="userPoint">
     <div class="main">
-      <p>{{$t("homePage.userOpinion.userRating")}}</p>
-      <div><span>{{$t("homePage.userOpinion.publicSecurity")}}</span>
-        <el-rate v-model="userPoint.public_security"
-                 show-score
-                 allow-half
-                 text-color="#ff9900"
-                 style="display: inline-block"
-                 score-template="{value}">
-        </el-rate>
-      </div>
-      <div><span>{{$t("homePage.userOpinion.equipmentMaintenance")}}</span>
-        <el-rate v-model="userPoint.equipment_maintenance"
-                 show-score
-                 allow-half
-                 text-color="#ff9900"
-                 style="display: inline-block"
-                 score-template="{value}">
-        </el-rate>
-      </div>
-      <div><span>{{$t("homePage.userOpinion.serviceAttitude")}}</span>
-        <el-rate v-model="userPoint.service_attitude"
-                 show-score
-                 allow-half
-                 text-color="#ff9900"
-                 style="display: inline-block"
-                 score-template="{value}">
-        </el-rate>
-      </div>
-      <div><span>{{$t("homePage.userOpinion.environmentalAssessment")}}</span>
-        <el-rate v-model="userPoint.environmental_assessment"
-                 show-score
-                 allow-half
-                 text-color="#ff9900"
-                 style="display: inline-block"
-                 score-template="{value}">
-        </el-rate>
-      </div>
-      <div><span>{{$t("homePage.userOpinion.overallEvaluation")}}</span>
-        <el-rate v-model="userPoint.overall_evaluation"
-                 show-score
-                 allow-half
-                 text-color="#ff9900"
-                 style="display: inline-block"
-                 score-template="{value}">
+      <p>{{ $t("homePage.userOpinion.userRating") }}</p>
+      <div>
+        <span>{{ $t("homePage.userOpinion.publicSecurity") }}</span>
+        <el-rate
+          v-model="userPoint.public_security"
+          :disabled="isSubmit"
+          show-score
+          allow-half
+          text-color="#ff9900"
+          style="display: inline-block"
+          score-template="{value}"
+        >
         </el-rate>
       </div>
       <div>
-        <el-button type="primary"
-                   @click.native="handlePoint"
-                   style="margin-top: 10px"
-                   :disabled="isSubmit">{{ (isSubmit) ? '已提交' : $t("button.submit")}}</el-button>
+        <span>{{ $t("homePage.userOpinion.equipmentMaintenance") }}</span>
+        <el-rate
+          v-model="userPoint.equipment_maintenance"
+          :disabled="isSubmit"
+          show-score
+          allow-half
+          text-color="#ff9900"
+          style="display: inline-block"
+          score-template="{value}"
+        >
+        </el-rate>
+      </div>
+      <div>
+        <span>{{ $t("homePage.userOpinion.serviceAttitude") }}</span>
+        <el-rate
+          v-model="userPoint.service_attitude"
+          :disabled="isSubmit"
+          show-score
+          allow-half
+          text-color="#ff9900"
+          style="display: inline-block"
+          score-template="{value}"
+        >
+        </el-rate>
+      </div>
+      <div>
+        <span>{{ $t("homePage.userOpinion.environmentalAssessment") }}</span>
+        <el-rate
+          v-model="userPoint.environmental_assessment"
+          :disabled="isSubmit"
+          show-score
+          allow-half
+          text-color="#ff9900"
+          style="display: inline-block"
+          score-template="{value}"
+        >
+        </el-rate>
+      </div>
+      <div>
+        <span>{{ $t("homePage.userOpinion.overallEvaluation") }}</span>
+        <el-rate
+          v-model="userPoint.overall_evaluation"
+          :disabled="isSubmit"
+          show-score
+          allow-half
+          text-color="#ff9900"
+          style="display: inline-block"
+          score-template="{value}"
+        >
+        </el-rate>
+      </div>
+      <div>
+        <el-button
+          type="primary"
+          @click.native="handlePoint"
+          style="margin-top: 10px"
+          :disabled="isSubmit"
+          >{{ isSubmit ? "已提交" : $t("button.submit") }}</el-button
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { handlePoint } from '../../service/user/userPoint.service';
-import showMessageBox from "../../mixin/showMessageBox"
+import _ from "lodash";
+import {
+  handlePoint,
+  getUserpoint
+} from "../../service/user/userPoint.service";
+import showMessageBox from "../../mixin/showMessageBox";
 export default {
   name: "userPoint",
-  data () {
+  data() {
     return {
       isSubmit: false,
       userPoint: {
@@ -71,27 +98,39 @@ export default {
         service_attitude: null,
         environmental_assessment: null,
         overall_evaluation: null,
-        loginid: "",
-        is_rate: 0
+        loginid: ""
       }
-    }
+    };
   },
   mixins: [showMessageBox],
-  mounted () {
-    // this.handlePoint();
+  mounted() {
+    this.getUserpoint();
   },
   methods: {
-    async handlePoint () {
+    async getUserpoint() {
+      const self = this;
+      const loginid = sessionStorage.getItem("userLoginId");
+      const respone = await getUserpoint(self, loginid);
+      const list = respone.data[0];
+      if (!_.isEmpty(list)) {
+        for (var key in list) {
+          const number = Number(list[key]);
+          self.userPoint[key] = number;
+        }
+        self.isSubmit = true;
+      }
+    },
+
+    async handlePoint() {
       const self = this;
       self.userPoint.loginid = sessionStorage.getItem("userLoginId");
       self.userPoint.is_rate = 1;
       const respone = await handlePoint(self, self.userPoint);
       self.showSuccessMessageBox();
       self.isSubmit = true;
-    },
-
+    }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
