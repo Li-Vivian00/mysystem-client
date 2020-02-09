@@ -149,7 +149,9 @@ export default {
       batchDeleteEmpty: '请选择需要删除的信息',
       oldPasswordIsError: '旧密码错误',
       successUpdatePwd: '修改密码成功！点击确认后重新登陆。',
-      successSend: '已成功发送提醒消息！'
+      successSend: '已成功发送提醒消息！',
+      successToPay: '支付成功！',
+      failToPay: '支付失败，请重新输入支付密码！'
     }
   },
 
@@ -180,7 +182,8 @@ export default {
     user: {
       onlineService: '网上报修',
       comments: '意见/投诉',
-      point: '线上评分'
+      point: '线上评分',
+      billCheck: '缴费项目'
     }
   },
 
@@ -407,5 +410,14 @@ export default {
       a4: '技术支持',
       a5: '富力港总部服务监督电话：400888888'
     }
+  },
+
+  userBill: {
+    title: '缴费单',
+    status: '缴费状态',
+    price: '单价',
+    count: '数量',
+    total: '总价',
+    click_pay: '点击缴费'
   }
 };

@@ -1,86 +1,118 @@
 <template>
   <div class="dialog">
-    <eldialog :title='`${$t(title)}`'
-              :visible.sync="editFormVisible"
-              :closeonclickmodal="false"
-              class="editform"
-              :beforeclose="handleClose">
-      <elform :model="editForm"
-              labelwidth="80px"
-              ref="editForm"
-              :rules="rules">
-        <elformitem prop="loginid"
-                    :label='`${$t("register.label.loginId")}`'>
-          <elinput vshow="!isAdd"
-                   vmodel="editForm.loginid"
-                   autocomplete="off"
-                   disabled
-                   class="inputWidth"></elinput>
-          <elinput vshow="isAdd"
-                   vmodel.trim="editForm.loginid"
-                   autocomplete="off"
-                   class="inputWidth"></elinput>
-        </elformitem>
-        <elformitem prop="username"
-                    :label='`${$t("register.label.userName")}`'>
-          <elinput vmodel.trim="editForm.username"
-                   autocomplete="off"
-                   class="inputWidth"></elinput>
-        </elformitem>
-        <elformitem prop="password"
-                    :label='`${$t("register.label.password")}`'>
-          <elinput vmodel.trim="editForm.password"
-                   showpassword
-                   autocomplete="off"
-                   class="inputWidth"></elinput>
-        </elformitem>
-        <elformitem prop="sex"
-                    :label='`${$t("register.label.sex")}`'>
-          <elselect class="inputWidth"
-                    vmodel.trim="editForm.sex"
-                    :placeholder='`${$t("register.inputPlaceholder.sex")}`'>
-            <eloption :label='`${$t("register.label.male")}`'
-                      :value='`${$t("register.label.male")}`'></eloption>
-            <eloption :label='`${$t("register.label.female")}`'
-                      :value='`${$t("register.label.female")}`'></eloption>
-          </elselect>
-        </elformitem>
-        <elformitem prop="phone"
-                    :label='`${$t("register.label.phone")}`'>
-          <elinput vmodel.trim="editForm.phone"
-                   autocomplete="off"
-                   class="inputWidth"></elinput>
-        </elformitem>
-        <elformitem prop="email"
-                    :label='`${$t("register.label.email")}`'>
-          <elinput vmodel.trim="editForm.email"
-                   autocomplete="off"
-                   class="inputWidth"></elinput>
-        </elformitem>
-        <elformitem prop="card"
-                    :label='`${$t("register.label.card")}`'>
-          <elinput vshow="!isAdd"
-                   vmodel="editForm.card"
-                   autocomplete="off"
-                   disabled
-                   class="inputWidth"></elinput>
-          <elinput vshow="isAdd"
-                   vmodel.trim="editForm.card"
-                   autocomplete="off"
-                   class="inputWidth"></elinput>
-        </elformitem>
-      </elform>
-      <div slot="footer"
-           class="dialogfooter">
-        <elbutton @click.native="handleClose()">{{$t("button.cancel")}}</elbutton>
-        <elbutton type="primary"
-                  vshow="!isAdd"
-                  @click.native="handleUpdate()">{{$t("button.update")}}</elbutton>
-        <elbutton type="primary"
-                  vshow="isAdd"
-                  @click.native="handleUpdate()">{{$t("button.add")}}</elbutton>
+    <el-dialog
+      :title="`${$t(title)}`"
+      :visible.sync="editFormVisible"
+      :close-on-click-modal="false"
+      class="edit-form"
+      :before-close="handleClose"
+    >
+      <el-form
+        :model="editForm"
+        label-width="80px"
+        ref="editForm"
+        :rules="rules"
+      >
+        <el-form-item prop="loginid" :label="`${$t('register.label.loginId')}`">
+          <el-input
+            v-show="!isAdd"
+            v-model="editForm.loginid"
+            auto-complete="off"
+            disabled
+            class="inputWidth"
+          ></el-input>
+          <el-input
+            v-show="isAdd"
+            v-model.trim="editForm.loginid"
+            auto-complete="off"
+            class="inputWidth"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          prop="username"
+          :label="`${$t('register.label.userName')}`"
+        >
+          <el-input
+            v-model.trim="editForm.username"
+            auto-complete="off"
+            class="inputWidth"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          prop="password"
+          :label="`${$t('register.label.password')}`"
+        >
+          <el-input
+            v-model.trim="editForm.password"
+            show-password
+            auto-complete="off"
+            class="inputWidth"
+          ></el-input>
+        </el-form-item>
+        <el-form-item prop="sex" :label="`${$t('register.label.sex')}`">
+          <el-select
+            class="inputWidth"
+            v-model.trim="editForm.sex"
+            :placeholder="`${$t('register.inputPlaceholder.sex')}`"
+          >
+            <el-option
+              :label="`${$t('register.label.male')}`"
+              :value="`${$t('register.label.male')}`"
+            ></el-option>
+            <el-option
+              :label="`${$t('register.label.female')}`"
+              :value="`${$t('register.label.female')}`"
+            ></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="phone" :label="`${$t('register.label.phone')}`">
+          <el-input
+            v-model.trim="editForm.phone"
+            auto-complete="off"
+            class="inputWidth"
+          ></el-input>
+        </el-form-item>
+        <el-form-item prop="email" :label="`${$t('register.label.email')}`">
+          <el-input
+            v-model.trim="editForm.email"
+            auto-complete="off"
+            class="inputWidth"
+          ></el-input>
+        </el-form-item>
+        <el-form-item prop="card" :label="`${$t('register.label.card')}`">
+          <el-input
+            v-show="!isAdd"
+            v-model="editForm.card"
+            auto-complete="off"
+            disabled
+            class="inputWidth"
+          ></el-input>
+          <el-input
+            v-show="isAdd"
+            v-model.trim="editForm.card"
+            auto-complete="off"
+            class="inputWidth"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click.native="handleClose()">{{
+          $t("button.cancel")
+        }}</el-button>
+        <el-button
+          type="primary"
+          v-show="!isAdd"
+          @click.native="handleUpdate()"
+          >{{ $t("button.update") }}</el-button
+        >
+        <el-button
+          type="primary"
+          v-show="isAdd"
+          @click.native="handleUpdate()"
+          >{{ $t("button.add") }}</el-button
+        >
       </div>
-    </eldialog>
+    </el-dialog>
   </div>
 </template>
 
@@ -91,26 +123,26 @@ export default {
   props: {
     editFormVisible: {
       type: Boolean,
-      default: () => false,
+      default: () => false
     },
     isAdd: {
       type: Boolean,
-      default: () => false,
+      default: () => false
     },
     rules: {
       type: Object,
-      default: () => { },
+      default: () => {}
     },
     form: {
       type: Object,
-      default: () => { },
+      default: () => {}
     },
     title: {
       type: String,
-      default: () => "",
+      default: () => ""
     }
   },
-  data () {
+  data() {
     return {
       editForm: {
         loginid: "",
@@ -122,27 +154,27 @@ export default {
         email: "",
         card: "",
         stay_date: "",
-        room_id: "",
+        room_id: ""
       },
-      visible: this.editFormVisible,
-    }
+      visible: this.editFormVisible
+    };
   },
   methods: {
     //关闭编辑用户dialog
-    handleClose () {
+    handleClose() {
       this.visible = false;
-      this.$emit('changevisible', this.visible);
+      this.$emit("change-visible", this.visible);
     },
-    handleUpdate () {
-      this.$emit('updateform', this.editForm);
-    },
+    handleUpdate() {
+      this.$emit("update-form", this.editForm);
+    }
   },
   watch: {
-    form () {
+    form() {
       this.editForm = Object.assign({}, this.form);
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

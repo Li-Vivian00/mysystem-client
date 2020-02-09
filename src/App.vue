@@ -1,5 +1,5 @@
 <template>
-  <div id="app" @click="isTimeOut">
+  <div id="app">
     <router-view />
   </div>
 </template>
@@ -7,16 +7,16 @@
 <script>
 export default {
   name: "App",
-  data() {
-    // return {
-    //   lastTime: null,
-    //   currentTime: null,
-    //   timeOut: 30 * 60 * 1000
-    // };
-  },
-  create() {
-    // this.lastTime = new Date().getTime();
-  },
+  // data() {
+  // return {
+  //   lastTime: null,
+  //   currentTime: null,
+  //   timeOut: 30 * 60 * 1000
+  // };
+  // },
+  // create() {
+  // this.lastTime = new Date().getTime();
+  // },
   methods: {
     // isTimeOut() {
     //   this.currentTime = new Date().getTime();

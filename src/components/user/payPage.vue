@@ -1,10 +1,12 @@
 <template>
   <div class="payPage">
     <div class="goods-psd">
-      <p class="apply-title">请输入支付密码</p>
+      <p class="apply-title">支付密码
+      <el-button class="closeStyle" @click="handleClose()">x</el-button>
+      </p>
       <p style="margin: 0.2rem">
         确认支付
-        <span>{{password}}</span>
+        <span>￥{{totalPrice}}</span>
       </p>
       <div class="psd-container">
         <input class="psd-input"
@@ -29,11 +31,24 @@
 import _ from 'lodash';
 export default {
   name: "payPage",
+  props: {
+    totalPrice: {
+      type: Number,
+      default: () => 0
+    },
+    payVisible: {
+      type: Boolean,
+      default: () => false
+    },
+    userPwd: {
+      type: Number,
+      default:() => 0
+    }
+  },
   data() {
     return {
       popupVisible1: true,
       realInput: "",
-      password: "111",
       passwordGroup: [],
       number: [
         "1",
@@ -50,7 +65,9 @@ export default {
         "删除"
       ],
       pasgroup: [],
-      currentInputIndex: -1
+      currentInputIndex: -1,
+      visible: this.payVisible,
+      userPassword: this.userPwd,
     };
   },
   mounted() {
@@ -86,13 +103,30 @@ export default {
           value: null
         });
       }
+    },
+
+    handleClose() {
+      this.visible = false;
+      this.$emit("change-visible", this.visible);
     }
   },
 
   watch: {
     currentInputIndex(val) {
       if (val == 5) {
-        console.log(this.pasgroup + "支付成功");
+        const value = this.pasgroup;
+        let str =""
+        for(let i = 0; i< value.length; i++) {
+          str += value[i];
+        }
+        if (_.isEqual(parseInt(str), this.userPassword)) {
+          this.$emit("handle-pay-bill", "success");
+          return;
+        }else {
+          this.pasgroup = [];
+          this.$emit("handle-pay-bill", "fail");
+          return;
+        }
       } else if (val <= -1) {
         this.currentInputIndex = -1;
       }
@@ -103,17 +137,27 @@ export default {
 
 <style lang="scss" scoped>
 .payPage {
-  background: #fff !important;
+  // background: #fff !important;
   width: 100%;
   height: 100%;
+  position: absolute;
+  top: 10%;
   .goods-psd {
-    width: 20%;
-    height: 56%;
-    // border: 1px solid rgb(133, 216, 248);
-    box-shadow: 2px 2px 8px rgb(133, 216, 248);
+    width: 34%;
+    height: 52%;
+    background: #ffe6e6;
+    box-shadow: 2px 2px 8px #f39494;
     text-align: center;
     position: relative;
     margin: 0 auto;
+    .closeStyle {
+      float: right;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0px;
+      margin-right: 5px;
+    }
     .psd-container {
       width: 100%;
       margin-bottom: 20px;
@@ -124,6 +168,7 @@ export default {
         border: 1px solid black;
         text-align: center;
         font-size: 20px;
+        margin: 2px;
       }
     }
     .input-pan {
@@ -133,14 +178,14 @@ export default {
       .pan-num {
         width: 124px;
         height: 50px;
-        border: 1px solid rgb(77, 77, 77);
+        border: 1px solid rgb(128, 127, 127);
         float: left;
         text-align: center;
         line-height: 50px;
         cursor: pointer;
       }
       .pan-num:hover {
-        background: rgb(224, 220, 220);
+        background: rgb(247, 165, 165);
       }
     }
 

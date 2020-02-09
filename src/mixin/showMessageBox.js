@@ -119,6 +119,17 @@ export default {
         }
       );
     },
-
+    successToPay() {
+      this.$message({
+        type: 'success',
+        message: this.$t('manage.showMessage.successToPay')
+      });
+    },
+    failToPay() {
+      this.$message({
+        type: 'error',
+        message: this.$t('manage.showMessage.failToPay')
+      });
+    }
   }
 };

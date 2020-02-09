@@ -151,7 +151,9 @@ export default {
       oldPasswordIsError: 'The old password is wrong',
       successUpdatePwd:
         'Change password successfully! Click ok to login again.',
-      successSend: 'Success to remind!'
+      successSend: 'Success to remind!',
+      successToPay: 'Pay for success!',
+      failToPay: 'Payment failed. Please re-enter the payment password!'
     }
   },
 
@@ -166,23 +168,24 @@ export default {
 
   sidebar: {
     admin: {
-      villaCenter: 'VillaCenter',
+      villaCenter: 'Villa Center',
       board: 'Board',
-      baseInfo: 'BaseInfo',
-      baseFacility: 'BaseFacility',
-      propertyManage: 'PropertyManage',
-      repairManage: 'RepairManage',
-      opinionManage: 'OpinionManage',
-      userManage: 'UserManage',
-      customerManage: 'CustomerManage',
-      adminManage: 'AdminManage',
-      buildingManage: 'BuildingManage',
-      billManage: 'BillManage'
+      baseInfo: 'Base Info',
+      baseFacility: 'Base Facility',
+      propertyManage: 'Property Manage',
+      repairManage: 'Repair Manage',
+      opinionManage: 'Opinion Manage',
+      userManage: 'User Manage',
+      customerManage: 'Customer Manage',
+      adminManage: 'Admin Manage',
+      buildingManage: 'Building Manage',
+      billManage: 'Bill Manage'
     },
     user: {
-      onlineService: 'Online service',
-      comments: 'Comments/complaints',
-      point: 'Online score'
+      onlineService: 'Online Service',
+      comments: 'Comments/Complaints',
+      point: 'Online Score',
+      billCheck: 'Payment Project '
     }
   },
 
@@ -417,5 +420,14 @@ export default {
       a4: 'Technical Support',
       a5: 'Fuli Port headquarters Service Supervisory telephone:400888888'
     }
+  },
+
+  userBill: {
+    title: 'Pay A Single',
+    status: 'Status',
+    price: 'Price',
+    count: 'Count',
+    total: 'Total',
+    click_pay: 'Click to pay'
   }
 };

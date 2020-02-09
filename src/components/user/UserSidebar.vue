@@ -1,16 +1,17 @@
 <template>
   <div class="sidebar">
     <div class="userImg">
-      <img src="../../../static/img/userImg.jpg"
-           alt="">
-      <p>{{username}}</p>
+      <img src="../../../static/img/userImg.jpg" alt="" />
+      <p>{{ username }}</p>
     </div>
-    <el-menu :default-active="activeIndex"
-             class="el-menu-vertical-demo"
-             theme="dark"
-             unique-opened
-             router
-             @select="onRoutes">
+    <el-menu
+      :default-active="activeIndex"
+      class="el-menu-vertical-demo"
+      theme="dark"
+      unique-opened
+      router
+      @select="onRoutes"
+    >
       <template v-for="item in items">
         <template v-if="item.subs">
           <el-submenu :index="item.index">
@@ -18,15 +19,18 @@
               <i :class="item.icon"></i>
               {{ $t(item.title) }}
             </template>
-            <el-menu-item v-for="(subItem,i) in item.subs"
-                          :key="i"
-                          :index="subItem.index">{{ $t(subItem.title) }}</el-menu-item>
+            <el-menu-item
+              v-for="(subItem, i) in item.subs"
+              :key="i"
+              :index="subItem.index"
+              >{{ $t(subItem.title) }}</el-menu-item
+            >
           </el-submenu>
         </template>
         <template v-else>
           <el-menu-item :index="item.index">
             <i :class="item.icon"></i>
-            {{  $t(item.title) }}
+            {{ $t(item.title) }}
           </el-menu-item>
         </template>
       </template>
@@ -37,39 +41,39 @@
 <script>
 export default {
   name: "userSidebar",
-  data () {
+  data() {
     return {
       activeIndex: "onlineService",
       items: [
         {
           icon: "el-icon-service",
           index: "onlineService",
-          title: "sidebar.user.onlineService",
+          title: "sidebar.user.onlineService"
         },
         {
           icon: "el-icon-chat-line-round",
           index: "userComment",
-          title: "sidebar.user.comments",
+          title: "sidebar.user.comments"
         },
         {
           icon: "el-icon-user",
           index: "userCenter",
-          title: "sidebar.admin.baseInfo",
+          title: "sidebar.admin.baseInfo"
         },
         {
           icon: "el-icon-thumb",
           index: "userPoint",
-          title: "sidebar.user.point",
+          title: "sidebar.user.point"
         },
         {
           icon: "el-icon-mobile",
           index: "modifyPassword",
-          title: "forgetPwd.stepTwo",
+          title: "forgetPwd.stepTwo"
         },
         {
           icon: "el-icon-wallet",
           index: "userBill",
-          title: "sidebar.admin.billManage"
+          title: "sidebar.user.billCheck"
         }
       ]
     };
@@ -78,15 +82,15 @@ export default {
     this.$router.push("onlineService");
   },
   computed: {
-    username () {
+    username() {
       let username = "Welcome! " + sessionStorage.getItem("userLoginId");
       return sessionStorage.getItem("userLoginId") ? username : "";
     }
   },
   methods: {
-    onRoutes () {
+    onRoutes() {
       return this.$route.path.replace("/", "");
-    },
+    }
   }
 };
 </script>

@@ -32,6 +32,7 @@ import buildingManage from '../components/admin/buildingManage/BuildingManage';
 import adminForget from '../components/login/AdminForget';
 import userForget from '../components/login/UserForget';
 import payPage from '../components/user/payPage.vue';
+import userBill from '../components/user/UserBill';
 Vue.use(Router);
 
 export default new Router({
@@ -47,11 +48,11 @@ export default new Router({
         },
         {
           path: '/aboutUs',
-          component: aboutUs,
+          component: aboutUs
         },
         {
           path: '/dailyNews',
-          component: dailyNews,
+          component: dailyNews
         },
         {
           path: '/userHome',
@@ -76,6 +77,10 @@ export default new Router({
             {
               path: '/userPoint',
               component: userPoint
+            },
+            {
+              path: '/userBill',
+              component: userBill
             }
           ]
         }
@@ -108,7 +113,6 @@ export default new Router({
       path: '/adminHome',
       component: adminHome,
       children: [
-
         //个人中心
         {
           path: '/adminCenter',
@@ -132,7 +136,7 @@ export default new Router({
         },
         {
           path: '/baseInfoAboutBuilding',
-          component: baseInfo,
+          component: baseInfo
         },
         {
           path: '/baseFacility',
