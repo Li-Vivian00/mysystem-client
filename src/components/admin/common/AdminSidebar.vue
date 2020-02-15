@@ -1,10 +1,12 @@
 <template>
   <div class="sidebar">
-    <el-menu :default-active="onRoutes"
-             class="el-menu-vertical-demo"
-             theme="dark"
-             unique-opened
-             router>
+    <el-menu
+      :default-active="onRoutes"
+      class="el-menu-vertical-demo"
+      theme="dark"
+      unique-opened
+      router
+    >
       <template v-for="item in items">
         <template v-if="item.subs">
           <el-submenu :index="item.index">
@@ -12,16 +14,19 @@
               <i :class="item.icon"></i>
               {{ $t(item.title) }}
             </template>
-            <el-menu-item v-for="(subItem,i) in item.subs"
-                          :key="i"
-                          :index="subItem.index">{{ $t(subItem.title) }}</el-menu-item>
+            <el-menu-item
+              v-for="(subItem, i) in item.subs"
+              :key="i"
+              :index="subItem.index"
+              >{{ $t(subItem.title) }}</el-menu-item
+            >
           </el-submenu>
         </template>
         <template v-else>
-            <el-menu-item :index="item.index">
-              <i :class="item.icon"></i>
-              {{  $t(item.title) }}
-            </el-menu-item>
+          <el-menu-item :index="item.index">
+            <i :class="item.icon"></i>
+            {{ $t(item.title) }}
+          </el-menu-item>
         </template>
       </template>
     </el-menu>
@@ -31,7 +36,7 @@
 <script>
 export default {
   name: "AdminSidebar",
-  data () {
+  data() {
     return {
       items: [
         {
@@ -44,8 +49,8 @@ export default {
               title: "sidebar.admin.board"
             },
             {
-              index: "baseInfoAboutBuilding",
-              title: "villaCenter.baseInfo.baseInfoBuilding"
+              index: "rateManage",
+              title: "sidebar.admin.rateManage"
             },
             {
               index: "baseFacility",
@@ -97,10 +102,10 @@ export default {
     };
   },
   computed: {
-    onRoutes () {
+    onRoutes() {
       return this.$route.path.replace("/", "");
     }
-  },
+  }
 };
 </script>
 

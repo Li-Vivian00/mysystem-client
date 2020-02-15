@@ -170,7 +170,7 @@ export default {
     admin: {
       villaCenter: 'Villa Center',
       board: 'Board',
-      baseInfo: 'Base Info',
+      rateManage: 'Rate Manage',
       baseFacility: 'Base Facility',
       propertyManage: 'Property Manage',
       repairManage: 'Repair Manage',
@@ -185,7 +185,8 @@ export default {
       onlineService: 'Online Service',
       comments: 'Comments/Complaints',
       point: 'Online Score',
-      billCheck: 'Payment Project '
+      billCheck: 'Payment Project ',
+      baseInfo: 'Base Info'
     }
   },
 
@@ -428,6 +429,8 @@ export default {
     price: 'Price',
     count: 'Count',
     total: 'Total',
-    click_pay: 'Click to pay'
+    click_pay: 'Click to pay',
+    orderDate: 'Order Date',
+    payDate: 'Pay Date'
   }
 };

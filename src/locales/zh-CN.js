@@ -168,7 +168,7 @@ export default {
     admin: {
       villaCenter: '别墅中心',
       board: '公告栏',
-      baseInfo: '基本信息',
+      rateManage: '用户评分',
       baseFacility: '基础设施',
       propertyManage: '物业管理',
       repairManage: '网上报修管理',
@@ -183,7 +183,8 @@ export default {
       onlineService: '网上报修',
       comments: '意见/投诉',
       point: '线上评分',
-      billCheck: '缴费项目'
+      billCheck: '缴费项目',
+      baseInfo: '基本信息'
     }
   },
 
@@ -418,6 +419,8 @@ export default {
     price: '单价',
     count: '数量',
     total: '总价',
-    click_pay: '点击缴费'
+    click_pay: '点击缴费',
+    orderDate: '出单时间',
+    payDate: '缴费时间'
   }
 };

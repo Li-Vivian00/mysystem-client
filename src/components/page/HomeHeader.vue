@@ -35,7 +35,7 @@
             $t("header.userCenter")
           }}</template>
           <el-menu-item index="userHome">{{
-            $t("sidebar.admin.baseInfo")
+            $t("sidebar.user.baseInfo")
           }}</el-menu-item>
           <el-menu-item index="/">{{ $t("header.logout") }}</el-menu-item>
         </el-submenu>

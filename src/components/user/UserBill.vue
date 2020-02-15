@@ -44,6 +44,10 @@
       </el-table-column>
       <el-table-column prop="count" :label="`${$t('userBill.count')}`">
       </el-table-column>
+      <el-table-column prop="order_date" :label="`${$t('userBill.orderDate')}`">
+      </el-table-column>
+      <el-table-column prop="pay_date" :label="`${$t('userBill.payDate')}`">
+      </el-table-column>
       <el-table-column prop="total" :label="`${$t('userBill.total')}`">
       </el-table-column>
       <el-table-column prop="status" :label="`${$t('userBill.status')}`">
@@ -110,15 +114,7 @@ export default {
           label: "billManage.PaidFee"
         }
       ],
-      userBill: [
-        {
-          type: "水费",
-          price: "5/吨",
-          count: "4.1",
-          total: 20.1,
-          status: 0
-        }
-      ],
+      userBill: [],
       totalPrice: 0,
       payVisible: false,
       userPwd: 0,
@@ -146,7 +142,9 @@ export default {
           price: "5/吨",
           count: "4.1",
           total: 20.1,
-          status: 1
+          status: 1,
+          order_date: "2020-2-9 22:03:22",
+          pay_date: "2020-2-8 22:03:22"
         }
       ];
       const userInfo = await userCenter(self, self.loginid);
@@ -159,7 +157,9 @@ export default {
           type: item.type,
           count: item.count,
           status: item.status,
-          total: parseInt(item.total)
+          total: parseInt(item.total),
+          order_date: item.order_date,
+          pay_date: item.pay_date
         });
       });
     },
@@ -186,7 +186,9 @@ export default {
             price: "5/吨",
             count: "4.1",
             total: 20.1,
-            status: value === "0" ? 0 : 1
+            status: value === "0" ? 0 : 1,
+            order_date: value === "0" ? "" : "2020-2-9 22:03:22",
+            pay_date: value === "0" ? "" : "2020-2-8 22:03:22"
           }
         ];
         response.data.map(item => {
@@ -196,7 +198,9 @@ export default {
             type: item.type,
             count: item.count,
             status: item.status,
-            total: parseInt(item.total)
+            total: parseInt(item.total),
+            order_date: item.order_date,
+            pay_date: item.pay_date
           });
         });
       }
@@ -204,14 +208,19 @@ export default {
 
     getSummaries(param) {
       const { columns, data } = param;
-      console.log(param);
       const sums = [];
       columns.forEach((column, index) => {
         if (index === 0) {
           sums[index] = "总数";
           return;
         }
-        if (index === 1 || index === 5 || index === 2) {
+        if (
+          index === 1 ||
+          index === 2 ||
+          index === 4 ||
+          index === 5 ||
+          index === 7
+        ) {
           sums[index] = "N/A";
           return;
         }
@@ -263,22 +272,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.userBill {
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  border: 1px solid red;
-  .batchDelect {
-    margin-top: 10px;
-  }
-  .headerStyle {
-    margin-top: 10px;
-  }
-  .processed {
-    color: rgb(248, 128, 128);
-  }
-  .textStyle {
-    width: 88%;
-  }
-}
+@import "../../../static/css/user/userBill";
 </style>

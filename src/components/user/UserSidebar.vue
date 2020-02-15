@@ -58,7 +58,7 @@ export default {
         {
           icon: "el-icon-user",
           index: "userCenter",
-          title: "sidebar.admin.baseInfo"
+          title: "sidebar.user.baseInfo"
         },
         {
           icon: "el-icon-thumb",

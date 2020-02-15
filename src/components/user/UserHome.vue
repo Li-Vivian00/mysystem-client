@@ -3,8 +3,7 @@
     <h-head></h-head>
     <v-sidebar></v-sidebar>
     <div class="content">
-      <transition name="move"
-                  mode="out-in">
+      <transition name="move" mode="out-in">
         <router-view></router-view>
       </transition>
     </div>
@@ -19,7 +18,7 @@ export default {
   data() {
     return {
       // activeIndex: "userHome",
-    }
+    };
   },
   components: {
     hHead,
@@ -52,8 +51,8 @@ export default {
   /* float: right; */
 }
 
-.el-menu-demo .el-menu-item{
-    border-bottom-color:#ffffff !important;
-    color: #909399;
+.el-menu-demo .el-menu-item {
+  border-bottom-color: #ffffff !important;
+  color: #909399;
 }
 </style>

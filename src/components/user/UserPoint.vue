@@ -110,14 +110,21 @@ export default {
     async getUserpoint() {
       const self = this;
       const loginid = sessionStorage.getItem("userLoginId");
-      const respone = await getUserpoint(self, loginid);
-      const list = respone.data[0];
-      if (!_.isEmpty(list)) {
+      const response = await getUserpoint(self, loginid);
+      console.log(response);
+      const list = response.data[0];
+      if (_.isEmpty(list)) {
+        self.isSubmit = false;
+      } else {
         for (var key in list) {
           const number = Number(list[key]);
           self.userPoint[key] = number;
         }
-        self.isSubmit = true;
+        if (_.isEqual(list.is_rate, "0")) {
+          self.isSubmit = false;
+        } else {
+          self.isSubmit = true;
+        }
       }
     },
 
@@ -125,7 +132,7 @@ export default {
       const self = this;
       self.userPoint.loginid = sessionStorage.getItem("userLoginId");
       self.userPoint.is_rate = 1;
-      const respone = await handlePoint(self, self.userPoint);
+      const response = await handlePoint(self, self.userPoint);
       self.showSuccessMessageBox();
       self.isSubmit = true;
     }
